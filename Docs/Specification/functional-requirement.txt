@@ -1,0 +1,48 @@
+# Functional Requirement
+
+## User
+
+- The software serves unlimited number of users on a same device.
+- Each user can: 
+	* Log in with username and passward.
+	* Change password.
+	* Access to all the records of cleaning agent.
+	* Create unlimited numbers of cleaning agent list.
+	* Add, modify and delete his or her own record of cleaning agent.
+	* Post, modify and delete his or her own rating and memo.
+
+## Search
+- Search keyward shall be:
+	* Language insensitive, Chinese pinyin supported.
+	* Case insensitive.
+	* Partial compared.
+	* Of unrestricted length.
+- Search result shall be:
+	* Presented in realtime during inserting keyword.
+	* Foldered up if the list is excessively long.
+
+## Language
+- The software GUI supports: Chinese, English and German.
+- The contant is prepared in: Chinese, English and German.
+
+# Non-functional Requirement
+
+## Portability
+- The software has two distinctive sub versions which support desktop computers and 
+Andriod devices.
+- The desktop version shall be supported by Java SE Runtime Environment 7 or higher.
+- The Andriod version...
+
+## Performance and Availability
+- The software shall start up in less than 1 second.
+- Search result shall be presented in less than 1 second.
+- The software shall be always available during runtime.
+
+## Security and Extensibility
+- User data and system data are stored with database specific security.
+- The software is not designed to extend.
+
+
+
+
+
