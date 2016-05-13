@@ -1,1 +1,19 @@
-Are you confused about searching for cleaning agent facing various kinds in front of you, even worse in foreign country? Are you still puzzled about how to use cleaning agent correctly? Our product ENCA is the key for cleaning agent searching, simple but robust, providing three different languages, aiming to satisfy those who might stay for a while in an unfamiliar country, especially for businessman, overseas workers and students. ENCA is convinced to offer quick off-line searching, updating and commenting about cleaning agent based on customers¡¯ needs and favorite, which is available on mobile devices in multi-platform. Trust our product, and we will guarantee you 100% satisfaction.(HaHaHa...)  
+Product Description
+/******Version 1******/
+Our product ENCA is a cleaning agent searching software, simple but robust, providing three
+ different languages, aiming to satisfy those who might stay in an unfamiliar country for
+ a while, especially for businessman, overseas workers and students. ENCA is convinced to 
+offer quick off-line searching, updating and commenting about cleaning agent based on 
+customers¡¯ needs and favorite, which is available on PCs and mobile devices in multi-platform. 
+
+/*******Version 2******/
+1.1 Product Purpose
+Our product is a cleaning agent searching software, features with quickly off-line searching,
+ updating and commenting about cleaning agent based on customers¡¯ needs and favorites. 
+It is available on PCs and mobile devices, supporting multi-platform. 
+1.2 Product Scope
+Our product provides three different languages, including Chinese, English, German, 
+and contains most commonly used cleaning agent in China and Germany.
+1.3 Potential Customers
+This product is specially designed for those who will travel, work or study abroad, 
+attempting to assist them to easily find the necessary cleaning agent in an unfamiliar society.
