@@ -1,10 +1,19 @@
 The ENCA software has following functions:
 - Display the cleaning agents according to their classification
-  * 
+  * The catagories will be displayed first, and those cleaning agents will be displayed in the form  of tables in each catagory.
+  * Multiple attibutes of cleaning agents will be displayed as table columns with headers.
+  * Each cleaning agent can be selected and the detail information of which can be displayed.
 - Modify and update cleaning agents for own purpose
+  * Specially designed UI will be displayed to enable user to modify and update.
+  * Will also check if user's inpput is valid and show the execution status.
 - Add new cleaning agents
+  * Specially designed UI will be displayed to enable user to add.
 - Search for cleaning agents
+  * Enable advanced search method.
 - Create profile for user
+  * The profile stores the favourite list, rates and comments of the user.
 - Add cleaning agents to favourite
-- Rate the cleaning agents  
+  * Will also check if the cleaning agent has already been added.
+- Rate the cleaning agents
 - Comment the cleaning agents or others' comments
+  * The latest comment will be displayed in the first place.
