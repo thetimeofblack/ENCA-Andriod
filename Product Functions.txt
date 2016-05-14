@@ -17,3 +17,5 @@ The ENCA software has following functions:
 - Rate the cleaning agents
 - Comment the cleaning agents or others' comments
   * The latest comment will be displayed in the first place.
+- Multiple language support
+  * Include English, German and Chinese.
