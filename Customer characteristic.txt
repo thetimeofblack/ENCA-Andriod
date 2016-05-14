@@ -5,23 +5,37 @@ For those who won't use our application frequently:
 For those who will use our application frequently:
 	For most of cases, only those who have high demand on cleaning will check what cleaning agents are available from time to time. They may want to check out which cleaning agents have better cleaning effect.
 
+
 Haoze modified with hints:
 Users are assumed to:
-	1. have basic computer operation knowledge, such as 
+	
+1. have basic computer operation knowledge, such as 
 log in, GUI interaction and typing.
-	2. be uninfected with hearing, vision, touching and 
+	
+2. be uninfected with hearing, vision, touching and 
 any other kinds of disability.
-	3. speak at least one of the following language: 
+	
+3. speak at least one of the following language: 
 Chinese, English and German.
-	4. be oversea students, business or casual travellers 
+	
+4. be oversea students, business or casual travellers 
 in the following country: China and Germany.
-	5. have basic knowledge in choosing cleaning agent.
+	
+5. have basic knowledge in choosing cleaning agent.
 
+6. have either computer or mobile phone
 Users need the software to:
-	1. find the name of an cleaning agent by its purpose.
-	2. get a translation of a certain agent.
-	3. search for the purpose of an existing cleaning 
+	
+1. find the name of an cleaning agent by its purpose.
+	
+2. get a translation of a certain agent.
+	
+3. search for the purpose of an existing cleaning 
 agent by name or other attributes.
 
 
 
+4. do the cleaning with the help of instructions
+5. record his or her preference
+6. have most information of the cleaning agents
+7. compare between different cleaning agents.
