@@ -1,9 +1,10 @@
-﻿The ENCA software has following functions:
-• Display the cleaning agents according to their classification
-• Modify and update cleaning agents for own purpose
-• Add new cleaning agents
-• Search for cleaning agents
-• Create profile for user
-• Add cleaning agents to favourite
-• Rate the cleaning agents
-• Comment the cleaning agents or others' comments
+The ENCA software has following functions:
+- Display the cleaning agents according to their classification
+  * 
+- Modify and update cleaning agents for own purpose
+- Add new cleaning agents
+- Search for cleaning agents
+- Create profile for user
+- Add cleaning agents to favourite
+- Rate the cleaning agents  
+- Comment the cleaning agents or others' comments
