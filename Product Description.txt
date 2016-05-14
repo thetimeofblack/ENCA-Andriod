@@ -8,11 +8,11 @@ customers¡¯ needs and favorite, which is available on PCs and mobile devices in 
 
 /*******Version 2******/
 1.1 Product Purpose
-Our product is a cleaning agent searching software, features with quickly off-line searching,
+Our product is a cleaning agent searching software, featured with quickly off-line searching,
  updating and commenting about cleaning agent based on customers¡¯ needs and favorites. 
 It is available on PCs and mobile devices, supporting multi-platform. 
 1.2 Product Scope
-Our product provides three different languages, including Chinese, English, German, 
+Our product provides three different languages, including Chinese, English and German, 
 and contains most commonly used cleaning agent in China and Germany.
 1.3 Potential Customers
 This product is specially designed for those who will travel, work or study abroad, 

@@ -5,7 +5,7 @@
   * Each cleaning agent can be selected and the detail information of which can be displayed.
 - Modify and update cleaning agents for own purpose
   * Specially designed UI will be displayed to enable user to modify and update.
-  * Will also check if user's inpput is valid and show the execution status.
+  * Will also check if user's input is valid and show the execution status.
 - Add new cleaning agents
   * Specially designed UI will be displayed to enable user to add.
 - Search for cleaning agents
