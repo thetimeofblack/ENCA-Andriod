@@ -1,4 +1,4 @@
-The ENCA software has following functions:
+# The ENCA software has following functions:
 - Display the cleaning agents according to their classification
   * The catagories will be displayed first, and those cleaning agents will be displayed in the form  of tables in each catagory.
   * Multiple attibutes of cleaning agents will be displayed as table columns with headers.
