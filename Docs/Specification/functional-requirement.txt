@@ -2,9 +2,9 @@
 
 ## Present
 - Display the cleaning agents
-	* The catagories shall be displayed first, and those cleaning agents 
-	will be displayed in the form of tables in each catagory.
-	* Multiple attibutes of cleaning agents shall be displayed as table 
+	* The categories shall be displayed first, and those cleaning agents 
+	will be displayed in the form of tables in each category.
+	* Multiple attributes of cleaning agents shall be displayed as table 
 	columns with headers.
 	* Each cleaning agent can be selected and the detail information of which can be displayed.
 
@@ -18,26 +18,26 @@
 	* can only be modified by the creator.
 
 ## Search
-- Search keyward shall be:
+- Search keyword shall be:
 	* Language insensitive, Chinese pinyin supported.
 	* Case insensitive.
 	* Partial compared.
 	* Of unrestricted length.
 - Search result shall be:
 	* Presented in realtime during inserting keyword.
-	* Foldered up if the list is excessively long.
+	* Folder up if the list is excessively long.
 
 ## Language
 - The software GUI supports: Chinese, English and German.
-- The contant is prepared in: Chinese, English and German.
+- The content is prepared in: Chinese, English and German.
 
 # Non-functional Requirement
 
 ## Portability
 - The software has two distinctive sub versions which support desktop computers and 
-Andriod devices.
+Android devices.
 - The desktop version shall be supported by Java SE Runtime Environment 7 or higher.
-- The Andriod version...
+- The Android version...
 
 ## Performance and Availability
 - The software shall start up in less than 1 second.
