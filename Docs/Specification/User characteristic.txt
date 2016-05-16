@@ -1,0 +1,34 @@
+
+Users are assumed to:
+	
+1. have basic computer operation knowledge, such as 
+log in, GUI interaction and typing.
+	
+2. be uninfected with hearing, vision, touching and 
+any other kinds of disability.
+	
+3. speak at least one of the following language: 
+Chinese, English and German.
+	
+4. be oversea students, business or casual travellers 
+in the following country: China and Germany.
+	
+5. have basic knowledge in choosing cleaning agent.
+
+6. have either computer or mobile phone.
+7. have access to cleaning agents in nearby supermarket.
+Users need the software to:
+	
+1. find the name of an cleaning agent by its purpose.
+	
+2. get a translation of a certain agent.
+	
+3. search for the purpose of an existing cleaning 
+agent by name or other attributes.
+
+
+
+4. do the cleaning with the help of instructions.
+5. have their preference on some specific cleaning agent.
+6. find detailed information about cleaning agents.
+7. decide which cleaning agents to buy with additional information given by our application.
