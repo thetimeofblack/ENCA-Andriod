@@ -1,9 +1,0 @@
-# The ENCA software has following functions:
-	* Log in with username and passward.
-	* Change password.
-	* Access to all the records of cleaning agent.
-	* Create unlimited numbers of cleaning agent lists.
-	* Add, modify and delete his or her own record of cleaning agent.
-	* Post, modify and delete his or her own rating and memo.
-	* Search specific cleaning agent.
-	* Multiple language support.

@@ -1,0 +1,18 @@
+- The software serves unlimited number of users on a same device.
+- Each user can: 
+	* Log in with username and password.
+		** Username and password will be forced to fit certain format.
+	* Change password.
+		** Old password is required to change password.
+	* Access to all the records of cleaning agent.
+		** The categories will be displayed first, and those cleaning agents will be displayed in the form  of tables in each category.
+  		** Multiple attributes of cleaning agents will be displayed as table columns with headers.
+  		** Each cleaning agent can be selected and the detail information of which can be displayed.
+	* Create unlimited numbers of cleaning agent lists.
+		** Also allow user to modify, delete and sort those lists.
+	* Add, modify and delete his or her own record of cleaning agent.
+		** Specially designed UI will be displayed to enable user to add, modify and delete.
+  		** Will also check if user's input is valid and show the execution status.
+	* Post, modify and delete his or her own rating and memo.
+		** The average rating will be calculated and displayed.
+		** The latest comment will be displayed in the first place.
