@@ -27,7 +27,6 @@ public class TestField extends JFrame {
 	private JPasswordField passwordField;
 	private JButton button;
 	private JComboBox<String> comboBox;
-	private DefaultComboBoxModel<String> model;
 	private Locale locale;
 
 	/* Run this frame */
@@ -75,13 +74,19 @@ public class TestField extends JFrame {
 		contentPane.add(passwordField);
 
 		comboBox = new JComboBox<String>();
+		comboBox.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent arg0) {
+				if(arg0.getStateChange()==ItemEvent.SELECTED){
+					initialize();
+				}
+			}
+		});
 		comboBox.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 12));
 
 		comboBox.setBounds(12, 13, 94, 22);
 		contentPane.add(comboBox);
 
-		model = new DefaultComboBoxModel<String>();
-		comboBox.setModel(model);
+		comboBox.setModel(new DefaultComboBoxModel<String>(new String[] { "English", "\u4E2D\u6587" }));
 
 		button = new JButton();
 		button.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 12));
@@ -95,24 +100,9 @@ public class TestField extends JFrame {
 		int temp = comboBox.getSelectedIndex();
 		temp = temp == -1 ? LanguageList.getDefaultIndex() : temp;
 		locale = LanguageList.get(temp);
-		if (comboBox.getItemListeners().length > 0) {
-			comboBox.removeItemListener(comboBox.getItemListeners()[0]);
-		}
 		ResourceBundle resourceBundle = ResourceBundle.getBundle("resource.messages", locale);
 		label1.setText(resourceBundle.getString("username"));
 		label2.setText(resourceBundle.getString("password"));
 		button.setText(resourceBundle.getString("login"));
-		model.removeAllElements();
-		model.addElement(resourceBundle.getString("english"));
-		model.addElement(resourceBundle.getString("chinese"));
-		comboBox.setSelectedIndex(temp);
-		comboBox.addItemListener(new ItemListener() {
-
-			public void itemStateChanged(ItemEvent arg0) {
-				if (arg0.getStateChange() == ItemEvent.SELECTED) {
-					initialize();
-				}
-			}
-		});
 	}
 }
