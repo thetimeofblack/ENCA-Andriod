@@ -1,6 +1,7 @@
 package test;
 
 import java.awt.EventQueue;
+import java.awt.Font;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.Locale;
@@ -45,6 +46,7 @@ public class TestField extends JFrame {
 	}
 
 	public TestField() throws Exception {
+		setResizable(false);
 		UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 228, 300);
@@ -54,6 +56,7 @@ public class TestField extends JFrame {
 		contentPane.setLayout(null);
 
 		label1 = new JLabel();
+		label1.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 12));
 		label1.setBounds(12, 48, 188, 16);
 		contentPane.add(label1);
 
@@ -63,6 +66,7 @@ public class TestField extends JFrame {
 		textField.setColumns(10);
 
 		label2 = new JLabel();
+		label2.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 12));
 		label2.setBounds(12, 112, 188, 16);
 		contentPane.add(label2);
 
@@ -71,6 +75,7 @@ public class TestField extends JFrame {
 		contentPane.add(passwordField);
 
 		comboBox = new JComboBox<String>();
+		comboBox.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 12));
 
 		comboBox.setBounds(12, 13, 94, 22);
 		contentPane.add(comboBox);
@@ -79,6 +84,7 @@ public class TestField extends JFrame {
 		comboBox.setModel(model);
 
 		button = new JButton();
+		button.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 12));
 		button.setBounds(12, 179, 97, 25);
 		contentPane.add(button);
 
