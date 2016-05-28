@@ -1,0 +1,40 @@
+# Database
+
+---
+
+```
+All strings have three languages!
+```
+
+## Tags
+	* tagID: int
+	* name: String
+	* tagType: String
+
+## CleaningAgents
+	* cleaningAgentID :int
+	* Name :String
+	* description: String
+	* instruction: String
+	* applicationTime: long
+	* frequency: long
+	* cleaningAgentType: String
+	* rate: int
+	* image: bin
+
+## TC
+	* cleaningAgentID: int
+	* tagID: int
+
+## Memos
+	* memoID: int
+	* date: Date
+	* cleaningAgentID: int
+	* content: String
+
+
+# File
+
+---
+
+## User
