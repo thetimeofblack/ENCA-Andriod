@@ -4,8 +4,8 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import java.util.Locale;
 import java.util.ResourceBundle;
+
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -27,7 +27,6 @@ public class TestField extends JFrame {
 	private JPasswordField passwordField;
 	private JButton button;
 	private JComboBox<String> comboBox;
-	private Locale locale;
 
 	/* Run this frame */
 	public static void main(String[] args) {
@@ -77,6 +76,7 @@ public class TestField extends JFrame {
 		comboBox.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent arg0) {
 				if(arg0.getStateChange()==ItemEvent.SELECTED){
+					LanguageList.setLanguageIndex(comboBox.getSelectedIndex());
 					initialize();
 				}
 			}
@@ -97,10 +97,8 @@ public class TestField extends JFrame {
 	}
 
 	private void initialize() {
-		int temp = comboBox.getSelectedIndex();
-		temp = temp == -1 ? LanguageList.getDefaultIndex() : temp;
-		locale = LanguageList.get(temp);
-		ResourceBundle resourceBundle = ResourceBundle.getBundle("resource.messages", locale);
+		comboBox.setSelectedIndex(LanguageList.getLanguageIndex());
+		ResourceBundle resourceBundle = ResourceBundle.getBundle("resource.messages", LanguageList.get());
 		label1.setText(resourceBundle.getString("username"));
 		label2.setText(resourceBundle.getString("password"));
 		button.setText(resourceBundle.getString("login"));

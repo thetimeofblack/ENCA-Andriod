@@ -6,27 +6,28 @@ import java.util.Map;
 
 public final class LanguageList {
 
-	private static Map<Integer, Locale> map = null;
-	private static int defaultIndex;
+	private static final Map<Integer, Locale> map = new HashMap<Integer, Locale>() {
+		private static final long serialVersionUID = -5151756330293201210L;
 
-	private static void initialize() {
-		map = new HashMap<Integer, Locale>();
-		map.put(0, Locale.ENGLISH);
-		map.put(1, Locale.CHINESE);
-		defaultIndex = 0;
+		{
+			put(0, Locale.ENGLISH);
+			put(1, Locale.CHINESE);
+		}
+	};
+
+	private static final int defaultIndex = 0;
+	
+	public static int languageIndex=defaultIndex;
+	
+	public static int getLanguageIndex(){
+		return languageIndex;
+	}
+	
+	public static void setLanguageIndex(int index){
+		languageIndex=index;
 	}
 
-	public static Locale get(int index) {
-		if (map == null) {
-			initialize();
-		}
-		return map.get(index);
-	}
-
-	public static int getDefaultIndex() {
-		if (map == null) {
-			initialize();
-		}
-		return defaultIndex;
+	public static Locale get() {
+		return map.get(languageIndex);
 	}
 }
