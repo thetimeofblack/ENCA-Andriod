@@ -13,7 +13,7 @@ All strings have three languages!
 
 ## CleaningAgents
 	* cleaningAgentID :int
-	* Name :String
+	* name :String
 	* description: String
 	* instruction: String
 	* applicationTime: long
