@@ -8,28 +8,35 @@ import java.sql.Statement;
 
 public final class Connector {
 
-	private static Connection connection = null;
-	private static Statement statement = null;
+	private static final Connection CONNECTION = initConnection();
 
-	public static boolean Connect() {
+	private static Connection initConnection() {
 		try {
-			connection = DriverManager.getConnection("jdbc:sqlite:res\\data\\data.db");
+			return DriverManager.getConnection("jdbc:sqlite:res\\data\\data.db");
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return false;
+			return null;
 		}
-		try {
-			statement = connection.createStatement();
-		} catch (SQLException e) {
-			e.printStackTrace();
-			return false;
+	}
+
+	private static final Statement STATEMENT = initStatement();
+
+	private static Statement initStatement() {
+		if (CONNECTION != null) {
+			try {
+				return CONNECTION.createStatement();
+			} catch (SQLException e) {
+				e.printStackTrace();
+				return null;
+			}
+		} else {
+			return null;
 		}
-		return true;
 	}
 
 	public static ResultSet executeSelect(String sql) {
 		try {
-			return statement.executeQuery(sql);
+			return STATEMENT.executeQuery(sql);
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return null;
@@ -38,7 +45,7 @@ public final class Connector {
 
 	public static boolean executeNonSelect(String sql) {
 		try {
-			return statement.execute(sql);
+			return STATEMENT.execute(sql);
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return false;
