@@ -7,24 +7,25 @@ All strings have three languages!
 ```
 
 ## Tags
-	* tagID: int
-	* name: String
-	* tagType: String
+	* tagID: int - 1
+	* name: String - 2 3 4
+	* tagType: String - 5
 
 ## CleaningAgents
-	* cleaningAgentID :int
-	* name :String
-	* description: String
-	* instruction: String
-	* applicationTime: long
-	* frequency: long
-	* cleaningAgentType: String
-	* rate: int
-	* image: bin
+	* cleaningAgentID :int - 1
+	* name :String  - 2 3 4
+	* description: String - 5 6 7
+	* instruction: String - 8 9 10
+	* applicationTime: long - 11
+	* frequency: long - 12
+	* cleaningAgentType: String - 13
+	* rate: int - 14
+	* mainLanguage: int  - 15
+	* image: bin - 16
 
 ## TC
-	* cleaningAgentID: int
-	* tagID: int
+	* cleaningAgentID: int - 1
+	* tagID: int - 2
 
 ## Memos
 	* memoID: int
