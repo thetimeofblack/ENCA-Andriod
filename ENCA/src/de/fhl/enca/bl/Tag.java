@@ -1,6 +1,5 @@
 package de.fhl.enca.bl;
 
-import java.awt.Color;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -11,23 +10,6 @@ public class Tag {
 	public enum tagType_t {
 		room, item, other
 	}
-
-	/* const member */
-	private static final Map<tagType_t, Color> ColorMap = new HashMap<tagType_t, Color>() {
-
-		private static final long serialVersionUID = 5237368492012644125L;
-		{
-			/* Remains to be decided */
-		}
-	};
-
-	private static final Map<tagType_t, String> DescriptionMap = new HashMap<tagType_t, String>() {
-
-		private static final long serialVersionUID = -6613820012277115380L;
-		{
-			/* Remains to be decided */
-		}
-	};
 
 	/* static member */
 	private static Map<Integer, Tag> tagsAll = new HashMap<Integer, Tag>();
