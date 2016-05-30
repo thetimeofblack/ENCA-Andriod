@@ -34,18 +34,21 @@ public final class CleaningAgent {
 	public static CleaningAgent getCleaningAgent(int ID) {
 		return cleaningAgentAll.get(ID);
 	}
-	
-	public static void addCleaningAgent(CleaningAgent cleaningAgent){
-		cleaningAgentAll.put(cleaningAgent.getCleaningAgentID(), cleaningAgent);
-	}
 
 	/* non-static method */
-	
 	public void addTag(int tagID) {
 		tags.add(tagID);
 	}
+	
+	public int search(String keyword){
+		return name.search(keyword)+description.search(keyword)+instruction.search(keyword);
+	}
 
 	/* getters and setters */
+	public static Map<Integer, CleaningAgent> getCleaningAgentAll() {
+		return cleaningAgentAll;
+	}
+
 	public static int getAgentCount() {
 		return agentCount;
 	}

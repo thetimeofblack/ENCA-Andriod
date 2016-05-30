@@ -63,6 +63,10 @@ public class Tag {
 	}
 
 	/* getters and setters */
+	public static Map<Integer, Tag> getTagsAll() {
+		return tagsAll;
+	}
+
 	public static int getTagCount() {
 		return tagCount;
 	}

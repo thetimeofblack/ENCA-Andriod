@@ -13,6 +13,18 @@ public final class InternationalString {
 		}
 	}
 
+	public int search(String keyword) {
+		String pattern = "\\p{ASCII}*" + keyword + "\\p{ASCII}*";
+		int relevance = 0;
+		for (String string : stringMap.values()) {
+			if (string.matches(pattern)) {
+				relevance++;
+			}
+		}
+		return relevance;
+	}
+
+	/* getters and setters */
 	public String getPreferredString() {
 		return stringMap.get(Language.getContentlanguageIndex());
 	}

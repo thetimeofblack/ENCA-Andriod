@@ -51,7 +51,7 @@ public final class CleaningAgentBuilder {
 	}
 
 	public CleaningAgent getResult() {
-		CleaningAgent.addCleaningAgent(cleaningAgent);
+		CleaningAgent.getCleaningAgentAll().put(cleaningAgent.getCleaningAgentID(), cleaningAgent);
 		return cleaningAgent;
 	}
 }
