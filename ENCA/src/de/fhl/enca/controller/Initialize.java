@@ -3,7 +3,6 @@ package de.fhl.enca.controller;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import de.fhl.enca.bl.CleaningAgent;
@@ -68,27 +67,35 @@ public final class Initialize {
 	 * and the relations between tags
 	 */
 	public static void initRelations() {
-		/* Map that stores every cleaning agent and those related tags of each agent */
+		// <cleaningAgentID, Set<tagID>> CleaningAgent:Tag = 1:*
+		Map<Integer, Set<Integer>> ctMap = new HashMap<Integer, Set<Integer>>();
+		// <tagID, Set<cleaningAgentID>> Tag:CleaningAgent = 1:*
 		Map<Integer, Set<Integer>> tcMap = new HashMap<Integer, Set<Integer>>();
-		initTCRelations(tcMap);
-		initTTRelations(tcMap);
+		initTCRelations(ctMap, tcMap);
+		initTTRelations(ctMap, tcMap);
 	}
 
 	/**
 	 * Initialize the relations between cleaning agents and tags
 	 */
-	private static void initTCRelations(Map<Integer, Set<Integer>> tcMap) {
-		ResultSet r = SQLVisitor.visitRelations();
+	private static void initTCRelations(Map<Integer, Set<Integer>> ctMap, Map<Integer, Set<Integer>> tcMap) {
+		ResultSet r = SQLVisitor.visitRelations(); // get TC relation records
 		try {
-			while (r.next()) {
+			while (r.next()) { // check every line of TC relation
 				int cleaningAgentID = r.getInt(1);
 				int tagID = r.getInt(2);
-				if (!tcMap.containsKey(cleaningAgentID)) {
-					tcMap.put(cleaningAgentID, new HashSet<Integer>());
+				if (!ctMap.containsKey(cleaningAgentID)) { // add CA if never met
+					// <cleaningAgentID, the CA's real tag set>
+					ctMap.put(cleaningAgentID, CleaningAgent.getCleaningAgent(cleaningAgentID).getTags());
 				}
-				tcMap.get(cleaningAgentID).add(tagID);
-				CleaningAgent.getCleaningAgent(cleaningAgentID).addTag(tagID);
-				Tag.getTag(tagID).addCleaningAgent(cleaningAgentID);
+				if (!tcMap.containsKey(tagID)) { // add Tag if never met
+					// <tagID, the tag's real CA set>
+					tcMap.put(tagID, Tag.getTag(tagID).getCleaningAgents());
+				}
+				// stick a tag to CA
+				ctMap.get(cleaningAgentID).add(tagID); 
+				// link CA to tag
+				tcMap.get(tagID).add(cleaningAgentID);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -98,14 +105,17 @@ public final class Initialize {
 	/**
 	 * Initialize the relations between tags
 	 */
-	private static void initTTRelations(Map<Integer, Set<Integer>> tcMap) {
-		for (Set<Integer> group : tcMap.values()) {
-			for (int id1 : group) {
-				for (int id2 : group) {
-					if (id1 != id2 && Tag.getTag(id1).getTagType() != Tag.getTag(id2).getTagType()) {
-						Tag.getTag(id1).addRelatedTag(id2);
-					}
+	private static void initTTRelations(Map<Integer, Set<Integer>> ctMap, Map<Integer, Set<Integer>> tcMap) {
+		for (Set<Integer> group : tcMap.values()) { // iterate all CA tag sets
+			for (int id1 : group) { // iterate each tag
+			for (int id2 : group) { // take another tag
+			if (id1 != id2 ) { // every two related tags
+				if (Tag.getTag(id1).getTagType() != Tag.getTag(id2).getTagType()) {
+					// log the relation if tag is of different type
+					Tag.getTag(id1).addRelatedTag(id2);
 				}
+			}
+			}
 			}
 		}
 	}
