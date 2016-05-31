@@ -7,10 +7,6 @@ import java.util.Set;
 
 public class Tag {
 
-	public enum tagType_t {
-		room, item, other
-	}
-
 	/* static member */
 	private static Map<Integer, Tag> tagsAll = new HashMap<Integer, Tag>();
 	private static int tagCount;
@@ -18,7 +14,7 @@ public class Tag {
 	/* non-static member */
 	private int tagID;
 	private InternationalString name;
-	private tagType_t tagType;
+	private TagType tagType;
 
 	private Set<Integer> cleaningAgents = new HashSet<Integer>();
 	private Set<Integer> tagsRelated = new HashSet<Integer>();
@@ -29,10 +25,10 @@ public class Tag {
 	}
 
 	/* non-static method */
-	public Tag(int tagID, String[] strings, String tagType) {
+	public Tag(int tagID, InternationalString name, TagType tagType) {
 		this.tagID = tagID;
-		this.name = new InternationalString(strings);
-		this.tagType = tagType_t.valueOf(tagType);
+		this.name = name;
+		this.tagType = tagType;
 		tagsAll.put(tagID, this);
 	}
 
@@ -73,11 +69,11 @@ public class Tag {
 		this.name = name;
 	}
 
-	public tagType_t getTagType() {
+	public TagType getTagType() {
 		return tagType;
 	}
 
-	public void setTagType(tagType_t tagType) {
+	public void setTagType(TagType tagType) {
 		this.tagType = tagType;
 	}
 }

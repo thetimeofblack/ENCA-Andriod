@@ -11,18 +11,28 @@ package de.fhl.enca.bl;
  */
 public enum TagType {
 	ROOM("Room"), ITEM("Item"), OTHERS("Others");
-	
+
 	/*
 	 * name: String representation of a type
 	 */
 	String name;
-	
+
 	private TagType(String name) {
 		this.name = name;
 	}
-	
+
+	public static TagType getTagType(String string) {
+		for (TagType tagType : TagType.values()) {
+			if (tagType.name.equals(string)) {
+				return tagType;
+			}
+		}
+		return null;
+	}
+
 	@Override
 	public String toString() {
 		return this.name;
+
 	}
 }

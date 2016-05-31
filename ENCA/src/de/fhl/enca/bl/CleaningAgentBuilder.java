@@ -2,7 +2,6 @@ package de.fhl.enca.bl;
 
 import java.awt.Toolkit;
 import javax.swing.JFrame;
-import de.fhl.enca.bl.CleaningAgent.cleaningAgent_t;
 
 public final class CleaningAgentBuilder {
 
@@ -14,16 +13,16 @@ public final class CleaningAgentBuilder {
 		cleaningAgent.setCleaningAgentID(id);
 	}
 
-	public void setName(String[] strings) {
-		cleaningAgent.setName(new InternationalString(strings));
+	public void setName(InternationalString name) {
+		cleaningAgent.setName(name);
 	}
 
-	public void setDescription(String[] strings) {
-		cleaningAgent.setDescription(new InternationalString(strings));
+	public void setDescription(InternationalString description) {
+		cleaningAgent.setDescription(description);
 	}
 
-	public void setinstruction(String[] strings) {
-		cleaningAgent.setInstruction(new InternationalString(strings));
+	public void setInstruction(InternationalString instruction) {
+		cleaningAgent.setInstruction(instruction);
 	}
 
 	public void setApplicationTime(long time) {
@@ -35,7 +34,7 @@ public final class CleaningAgentBuilder {
 	}
 
 	public void setType(String type) {
-		cleaningAgent.setAgentType(cleaningAgent_t.valueOf(type));
+		cleaningAgent.setAgentType(CleaningAgentType.getCleaningAgentType(type));
 	}
 
 	public void setRate(int rate) {
@@ -43,7 +42,7 @@ public final class CleaningAgentBuilder {
 	}
 
 	public void setMainLanguage(int index) {
-		cleaningAgent.setMainLanguage(index);
+		cleaningAgent.setMainLanguage(LanguageType.getLanguageType(index));
 	}
 
 	public void setImage(byte[] source) {

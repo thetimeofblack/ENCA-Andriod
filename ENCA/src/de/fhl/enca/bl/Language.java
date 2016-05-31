@@ -7,24 +7,11 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.LineNumberReader;
-import java.util.HashMap;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Set;
 
 public final class Language {
 
-	private static final int DefaultLanguageIndex = 0;
+	private static final LanguageType DefaultLanguage = LanguageType.ENGLISH;
 
-	private static final Map<Integer, Locale> LanguageList = new HashMap<Integer, Locale>() {
-
-		private static final long serialVersionUID = -7841679423247561396L;
-		{
-			put(0, Locale.ENGLISH);
-			put(1, Locale.GERMAN);
-			put(2, Locale.CHINESE);
-		}
-	};
 	private static final File FILE = new File("res\\user\\user.txt");
 	private static final LineNumberReader READER = initReader();
 
@@ -39,23 +26,23 @@ public final class Language {
 
 	private static BufferedWriter WRITER = null;
 
-	private static int interfaceLanguageIndex;
+	private static LanguageType interfaceLanguage;
 
-	private static int contentlanguageIndex;
+	private static LanguageType contentlanguage;
 
 	static {
 		try {
-			interfaceLanguageIndex = Integer.valueOf(READER.readLine());
+			interfaceLanguage = LanguageType.getLanguageType(Integer.valueOf(READER.readLine()));
 		} catch (Exception e) {
 			e.printStackTrace();
-			interfaceLanguageIndex = DefaultLanguageIndex;
+			interfaceLanguage = DefaultLanguage;
 		}
 		READER.setLineNumber(2);
 		try {
-			contentlanguageIndex = Integer.valueOf(READER.readLine());
+			contentlanguage = LanguageType.getLanguageType(Integer.valueOf(READER.readLine()));
 		} catch (Exception e) {
 			e.printStackTrace();
-			contentlanguageIndex = DefaultLanguageIndex;
+			contentlanguage = DefaultLanguage;
 		}
 		try {
 			READER.close();
@@ -72,48 +59,12 @@ public final class Language {
 			return;
 		}
 		try {
-			WRITER.write(String.valueOf(interfaceLanguageIndex));
+			WRITER.write(interfaceLanguage.toString());
 			WRITER.newLine();
-			WRITER.write(String.valueOf(contentlanguageIndex));
+			WRITER.write(contentlanguage.toString());
 			WRITER.flush();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	}
-
-	public static void setInterfacelanguage(int index) {
-		if (LanguageList.containsKey(index)) {
-			interfaceLanguageIndex = index;
-		}
-	}
-
-	public static void setContentLanguageIndex(int index) {
-		if (LanguageList.containsKey(index)) {
-			contentlanguageIndex = index;
-		}
-	}
-
-	public static int getInterfaceLanguageIndex() {
-		return interfaceLanguageIndex;
-	}
-
-	public static int getContentlanguageIndex() {
-		return contentlanguageIndex;
-	}
-
-	public static Locale getinterfaceLanguage() {
-		return LanguageList.get(interfaceLanguageIndex);
-	}
-
-	public static Locale getContentLanguage() {
-		return LanguageList.get(contentlanguageIndex);
-	}
-
-	public static int getLanguageCount() {
-		return LanguageList.size();
-	}
-
-	public static Set<Integer> getKeySet() {
-		return LanguageList.keySet();
 	}
 }

@@ -8,10 +8,25 @@ import java.util.Map;
 import java.util.Set;
 import de.fhl.enca.bl.CleaningAgent;
 import de.fhl.enca.bl.CleaningAgentBuilder;
+import de.fhl.enca.bl.InternationalString;
+import de.fhl.enca.bl.LanguageType;
 import de.fhl.enca.bl.Tag;
+import de.fhl.enca.bl.TagType;
 import de.fhl.enca.dao.SQLVisitor;
 
 public final class Initialize {
+
+	private static InternationalString iStringGenerator(ResultSet r, int i) {
+		InternationalString iString = new InternationalString();
+		try {
+			iString.setString(LanguageType.ENGLISH, r.getString(i));
+			iString.setString(LanguageType.GERMAN, r.getString(i + 1));
+			iString.setString(LanguageType.CHINESE, r.getString(i + 2));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return iString;
+	}
 
 	public static void initCleaningAgents() {
 		ResultSet r = SQLVisitor.visitCleaningAgentsAll();
@@ -19,9 +34,9 @@ public final class Initialize {
 			while (r.next()) {
 				CleaningAgentBuilder builder = new CleaningAgentBuilder();
 				builder.setID(r.getInt(1));
-				builder.setName(new String[] { r.getString(2), r.getString(3), r.getString(4) });
-				builder.setDescription(new String[] { r.getString(5), r.getString(6), r.getString(7) });
-				builder.setinstruction(new String[] { r.getString(8), r.getString(9), r.getString(10) });
+				builder.setName(iStringGenerator(r, 2));
+				builder.setName(iStringGenerator(r, 5));
+				builder.setName(iStringGenerator(r, 8));
 				builder.setApplicationTime(r.getLong(11));
 				builder.setFrequency(r.getLong(12));
 				builder.setType(r.getString(13));
@@ -38,7 +53,7 @@ public final class Initialize {
 		ResultSet r = SQLVisitor.visitTagsAll();
 		try {
 			while (r.next()) {
-				new Tag(r.getInt(1), new String[] { r.getString(2), r.getString(3), r.getString(4) }, r.getString(5));
+				new Tag(r.getInt(1), iStringGenerator(r, 2), TagType.getTagType(r.getString(5)));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

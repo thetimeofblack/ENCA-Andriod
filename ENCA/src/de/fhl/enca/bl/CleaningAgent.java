@@ -8,10 +8,6 @@ import java.util.Map;
 
 public final class CleaningAgent {
 
-	public enum cleaningAgent_t {
-		system, user
-	};
-
 	/* static member */
 	private static Map<Integer, CleaningAgent> cleaningAgentAll = new HashMap<Integer, CleaningAgent>();
 	private static int agentCount;
@@ -23,9 +19,9 @@ public final class CleaningAgent {
 	private InternationalString instruction;
 	private long applicationTime;
 	private long frequency;
-	private cleaningAgent_t agentType;
+	private CleaningAgentType agentType;
 	private int rate;
-	private int mainLanguage;
+	private LanguageType mainLanguage;
 	private Image image;
 
 	private List<Integer> tags = new ArrayList<Integer>();
@@ -39,9 +35,9 @@ public final class CleaningAgent {
 	public void addTag(int tagID) {
 		tags.add(tagID);
 	}
-	
-	public int search(String keyword){
-		return name.search(keyword)+description.search(keyword)+instruction.search(keyword);
+
+	public int search(String keyword) {
+		return name.search(keyword) + description.search(keyword) + instruction.search(keyword);
 	}
 
 	/* getters and setters */
@@ -105,11 +101,11 @@ public final class CleaningAgent {
 		this.frequency = frequency;
 	}
 
-	public cleaningAgent_t getAgentType() {
+	public CleaningAgentType getAgentType() {
 		return agentType;
 	}
 
-	public void setAgentType(cleaningAgent_t agentType) {
+	public void setAgentType(CleaningAgentType agentType) {
 		this.agentType = agentType;
 	}
 
@@ -121,12 +117,12 @@ public final class CleaningAgent {
 		this.rate = rate;
 	}
 
-	public int getMainLanguage() {
+	public LanguageType getMainLanguage() {
 		return mainLanguage;
 	}
 
-	public void setMainLanguage(int mainLanguage) {
-		this.mainLanguage = mainLanguage;
+	public void setMainLanguage(LanguageType lang) {
+		this.mainLanguage = lang;
 	}
 
 	public Image getImage() {

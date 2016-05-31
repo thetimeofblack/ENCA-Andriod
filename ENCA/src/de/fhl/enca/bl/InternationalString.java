@@ -5,13 +5,9 @@ import java.util.Map;
 
 public final class InternationalString {
 
-	private Map<Integer, String> stringMap = new HashMap<Integer, String>(Language.getLanguageCount());
+	private Map<LanguageType, String> stringMap = new HashMap<LanguageType, String>(LanguageType.getLanguageCount());
 
-	public InternationalString(String[] strings) {
-		for (int index : Language.getKeySet()) {
-			stringMap.put(index, strings[index]);
-		}
-	}
+	public InternationalString() {}
 
 	public int search(String keyword) {
 		String pattern = "\\p{ASCII}*" + keyword + "\\p{ASCII}*";
@@ -24,18 +20,11 @@ public final class InternationalString {
 		return relevance;
 	}
 
-	/* getters and setters */
-	public String getPreferredString() {
-		return stringMap.get(Language.getContentlanguageIndex());
+	public void setString(LanguageType lType, String content) {
+		stringMap.put(lType, content);
 	}
 
-	public String getSpecificString(int index) {
-		return stringMap.get(index);
-	}
-
-	public void setString(int index, String string) {
-		if (Language.getKeySet().contains(index)) {
-			stringMap.put(index, string);
-		}
+	public String getString(LanguageType lType) {
+		return stringMap.get(lType);
 	}
 }
