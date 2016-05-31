@@ -16,7 +16,6 @@ public class Tag implements Searchable{
 
 	/* static member */
 	private static Map<Integer, Tag> tagsAll = new HashMap<Integer, Tag>();
-	private static int tagCount = 0;
 
 	/* non-static member */
 	private int tagID;
@@ -39,9 +38,6 @@ public class Tag implements Searchable{
 
 		/* directly put this tag into tagsAll */
 		tagsAll.put(tagID, this);
-
-		/* increase tagCount */
-		tagCount++;
 	}
 
 	public void addCleaningAgent(int id) {
@@ -60,10 +56,6 @@ public class Tag implements Searchable{
 	/* getters and setters */
 	public static Map<Integer, Tag> getTagsAll() {
 		return tagsAll;
-	}
-
-	public static int getTagCount() {
-		return tagCount;
 	}
 
 	public int getTagID() {
