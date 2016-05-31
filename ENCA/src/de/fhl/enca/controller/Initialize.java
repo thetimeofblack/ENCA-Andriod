@@ -17,7 +17,7 @@ import de.fhl.enca.dao.SQLVisitor;
  * @version 31.05.2016
  * 
  * Class Initialize
- * This class contains the oprations of initialization.
+ * This class contains the operations of initialization.
  * During the initialization, all of tags and cleaning agents
  * will be read into memory. The relations between cleaning agents
  * and tags and the relations between tags will be realize.
