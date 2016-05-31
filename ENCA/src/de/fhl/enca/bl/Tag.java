@@ -89,4 +89,20 @@ public class Tag implements Searchable{
 	public void setTagType(TagType tagType) {
 		this.tagType = tagType;
 	}
+	
+	public Set<Integer> getCleaningAgents() {
+		return cleaningAgents;
+	}
+
+	public Set<Integer> getTagsRelated() {
+		return tagsRelated;
+	}
+
+	public void setCleaningAgents(Set<Integer> cleaningAgents) {
+		this.cleaningAgents = cleaningAgents;
+	}
+
+	public void setTagsRelated(Set<Integer> tagsRelated) {
+		this.tagsRelated = tagsRelated;
+	}
 }
