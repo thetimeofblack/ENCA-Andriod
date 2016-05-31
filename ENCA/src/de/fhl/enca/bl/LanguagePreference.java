@@ -27,7 +27,7 @@ public final class LanguagePreference {
 	 * This class is designed to realize generating an object that carries
 	 * language preference data and can be serialized.
 	 */
-	public static final class LanguagePreferenceCarrier implements Serializable {
+	private static final class LanguagePreferenceCarrier implements Serializable {
 
 		private static final long serialVersionUID = -7118590040292976226L;
 
@@ -50,10 +50,10 @@ public final class LanguagePreference {
 	}
 
 	private static File fileLocation;
-	
+
 	static {
 		try {
-			fileLocation = new File(LanguagePreference.class.getClassLoader().getResource("\\res\\user\\user.txt").toURI());
+			fileLocation = new File(LanguagePreference.class.getClassLoader().getResource("\\user\\user").toURI());
 		} catch (URISyntaxException e) {
 			e.printStackTrace();
 			fileLocation = null;
@@ -125,7 +125,7 @@ public final class LanguagePreference {
 	public static void setContentlanguage(LanguageType contentlanguage) {
 		LanguagePreference.contentlanguage = contentlanguage;
 	}
-	
+
 	public static void main(String[] args) {
 		System.out.println(getInterfaceLanguage());
 		System.out.println(getContentlanguage());
