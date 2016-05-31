@@ -10,7 +10,7 @@ import java.util.Map;
  * Class InternationalString
  * This class is designed to encapsulate strings in different languages into single object.
  */
-public final class InternationalString {
+public final class InternationalString implements Searchable {
 
 	/**
 	 * Map that stores strings in different languages
@@ -25,6 +25,7 @@ public final class InternationalString {
 	 * @return the relevance, whose value indicates the count that
 	 * the keyword occurs in the content.
 	 */
+	@Override
 	public int search(String keyword) {
 		String pattern = "\\p{ASCII}*" + keyword + "\\p{ASCII}*";
 		int relevance = 0;

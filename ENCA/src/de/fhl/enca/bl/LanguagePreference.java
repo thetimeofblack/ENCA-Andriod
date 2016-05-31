@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.net.URISyntaxException;
 
 /**
  * @author Bobby
@@ -30,8 +31,8 @@ public final class LanguagePreference {
 
 		private static final long serialVersionUID = -7118590040292976226L;
 
-		private LanguageType interfaceLanguage = null;
-		private LanguageType contentlanguage = null;
+		private LanguageType interfaceLanguage = DefaultLanguage;
+		private LanguageType contentlanguage = DefaultLanguage;
 
 		public LanguagePreferenceCarrier(LanguageType interfaceLanguage, LanguageType contentlanguage) {
 			this.interfaceLanguage = interfaceLanguage;
@@ -48,7 +49,16 @@ public final class LanguagePreference {
 		}
 	}
 
-	private static final File FILE = new File("res\\user\\user.txt");
+	private static File fileLocation;
+	
+	static {
+		try {
+			fileLocation = new File(LanguagePreference.class.getClassLoader().getResource("\\res\\user\\user.txt").toURI());
+		} catch (URISyntaxException e) {
+			e.printStackTrace();
+			fileLocation = null;
+		}
+	}
 
 	private static final LanguageType DefaultLanguage = LanguageType.ENGLISH;
 
@@ -77,7 +87,7 @@ public final class LanguagePreference {
 	public static void readLanguagePreference() {
 		ObjectInputStream oStream = null;
 		try {
-			oStream = new ObjectInputStream(new FileInputStream(FILE));
+			oStream = new ObjectInputStream(new FileInputStream(fileLocation));
 			readCarrier((LanguagePreferenceCarrier) oStream.readObject());
 			oStream.close();
 		} catch (ClassNotFoundException | IOException e) {
@@ -91,7 +101,7 @@ public final class LanguagePreference {
 	public static void writeLanguagePreference() {
 		ObjectOutputStream oStream = null;
 		try {
-			oStream = new ObjectOutputStream(new FileOutputStream(FILE));
+			oStream = new ObjectOutputStream(new FileOutputStream(fileLocation));
 			oStream.writeObject(getCarrier());
 			oStream.close();
 		} catch (IOException e) {
@@ -114,5 +124,10 @@ public final class LanguagePreference {
 
 	public static void setContentlanguage(LanguageType contentlanguage) {
 		LanguagePreference.contentlanguage = contentlanguage;
+	}
+	
+	public static void main(String[] args) {
+		System.out.println(getInterfaceLanguage());
+		System.out.println(getContentlanguage());
 	}
 }

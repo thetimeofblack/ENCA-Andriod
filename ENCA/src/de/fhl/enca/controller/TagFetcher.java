@@ -15,6 +15,9 @@ import de.fhl.enca.bl.TagType;
  */
 public final class TagFetcher {
 
+	/**
+	 * Get all tags
+	 */
 	public static Set<Tag> fetchTagsAll() {
 		Set<Tag> tempSet = new HashSet<Tag>();
 		for (Tag tag : Tag.getTagsAll().values()) {
@@ -23,6 +26,10 @@ public final class TagFetcher {
 		return tempSet;
 	}
 
+	/**
+	 * Get tags of specific type
+	 * @param type
+	 */
 	public static Set<Tag> fetchTagsOfType(TagType type) {
 		Set<Tag> tempSet = new HashSet<Tag>();
 		for (Tag tag : Tag.getTagsAll().values()) {

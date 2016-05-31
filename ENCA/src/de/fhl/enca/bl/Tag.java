@@ -12,7 +12,7 @@ import java.util.Set;
  * Class Tag
  * Object representing tag
  */
-public class Tag {
+public class Tag implements Searchable{
 
 	/* static member */
 	private static Map<Integer, Tag> tagsAll = new HashMap<Integer, Tag>();
@@ -50,6 +50,11 @@ public class Tag {
 
 	public void addRelatedTag(int id) {
 		tagsRelated.add(id);
+	}
+	
+	@Override
+	public int search(String keyword) {
+		return name.search(keyword);
 	}
 
 	/* getters and setters */
