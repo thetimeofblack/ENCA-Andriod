@@ -2,6 +2,13 @@ package de.fhl.enca.dao;
 
 import java.sql.ResultSet;
 
+/**
+ * @author Bobby
+ * @version 31.05.2016
+ * 
+ * Class SQLVisitor
+ * Class generates select sql query and sends them
+ */
 public final class SQLVisitor {
 
 	public static ResultSet visitCleaningAgentsAll() {

@@ -10,8 +10,19 @@ import java.util.Set;
 import java.util.TreeSet;
 import de.fhl.enca.bl.CleaningAgent;
 
+/**
+ * @author Bobby
+ * @version 31.05.2016
+ * 
+ * Class CleaningAgentFetcher
+ * This class contains methods of operating cleaning agents
+ * which are stored in memory in map CleaningAgent.cleaningAgentAll.
+ */
 public final class CleaningAgentFetcher {
 
+	/**
+	 * Get all cleaning agents
+	 */
 	public static Set<CleaningAgent> fetchCleaningAgentsAll() {
 		Set<CleaningAgent> tempSet = new HashSet<CleaningAgent>();
 		for (CleaningAgent cleaningAgent : CleaningAgent.getCleaningAgentAll().values()) {
@@ -20,6 +31,11 @@ public final class CleaningAgentFetcher {
 		return tempSet;
 	}
 
+	/**
+	 * Search cleaning agents with the given keyword,
+	 * the result would be sorted according to the relevance.
+	 * @param keyword
+	 */
 	public static Set<CleaningAgent> searchCleaningAgent(String keyword) {
 		Map<CleaningAgent, Integer> tempMap = new HashMap<CleaningAgent, Integer>();
 		String[] subKeywords = keyword.split("\\p{Blank}|-");

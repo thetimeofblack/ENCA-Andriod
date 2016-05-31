@@ -3,12 +3,28 @@ package de.fhl.enca.bl;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * @author Bobby
+ * @version 31.05.2016
+ * 
+ * Class InternationalString
+ * This class is designed to encapsulate strings in different languages into single object.
+ */
 public final class InternationalString {
 
+	/**
+	 * Map that stores strings in different languages
+	 */
 	private Map<LanguageType, String> stringMap = new HashMap<LanguageType, String>(LanguageType.getLanguageCount());
 
 	public InternationalString() {}
 
+	/**
+	 * Search those strings with given keyword
+	 * @param keyword
+	 * @return the relevance, whose value indicates the count that
+	 * the keyword occurs in the content.
+	 */
 	public int search(String keyword) {
 		String pattern = "\\p{ASCII}*" + keyword + "\\p{ASCII}*";
 		int relevance = 0;
@@ -28,7 +44,10 @@ public final class InternationalString {
 		return stringMap.get(lType);
 	}
 
+	/**
+	 * Get string according to the content language located in class LanguagePreference
+	 */
 	public String getString() {
-		return stringMap.get(Language.getContentlanguage());
+		return stringMap.get(LanguagePreference.getContentlanguage());
 	}
 }

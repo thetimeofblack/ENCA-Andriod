@@ -7,27 +7,27 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import de.fhl.enca.bl.CleaningAgent;
-import de.fhl.enca.bl.CleaningAgentBuilder;
 import de.fhl.enca.bl.InternationalString;
 import de.fhl.enca.bl.LanguageType;
 import de.fhl.enca.bl.Tag;
 import de.fhl.enca.bl.TagType;
 import de.fhl.enca.dao.SQLVisitor;
 
+/**
+ * @author Bobby
+ * @version 31.05.2016
+ * 
+ * Class Initialize
+ * This class contains the oprations of initialization.
+ * During the initialization, all of tags and cleaning agents
+ * will be read into memory. The relations between cleaning agents
+ * and tags and the relations between tags will be realize.
+ */
 public final class Initialize {
 
-	private static InternationalString iStringGenerator(ResultSet r, int i) {
-		InternationalString iString = new InternationalString();
-		try {
-			iString.setString(LanguageType.ENGLISH, r.getString(i));
-			iString.setString(LanguageType.GERMAN, r.getString(i + 1));
-			iString.setString(LanguageType.CHINESE, r.getString(i + 2));
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return iString;
-	}
-
+	/**
+	 * Initialize all cleaning agents and store them into the memory
+	 */
 	public static void initCleaningAgents() {
 		ResultSet r = SQLVisitor.visitCleaningAgentsAll();
 		try {
@@ -35,8 +35,8 @@ public final class Initialize {
 				CleaningAgentBuilder builder = new CleaningAgentBuilder();
 				builder.setID(r.getInt(1));
 				builder.setName(iStringGenerator(r, 2));
-				builder.setName(iStringGenerator(r, 5));
-				builder.setName(iStringGenerator(r, 8));
+				builder.setDescription(iStringGenerator(r, 5));
+				builder.setInstruction(iStringGenerator(r, 8));
 				builder.setApplicationTime(r.getLong(11));
 				builder.setFrequency(r.getLong(12));
 				builder.setType(r.getString(13));
@@ -49,6 +49,9 @@ public final class Initialize {
 		}
 	}
 
+	/**
+	 * Initialize all tags and store them into the memory
+	 */
 	public static void initTags() {
 		ResultSet r = SQLVisitor.visitTagsAll();
 		try {
@@ -60,8 +63,21 @@ public final class Initialize {
 		}
 	}
 
+	/**
+	 * Initialize the relations between cleaning agents and tags
+	 * and the relations between tags
+	 */
 	public static void initRelations() {
+		/* Map that stores every cleaning agent and those related tags of each agent */
 		Map<Integer, Set<Integer>> tcMap = new HashMap<Integer, Set<Integer>>();
+		initTCRelations(tcMap);
+		initTTRelations(tcMap);
+	}
+
+	/**
+	 * Initialize the relations between cleaning agents and tags
+	 */
+	private static void initTCRelations(Map<Integer, Set<Integer>> tcMap) {
 		ResultSet r = SQLVisitor.visitRelations();
 		try {
 			while (r.next()) {
@@ -77,6 +93,12 @@ public final class Initialize {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
+
+	/**
+	 * Initialize the relations between tags
+	 */
+	private static void initTTRelations(Map<Integer, Set<Integer>> tcMap) {
 		for (Set<Integer> group : tcMap.values()) {
 			for (int id1 : group) {
 				for (int id2 : group) {
@@ -86,5 +108,21 @@ public final class Initialize {
 				}
 			}
 		}
+	}
+
+	/**
+	 * Generate InternationalString according to ResultSet object and column number, 
+	 * allows reusing replicate codes of
+	 */
+	private static InternationalString iStringGenerator(ResultSet r, int i) {
+		InternationalString iString = new InternationalString();
+		try {
+			iString.setString(LanguageType.ENGLISH, r.getString(i));
+			iString.setString(LanguageType.GERMAN, r.getString(i + 1));
+			iString.setString(LanguageType.CHINESE, r.getString(i + 2));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return iString;
 	}
 }

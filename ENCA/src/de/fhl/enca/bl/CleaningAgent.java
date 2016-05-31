@@ -1,11 +1,18 @@
 package de.fhl.enca.bl;
 
 import java.awt.Image;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
+/**
+ * @author Bobby
+ * @version 31.05.2016
+ * 
+ * Class CleaningAgent
+ * Object representing cleaning agent
+ */
 public final class CleaningAgent {
 
 	/* static member */
@@ -24,7 +31,7 @@ public final class CleaningAgent {
 	private LanguageType mainLanguage;
 	private Image image;
 
-	private List<Integer> tags = new ArrayList<Integer>();
+	private Set<Integer> tags = new HashSet<Integer>();
 
 	/* static method */
 	public static CleaningAgent getCleaningAgent(int ID) {
@@ -36,6 +43,11 @@ public final class CleaningAgent {
 		tags.add(tagID);
 	}
 
+	/**
+	 * search the cleaning agent according to given keyword
+	 * @param keyword
+	 * @return integer representing the relevance
+	 */
 	public int search(String keyword) {
 		return name.search(keyword) + description.search(keyword) + instruction.search(keyword);
 	}
@@ -133,7 +145,7 @@ public final class CleaningAgent {
 		this.image = image;
 	}
 
-	public List<Integer> getTags() {
+	public Set<Integer> getTags() {
 		return tags;
 	}
 }

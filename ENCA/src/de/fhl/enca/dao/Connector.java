@@ -6,6 +6,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+/**
+ * @author Bobby
+ * @version 31.05.2016
+ * 
+ * Class Connector
+ * Class responible for connecting the database and
+ * sending sql query to database
+ */
 public final class Connector {
 
 	private static final Connection CONNECTION = initConnection();

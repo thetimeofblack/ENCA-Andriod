@@ -5,6 +5,14 @@ import java.util.Set;
 import de.fhl.enca.bl.Tag;
 import de.fhl.enca.bl.TagType;
 
+/**
+ * @author Bobby
+ * @version 31.05.2016
+ * 
+ * Class TagFetcher
+ * This class contains methods of operating tags
+ * which are stored in memory in map Tag.tagsAll.
+ */
 public final class TagFetcher {
 
 	public static Set<Tag> fetchTagsAll() {

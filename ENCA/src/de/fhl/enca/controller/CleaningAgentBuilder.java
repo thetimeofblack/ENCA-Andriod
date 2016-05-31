@@ -1,8 +1,20 @@
-package de.fhl.enca.bl;
+package de.fhl.enca.controller;
 
 import java.awt.Toolkit;
 import javax.swing.JFrame;
+import de.fhl.enca.bl.CleaningAgent;
+import de.fhl.enca.bl.CleaningAgentType;
+import de.fhl.enca.bl.InternationalString;
+import de.fhl.enca.bl.LanguageType;
 
+/**
+ * @author Bobby
+ * @version 31.05.2016
+ * 
+ * Class CleaningAgentBuilder
+ * The class helps building a cleaning agent,
+ * applying Builder design pattern
+ */
 public final class CleaningAgentBuilder {
 
 	private static final Toolkit TOOLKIT = new JFrame().getToolkit();
@@ -49,6 +61,10 @@ public final class CleaningAgentBuilder {
 		cleaningAgent.setImage(TOOLKIT.createImage(source));
 	}
 
+	/**
+	 * Return the cleaning agent just built,
+	 * will also store this result.
+	 */
 	public CleaningAgent getResult() {
 		CleaningAgent.getCleaningAgentAll().put(cleaningAgent.getCleaningAgentID(), cleaningAgent);
 		return cleaningAgent;

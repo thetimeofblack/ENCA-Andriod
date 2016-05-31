@@ -5,11 +5,18 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ * @author Bobby
+ * @version 31.05.2016
+ * 
+ * Class Tag
+ * Object representing tag
+ */
 public class Tag {
 
 	/* static member */
 	private static Map<Integer, Tag> tagsAll = new HashMap<Integer, Tag>();
-	private static int tagCount;
+	private static int tagCount = 0;
 
 	/* non-static member */
 	private int tagID;
@@ -29,7 +36,12 @@ public class Tag {
 		this.tagID = tagID;
 		this.name = name;
 		this.tagType = tagType;
+
+		/* directly put this tag into tagsAll */
 		tagsAll.put(tagID, this);
+
+		/* increase tagCount */
+		tagCount++;
 	}
 
 	public void addCleaningAgent(int id) {
@@ -47,10 +59,6 @@ public class Tag {
 
 	public static int getTagCount() {
 		return tagCount;
-	}
-
-	public static void setTagCount(int tagCount) {
-		Tag.tagCount = tagCount;
 	}
 
 	public int getTagID() {
