@@ -22,10 +22,31 @@ public class TagPreference implements Serializable {
 		colors.put(TagType.ROOM, Color.getHSBColor(0, 0, 0));
 		colors.put(TagType.ITEM, Color.getHSBColor(0, 0, 0));
 		colors.put(TagType.OTHERS, Color.getHSBColor(0, 0, 0));
+		//Remember to specify colors!
 	};
 	private static Map<TagType, InternationalString> descripsions = new HashMap<TagType, InternationalString>();
 	static {
-		// add here
+		InternationalString desROOM = new InternationalString();
+		desROOM.setString(LanguageType.CHINESE, "房间");
+		desROOM.setString(LanguageType.ENGLISH, "Room");
+		desROOM.setString(LanguageType.GERMAN, "Zimmer");
+		
+		InternationalString desITEM = new InternationalString();
+		desITEM.setString(LanguageType.CHINESE, "物品");
+		desITEM.setString(LanguageType.ENGLISH, "Item");
+		desITEM.setString(LanguageType.GERMAN, "");
+		//remember to add!
+		
+		InternationalString desOTHERS = new InternationalString();
+		desOTHERS.setString(LanguageType.CHINESE, "其它");
+		desOTHERS.setString(LanguageType.ENGLISH, "Others");
+		desOTHERS.setString(LanguageType.GERMAN, "");
+		//remember to add!
+		
+		descripsions.put(TagType.ROOM, desROOM);
+		descripsions.put(TagType.ITEM, desITEM);
+		descripsions.put(TagType.OTHERS, desOTHERS);
+		
 	};
 	
 	/*
