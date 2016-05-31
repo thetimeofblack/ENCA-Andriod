@@ -14,7 +14,7 @@ import java.util.Map;
  * of language preferences. It is used globally in this application.
  */
 public enum LanguageType {
-	ENGLISH("English", Locale.ENGLISH, 0), GERMAN("Deutsch", Locale.GERMAN, 1), CHINESE("ÖÐÎÄ", Locale.CHINESE, 2);
+	ENGLISH("English", Locale.ENGLISH, 0), GERMAN("Deutsch", Locale.GERMAN, 1), CHINESE("ä¸­æ–‡", Locale.CHINESE, 2);
 
 	private String name;
 	private Locale locale;
