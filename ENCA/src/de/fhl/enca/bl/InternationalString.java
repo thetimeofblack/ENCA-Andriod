@@ -27,4 +27,8 @@ public final class InternationalString {
 	public String getString(LanguageType lType) {
 		return stringMap.get(lType);
 	}
+
+	public String getString() {
+		return stringMap.get(Language.getContentlanguage());
+	}
 }

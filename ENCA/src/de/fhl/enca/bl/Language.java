@@ -67,4 +67,20 @@ public final class Language {
 			e.printStackTrace();
 		}
 	}
+
+	public static LanguageType getInterfaceLanguage() {
+		return interfaceLanguage;
+	}
+
+	public static void setInterfaceLanguage(LanguageType interfaceLanguage) {
+		Language.interfaceLanguage = interfaceLanguage;
+	}
+
+	public static LanguageType getContentlanguage() {
+		return contentlanguage;
+	}
+
+	public static void setContentlanguage(LanguageType contentlanguage) {
+		Language.contentlanguage = contentlanguage;
+	}
 }
