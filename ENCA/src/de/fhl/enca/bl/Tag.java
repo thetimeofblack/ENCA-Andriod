@@ -12,7 +12,7 @@ import java.util.Set;
  * Class Tag
  * Object representing tag
  */
-public class Tag implements Searchable{
+public class Tag implements Searchable {
 
 	/* static member */
 	private static Map<Integer, Tag> tagsAll = new HashMap<Integer, Tag>();
@@ -47,7 +47,7 @@ public class Tag implements Searchable{
 	public void addRelatedTag(int id) {
 		tagsRelated.add(id);
 	}
-	
+
 	@Override
 	public int search(String keyword) {
 		return name.search(keyword);
@@ -81,7 +81,7 @@ public class Tag implements Searchable{
 	public void setTagType(TagType tagType) {
 		this.tagType = tagType;
 	}
-	
+
 	public Set<Integer> getCleaningAgents() {
 		return cleaningAgents;
 	}

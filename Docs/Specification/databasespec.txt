@@ -27,11 +27,11 @@ All strings have three languages!
 	* cleaningAgentID: int - 1
 	* tagID: int - 2
 
-## Memos
-	* memoID: int
-	* date: Date
-	* cleaningAgentID: int
-	* content: String
+## Memos	
+	* memoID: int - 1
+	* date: Date - 2
+	* cleaningAgentID: int - 3
+	* content: String - 4
 
 
 # File

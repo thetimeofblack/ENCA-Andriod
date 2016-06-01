@@ -4,7 +4,7 @@ import java.sql.ResultSet;
 
 /**
  * @author Bobby
- * @version 31.05.2016
+ * @version 01.06.2016
  * 
  * Class SQLVisitor
  * Class generates select sql query and sends them
@@ -21,5 +21,9 @@ public final class SQLVisitor {
 
 	public static ResultSet visitRelations() {
 		return Connector.executeSelect("select * from TC");
+	}
+
+	public static ResultSet visitMemos() {
+		return Connector.executeSelect("select * from Memos");
 	}
 }

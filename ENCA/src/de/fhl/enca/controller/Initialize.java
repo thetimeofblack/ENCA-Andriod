@@ -8,13 +8,14 @@ import java.util.Set;
 import de.fhl.enca.bl.CleaningAgent;
 import de.fhl.enca.bl.InternationalString;
 import de.fhl.enca.bl.LanguageType;
+import de.fhl.enca.bl.Memo;
 import de.fhl.enca.bl.Tag;
 import de.fhl.enca.bl.TagType;
 import de.fhl.enca.dao.SQLVisitor;
 
 /**
  * @author Bobby
- * @version 31.05.2016
+ * @version 01.06.2016
  * 
  * Class Initialize
  * This class contains the operations of initialization.
@@ -93,7 +94,7 @@ public final class Initialize {
 					tcMap.put(tagID, Tag.getTag(tagID).getCleaningAgents());
 				}
 				// stick a tag to CA
-				ctMap.get(cleaningAgentID).add(tagID); 
+				ctMap.get(cleaningAgentID).add(tagID);
 				// link CA to tag
 				tcMap.get(tagID).add(cleaningAgentID);
 			}
@@ -108,14 +109,14 @@ public final class Initialize {
 	private static void initTTRelations(Map<Integer, Set<Integer>> ctMap, Map<Integer, Set<Integer>> tcMap) {
 		for (Set<Integer> group : tcMap.values()) { // iterate all CA tag sets
 			for (int id1 : group) { // iterate each tag
-			for (int id2 : group) { // take another tag
-			if (id1 != id2 ) { // every two related tags
-				if (Tag.getTag(id1).getTagType() != Tag.getTag(id2).getTagType()) {
-					// log the relation if tag is of different type
-					Tag.getTag(id1).addRelatedTag(id2);
+				for (int id2 : group) { // take another tag
+					if (id1 != id2) { // every two related tags
+						if (Tag.getTag(id1).getTagType() != Tag.getTag(id2).getTagType()) {
+							// log the relation if tag is of different type
+							Tag.getTag(id1).addRelatedTag(id2);
+						}
+					}
 				}
-			}
-			}
 			}
 		}
 	}
@@ -134,5 +135,19 @@ public final class Initialize {
 			e.printStackTrace();
 		}
 		return iString;
+	}
+
+	/**
+	 * Initialize memos.
+	 */
+	public static void initMemos() {
+		ResultSet r = SQLVisitor.visitMemos();
+		try {
+			while (r.next()) {
+				new Memo(r.getInt(1), CleaningAgent.getCleaningAgent(r.getInt(3)), r.getString(4), r.getDate(2));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 }
