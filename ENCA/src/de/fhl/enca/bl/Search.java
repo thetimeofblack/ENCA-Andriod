@@ -1,13 +1,12 @@
 package de.fhl.enca.bl;
 
+import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.TreeSet;
-import java.util.Map.Entry;
 
 /**
  * @author Bobby
@@ -23,7 +22,7 @@ public final class Search {
 	 * the result would be sorted according to the relevance.
 	 * @param keyword
 	 */
-	public static Set<Searchable> searchSearchable(Collection<Searchable> collection, String keyword) {
+	public static Set<Searchable> search(Collection<Searchable> collection, String keyword) {
 		Map<Searchable, Integer> tempMap = new HashMap<Searchable, Integer>();
 		String[] subKeywords = keyword.split("\\p{Blank}|-");
 		for (Searchable Searchable : collection) {
@@ -35,16 +34,11 @@ public final class Search {
 				tempMap.put(Searchable, relevance);
 			}
 		}
-		Set<Map.Entry<Searchable, Integer>> sortingSet = new TreeSet<Map.Entry<Searchable, Integer>>(new Comparator<Map.Entry<Searchable, Integer>>() {
-
-			@Override
-			public int compare(Entry<Searchable, Integer> o1, Entry<Searchable, Integer> o2) {
-				return o1.getValue() - o2.getValue();
-			}
-		});
-		sortingSet.addAll(tempMap.entrySet());
+		List<Map.Entry<Searchable, Integer>> sortingList = new ArrayList<Map.Entry<Searchable, Integer>>();
+		sortingList.addAll(tempMap.entrySet());
+		sortingList.sort((o1, o2) -> o2.getValue() - o1.getValue());
 		Set<Searchable> tempSet = new LinkedHashSet<Searchable>();
-		for (Map.Entry<Searchable, Integer> entry : sortingSet) {
+		for (Map.Entry<Searchable, Integer> entry : sortingList) {
 			tempSet.add(entry.getKey());
 		}
 		return tempSet;
