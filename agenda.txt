@@ -1,3 +1,4 @@
+# Agenda
 2016-05-09 First get-together
 2016-05-14 Spec discussion
 2016-05-16 1pm Spec submit
@@ -9,3 +10,32 @@
 *2016-05-31 UML deadline
 *2016-06-14 GUI deadline
 *2016-07-10 Product deadline
+
+
+# Task
+- DB, content: Wu
+	* DB infrastructure (priority)
+	* Test material (priority)
+	* production content
+
+- Connector: Gong
+	* prototyping (priority)
+	* production
+
+- BL: Zhang, Gong
+	* model
+	* controller
+	* test
+	* refactoring
+
+- AndroidGUI: Ma, Zhang
+	* monk (priority), AndroidStudio
+	* production
+
+- PCGUI: Gong, Zhang
+	* monk
+	* production
+
+- Design, algorithm and logic: ALL
+	* code review ****
+
