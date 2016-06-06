@@ -97,4 +97,9 @@ public class Tag implements Searchable {
 	public void setTagsRelated(Set<Integer> tagsRelated) {
 		this.tagsRelated = tagsRelated;
 	}
+
+	@Override
+	public String toString() {
+		return this.name.getString() + "\n" + "CA:" + this.cleaningAgents + "||" + "Tag:" + this.tagsRelated + "\n";
+	}
 }

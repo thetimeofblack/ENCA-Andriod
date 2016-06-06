@@ -1,7 +1,6 @@
 package de.fhl.enca.bl;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -22,7 +21,7 @@ public final class Search {
 	 * the result would be sorted according to the relevance.
 	 * @param keyword
 	 */
-	public static Set<Searchable> search(Collection<Searchable> collection, String keyword) {
+	public static Set<Searchable> search(Set<Searchable> collection, String keyword) {
 		Map<Searchable, Integer> tempMap = new HashMap<Searchable, Integer>();
 		String[] subKeywords = keyword.split("\\p{Blank}|-");
 		for (Searchable Searchable : collection) {

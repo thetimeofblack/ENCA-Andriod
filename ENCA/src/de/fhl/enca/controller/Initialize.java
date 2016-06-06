@@ -43,6 +43,7 @@ public final class Initialize {
 				builder.setRate(r.getInt(14));
 				builder.setMainLanguage(r.getInt(15));
 				builder.setImage(r.getBytes(16));
+				builder.getResult();
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -107,7 +108,7 @@ public final class Initialize {
 	 * Initialize the relations between tags
 	 */
 	private static void initTTRelations(Map<Integer, Set<Integer>> ctMap, Map<Integer, Set<Integer>> tcMap) {
-		for (Set<Integer> group : tcMap.values()) { // iterate all CA tag sets
+		for (Set<Integer> group : ctMap.values()) { // iterate all CA tag sets
 			for (int id1 : group) { // iterate each tag
 				for (int id2 : group) { // take another tag
 					if (id1 != id2) { // every two related tags

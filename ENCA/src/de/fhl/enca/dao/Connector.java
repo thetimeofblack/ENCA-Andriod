@@ -1,5 +1,6 @@
 package de.fhl.enca.dao;
 
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -16,35 +17,35 @@ import java.sql.Statement;
  */
 public final class Connector {
 
-	private static final Connection CONNECTION = initConnection();
+	private static Connection connection;
 
-	private static Connection initConnection() {
+	static {
 		try {
-			return DriverManager.getConnection("jdbc:sqlite:res\\data\\data.db");
+			connection = DriverManager.getConnection("jdbc:sqlite:res/data/data.db");
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return null;
+			connection = null;
 		}
 	}
 
-	private static final Statement STATEMENT = initStatement();
+	private static Statement statement;
 
-	private static Statement initStatement() {
-		if (CONNECTION != null) {
+	static {
+		if (connection != null) {
 			try {
-				return CONNECTION.createStatement();
+				statement = connection.createStatement();
 			} catch (SQLException e) {
 				e.printStackTrace();
-				return null;
+				statement = null;
 			}
 		} else {
-			return null;
+			statement = null;
 		}
 	}
 
 	public static ResultSet executeSelect(String sql) {
 		try {
-			return STATEMENT.executeQuery(sql);
+			return statement.executeQuery(sql);
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return null;
@@ -53,7 +54,7 @@ public final class Connector {
 
 	public static boolean executeNonSelect(String sql) {
 		try {
-			return STATEMENT.execute(sql);
+			return statement.execute(sql);
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return false;

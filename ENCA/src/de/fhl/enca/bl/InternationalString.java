@@ -27,10 +27,10 @@ public final class InternationalString implements Searchable {
 	 */
 	@Override
 	public int search(String keyword) {
-		String pattern = "\\p{ASCII}*" + keyword + "\\p{ASCII}*";
+		String pattern = ".*" + keyword + ".*";
 		int relevance = 0;
 		for (String string : stringMap.values()) {
-			if (string.matches(pattern)) {
+			if (string != null && string.matches(pattern)) {
 				relevance++;
 			}
 		}

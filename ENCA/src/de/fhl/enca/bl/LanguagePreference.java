@@ -51,13 +51,13 @@ public final class LanguagePreference {
 
 	private static File fileLocation = null;
 
-	static {
-		try {
-			fileLocation = new File(LanguagePreference.class.getClassLoader().getResource("\\user\\language").toURI());
-		} catch (URISyntaxException e) {
-			e.printStackTrace();
-		}
-	}
+//	static {
+//		try {
+//			fileLocation = new File(LanguagePreference.class.getClassLoader().getResource("\\user\\language").toURI());
+//		} catch (URISyntaxException e) {
+//			e.printStackTrace();
+//		}
+//	}
 
 	private static final LanguageType DefaultLanguage = LanguageType.ENGLISH;
 
@@ -66,9 +66,9 @@ public final class LanguagePreference {
 	private static LanguageType contentlanguage = DefaultLanguage;
 
 	/* initialization */
-	static {
-		readLanguagePreference();
-	}
+//	static {
+//		readLanguagePreference();
+//	}
 
 	/* static method */
 	public static void readCarrier(LanguagePreferenceCarrier carrier) {
