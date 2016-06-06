@@ -8,7 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 
-public class ListViewTestController {
+public final class ListViewTestController {
 
 	@FXML
 	private ListView<String> listView;
