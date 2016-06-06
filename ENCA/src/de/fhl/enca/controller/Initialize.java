@@ -25,10 +25,18 @@ import de.fhl.enca.dao.SQLVisitor;
  */
 public final class Initialize {
 
+	public static void initialize() {
+		new Thread(() -> {
+			initCleaningAgents();
+			initTags();
+			initRelations();
+		}).start();
+	}
+
 	/**
 	 * Initialize all cleaning agents and store them into the memory
 	 */
-	public static void initCleaningAgents() {
+	private static void initCleaningAgents() {
 		ResultSet r = SQLVisitor.visitCleaningAgentsAll();
 		try {
 			while (r.next()) {
@@ -53,7 +61,7 @@ public final class Initialize {
 	/**
 	 * Initialize all tags and store them into the memory
 	 */
-	public static void initTags() {
+	private static void initTags() {
 		ResultSet r = SQLVisitor.visitTagsAll();
 		try {
 			while (r.next()) {
@@ -68,7 +76,7 @@ public final class Initialize {
 	 * Initialize the relations between cleaning agents and tags
 	 * and the relations between tags
 	 */
-	public static void initRelations() {
+	private static void initRelations() {
 		// <cleaningAgentID, Set<tagID>> CleaningAgent:Tag = 1:*
 		Map<Integer, Set<Integer>> ctMap = new HashMap<Integer, Set<Integer>>();
 		// <tagID, Set<cleaningAgentID>> Tag:CleaningAgent = 1:*
@@ -141,7 +149,7 @@ public final class Initialize {
 	/**
 	 * Initialize memos.
 	 */
-	public static void initMemos() {
+	private static void initMemos() {
 		ResultSet r = SQLVisitor.visitMemos();
 		try {
 			while (r.next()) {

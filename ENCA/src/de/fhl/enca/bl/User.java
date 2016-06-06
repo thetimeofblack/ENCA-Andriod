@@ -58,7 +58,7 @@ public final class User {
 
 	static {
 		try {
-			fileLocation = new File(LanguagePreference.class.getClassLoader().getResource("\\user\\user").toURI());
+			fileLocation = new File(LanguagePreference.class.getResource("/user/user").toURI());
 		} catch (URISyntaxException e) {
 			e.printStackTrace();
 		}
@@ -109,6 +109,14 @@ public final class User {
 			oStream = new ObjectOutputStream(new FileOutputStream(fileLocation));
 			oStream.writeObject(getCarrier());
 			oStream.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void clear() {
+		try {
+			new FileOutputStream(fileLocation).close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
