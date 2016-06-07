@@ -118,14 +118,14 @@ public final class Initialize {
 	private static void initTTRelations(Map<Integer, Set<Integer>> ctMap, Map<Integer, Set<Integer>> tcMap) {
 		for (Set<Integer> group : ctMap.values()) { // iterate all CA tag sets
 			for (int id1 : group) { // iterate each tag
-				for (int id2 : group) { // take another tag
+			for (int id2 : group) { // take another tag
 					if (id1 != id2) { // every two related tags
-						if (Tag.getTag(id1).getTagType() != Tag.getTag(id2).getTagType()) {
+					if (Tag.getTag(id1).getTagType() != Tag.getTag(id2).getTagType()) {
 							// log the relation if tag is of different type
 							Tag.getTag(id1).addRelatedTag(id2);
-						}
 					}
-				}
+					}
+			}
 			}
 		}
 	}

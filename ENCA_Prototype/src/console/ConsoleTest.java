@@ -6,7 +6,7 @@ import de.fhl.enca.bl.User;
 public final class ConsoleTest {
 
 	public static void main(String[] args) {
-		User.clear();
-		LanguagePreference.clear();
+		User.initialize();
+		LanguagePreference.initialize();
 	}
 }

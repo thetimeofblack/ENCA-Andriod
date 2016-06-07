@@ -32,17 +32,23 @@ public final class User {
 	 */
 	private static final class UserCarrier implements Serializable {
 
-		private static final long serialVersionUID = -7407640364449951106L;
+		private static final long serialVersionUID = 9171730458759247340L;
 
+		private boolean isFirstUse = true;
 		private String name = null;
 		private Date regDate = null;
 
-		public UserCarrier(String name, Date regDate) {
+		public UserCarrier(boolean isFirstUse, String name, Date regDate) {
+			super();
+			this.isFirstUse = isFirstUse;
 			this.name = name;
 			this.regDate = regDate;
 		}
 
-		/* getters */
+		public boolean isFirstUse() {
+			return isFirstUse;
+		}
+
 		public String getName() {
 			return name;
 		}
@@ -77,24 +83,23 @@ public final class User {
 
 	/* static method */
 	public static void readCarrier(UserCarrier carrier) {
+		isFirstUse = carrier.isFirstUse();
 		name = carrier.getName();
 		regDate = carrier.getRegDate();
 	}
 
 	public static UserCarrier getCarrier() {
-		return new UserCarrier(name, regDate);
+		return new UserCarrier(isFirstUse, name, regDate);
 	}
 
 	/**
 	 * Read user data from a serialized carrier
 	 */
 	public static void readUser() {
-		ObjectInputStream oStream = null;
 		try {
-			oStream = new ObjectInputStream(new FileInputStream(fileLocation));
+			ObjectInputStream oStream = new ObjectInputStream(new FileInputStream(fileLocation));
 			readCarrier((UserCarrier) oStream.readObject());
 			oStream.close();
-			isFirstUse = false;
 		} catch (ClassNotFoundException | IOException e) {
 			e.printStackTrace();
 		}
@@ -104,22 +109,20 @@ public final class User {
 	 * Serialize the carrier and write it to the file
 	 */
 	public static void writeUser() {
-		ObjectOutputStream oStream = null;
 		try {
-			oStream = new ObjectOutputStream(new FileOutputStream(fileLocation));
+			ObjectOutputStream oStream = new ObjectOutputStream(new FileOutputStream(fileLocation));
 			oStream.writeObject(getCarrier());
 			oStream.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
-	
-	public static void clear() {
-		try {
-			new FileOutputStream(fileLocation).close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+
+	public static void initialize() {
+		setFirstUse(true);
+		setName(null);
+		setRegDate(null);
+		writeUser();
 	}
 
 	public static String getDateString() {
@@ -127,6 +130,10 @@ public final class User {
 	}
 
 	/* getters and setters */
+	public static void setFirstUse(boolean isFirstUse) {
+		User.isFirstUse = isFirstUse;
+	}
+
 	public static boolean isFirstUse() {
 		return isFirstUse;
 	}

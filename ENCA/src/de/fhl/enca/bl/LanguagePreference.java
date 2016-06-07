@@ -108,12 +108,10 @@ public final class LanguagePreference {
 		}
 	}
 
-	public static void clear() {
-		try {
-			new FileOutputStream(fileLocation).close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+	public static void initialize() {
+		setInterfaceLanguage(DefaultLanguage);
+		setContentlanguage(DefaultLanguage);
+		writeLanguagePreference();
 	}
 
 	/* getters and setters */
@@ -131,9 +129,5 @@ public final class LanguagePreference {
 
 	public static void setContentlanguage(LanguageType contentlanguage) {
 		LanguagePreference.contentlanguage = contentlanguage;
-	}
-
-	public static void main(String[] args) {
-
 	}
 }

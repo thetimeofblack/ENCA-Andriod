@@ -46,6 +46,7 @@ public final class LoginFirstController {
 		if (!usernameTextField.getText().equals("") && !interfaceComboBox.getSelectionModel().isEmpty() && !contentComboBox.getSelectionModel().isEmpty()) {
 			User.setName(usernameTextField.getText());
 			User.setRegDate(new Date());
+			User.setFirstUse(false);
 			User.writeUser();
 			LanguagePreference.setInterfaceLanguage(LanguageType.getLanguageType(interfaceComboBox.getSelectionModel().getSelectedIndex()));
 			LanguagePreference.setContentlanguage(LanguageType.getLanguageType(contentComboBox.getSelectionModel().getSelectedIndex()));
