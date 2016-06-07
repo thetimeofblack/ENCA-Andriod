@@ -48,6 +48,14 @@ public class Tag implements Searchable {
 		tagsRelated.add(id);
 	}
 
+	public Set<Tag> getTags() {
+		Set<Tag> set = new HashSet<Tag>();
+		for (int i : tagsRelated) {
+			set.add(getTag(i));
+		}
+		return set;
+	}
+
 	@Override
 	public int search(String keyword) {
 		return name.search(keyword);

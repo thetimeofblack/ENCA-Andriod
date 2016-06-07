@@ -1,6 +1,9 @@
 package application;
 
 import java.io.IOException;
+import java.util.ResourceBundle;
+import de.fhl.enca.bl.LanguagePreference;
+import de.fhl.enca.controller.Initialize;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -11,8 +14,9 @@ public class Main extends Application {
 
 	@Override
 	public void start(Stage primaryStage) {
+		Initialize.initialize();
 		try {
-			Scene scene = new Scene(new FXMLLoader(Main.class.getResource("/view/Main.fxml")).load());
+			Scene scene = new Scene(new FXMLLoader(Main.class.getResource("/view/Main.fxml"), ResourceBundle.getBundle("res.Main", LanguagePreference.getInterfaceLanguage().getLocale())).load());
 			primaryStage.setScene(scene);
 			primaryStage.setTitle("ENCA");
 			primaryStage.initStyle(StageStyle.UNIFIED);
@@ -20,9 +24,5 @@ public class Main extends Application {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	}
-
-	public static void main(String[] args) {
-		launch(args);
 	}
 }

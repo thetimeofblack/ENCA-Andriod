@@ -10,7 +10,7 @@ package de.fhl.enca.bl;
  * of tag type. It is used globally in this application.
  */
 public enum TagType {
-	ROOM("Room"), ITEM("Item"), OTHERS("Others");
+	ROOM("Room"), ITEM("Items"), OTHERS("Others");
 
 	/*
 	 * name: String representation of a type

@@ -1,6 +1,7 @@
 package view;
 
 import java.util.Date;
+import application.Main;
 import de.fhl.enca.bl.LanguagePreference;
 import de.fhl.enca.bl.LanguageType;
 import de.fhl.enca.bl.User;
@@ -11,6 +12,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 public final class LoginFirstController {
 
@@ -51,6 +53,7 @@ public final class LoginFirstController {
 			LanguagePreference.setInterfaceLanguage(LanguageType.getLanguageType(interfaceComboBox.getSelectionModel().getSelectedIndex()));
 			LanguagePreference.setContentlanguage(LanguageType.getLanguageType(contentComboBox.getSelectionModel().getSelectedIndex()));
 			LanguagePreference.writeLanguagePreference();
+			new Main().start(new Stage());
 		}
 	}
 }
