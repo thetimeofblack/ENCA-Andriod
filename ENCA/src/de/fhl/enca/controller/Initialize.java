@@ -138,8 +138,8 @@ public final class Initialize {
 		InternationalString iString = new InternationalString();
 		try {
 			iString.setString(LanguageType.ENGLISH, r.getString(i));
-			iString.setString(LanguageType.GERMAN, r.getString(i + 1));
-			iString.setString(LanguageType.CHINESE, r.getString(i + 2));
+			iString.setString(LanguageType.CHINESE, r.getString(i + 1));
+			iString.setString(LanguageType.GERMAN, r.getString(i + 2));
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
