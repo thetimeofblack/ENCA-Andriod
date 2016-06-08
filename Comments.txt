@@ -1,0 +1,32 @@
+# Initialize.java
+	- line 35: initializeConcurrently()
+	mechanism required to keep main activity informed that init is done.
+
+	- line 154: initMemos()
+	not used, be careful.
+
+# Search.java (inline comments recommended)
+	- line 24:
+	we only apply search on cleaning agents, so it would be type-safer to change parameter 'collection' type to CleaningAgent. (To avoid search directly on Tag for instance)
+	Rename "keyword" to "query" and "subKeyword"to "keyword" to clearly show difference between a single word and words with delimiters. Because I noticed that it is "keyword" parameter for Searchable.search.
+	And additionally, search activity should be a cascade behavior, that is to say, we apply search on CleaningAgent, but search query cascades down to Tag and InternationalString, then total relevance pass up.
+	So, search method on each Searchable shall be reconsidered.
+	Further, I also recommend put weight on different levels of relevance.
+	And I recommend to separate this method into smaller private functions "split" + "search" + "order"
+
+	- line 27:
+	delimiter reconsider
+
+# Tag.java
+	- line 61:
+	we also need to search description for a tag, it is in class TagPreference
+
+# TagFetcher.java
+	It is a little cryptic, refactoring is recommended.
+
+# General advice
+> Inline comments is recommended for algorithm intense code block.
+> We don’t do prototyping in ENCA project, so make code clean and robust, as if it is for production.
+
+Haoze Z
+2016-06-08
