@@ -1,11 +1,13 @@
 package view;
 
-import de.fhl.enca.bl.Tag;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 import de.fhl.enca.bl.TagType;
 import de.fhl.enca.controller.TagFetcher;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
@@ -23,42 +25,74 @@ public final class MainController {
 	private ListView<TagBean> otherTaglistView;
 
 	@FXML
-	private Button roomClearButton;
+	private Button clearButton;
 
-	@FXML
-	private Button itemClearButton;
+	private Map<ListView<TagBean>, TagType> listViewMap = new HashMap<ListView<TagBean>, TagType>();
 
-	@FXML
-	private Button otherClearButton;
+	private Map<ListView<TagBean>, Integer> priorityMap = new HashMap<>();
+
+	private int priority;
+
+	private Set<TagBean> getChosenTags() {
+		Set<TagBean> set = new HashSet<>();
+		for (ListView<TagBean> listView : listViewMap.keySet()) {
+			if (!listView.getSelectionModel().isEmpty()) {
+				set.add(listView.getSelectionModel().getSelectedItem());
+			}
+		}
+		return set;
+	}
 
 	@FXML
 	private void initialize() {
-		roomTagListView.setItems(TagBean.generateList(TagFetcher.fetchTagsOfType(TagType.ROOM)));
-		itemTagListView.setItems(TagBean.generateList(TagFetcher.fetchTagsOfType(TagType.ITEM)));
-		ObservableList<TagBean> list = TagBean.generateList(TagFetcher.fetchTagsOfType(TagType.OTHERS));
-		if (!list.isEmpty()) {
-			otherTaglistView.setItems(list);
-		}
-		roomTagListView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<TagBean>() {
+		listViewMap.put(roomTagListView, TagType.ROOM);
+		listViewMap.put(itemTagListView, TagType.ITEM);
+		listViewMap.put(otherTaglistView, TagType.OTHERS);
+		for (ListView<TagBean> listView : listViewMap.keySet()) {
+			listView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<TagBean>() {
 
-			@Override
-			public void changed(ObservableValue<? extends TagBean> observable, TagBean oldValue, TagBean newValue) {
-				if (!roomTagListView.getSelectionModel().isEmpty()) {
-					itemTagListView.setItems(TagBean.generateList(TagFetcher.fetchTagsOfTypeOfTag(Tag.getTag(newValue.getTagID()), TagType.ITEM)));
-				} else {
-					itemTagListView.setItems(TagBean.generateList(TagFetcher.fetchTagsOfType(TagType.ITEM)));
+				@Override
+				public void changed(ObservableValue<? extends TagBean> observable, TagBean oldValue, TagBean newValue) {
+					if (newValue != null) {
+						if (!priorityMap.containsKey(listView)) {
+							priorityMap.put(listView, ++priority);
+						}
+						for (ListView<TagBean> listView2 : listViewMap.keySet()) {
+							if (priorityMap.containsKey(listView2)) {
+								if (priorityMap.get(listView2) > priorityMap.get(listView)) {
+									listView2.getSelectionModel().clearSelection();
+									init(listView2);
+								}
+							} else {
+								init(listView2);
+							}
+						}
+					}
 				}
+			});
+		}
+		clear();
+	}
+
+	private void init(ListView<TagBean> listView) {
+		if (getChosenTags().isEmpty()) {
+			listView.setItems(TagBean.generateList(TagFetcher.fetchTagsOfType(listViewMap.get(listView))));
+		} else {
+			if (listView.getSelectionModel().isEmpty()) {
+				listView.setItems(TagBean.generateList(TagFetcher.fetchTagOfTypeOfTags(TagBean.convert(getChosenTags()), listViewMap.get(listView))));
 			}
-		});
+		}
 	}
 
 	@FXML
-	private void clearRoom() {
-		roomTagListView.getSelectionModel().clearSelection();
-	}
-
-	@FXML
-	private void clearItem() {
-		itemTagListView.getSelectionModel().clearSelection();
+	private void clear() {
+		for (ListView<TagBean> listView : listViewMap.keySet()) {
+			listView.getSelectionModel().clearSelection();
+		}
+		priorityMap.clear();
+		priority = 0;
+		for (Map.Entry<ListView<TagBean>, TagType> entry : listViewMap.entrySet()) {
+			init(entry.getKey());
+		}
 	}
 }

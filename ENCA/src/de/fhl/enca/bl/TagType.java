@@ -12,7 +12,7 @@ package de.fhl.enca.bl;
 public enum TagType {
 	ROOM("Room"), ITEM("Items"), OTHERS("Others");
 
-	/*
+	/**
 	 * name: String representation of a type
 	 */
 	String name;

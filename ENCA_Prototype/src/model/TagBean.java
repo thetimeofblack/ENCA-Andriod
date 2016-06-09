@@ -1,5 +1,6 @@
 package model;
 
+import java.util.HashSet;
 import java.util.Set;
 import de.fhl.enca.bl.Tag;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -18,6 +19,14 @@ public final class TagBean {
 			list.add(new TagBean(tag));
 		}
 		return list;
+	}
+
+	public static Set<Tag> convert(Set<TagBean> source) {
+		Set<Tag> set = new HashSet<Tag>();
+		for (TagBean tagBean : source) {
+			set.add(Tag.getTag(tagBean.getTagID()));
+		}
+		return set;
 	}
 
 	public TagBean(Tag tag) {

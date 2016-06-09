@@ -38,6 +38,27 @@ public final class TagFetcher {
 		return fetchTagsOfTypeFrom(tag.getTags(), type);
 	}
 
+	public static Set<Tag> fetchTagOfTypeOfTags(Set<Tag> tags, TagType type) {
+		Set<Tag> result = new HashSet<Tag>();
+		for (Tag tag : tags) {
+			for (int tagID : tag.getTagsRelated()) {
+				boolean exists = true;
+				for (Tag tag2 : tags) {
+					if (tag != tag2) {
+						if (!tag2.getTagsRelated().contains(tagID)) {
+							exists = false;
+						}
+					}
+				}
+				if (exists) {
+					result.add(Tag.getTag(tagID));
+				}
+			}
+			break;
+		}
+		return fetchTagsOfTypeFrom(result, type);
+	}
+
 	private static Set<Tag> fetchTagsOfTypeFrom(Set<Tag> source, TagType type) {
 		Set<Tag> tempSet = new HashSet<Tag>();
 		for (Tag tag : source) {
