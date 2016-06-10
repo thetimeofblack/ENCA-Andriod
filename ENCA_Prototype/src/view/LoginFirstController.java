@@ -18,16 +18,12 @@ public final class LoginFirstController {
 
 	@FXML
 	private AnchorPane pane;
-
 	@FXML
 	private ComboBox<String> interfaceComboBox;
-
 	@FXML
 	private ComboBox<String> contentComboBox;
-
 	@FXML
 	private Button loginButton;
-
 	@FXML
 	private TextField usernameTextField;
 

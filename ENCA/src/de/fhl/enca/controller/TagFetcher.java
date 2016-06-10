@@ -19,7 +19,7 @@ public final class TagFetcher {
 	 * Get all tags
 	 */
 	public static Set<Tag> fetchTagsAll() {
-		Set<Tag> tempSet = new HashSet<Tag>();
+		Set<Tag> tempSet = new HashSet<>();
 		for (Tag tag : Tag.getTagsAll().values()) {
 			tempSet.add(tag);
 		}
@@ -38,29 +38,28 @@ public final class TagFetcher {
 		return fetchTagsOfTypeFrom(tag.getTags(), type);
 	}
 
+	/*
+	 * Need to be opitmized
+	 */
 	public static Set<Tag> fetchTagOfTypeOfTags(Set<Tag> tags, TagType type) {
-		Set<Tag> result = new HashSet<Tag>();
-		for (Tag tag : tags) {
-			for (int tagID : tag.getTagsRelated()) {
-				boolean exists = true;
-				for (Tag tag2 : tags) {
-					if (tag != tag2) {
-						if (!tag2.getTagsRelated().contains(tagID)) {
-							exists = false;
-						}
-					}
-				}
-				if (exists) {
-					result.add(Tag.getTag(tagID));
+		Set<Tag> result = new HashSet<>();
+		for (int id : Tag.getTagsAll().keySet()) {
+			boolean exists = true;
+			for (Tag tag : tags) {
+				if (!tag.getTagsRelated().contains(id)) {
+					exists = false;
+					break;
 				}
 			}
-			break;
+			if (exists) {
+				result.add(Tag.getTag(id));
+			}
 		}
 		return fetchTagsOfTypeFrom(result, type);
 	}
 
 	private static Set<Tag> fetchTagsOfTypeFrom(Set<Tag> source, TagType type) {
-		Set<Tag> tempSet = new HashSet<Tag>();
+		Set<Tag> tempSet = new HashSet<>();
 		for (Tag tag : source) {
 			if (tag.getTagType() == type)
 				tempSet.add(tag);

@@ -11,7 +11,6 @@ public final class LoginController {
 
 	@FXML
 	private Button loginButton;
-
 	@FXML
 	private Label usernameLabel;
 
