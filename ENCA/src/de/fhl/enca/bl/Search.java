@@ -21,23 +21,23 @@ public final class Search {
 	 * the result would be sorted according to the relevance.
 	 * @param keyword
 	 */
-	public static Set<Searchable> search(Set<Searchable> collection, String keyword) {
-		Map<Searchable, Integer> tempMap = new HashMap<Searchable, Integer>();
-		String[] subKeywords = keyword.split("\\p{Blank}|-");
-		for (Searchable Searchable : collection) {
+	public static Set<CleaningAgent> search(Set<CleaningAgent> collection, String keyword) {
+		Map<CleaningAgent, Integer> tempMap = new HashMap<>();
+		String[] subKeywords = keyword.toLowerCase().split("\\p{Blank}|-");
+		for (CleaningAgent cleaningAgent : collection) {
 			int relevance = 0;
 			for (String subKeyword : subKeywords) {
-				relevance += Searchable.search(subKeyword);
+				relevance += cleaningAgent.search(subKeyword);
 			}
 			if (relevance > 0) {
-				tempMap.put(Searchable, relevance);
+				tempMap.put(cleaningAgent, relevance);
 			}
 		}
-		List<Map.Entry<Searchable, Integer>> sortingList = new ArrayList<Map.Entry<Searchable, Integer>>();
+		List<Map.Entry<CleaningAgent, Integer>> sortingList = new ArrayList<>();
 		sortingList.addAll(tempMap.entrySet());
 		sortingList.sort((o1, o2) -> o2.getValue() - o1.getValue());
-		Set<Searchable> tempSet = new LinkedHashSet<Searchable>();
-		for (Map.Entry<Searchable, Integer> entry : sortingList) {
+		Set<CleaningAgent> tempSet = new LinkedHashSet<>();
+		for (Map.Entry<CleaningAgent, Integer> entry : sortingList) {
 			tempSet.add(entry.getKey());
 		}
 		return tempSet;

@@ -113,15 +113,15 @@
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <TextField prefHeight="25.0" prefWidth="212.0" promptText="%searchPrompt" GridPane.columnIndex="1" />
+                        <TextField fx:id="textField" prefHeight="25.0" prefWidth="212.0" promptText="%searchPrompt" GridPane.columnIndex="1" />
                         <AnchorPane prefHeight="200.0" prefWidth="200.0">
                            <children>
-                              <Button fx:id="clearButton" alignment="CENTER" layoutX="21.0" layoutY="13.0" mnemonicParsing="false" onAction="#initMain" prefHeight="25.0" prefWidth="58.0" text="%clear" />
+                              <Button alignment="CENTER" layoutX="21.0" layoutY="13.0" mnemonicParsing="false" onAction="#initMain" prefHeight="25.0" prefWidth="58.0" text="%clear" />
                            </children>
                         </AnchorPane>
                         <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2">
                            <children>
-                              <Button layoutX="16.0" layoutY="13.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="77.0" text="%search" />
+                              <Button layoutX="16.0" layoutY="13.0" mnemonicParsing="false" onAction="#search" prefHeight="25.0" prefWidth="77.0" text="%search" />
                            </children>
                         </AnchorPane>
                      </children>

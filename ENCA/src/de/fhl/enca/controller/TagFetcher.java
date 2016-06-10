@@ -38,9 +38,6 @@ public final class TagFetcher {
 		return fetchTagsOfTypeFrom(tag.getTags(), type);
 	}
 
-	/*
-	 * Need to be opitmized
-	 */
 	public static Set<Tag> fetchTagOfTypeOfTags(Set<Tag> tags, TagType type) {
 		Set<Tag> result = new HashSet<>();
 		for (int id : Tag.getTagsAll().keySet()) {

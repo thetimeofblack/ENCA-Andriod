@@ -30,7 +30,7 @@ public final class InternationalString implements Searchable {
 		String pattern = ".*" + keyword + ".*";
 		int relevance = 0;
 		for (String string : stringMap.values()) {
-			if (string != null && string.matches(pattern)) {
+			if (string != null && string.toLowerCase().matches(pattern)) {
 				relevance++;
 			}
 		}
