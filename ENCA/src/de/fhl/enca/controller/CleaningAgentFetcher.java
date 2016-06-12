@@ -3,6 +3,7 @@ package de.fhl.enca.controller;
 import java.util.HashSet;
 import java.util.Set;
 import de.fhl.enca.bl.CleaningAgent;
+import de.fhl.enca.bl.Tag;
 
 /**
  * @author Bobby
@@ -18,9 +19,26 @@ public final class CleaningAgentFetcher {
 	 * Get all cleaning agents
 	 */
 	public static Set<CleaningAgent> fetchCleaningAgentsAll() {
-		Set<CleaningAgent> tempSet = new HashSet<CleaningAgent>();
+		Set<CleaningAgent> tempSet = new HashSet<>();
 		for (CleaningAgent cleaningAgent : CleaningAgent.getCleaningAgentAll().values()) {
 			tempSet.add(cleaningAgent);
+		}
+		return tempSet;
+	}
+
+	public static Set<CleaningAgent> fetchCleaningAgentsOfTypes(Set<Tag> tags) {
+		Set<CleaningAgent> tempSet = new HashSet<>();
+		for (CleaningAgent cleaningAgent : CleaningAgent.getCleaningAgentAll().values()) {
+			boolean exists = true;
+			for (Tag tag : tags) {
+				if (!cleaningAgent.getTags().contains(tag.getTagID())) {
+					exists = false;
+					break;
+				}
+			}
+			if (exists) {
+				tempSet.add(cleaningAgent);
+			}
 		}
 		return tempSet;
 	}

@@ -13,7 +13,7 @@ import java.util.Set;
  * Class CleaningAgent
  * Object representing cleaning agent
  */
-public final class CleaningAgent implements Searchable{
+public final class CleaningAgent implements Searchable {
 
 	/* static member */
 	private static Map<Integer, CleaningAgent> cleaningAgentAll = new HashMap<Integer, CleaningAgent>();
@@ -148,5 +148,10 @@ public final class CleaningAgent implements Searchable{
 
 	public Set<Integer> getTags() {
 		return tags;
+	}
+
+	@Override
+	public String toString() {
+		return this.name.getString() + "\n" + "Tags:" + tags + "\n";
 	}
 }

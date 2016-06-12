@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">ENCA</string>
+    <string name="drawer_open">drawer_open</string>
+    <string name="drawer_close">drawer_close</string>
+    <string name="kitchen_dish"><![CDATA[Dish, Bowl & Cup]]></string>
+    <string name="kitchen_cooker"><![CDATA[Cooker & Oven]]></string>
+    <string name="kitchen_faucet"><![CDATA[Faucet & Basin]]></string>
+    <string name="kitchen_dishwashine">Dish Wachine</string>
+    <string name="floor">Floor</string>
+    <string name="kitchen_floor">Floor</string>
+    <string name="kitchen_fridge">Fridge</string>
+    <string name="kitchen_light">Light</string>
+    <string name="kitchen_tile">Tile</string>
+    <string name="kitchen_window">Window</string>
+    <string name="kitchen_ventilator">Ventilator</string>
+    <string name="bathroom_Bath">Bath</string>
+    <string name="bathroom_faucet"><![CDATA[Faucet & Basin]]></string>
+    <string name="bathroom_floor">Floor</string>
+    <string name="bathroom_mirror">Mirror</string>
+    <string name="bathroom_light">Light</string>
+    <string name="bathroom_shower">Shower</string>
+    <string name="bathroom_tile">Tile</string>
+    <string name="bathroom_toilet">Toilet</string>
+    <string name="bathroom_window">Window</string>
+    <string name="bedroom_floor">Floor</string>
+    <string name="bedroom_light">Light</string>
+    <string name="bedroom_window">Window</string>
+    <string name="bedroom_shelf">Shelf</string>
+    <string name="livingroom_Floor">Floor</string>
+    <string name="livingroom_shelf">Shelf</string>
+    <string name="livingroom_washingmachine">Washing Machine</string>
+    <string name="livingroom_window">Window</string>
+    <string name="livingroom_leather">Leather</string>
+    <string name="livingroom_light">Light</string>
+    <string name="livingroom_floor">Floor</string>
+    <string name="livingroom_screen"><![CDATA[Screen & Lens]]></string>
+    <string name="office_faucet"><![CDATA[Faucet & Basin]]></string>
+    <string name="office_floor">Floor</string>
+    <string name="office_light">Light</string>
+    <string name="office_shelf">Shelf</string>
+    <string name="office_window">Window</string>
+    <string name="general_floor">Floor</string>
+    <string name="general_light">Light</string>
+    <string name="general_shelf">Shelf</string>
+    <string name="general_window">Window</string>
+    <string name="search_hint">Search</string>
+    <string name="search">Search</string>
+    <string name="search_relavance">Relavance</string>
+    <string name="search_relevance">Relevance</string>
+    <string name="search_price">Price</string>
+    <string name="search_function">Function</string>
+</resources>

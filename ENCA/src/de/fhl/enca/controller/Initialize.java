@@ -25,10 +25,20 @@ import de.fhl.enca.dao.SQLVisitor;
  */
 public final class Initialize {
 
+	public static void initialize() {
+		initCleaningAgents();
+		initTags();
+		initRelations();
+	}
+
+	public static void initializeConcurrently() {
+		new Thread(() -> initialize());
+	}
+
 	/**
 	 * Initialize all cleaning agents and store them into the memory
 	 */
-	public static void initCleaningAgents() {
+	private static void initCleaningAgents() {
 		ResultSet r = SQLVisitor.visitCleaningAgentsAll();
 		try {
 			while (r.next()) {
@@ -43,6 +53,7 @@ public final class Initialize {
 				builder.setRate(r.getInt(14));
 				builder.setMainLanguage(r.getInt(15));
 				builder.setImage(r.getBytes(16));
+				builder.getResult();
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -52,7 +63,7 @@ public final class Initialize {
 	/**
 	 * Initialize all tags and store them into the memory
 	 */
-	public static void initTags() {
+	private static void initTags() {
 		ResultSet r = SQLVisitor.visitTagsAll();
 		try {
 			while (r.next()) {
@@ -67,7 +78,7 @@ public final class Initialize {
 	 * Initialize the relations between cleaning agents and tags
 	 * and the relations between tags
 	 */
-	public static void initRelations() {
+	private static void initRelations() {
 		// <cleaningAgentID, Set<tagID>> CleaningAgent:Tag = 1:*
 		Map<Integer, Set<Integer>> ctMap = new HashMap<Integer, Set<Integer>>();
 		// <tagID, Set<cleaningAgentID>> Tag:CleaningAgent = 1:*
@@ -107,7 +118,7 @@ public final class Initialize {
 	 * Initialize the relations between tags
 	 */
 	private static void initTTRelations(Map<Integer, Set<Integer>> ctMap, Map<Integer, Set<Integer>> tcMap) {
-		for (Set<Integer> group : tcMap.values()) { // iterate all CA tag sets
+		for (Set<Integer> group : ctMap.values()) { // iterate all CA tag sets
 			for (int id1 : group) { // iterate each tag
 				for (int id2 : group) { // take another tag
 					if (id1 != id2) { // every two related tags
@@ -129,8 +140,8 @@ public final class Initialize {
 		InternationalString iString = new InternationalString();
 		try {
 			iString.setString(LanguageType.ENGLISH, r.getString(i));
-			iString.setString(LanguageType.GERMAN, r.getString(i + 1));
-			iString.setString(LanguageType.CHINESE, r.getString(i + 2));
+			iString.setString(LanguageType.CHINESE, r.getString(i + 1));
+			iString.setString(LanguageType.GERMAN, r.getString(i + 2));
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -140,7 +151,7 @@ public final class Initialize {
 	/**
 	 * Initialize memos.
 	 */
-	public static void initMemos() {
+	private static void initMemos() {
 		ResultSet r = SQLVisitor.visitMemos();
 		try {
 			while (r.next()) {

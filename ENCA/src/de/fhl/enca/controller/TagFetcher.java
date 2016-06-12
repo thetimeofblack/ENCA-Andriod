@@ -19,7 +19,7 @@ public final class TagFetcher {
 	 * Get all tags
 	 */
 	public static Set<Tag> fetchTagsAll() {
-		Set<Tag> tempSet = new HashSet<Tag>();
+		Set<Tag> tempSet = new HashSet<>();
 		for (Tag tag : Tag.getTagsAll().values()) {
 			tempSet.add(tag);
 		}
@@ -31,8 +31,33 @@ public final class TagFetcher {
 	 * @param type
 	 */
 	public static Set<Tag> fetchTagsOfType(TagType type) {
-		Set<Tag> tempSet = new HashSet<Tag>();
-		for (Tag tag : Tag.getTagsAll().values()) {
+		return fetchTagsOfTypeFrom(fetchTagsAll(), type);
+	}
+
+	public static Set<Tag> fetchTagsOfTypeOfTag(Tag tag, TagType type) {
+		return fetchTagsOfTypeFrom(tag.getTags(), type);
+	}
+
+	public static Set<Tag> fetchTagOfTypeOfTags(Set<Tag> tags, TagType type) {
+		Set<Tag> result = new HashSet<>();
+		for (int id : Tag.getTagsAll().keySet()) {
+			boolean exists = true;
+			for (Tag tag : tags) {
+				if (!tag.getTagsRelated().contains(id)) {
+					exists = false;
+					break;
+				}
+			}
+			if (exists) {
+				result.add(Tag.getTag(id));
+			}
+		}
+		return fetchTagsOfTypeFrom(result, type);
+	}
+
+	private static Set<Tag> fetchTagsOfTypeFrom(Set<Tag> source, TagType type) {
+		Set<Tag> tempSet = new HashSet<>();
+		for (Tag tag : source) {
 			if (tag.getTagType() == type)
 				tempSet.add(tag);
 		}

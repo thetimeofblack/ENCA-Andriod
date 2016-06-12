@@ -53,7 +53,7 @@ public final class LanguagePreference {
 
 	static {
 		try {
-			fileLocation = new File(LanguagePreference.class.getClassLoader().getResource("\\user\\language").toURI());
+			fileLocation = new File(LanguagePreference.class.getResource("/user/language").toURI());
 		} catch (URISyntaxException e) {
 			e.printStackTrace();
 		}
@@ -106,6 +106,12 @@ public final class LanguagePreference {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	public static void initialize() {
+		setInterfaceLanguage(DefaultLanguage);
+		setContentlanguage(DefaultLanguage);
+		writeLanguagePreference();
 	}
 
 	/* getters and setters */
