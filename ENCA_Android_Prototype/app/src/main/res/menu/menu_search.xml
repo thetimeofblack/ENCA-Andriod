@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_search_relevance"
+        android:title="@string/search_relevance"
+        />
+    <item
+        android:id="@+id/menu_search_price"
+        android:title="@string/search_price"
+        />
+    <item
+        android:id="@+id/menu_search_function"
+        android:title="@string/search_function"
+        />
+</menu>
