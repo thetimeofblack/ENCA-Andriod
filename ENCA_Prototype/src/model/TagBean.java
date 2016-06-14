@@ -3,14 +3,13 @@ package model;
 import java.util.HashSet;
 import java.util.Set;
 import de.fhl.enca.bl.Tag;
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 public final class TagBean {
 
-	private final SimpleIntegerProperty tagID;
+	private final int tagID;
 	private final SimpleStringProperty name;
 
 	public static ObservableList<TagBean> generateList(Set<Tag> source) {
@@ -30,12 +29,12 @@ public final class TagBean {
 	}
 
 	public TagBean(Tag tag) {
-		this.tagID = new SimpleIntegerProperty(tag.getTagID());
+		this.tagID = tag.getTagID();
 		this.name = new SimpleStringProperty(tag.getName().getString());
 	}
 
 	public int getTagID() {
-		return tagID.get();
+		return tagID;
 	}
 
 	public String getName() {

@@ -27,6 +27,12 @@ public final class LoginFirstController {
 	@FXML
 	private TextField usernameTextField;
 
+	private static Stage loginStage;
+
+	public static void setLoginStage(Stage loginStage) {
+		LoginFirstController.loginStage = loginStage;
+	}
+
 	@FXML
 	private void initialize() {
 		ObservableList<String> languageList = FXCollections.observableArrayList();
@@ -50,6 +56,7 @@ public final class LoginFirstController {
 			LanguagePreference.setContentlanguage(LanguageType.getLanguageType(contentComboBox.getSelectionModel().getSelectedIndex()));
 			LanguagePreference.writeLanguagePreference();
 			new Main().start(new Stage());
+			loginStage.hide();
 		}
 	}
 }

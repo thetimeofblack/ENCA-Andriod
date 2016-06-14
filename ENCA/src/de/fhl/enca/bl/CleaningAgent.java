@@ -13,11 +13,13 @@ import java.util.Set;
  * Class CleaningAgent
  * Object representing cleaning agent
  */
-public final class CleaningAgent implements Searchable {
+public final class CleaningAgent {
 
 	/* static member */
-	private static Map<Integer, CleaningAgent> cleaningAgentAll = new HashMap<Integer, CleaningAgent>();
-	private static int agentCount;
+	/**
+	 * Store the references of all cleaning agents
+	 */
+	private static Map<Integer, CleaningAgent> cleaningAgentAll = new HashMap<>();
 
 	/* non-static member */
 	private int cleaningAgentID;
@@ -29,43 +31,43 @@ public final class CleaningAgent implements Searchable {
 	private CleaningAgentType agentType;
 	private int rate;
 	private LanguageType mainLanguage;
-	private Image image;
+	private Image image = null;
 
-	private Set<Integer> tags = new HashSet<Integer>();
+	private Set<Tag> tags = new HashSet<>();
 
 	/* static method */
 	public static CleaningAgent getCleaningAgent(int ID) {
 		return cleaningAgentAll.get(ID);
 	}
 
-	/* non-static method */
-	public void addTag(int tagID) {
-		tags.add(tagID);
+	public static void addCleaningAgent(CleaningAgent cleaningAgent) {
+		cleaningAgentAll.put(cleaningAgent.getCleaningAgentID(), cleaningAgent);
 	}
 
+	public static Set<CleaningAgent> getCleaningAgentsAll() {
+		Set<CleaningAgent> set = new HashSet<>();
+		for (CleaningAgent cleaningAgent : cleaningAgentAll.values()) {
+			set.add(cleaningAgent);
+		}
+		return set;
+	}
+
+	/* non-static method */
 	/**
 	 * search the cleaning agent according to given keyword
 	 * @param keyword
 	 * @return integer representing the relevance
 	 */
-	@Override
 	public int search(String keyword) {
 		return name.search(keyword) + description.search(keyword) + instruction.search(keyword);
 	}
 
+	@Override
+	public String toString() {
+		return "CA[" + cleaningAgentID + " - " + name.getString() + "]\n";
+	}
+
 	/* getters and setters */
-	public static Map<Integer, CleaningAgent> getCleaningAgentAll() {
-		return cleaningAgentAll;
-	}
-
-	public static int getAgentCount() {
-		return agentCount;
-	}
-
-	public static void setAgentCount(int agentCount) {
-		CleaningAgent.agentCount = agentCount;
-	}
-
 	public int getCleaningAgentID() {
 		return cleaningAgentID;
 	}
@@ -146,12 +148,7 @@ public final class CleaningAgent implements Searchable {
 		this.image = image;
 	}
 
-	public Set<Integer> getTags() {
+	public Set<Tag> getTags() {
 		return tags;
-	}
-
-	@Override
-	public String toString() {
-		return this.name.getString() + "\n" + "Tags:" + tags + "\n";
 	}
 }

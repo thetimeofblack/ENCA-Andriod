@@ -6,13 +6,12 @@ import java.util.Map;
 import java.util.Set;
 import de.fhl.enca.bl.CleaningAgent;
 import de.fhl.enca.bl.LanguageType;
-import de.fhl.enca.bl.Search;
 import de.fhl.enca.bl.TagType;
 import de.fhl.enca.controller.CleaningAgentFetcher;
+import de.fhl.enca.controller.Search;
 import de.fhl.enca.controller.TagFetcher;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
@@ -38,20 +37,42 @@ public final class MainController {
 	@FXML
 	private TableView<CleaningAgentBean> chineseTableView;
 	@FXML
-	private TableColumn<CleaningAgentBean, Set<Button>> englishTagsColumn;
+	private TableColumn<CleaningAgentBean, HBox> englishTagsColumn;
 	@FXML
-	private TableColumn<CleaningAgentBean, Set<Button>> germanTagsColumn;
+	private TableColumn<CleaningAgentBean, HBox> germanTagsColumn;
 	@FXML
-	private TableColumn<CleaningAgentBean, Set<Button>> chineseTagsColumn;
+	private TableColumn<CleaningAgentBean, HBox> chineseTagsColumn;
 	@FXML
 	private TextField textField;
 
+	/**
+	 * Store the three listView and their representing tagType
+	 */
 	private Map<ListView<TagBean>, TagType> listViewMap = new HashMap<>();
+
+	/**
+	 * Store the priority of three listView
+	 */
 	private Map<ListView<TagBean>, Integer> priorityMap = new HashMap<>();
+
+	/**
+	 * Current priority
+	 */
 	private int priority;
 
+	/**
+	 * Store the three tableView and their representing language
+	 */
 	private Map<TableView<CleaningAgentBean>, LanguageType> tableViewMap = new HashMap<>();
-	private Set<TableColumn<CleaningAgentBean, Set<Button>>> columnList = new HashSet<>();
+
+	/**
+	 * Store the three tag columns
+	 */
+	private Set<TableColumn<CleaningAgentBean, HBox>> columnList = new HashSet<>();
+
+	/**
+	 * Store the current cleaning agent fetch result
+	 */
 	private Set<CleaningAgent> result = new HashSet<>();
 
 	private Set<TagBean> getChosenTags() {
@@ -75,53 +96,67 @@ public final class MainController {
 		columnList.add(englishTagsColumn);
 		columnList.add(germanTagsColumn);
 		columnList.add(chineseTagsColumn);
+		/* Assign the two columns of the tableView */
 		for (TableView<CleaningAgentBean> tableView : tableViewMap.keySet()) {
 			tableView.getColumns().get(0).setCellValueFactory(new PropertyValueFactory<>("name"));
 			tableView.getColumns().get(1).setCellValueFactory(new PropertyValueFactory<>("tags"));
 		}
-		for (TableColumn<CleaningAgentBean, Set<Button>> column : columnList) {
-			column.setCellFactory(e -> new TableCell<CleaningAgentBean, Set<Button>>() {
+		/* Put those tag labels into the table cell */
+		for (TableColumn<CleaningAgentBean, HBox> column : columnList) {
+			column.setCellFactory(e -> new TableCell<CleaningAgentBean, HBox>() {
 
 				@Override
-				protected void updateItem(Set<Button> item, boolean empty) {
+				protected void updateItem(HBox item, boolean empty) {
 					if (empty) {
 						setText(null);
 						setGraphic(null);
 					} else {
-						HBox hBox = new HBox();
-						for (Button button : item) {
-							hBox.getChildren().add(button);
-						}
-						setGraphic(hBox);
+						setGraphic(item);
 					}
 				}
 			});
 		}
-		for (ListView<TagBean> listView : listViewMap.keySet()) {
-			listView.getSelectionModel().selectedItemProperty().addListener((ObservableValue<? extends TagBean> e, TagBean oldValue, TagBean newValue) -> {
+		/* Assign action when the selection of the listView is changed */
+		for (ListView<TagBean> listView1 : listViewMap.keySet()) {
+			listView1.getSelectionModel().selectedItemProperty().addListener((ObservableValue<? extends TagBean> e, TagBean oldValue, TagBean newValue) -> {
+				/* Ensure the action is performed by user */
 				if (newValue != null) {
-					if (!priorityMap.containsKey(listView)) {
-						priorityMap.put(listView, ++priority);
+					/* Assign priority for each listView according to user's action */
+					if (!priorityMap.containsKey(listView1)) {
+						priorityMap.put(listView1, ++priority);
 					}
+					/* Refresh each listView according to the priority */
 					for (ListView<TagBean> listView2 : listViewMap.keySet()) {
 						if (priorityMap.containsKey(listView2)) {
-							if (priorityMap.get(listView2) > priorityMap.get(listView)) {
+							/* Refresh those listViews whose priority is larger than that of current listView */
+							if (priorityMap.get(listView2) > priorityMap.get(listView1)) {
 								listView2.getSelectionModel().clearSelection();
 								initListView(listView2);
 							}
 						} else {
+							/* Refresh those listViews who doesn't have a priority */
 							initListView(listView2);
 						}
 					}
+					/* Refresh the tableView according to the change of listview */
 					initTableViews(CleaningAgentFetcher.fetchCleaningAgentsOfTypes(TagBean.convert(getChosenTags())));
 				}
 			});
 		}
-
+		/* Add auto-search function for the textField */
+		textField.textProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
+			if (newValue.equals("")) {
+				initTableViews(CleaningAgent.getCleaningAgentsAll());
+			} else {
+				search();
+			}
+		});
 		initMain();
-		initTableViews(CleaningAgentFetcher.fetchCleaningAgentsAll());
 	}
 
+	/**
+	 * Initialize all of the content
+	 */
 	@FXML
 	private void initMain() {
 		priorityMap.clear();
@@ -132,30 +167,39 @@ public final class MainController {
 		for (ListView<TagBean> listView : listViewMap.keySet()) {
 			initListView(listView);
 		}
-		initTableViews(CleaningAgentFetcher.fetchCleaningAgentsAll());
+		initTableViews(CleaningAgent.getCleaningAgentsAll());
 	}
 
+	/**
+	 * Search cleaning agents according to current chosen tags and keywords
+	 */
 	@FXML
 	private void search() {
 		if (!textField.getText().equals("")) {
 			if (getChosenTags().isEmpty()) {
-				initTableViews(Search.search(CleaningAgentFetcher.fetchCleaningAgentsAll(), textField.getText()));
+				initTableViews(Search.search(CleaningAgent.getCleaningAgentsAll(), textField.getText()));
 			} else {
 				initTableViews(Search.search(result, textField.getText()));
 			}
 		}
 	}
 
+	/**
+	 * Initialize or refresh a certain listView
+	 */
 	private void initListView(ListView<TagBean> listView) {
 		if (getChosenTags().isEmpty()) {
+			/* If no tag has been chosen, fetch all tags of the tagType of the listView */
 			listView.setItems(TagBean.generateList(TagFetcher.fetchTagsOfType(listViewMap.get(listView))));
 		} else {
-			if (listView.getSelectionModel().isEmpty()) {
-				listView.setItems(TagBean.generateList(TagFetcher.fetchTagOfTypeOfTags(TagBean.convert(getChosenTags()), listViewMap.get(listView))));
-			}
+			/* If some tags have been chosen, fetch tags according to the chosen tags */
+			listView.setItems(TagBean.generateList(TagFetcher.fetchTagOfTypeOfTags(TagBean.convert(getChosenTags()), listViewMap.get(listView))));
 		}
 	}
 
+	/**
+	 * initialize the tableView according to the source
+	 */
 	private void initTableViews(Set<CleaningAgent> source) {
 		result = source;
 		for (Map.Entry<TableView<CleaningAgentBean>, LanguageType> entry : tableViewMap.entrySet()) {

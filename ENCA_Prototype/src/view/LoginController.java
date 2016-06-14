@@ -14,6 +14,12 @@ public final class LoginController {
 	@FXML
 	private Label usernameLabel;
 
+	private static Stage loginStage;
+
+	public static void setLoginStage(Stage loginStage) {
+		LoginController.loginStage = loginStage;
+	}
+
 	@FXML
 	private void initialize() {
 		usernameLabel.setText(User.getName());
@@ -22,5 +28,6 @@ public final class LoginController {
 	@FXML
 	private void login() {
 		new Main().start(new Stage());
+		loginStage.hide();
 	}
 }

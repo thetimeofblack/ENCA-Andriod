@@ -32,7 +32,7 @@ public final class Initialize {
 	}
 
 	public static void initializeConcurrently() {
-		new Thread(() -> initialize());
+		new Thread(() -> initialize()).start();
 	}
 
 	/**
@@ -52,7 +52,6 @@ public final class Initialize {
 				builder.setType(r.getString(13));
 				builder.setRate(r.getInt(14));
 				builder.setMainLanguage(r.getInt(15));
-				builder.setImage(r.getBytes(16));
 				builder.getResult();
 			}
 		} catch (SQLException e) {
@@ -79,35 +78,35 @@ public final class Initialize {
 	 * and the relations between tags
 	 */
 	private static void initRelations() {
-		// <cleaningAgentID, Set<tagID>> CleaningAgent:Tag = 1:*
-		Map<Integer, Set<Integer>> ctMap = new HashMap<Integer, Set<Integer>>();
-		// <tagID, Set<cleaningAgentID>> Tag:CleaningAgent = 1:*
-		Map<Integer, Set<Integer>> tcMap = new HashMap<Integer, Set<Integer>>();
+		/* Key: a cleaning agent, value: the set of related tags of the cleaning agent */
+		Map<CleaningAgent, Set<Tag>> ctMap = new HashMap<>();
+		/* Key: a tag, value: the set of related cleaning agents of the tag */
+		Map<Tag, Set<CleaningAgent>> tcMap = new HashMap<>();
 		initTCRelations(ctMap, tcMap);
-		initTTRelations(ctMap, tcMap);
+		initTTRelations(ctMap);
 	}
 
 	/**
 	 * Initialize the relations between cleaning agents and tags
 	 */
-	private static void initTCRelations(Map<Integer, Set<Integer>> ctMap, Map<Integer, Set<Integer>> tcMap) {
-		ResultSet r = SQLVisitor.visitRelations(); // get TC relation records
+	private static void initTCRelations(Map<CleaningAgent, Set<Tag>> ctMap, Map<Tag, Set<CleaningAgent>> tcMap) {
+		ResultSet r = SQLVisitor.visitRelations();
 		try {
-			while (r.next()) { // check every line of TC relation
-				int cleaningAgentID = r.getInt(1);
-				int tagID = r.getInt(2);
-				if (!ctMap.containsKey(cleaningAgentID)) { // add CA if never met
-					// <cleaningAgentID, the CA's real tag set>
-					ctMap.put(cleaningAgentID, CleaningAgent.getCleaningAgent(cleaningAgentID).getTags());
+			while (r.next()) {
+				CleaningAgent cleaningAgent = CleaningAgent.getCleaningAgent(r.getInt(1));
+				Tag tag = Tag.getTag(r.getInt(2));
+				/* Add the cleaning agent and its tags set to ctMap */
+				if (!ctMap.containsKey(cleaningAgent)) {
+					ctMap.put(cleaningAgent, cleaningAgent.getTags());
 				}
-				if (!tcMap.containsKey(tagID)) { // add Tag if never met
-					// <tagID, the tag's real CA set>
-					tcMap.put(tagID, Tag.getTag(tagID).getCleaningAgents());
+				/* Add the tag and its cleaning agents set to tcMap */
+				if (!tcMap.containsKey(tag)) {
+					tcMap.put(tag, tag.getCleaningAgents());
 				}
-				// stick a tag to CA
-				ctMap.get(cleaningAgentID).add(tagID);
-				// link CA to tag
-				tcMap.get(tagID).add(cleaningAgentID);
+				/* Add the tag into the tags set of the cleaning agent */
+				ctMap.get(cleaningAgent).add(tag);
+				/* Add the cleaning agent into the cleaning agents set of the tag */
+				tcMap.get(tag).add(cleaningAgent);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -117,15 +116,15 @@ public final class Initialize {
 	/**
 	 * Initialize the relations between tags
 	 */
-	private static void initTTRelations(Map<Integer, Set<Integer>> ctMap, Map<Integer, Set<Integer>> tcMap) {
-		for (Set<Integer> group : ctMap.values()) { // iterate all CA tag sets
-			for (int id1 : group) { // iterate each tag
-				for (int id2 : group) { // take another tag
-					if (id1 != id2) { // every two related tags
-						if (Tag.getTag(id1).getTagType() != Tag.getTag(id2).getTagType()) {
-							// log the relation if tag is of different type
-							Tag.getTag(id1).addRelatedTag(id2);
-						}
+	private static void initTTRelations(Map<CleaningAgent, Set<Tag>> ctMap) {
+		/* Go through every single tags set */
+		for (Set<Tag> group : ctMap.values()) {
+			/* The following two layers of loop is to build the relation of every two tags in a tags set */
+			for (Tag tag1 : group) {
+				for (Tag tag2 : group) {
+					/* Ensure the two tags are not with the same tagType*/
+					if (tag1.getTagType() != tag2.getTagType()) {
+						tag1.getTagsRelated().add(tag2);
 					}
 				}
 			}
@@ -134,7 +133,7 @@ public final class Initialize {
 
 	/**
 	 * Generate InternationalString according to ResultSet object and column number, 
-	 * allows reusing replicate codes of
+	 * allows reusing replicate codes.
 	 */
 	private static InternationalString iStringGenerator(ResultSet r, int i) {
 		InternationalString iString = new InternationalString();

@@ -11,7 +11,7 @@ import java.util.Map;
  * Class Memo
  * Object representing memo
  */
-public final class Memo implements Searchable {
+public final class Memo {
 
 	/* static member */
 	private static Map<Integer, Memo> memosAll = new HashMap<Integer, Memo>();
@@ -36,7 +36,6 @@ public final class Memo implements Searchable {
 		memosAll.put(memoID, this);
 	}
 
-	@Override
 	public int search(String keyword) {
 		return content.matches("\\p{ASCII}*" + keyword + "\\p{ASCII}*") ? 1 : 0;
 	}
