@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
-import java.net.URISyntaxException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -32,17 +31,20 @@ public final class User {
 	 */
 	private static final class UserCarrier implements Serializable {
 
-		private static final long serialVersionUID = 9171730458759247340L;
+		private static final long serialVersionUID = -1443487828610682720L;
 
-		private boolean isFirstUse = true;
-		private String name = null;
-		private Date regDate = null;
+		private boolean isFirstUse;
+		private String name;
+		private Date regDate;
+		private LanguageType interfaceLanguage;
+		private LanguageType contentlanguage;
 
-		public UserCarrier(boolean isFirstUse, String name, Date regDate) {
-			super();
+		public UserCarrier(boolean isFirstUse, String name, Date regDate, LanguageType interfaceLanguage, LanguageType contentlanguage) {
 			this.isFirstUse = isFirstUse;
 			this.name = name;
 			this.regDate = regDate;
+			this.interfaceLanguage = interfaceLanguage;
+			this.contentlanguage = contentlanguage;
 		}
 
 		public boolean isFirstUse() {
@@ -56,28 +58,40 @@ public final class User {
 		public Date getRegDate() {
 			return regDate;
 		}
-	}
 
-	private static final DateFormat FORMAT = new SimpleDateFormat("dd.MM.yyyy");
+		public LanguageType getInterfaceLanguage() {
+			return interfaceLanguage;
+		}
 
-	private static File fileLocation = null;
-
-	static {
-		try {
-			fileLocation = new File(LanguagePreference.class.getResource("/user/user").toURI());
-		} catch (URISyntaxException e) {
-			e.printStackTrace();
+		public LanguageType getContentlanguage() {
+			return contentlanguage;
 		}
 	}
 
+	private static final DateFormat FORMAT = new SimpleDateFormat("dd.MM.yyyy");
+	private static final LanguageType DefaultLanguage = LanguageType.ENGLISH;
+	
+	private static File directory;
+	private static File file;
+
 	private static boolean isFirstUse = true;
-
 	private static String name = null;
-
 	private static Date regDate = null;
+	private static LanguageType interfaceLanguage = DefaultLanguage;
+	private static LanguageType contentlanguage = DefaultLanguage;
 
 	/* initialization */
 	static {
+		if(System.getProperty("os.name").startsWith("Windows")) {
+			directory=new File(System.getProperty("user.home")+"\\Documents\\Enca");
+			file=new File(directory, "user.ini");
+		}
+		if(!directory.exists()) {
+			directory.mkdirs();
+		}
+		if(!file.exists()) {
+			firstTimeInitialize();
+		}
 		readUser();
 	}
 
@@ -86,10 +100,12 @@ public final class User {
 		isFirstUse = carrier.isFirstUse();
 		name = carrier.getName();
 		regDate = carrier.getRegDate();
+		interfaceLanguage = carrier.getInterfaceLanguage();
+		contentlanguage = carrier.getContentlanguage();
 	}
 
 	public static UserCarrier getCarrier() {
-		return new UserCarrier(isFirstUse, name, regDate);
+		return new UserCarrier(isFirstUse, name, regDate, interfaceLanguage, contentlanguage);
 	}
 
 	/**
@@ -97,7 +113,7 @@ public final class User {
 	 */
 	public static void readUser() {
 		try {
-			ObjectInputStream oStream = new ObjectInputStream(new FileInputStream(fileLocation));
+			ObjectInputStream oStream = new ObjectInputStream(new FileInputStream(file));
 			readCarrier((UserCarrier) oStream.readObject());
 			oStream.close();
 		} catch (ClassNotFoundException | IOException e) {
@@ -110,7 +126,7 @@ public final class User {
 	 */
 	public static void writeUser() {
 		try {
-			ObjectOutputStream oStream = new ObjectOutputStream(new FileOutputStream(fileLocation));
+			ObjectOutputStream oStream = new ObjectOutputStream(new FileOutputStream(file));
 			oStream.writeObject(getCarrier());
 			oStream.close();
 		} catch (IOException e) {
@@ -118,10 +134,12 @@ public final class User {
 		}
 	}
 
-	public static void initialize() {
+	public static void firstTimeInitialize() {
 		setFirstUse(true);
 		setName(null);
 		setRegDate(null);
+		setInterfaceLanguage(DefaultLanguage);
+		setContentlanguage(DefaultLanguage);
 		writeUser();
 	}
 
@@ -152,5 +170,21 @@ public final class User {
 
 	public static void setRegDate(Date regDate) {
 		User.regDate = regDate;
+	}
+
+	public static LanguageType getInterfaceLanguage() {
+		return interfaceLanguage;
+	}
+
+	public static void setInterfaceLanguage(LanguageType interfaceLanguage) {
+		User.interfaceLanguage = interfaceLanguage;
+	}
+
+	public static LanguageType getContentlanguage() {
+		return contentlanguage;
+	}
+
+	public static void setContentlanguage(LanguageType contentlanguage) {
+		User.contentlanguage = contentlanguage;
 	}
 }
