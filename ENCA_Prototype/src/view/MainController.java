@@ -4,25 +4,39 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import application.UserCentre;
 import de.fhl.enca.bl.CleaningAgent;
 import de.fhl.enca.bl.LanguageType;
 import de.fhl.enca.bl.TagType;
+import de.fhl.enca.bl.User;
 import de.fhl.enca.controller.CleaningAgentFetcher;
 import de.fhl.enca.controller.Search;
 import de.fhl.enca.controller.TagFetcher;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
 import model.CleaningAgentBean;
 import model.TagBean;
 
 public final class MainController {
+
+	private static Stage mainStage;
+
+	public static void setStage(Stage stage) {
+		mainStage = stage;
+	}
+
+	public static void hideStage() {
+		mainStage.hide();
+	}
 
 	@FXML
 	private ListView<TagBean> roomTagListView;
@@ -30,6 +44,8 @@ public final class MainController {
 	private ListView<TagBean> itemTagListView;
 	@FXML
 	private ListView<TagBean> otherTaglistView;
+	@FXML
+	private TabPane tabPane;
 	@FXML
 	private TableView<CleaningAgentBean> englishTableView;
 	@FXML
@@ -63,7 +79,7 @@ public final class MainController {
 	/**
 	 * Store the three tableView and their representing language
 	 */
-	private Map<TableView<CleaningAgentBean>, LanguageType> tableViewMap = new HashMap<>();
+	private Map<LanguageType, TableView<CleaningAgentBean>> tableViewMap = new HashMap<>();
 
 	/**
 	 * Store the three tag columns
@@ -90,14 +106,15 @@ public final class MainController {
 		listViewMap.put(roomTagListView, TagType.ROOM);
 		listViewMap.put(itemTagListView, TagType.ITEM);
 		listViewMap.put(otherTaglistView, TagType.OTHERS);
-		tableViewMap.put(englishTableView, LanguageType.ENGLISH);
-		tableViewMap.put(germanTableView, LanguageType.GERMAN);
-		tableViewMap.put(chineseTableView, LanguageType.CHINESE);
+		tableViewMap.put(LanguageType.ENGLISH, englishTableView);
+		tableViewMap.put(LanguageType.GERMAN, germanTableView);
+		tableViewMap.put(LanguageType.CHINESE, chineseTableView);
 		columnList.add(englishTagsColumn);
 		columnList.add(germanTagsColumn);
 		columnList.add(chineseTagsColumn);
+		tabPane.getSelectionModel().clearAndSelect(User.getContentLanguage().getId());
 		/* Assign the two columns of the tableView */
-		for (TableView<CleaningAgentBean> tableView : tableViewMap.keySet()) {
+		for (TableView<CleaningAgentBean> tableView : tableViewMap.values()) {
 			tableView.getColumns().get(0).setCellValueFactory(new PropertyValueFactory<>("name"));
 			tableView.getColumns().get(1).setCellValueFactory(new PropertyValueFactory<>("tags"));
 		}
@@ -202,8 +219,13 @@ public final class MainController {
 	 */
 	private void initTableViews(Set<CleaningAgent> source) {
 		result = source;
-		for (Map.Entry<TableView<CleaningAgentBean>, LanguageType> entry : tableViewMap.entrySet()) {
-			entry.getKey().setItems(CleaningAgentBean.generateList(source, entry.getValue()));
+		for (Map.Entry<LanguageType, TableView<CleaningAgentBean>> entry : tableViewMap.entrySet()) {
+			entry.getValue().setItems(CleaningAgentBean.generateList(source, entry.getKey()));
 		}
+	}
+
+	@FXML
+	private void userCentre() {
+		new UserCentre().start(new Stage());
 	}
 }

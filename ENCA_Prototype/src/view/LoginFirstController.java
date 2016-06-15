@@ -41,7 +41,7 @@ public final class LoginFirstController {
 		interfaceComboBox.setItems(languageList);
 		interfaceComboBox.setValue(User.getInterfaceLanguage().toString());
 		contentComboBox.setItems(languageList);
-		contentComboBox.setValue(User.getContentlanguage().toString());
+		contentComboBox.setValue(User.getContentLanguage().toString());
 	}
 
 	@FXML
@@ -51,7 +51,7 @@ public final class LoginFirstController {
 			User.setRegDate(new Date());
 			User.setFirstUse(false);
 			User.setInterfaceLanguage(LanguageType.getLanguageType(interfaceComboBox.getSelectionModel().getSelectedIndex()));
-			User.setContentlanguage(LanguageType.getLanguageType(contentComboBox.getSelectionModel().getSelectedIndex()));
+			User.setContentLanguage(LanguageType.getLanguageType(contentComboBox.getSelectionModel().getSelectedIndex()));
 			User.writeUser();
 			new Main().start(new Stage());
 			loginStage.hide();

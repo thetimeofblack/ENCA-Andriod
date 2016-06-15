@@ -31,20 +31,20 @@ public final class User {
 	 */
 	private static final class UserCarrier implements Serializable {
 
-		private static final long serialVersionUID = -1443487828610682720L;
+		private static final long serialVersionUID = 6837137300470719827L;
 
 		private boolean isFirstUse;
 		private String name;
 		private Date regDate;
 		private LanguageType interfaceLanguage;
-		private LanguageType contentlanguage;
+		private LanguageType contentLanguage;
 
-		public UserCarrier(boolean isFirstUse, String name, Date regDate, LanguageType interfaceLanguage, LanguageType contentlanguage) {
+		public UserCarrier(boolean isFirstUse, String name, Date regDate, LanguageType interfaceLanguage, LanguageType contentLanguage) {
 			this.isFirstUse = isFirstUse;
 			this.name = name;
 			this.regDate = regDate;
 			this.interfaceLanguage = interfaceLanguage;
-			this.contentlanguage = contentlanguage;
+			this.contentLanguage = contentLanguage;
 		}
 
 		public boolean isFirstUse() {
@@ -63,14 +63,14 @@ public final class User {
 			return interfaceLanguage;
 		}
 
-		public LanguageType getContentlanguage() {
-			return contentlanguage;
+		public LanguageType getContentLanguage() {
+			return contentLanguage;
 		}
 	}
 
 	private static final DateFormat FORMAT = new SimpleDateFormat("dd.MM.yyyy");
 	private static final LanguageType DefaultLanguage = LanguageType.ENGLISH;
-	
+
 	private static File directory;
 	private static File file;
 
@@ -78,18 +78,18 @@ public final class User {
 	private static String name = null;
 	private static Date regDate = null;
 	private static LanguageType interfaceLanguage = DefaultLanguage;
-	private static LanguageType contentlanguage = DefaultLanguage;
+	private static LanguageType contentLanguage = DefaultLanguage;
 
 	/* initialization */
 	static {
-		if(System.getProperty("os.name").startsWith("Windows")) {
-			directory=new File(System.getProperty("user.home")+"\\Documents\\Enca");
-			file=new File(directory, "user.ini");
+		if (System.getProperty("os.name").startsWith("Windows")) {
+			directory = new File(System.getProperty("user.home") + "\\Documents\\Enca");
+			file = new File(directory, "user.ini");
 		}
-		if(!directory.exists()) {
+		if (!directory.exists()) {
 			directory.mkdirs();
 		}
-		if(!file.exists()) {
+		if (!file.exists()) {
 			firstTimeInitialize();
 		}
 		readUser();
@@ -101,11 +101,11 @@ public final class User {
 		name = carrier.getName();
 		regDate = carrier.getRegDate();
 		interfaceLanguage = carrier.getInterfaceLanguage();
-		contentlanguage = carrier.getContentlanguage();
+		contentLanguage = carrier.getContentLanguage();
 	}
 
 	public static UserCarrier getCarrier() {
-		return new UserCarrier(isFirstUse, name, regDate, interfaceLanguage, contentlanguage);
+		return new UserCarrier(isFirstUse, name, regDate, interfaceLanguage, contentLanguage);
 	}
 
 	/**
@@ -139,7 +139,7 @@ public final class User {
 		setName(null);
 		setRegDate(null);
 		setInterfaceLanguage(DefaultLanguage);
-		setContentlanguage(DefaultLanguage);
+		setContentLanguage(DefaultLanguage);
 		writeUser();
 	}
 
@@ -180,11 +180,11 @@ public final class User {
 		User.interfaceLanguage = interfaceLanguage;
 	}
 
-	public static LanguageType getContentlanguage() {
-		return contentlanguage;
+	public static LanguageType getContentLanguage() {
+		return contentLanguage;
 	}
 
-	public static void setContentlanguage(LanguageType contentlanguage) {
-		User.contentlanguage = contentlanguage;
+	public static void setContentLanguage(LanguageType contentLanguage) {
+		User.contentLanguage = contentLanguage;
 	}
 }
