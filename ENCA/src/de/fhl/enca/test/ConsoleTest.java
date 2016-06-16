@@ -1,4 +1,4 @@
-package test;
+package de.fhl.enca.test;
 
 import de.fhl.enca.bl.User;
 
