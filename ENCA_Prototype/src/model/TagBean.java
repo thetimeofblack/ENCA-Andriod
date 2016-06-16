@@ -3,6 +3,7 @@ package model;
 import java.util.HashSet;
 import java.util.Set;
 import de.fhl.enca.bl.Tag;
+import de.fhl.enca.bl.User;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -30,7 +31,7 @@ public final class TagBean {
 
 	public TagBean(Tag tag) {
 		this.tagID = tag.getTagID();
-		this.name = new SimpleStringProperty(tag.getName().getString());
+		this.name = new SimpleStringProperty(tag.getName().getString(User.getInterfaceLanguage()));
 	}
 
 	public int getTagID() {
