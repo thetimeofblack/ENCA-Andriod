@@ -113,12 +113,12 @@ public final class MainController {
 		columnList.add(germanTagsColumn);
 		columnList.add(chineseTagsColumn);
 		tabPane.getSelectionModel().clearAndSelect(User.getContentLanguage().getId());
-		/* Assign the two columns of the tableView */
+		/* assign the two columns of the tableView */
 		for (TableView<CleaningAgentBean> tableView : tableViewMap.values()) {
 			tableView.getColumns().get(0).setCellValueFactory(new PropertyValueFactory<>("name"));
 			tableView.getColumns().get(1).setCellValueFactory(new PropertyValueFactory<>("tags"));
 		}
-		/* Put those tag labels into the table cell */
+		/* put those tag labels into the table cell */
 		for (TableColumn<CleaningAgentBean, HBox> column : columnList) {
 			column.setCellFactory(e -> new TableCell<CleaningAgentBean, HBox>() {
 
@@ -133,34 +133,34 @@ public final class MainController {
 				}
 			});
 		}
-		/* Assign action when the selection of the listView is changed */
+		/* assign action when the selection of the listView is changed */
 		for (ListView<TagBean> listView1 : listViewMap.keySet()) {
 			listView1.getSelectionModel().selectedItemProperty().addListener((ObservableValue<? extends TagBean> e, TagBean oldValue, TagBean newValue) -> {
-				/* Ensure the action is performed by user */
+				/* ensure the action is performed by user */
 				if (newValue != null) {
-					/* Assign priority for each listView according to user's action */
+					/* assign priority for each listView according to user's action */
 					if (!priorityMap.containsKey(listView1)) {
 						priorityMap.put(listView1, ++priority);
 					}
-					/* Refresh each listView according to the priority */
+					/* refresh each listView according to the priority */
 					for (ListView<TagBean> listView2 : listViewMap.keySet()) {
 						if (priorityMap.containsKey(listView2)) {
-							/* Refresh those listViews whose priority is larger than that of current listView */
+							/* refresh those listViews whose priority is larger than that of current listView */
 							if (priorityMap.get(listView2) > priorityMap.get(listView1)) {
 								listView2.getSelectionModel().clearSelection();
 								initListView(listView2);
 							}
 						} else {
-							/* Refresh those listViews who doesn't have a priority */
+							/* refresh those listViews who doesn't have a priority */
 							initListView(listView2);
 						}
 					}
-					/* Refresh the tableView according to the change of listview */
+					/* refresh the tableView according to the change of listview */
 					initTableViews(CleaningAgentFetcher.fetchCleaningAgentsOfTypes(TagBean.convert(getChosenTags())));
 				}
 			});
 		}
-		/* Add auto-search function for the textField */
+		/* add auto-search function for the textField */
 		textField.textProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
 			if (newValue.equals("")) {
 				initTableViews(CleaningAgent.getCleaningAgentsAll());

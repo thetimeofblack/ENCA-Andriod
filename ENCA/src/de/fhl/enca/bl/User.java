@@ -39,32 +39,20 @@ public final class User {
 		private LanguageType interfaceLanguage;
 		private LanguageType contentLanguage;
 
-		public UserCarrier(boolean isFirstUse, String name, Date regDate, LanguageType interfaceLanguage, LanguageType contentLanguage) {
-			this.isFirstUse = isFirstUse;
-			this.name = name;
-			this.regDate = regDate;
-			this.interfaceLanguage = interfaceLanguage;
-			this.contentLanguage = contentLanguage;
+		public UserCarrier() {
+			this.isFirstUse = User.isFirstUse;
+			this.name = User.name;
+			this.regDate = User.regDate;
+			this.interfaceLanguage = User.interfaceLanguage;
+			this.contentLanguage = User.contentLanguage;
 		}
-
-		public boolean isFirstUse() {
-			return isFirstUse;
-		}
-
-		public String getName() {
-			return name;
-		}
-
-		public Date getRegDate() {
-			return regDate;
-		}
-
-		public LanguageType getInterfaceLanguage() {
-			return interfaceLanguage;
-		}
-
-		public LanguageType getContentLanguage() {
-			return contentLanguage;
+		
+		public void applyCarrier() {
+			User.isFirstUse=this.isFirstUse;
+			User.name=this.name;
+			User.regDate=this.regDate;
+			User.interfaceLanguage=this.interfaceLanguage;
+			User.contentLanguage=this.contentLanguage;
 		}
 	}
 
@@ -82,6 +70,7 @@ public final class User {
 
 	/* initialization */
 	static {
+		/* initialize directory and file location */
 		if (System.getProperty("os.name").startsWith("Windows")) {
 			directory = new File(System.getProperty("user.home") + "\\Documents\\Enca");
 			file = new File(directory, "user.ini");
@@ -96,25 +85,13 @@ public final class User {
 	}
 
 	/* static method */
-	public static void readCarrier(UserCarrier carrier) {
-		isFirstUse = carrier.isFirstUse();
-		name = carrier.getName();
-		regDate = carrier.getRegDate();
-		interfaceLanguage = carrier.getInterfaceLanguage();
-		contentLanguage = carrier.getContentLanguage();
-	}
-
-	public static UserCarrier getCarrier() {
-		return new UserCarrier(isFirstUse, name, regDate, interfaceLanguage, contentLanguage);
-	}
-
 	/**
-	 * Read user data from a serialized carrier
+	 * Read user data from a serialized carrier from the file
 	 */
-	public static void readUser() {
+	private static void readUser() {
 		try {
 			ObjectInputStream oStream = new ObjectInputStream(new FileInputStream(file));
-			readCarrier((UserCarrier) oStream.readObject());
+			((UserCarrier) oStream.readObject()).applyCarrier();
 			oStream.close();
 		} catch (ClassNotFoundException | IOException e) {
 			e.printStackTrace();
@@ -127,7 +104,7 @@ public final class User {
 	public static void writeUser() {
 		try {
 			ObjectOutputStream oStream = new ObjectOutputStream(new FileOutputStream(file));
-			oStream.writeObject(getCarrier());
+			oStream.writeObject(new UserCarrier());
 			oStream.close();
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -162,10 +139,6 @@ public final class User {
 
 	public static void setName(String name) {
 		User.name = name;
-	}
-
-	public static Date getRegDate() {
-		return regDate;
 	}
 
 	public static void setRegDate(Date regDate) {
