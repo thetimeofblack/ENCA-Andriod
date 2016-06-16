@@ -1,6 +1,6 @@
 package view;
 
-import application.Login;
+import application.Main;
 import de.fhl.enca.bl.LanguageType;
 import de.fhl.enca.bl.User;
 import javafx.beans.property.BooleanProperty;
@@ -33,9 +33,9 @@ public final class UserCentreController {
 	@FXML
 	private ComboBox<String> contentComboBox;
 	@FXML
-	private Label restartLabel;
-	@FXML
 	private Button saveButton;
+	@FXML
+	private Button cancelButton;
 
 	private BooleanProperty interfaceChanged = new SimpleBooleanProperty(false);
 	private BooleanProperty contentChanged = new SimpleBooleanProperty(false);
@@ -48,18 +48,17 @@ public final class UserCentreController {
 		ChangeListener<Boolean> listener = (ObservableValue<? extends Boolean> a, Boolean b, Boolean c) -> needrestart.setValue(interfaceChanged.getValue() || contentChanged.getValue());
 		interfaceChanged.addListener(listener);
 		contentChanged.addListener(listener);
-		needrestart.addListener((ObservableValue<? extends Boolean> a, Boolean b, Boolean c) -> restartLabel.setVisible(needrestart.getValue()));
+		needrestart.addListener((ObservableValue<? extends Boolean> a, Boolean b, Boolean c) -> cancelButton.disableProperty().set(!needrestart.getValue()));
 		ObservableList<String> languageList = FXCollections.observableArrayList();
 		for (LanguageType lType : LanguageType.values()) {
 			languageList.add(lType.toString());
 		}
 		interfaceComboBox.setItems(languageList);
-		interfaceComboBox.setValue(User.getInterfaceLanguage().toString());
 		interfaceComboBox.getSelectionModel().selectedIndexProperty().addListener((ObservableValue<? extends Number> a, Number b, Number c) -> interfaceChanged.setValue(User.getInterfaceLanguage() != LanguageType.getLanguageType(interfaceComboBox.getSelectionModel().getSelectedIndex())));
 		contentComboBox.setItems(languageList);
-		contentComboBox.setValue(User.getContentLanguage().toString());
 		contentComboBox.getSelectionModel().selectedIndexProperty().addListener((ObservableValue<? extends Number> a, Number b, Number c) -> contentChanged.setValue(User.getContentLanguage() != LanguageType.getLanguageType(contentComboBox.getSelectionModel().getSelectedIndex())));
-		restartLabel.setVisible(false);
+		cancelButton.disableProperty().set(true);
+		cancel();
 	}
 
 	@FXML
@@ -72,9 +71,15 @@ public final class UserCentreController {
 			userCentreStage.hide();
 			if (needrestart.getValue()) {
 				MainController.hideStage();
-				new Login().start(new Stage());
+				new Main().start(new Stage());
 			}
 		}
+	}
+
+	@FXML
+	private void cancel() {
+		interfaceComboBox.setValue(User.getInterfaceLanguage().toString());
+		contentComboBox.setValue(User.getContentLanguage().toString());
 	}
 
 }

@@ -12,7 +12,7 @@
 <?import javafx.scene.text.Font?>
 
 <BorderPane prefWidth="250.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.UserCentreController">
-   <center>
+   <bottom>
       <GridPane BorderPane.alignment="CENTER">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -20,7 +20,6 @@
         <rowConstraints>
           <RowConstraints maxHeight="75.0" minHeight="75.0" prefHeight="75.0" vgrow="SOMETIMES" />
           <RowConstraints vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="40.0" minHeight="40.0" prefHeight="40.0" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="75.0" minHeight="75.0" prefHeight="75.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
@@ -87,17 +86,28 @@
                   </AnchorPane>
                </children>
             </GridPane>
-            <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
+            <GridPane GridPane.rowIndex="2">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
                <children>
-                  <Label fx:id="restartLabel" alignment="CENTER" layoutX="18.0" layoutY="12.0" prefHeight="17.0" prefWidth="215.0" text="%restart" textFill="RED" />
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <Button fx:id="saveButton" layoutX="25.0" layoutY="25.0" mnemonicParsing="false" onAction="#save" prefHeight="25.0" prefWidth="75.0" text="%save" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
+                     <children>
+                        <Button fx:id="cancelButton" cancelButton="true" layoutX="25.0" layoutY="25.0" mnemonicParsing="false" onAction="#cancel" prefWidth="75.0" text="%cancel" />
+                     </children>
+                  </AnchorPane>
                </children>
-            </AnchorPane>
-            <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3">
-               <children>
-                  <Button fx:id="saveButton" layoutX="88.0" layoutY="25.0" mnemonicParsing="false" onAction="#save" prefHeight="25.0" prefWidth="75.0" text="%save" />
-               </children>
-            </AnchorPane>
+            </GridPane>
          </children>
       </GridPane>
-   </center>
+   </bottom>
 </BorderPane>

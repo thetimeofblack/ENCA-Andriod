@@ -14,6 +14,7 @@ import de.fhl.enca.controller.Search;
 import de.fhl.enca.controller.TagFetcher;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TableCell;
@@ -21,6 +22,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import model.CleaningAgentBean;
@@ -60,6 +63,8 @@ public final class MainController {
 	private TableColumn<CleaningAgentBean, HBox> chineseTagsColumn;
 	@FXML
 	private TextField textField;
+	@FXML
+	private Button userCentreButton;
 
 	/**
 	 * Store the three listView and their representing tagType
@@ -169,6 +174,12 @@ public final class MainController {
 			}
 		});
 		initMain();
+		
+		Image image=new Image(getClass().getResourceAsStream("/res/image/icon-user.png"));
+		ImageView imageView=new ImageView(image);
+		imageView.setFitWidth(23);
+		imageView.setFitHeight(23);
+		userCentreButton.setGraphic(imageView);
 	}
 
 	/**
