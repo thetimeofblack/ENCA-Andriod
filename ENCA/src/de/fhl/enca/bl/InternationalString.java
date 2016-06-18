@@ -48,6 +48,6 @@ public final class InternationalString {
 	 * Get string according to the content language located in class LanguagePreference
 	 */
 	public String getString() {
-		return stringMap.get(LanguagePreference.getContentlanguage());
+		return stringMap.get(User.getContentLanguage());
 	}
 }

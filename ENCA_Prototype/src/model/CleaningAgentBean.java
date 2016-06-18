@@ -1,5 +1,7 @@
 package model;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 import de.fhl.enca.bl.CleaningAgent;
 import de.fhl.enca.bl.LanguageType;
@@ -7,6 +9,7 @@ import de.fhl.enca.bl.Tag;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderStroke;
@@ -34,9 +37,12 @@ public final class CleaningAgentBean {
 		this.id = cleaningAgent.getCleaningAgentID();
 		this.name = new SimpleStringProperty(cleaningAgent.getName().getString(type));
 		tags = new HBox(5);
-		for (Tag tag : cleaningAgent.getTags()) {
+		List<Tag> tagList = new ArrayList<>(cleaningAgent.getTags());
+		tagList.sort((Tag o1, Tag o2) -> o1.getTagType().getId() - o2.getTagType().getId());
+		for (Tag tag : tagList) {
 			Label label = new Label(tag.getName().getString(type));
 			label.setBorder(new Border(new BorderStroke(Color.GRAY, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+			label.setPadding(new Insets(0, 4, 0, 4));
 			tags.getChildren().add(label);
 		}
 	}
