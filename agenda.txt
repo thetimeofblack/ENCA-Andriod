@@ -9,6 +9,7 @@
 2016-05-28 Database and tag spec meeting
 *2016-05-31 UML deadline
 *2016-06-14 GUI deadline
+2016-06-18 GUI theme issues
 *2016-07-10 Product deadline
 
 
@@ -38,4 +39,10 @@
 
 - Design, algorithm and logic: ALL
 	* code review ****
+
+
+# issues
+- choose tag, detail page
+- modify tag, edit
+
 
