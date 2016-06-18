@@ -1,7 +1,5 @@
 package de.fhl.enca.controller;
 
-import java.awt.Toolkit;
-import javax.swing.JFrame;
 import de.fhl.enca.bl.CleaningAgent;
 import de.fhl.enca.bl.CleaningAgentType;
 import de.fhl.enca.bl.InternationalString;
@@ -16,8 +14,6 @@ import de.fhl.enca.bl.LanguageType;
  * applying Builder design pattern
  */
 public final class CleaningAgentBuilder {
-
-	private static final Toolkit TOOLKIT = new JFrame().getToolkit();
 
 	private CleaningAgent cleaningAgent = new CleaningAgent();
 
@@ -57,16 +53,12 @@ public final class CleaningAgentBuilder {
 		cleaningAgent.setMainLanguage(LanguageType.getLanguageType(index));
 	}
 
-	public void setImage(byte[] source) {
-		cleaningAgent.setImage(TOOLKIT.createImage(source));
-	}
-
 	/**
 	 * Return the cleaning agent just built,
 	 * will also store this result.
 	 */
 	public CleaningAgent getResult() {
-		CleaningAgent.getCleaningAgentAll().put(cleaningAgent.getCleaningAgentID(), cleaningAgent);
+		CleaningAgent.addCleaningAgent(cleaningAgent);
 		return cleaningAgent;
 	}
 }

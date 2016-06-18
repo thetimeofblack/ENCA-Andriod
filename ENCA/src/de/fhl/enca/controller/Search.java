@@ -1,4 +1,4 @@
-package de.fhl.enca.bl;
+package de.fhl.enca.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -6,6 +6,7 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import de.fhl.enca.bl.CleaningAgent;
 
 /**
  * @author Bobby

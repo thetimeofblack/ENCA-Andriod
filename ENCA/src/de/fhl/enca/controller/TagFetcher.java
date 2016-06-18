@@ -16,51 +16,44 @@ import de.fhl.enca.bl.TagType;
 public final class TagFetcher {
 
 	/**
-	 * Get all tags
+	 * Fetch from all tags according to the given tagType
 	 */
-	public static Set<Tag> fetchTagsAll() {
-		Set<Tag> tempSet = new HashSet<>();
-		for (Tag tag : Tag.getTagsAll().values()) {
-			tempSet.add(tag);
-		}
-		return tempSet;
+	public static Set<Tag> fetchTagsOfType(TagType type) {
+		return fetchTagsOfTypeFrom(Tag.getTagsAll(), type);
 	}
 
 	/**
-	 * Get tags of specific type
-	 * @param type
+	 * Fetch from those tags related to all of tags given according to the given tagType
 	 */
-	public static Set<Tag> fetchTagsOfType(TagType type) {
-		return fetchTagsOfTypeFrom(fetchTagsAll(), type);
-	}
-
-	public static Set<Tag> fetchTagsOfTypeOfTag(Tag tag, TagType type) {
-		return fetchTagsOfTypeFrom(tag.getTags(), type);
-	}
-
 	public static Set<Tag> fetchTagOfTypeOfTags(Set<Tag> tags, TagType type) {
-		Set<Tag> result = new HashSet<>();
-		for (int id : Tag.getTagsAll().keySet()) {
-			boolean exists = true;
-			for (Tag tag : tags) {
-				if (!tag.getTagsRelated().contains(id)) {
-					exists = false;
-					break;
+		Set<Tag> result = null;
+		for (Tag tag : tags) {
+			if (result == null) {
+				/* Put all of the related tags of the first tag into the result */
+				result = tag.getTagsRelated();
+			} else {
+				Set<Tag> tempSet = new HashSet<>();
+				/* Go through the result, only save those tags which are related to current tag */
+				for (Tag relatedTag : result) {
+					if (tag.getTagsRelated().contains(relatedTag)) {
+						tempSet.add(relatedTag);
+					}
 				}
-			}
-			if (exists) {
-				result.add(Tag.getTag(id));
+				result = tempSet;
 			}
 		}
 		return fetchTagsOfTypeFrom(result, type);
 	}
 
+	/**
+	 * Fetch from given tags according to the given tagType
+	 */
 	private static Set<Tag> fetchTagsOfTypeFrom(Set<Tag> source, TagType type) {
-		Set<Tag> tempSet = new HashSet<>();
+		Set<Tag> result = new HashSet<>();
 		for (Tag tag : source) {
 			if (tag.getTagType() == type)
-				tempSet.add(tag);
+				result.add(tag);
 		}
-		return tempSet;
+		return result;
 	}
 }

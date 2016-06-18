@@ -3,24 +3,23 @@ package application;
 import java.io.IOException;
 import java.util.ResourceBundle;
 import de.fhl.enca.bl.User;
-import de.fhl.enca.controller.Initialize;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import view.MainController;
+import view.UserCentreController;
 
-public class Main extends Application {
+public final class UserCentre extends Application {
 
 	@Override
 	public void start(Stage primaryStage) {
-		Initialize.initialize();
 		try {
-			primaryStage.setScene(new Scene(new FXMLLoader(Main.class.getResource("/view/Main.fxml"), ResourceBundle.getBundle("res.Main", User.getInterfaceLanguage().getLocale())).load()));
-			primaryStage.setTitle("ENCA");
+			primaryStage.setScene(new Scene(new FXMLLoader(Main.class.getResource("/view/UserCentre.fxml"), ResourceBundle.getBundle("res.UserCentre", User.getInterfaceLanguage().getLocale())).load()));
+			primaryStage.setTitle("User Centre");
 			primaryStage.initStyle(StageStyle.UNIFIED);
-			MainController.setStage(primaryStage);
+			primaryStage.setResizable(false);
+			UserCentreController.setStage(primaryStage);
 			primaryStage.show();
 		} catch (IOException e) {
 			e.printStackTrace();

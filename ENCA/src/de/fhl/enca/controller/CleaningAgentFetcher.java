@@ -16,30 +16,25 @@ import de.fhl.enca.bl.Tag;
 public final class CleaningAgentFetcher {
 
 	/**
-	 * Get all cleaning agents
+	 * Fetch cleaning agents related to all of the given tags
 	 */
-	public static Set<CleaningAgent> fetchCleaningAgentsAll() {
-		Set<CleaningAgent> tempSet = new HashSet<>();
-		for (CleaningAgent cleaningAgent : CleaningAgent.getCleaningAgentAll().values()) {
-			tempSet.add(cleaningAgent);
-		}
-		return tempSet;
-	}
-
 	public static Set<CleaningAgent> fetchCleaningAgentsOfTypes(Set<Tag> tags) {
-		Set<CleaningAgent> tempSet = new HashSet<>();
-		for (CleaningAgent cleaningAgent : CleaningAgent.getCleaningAgentAll().values()) {
-			boolean exists = true;
-			for (Tag tag : tags) {
-				if (!cleaningAgent.getTags().contains(tag.getTagID())) {
-					exists = false;
-					break;
+		Set<CleaningAgent> result = null;
+		for (Tag tag : tags) {
+			if (result == null) {
+				/* Put all of the related cleaning agents of the first tag into the result */
+				result = tag.getCleaningAgents();
+			} else {
+				/* Go through the result, only save those cleaning agents which are related to current tag */
+				Set<CleaningAgent> tempSet = new HashSet<>();
+				for (CleaningAgent cleaningAgent : result) {
+					if (cleaningAgent.getTags().contains(tag)) {
+						tempSet.add(cleaningAgent);
+					}
 				}
-			}
-			if (exists) {
-				tempSet.add(cleaningAgent);
+				result = tempSet;
 			}
 		}
-		return tempSet;
+		return result;
 	}
 }

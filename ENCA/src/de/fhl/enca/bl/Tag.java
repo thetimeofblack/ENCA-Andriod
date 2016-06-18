@@ -12,22 +12,37 @@ import java.util.Set;
  * Class Tag
  * Object representing tag
  */
-public class Tag implements Searchable {
+public class Tag {
 
 	/* static member */
-	private static Map<Integer, Tag> tagsAll = new HashMap<Integer, Tag>();
+	/**
+	 * Store the references of all tags
+	 */
+	private static Map<Integer, Tag> tagsAll = new HashMap<>();
 
 	/* non-static member */
 	private int tagID;
 	private InternationalString name;
 	private TagType tagType;
 
-	private Set<Integer> cleaningAgents = new HashSet<Integer>();
-	private Set<Integer> tagsRelated = new HashSet<Integer>();
+	private Set<CleaningAgent> cleaningAgents = new HashSet<>();
+	private Set<Tag> tagsRelated = new HashSet<>();
 
 	/* static method */
 	public static Tag getTag(int ID) {
 		return tagsAll.get(ID);
+	}
+
+	public static void addTag(Tag tag) {
+		tagsAll.put(tag.getTagID(), tag);
+	}
+
+	public static Set<Tag> getTagsAll() {
+		Set<Tag> set = new HashSet<>();
+		for (Tag tag : tagsAll.values()) {
+			set.add(tag);
+		}
+		return set;
 	}
 
 	/* non-static method */
@@ -35,37 +50,16 @@ public class Tag implements Searchable {
 		this.tagID = tagID;
 		this.name = name;
 		this.tagType = tagType;
-
 		/* directly put this tag into tagsAll */
 		tagsAll.put(tagID, this);
 	}
 
-	public void addCleaningAgent(int id) {
-		cleaningAgents.add(id);
-	}
-
-	public void addRelatedTag(int id) {
-		tagsRelated.add(id);
-	}
-
-	public Set<Tag> getTags() {
-		Set<Tag> set = new HashSet<Tag>();
-		for (int i : tagsRelated) {
-			set.add(getTag(i));
-		}
-		return set;
-	}
-
 	@Override
-	public int search(String keyword) {
-		return name.search(keyword);
+	public String toString() {
+		return "Tag[" + tagID + " - " + name.getString() + "]\n";
 	}
 
 	/* getters and setters */
-	public static Map<Integer, Tag> getTagsAll() {
-		return tagsAll;
-	}
-
 	public int getTagID() {
 		return tagID;
 	}
@@ -90,24 +84,11 @@ public class Tag implements Searchable {
 		this.tagType = tagType;
 	}
 
-	public Set<Integer> getCleaningAgents() {
+	public Set<CleaningAgent> getCleaningAgents() {
 		return cleaningAgents;
 	}
 
-	public Set<Integer> getTagsRelated() {
+	public Set<Tag> getTagsRelated() {
 		return tagsRelated;
-	}
-
-	public void setCleaningAgents(Set<Integer> cleaningAgents) {
-		this.cleaningAgents = cleaningAgents;
-	}
-
-	public void setTagsRelated(Set<Integer> tagsRelated) {
-		this.tagsRelated = tagsRelated;
-	}
-
-	@Override
-	public String toString() {
-		return this.name.getString() + "\n" + "CA:" + this.cleaningAgents + "||" + "Tag:" + this.tagsRelated + "\n";
 	}
 }

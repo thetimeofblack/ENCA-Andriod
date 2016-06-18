@@ -2,7 +2,6 @@ package view;
 
 import java.util.Date;
 import application.Main;
-import de.fhl.enca.bl.LanguagePreference;
 import de.fhl.enca.bl.LanguageType;
 import de.fhl.enca.bl.User;
 import javafx.collections.FXCollections;
@@ -27,6 +26,12 @@ public final class LoginFirstController {
 	@FXML
 	private TextField usernameTextField;
 
+	private static Stage loginStage;
+
+	public static void setLoginStage(Stage loginStage) {
+		LoginFirstController.loginStage = loginStage;
+	}
+
 	@FXML
 	private void initialize() {
 		ObservableList<String> languageList = FXCollections.observableArrayList();
@@ -34,9 +39,9 @@ public final class LoginFirstController {
 			languageList.add(lType.toString());
 		}
 		interfaceComboBox.setItems(languageList);
-		interfaceComboBox.setValue(LanguagePreference.getInterfaceLanguage().toString());
+		interfaceComboBox.setValue(User.getInterfaceLanguage().toString());
 		contentComboBox.setItems(languageList);
-		contentComboBox.setValue(LanguagePreference.getContentlanguage().toString());
+		contentComboBox.setValue(User.getContentLanguage().toString());
 	}
 
 	@FXML
@@ -45,11 +50,11 @@ public final class LoginFirstController {
 			User.setName(usernameTextField.getText());
 			User.setRegDate(new Date());
 			User.setFirstUse(false);
+			User.setInterfaceLanguage(LanguageType.getLanguageType(interfaceComboBox.getSelectionModel().getSelectedIndex()));
+			User.setContentLanguage(LanguageType.getLanguageType(contentComboBox.getSelectionModel().getSelectedIndex()));
 			User.writeUser();
-			LanguagePreference.setInterfaceLanguage(LanguageType.getLanguageType(interfaceComboBox.getSelectionModel().getSelectedIndex()));
-			LanguagePreference.setContentlanguage(LanguageType.getLanguageType(contentComboBox.getSelectionModel().getSelectedIndex()));
-			LanguagePreference.writeLanguagePreference();
 			new Main().start(new Stage());
+			loginStage.hide();
 		}
 	}
 }

@@ -10,16 +10,13 @@ package de.fhl.enca.bl;
  * of tag type. It is used globally in this application.
  */
 public enum TagType {
-	ROOM("Room"), ITEM("Items"), OTHERS("Others");
+	ROOM("Room", 0), ITEM("Items", 1), OTHERS("Others", 2);
 
 	/**
 	 * name: String representation of a type
 	 */
-	String name;
-
-	private TagType(String name) {
-		this.name = name;
-	}
+	private String name;
+	private int id;
 
 	public static TagType getTagType(String string) {
 		for (TagType tagType : TagType.values()) {
@@ -30,9 +27,17 @@ public enum TagType {
 		return null;
 	}
 
+	private TagType(String name, int id) {
+		this.name = name;
+		this.id = id;
+	}
+
+	public int getId() {
+		return id;
+	}
+
 	@Override
 	public String toString() {
 		return this.name;
-
 	}
 }
