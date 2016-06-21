@@ -161,7 +161,7 @@ public final class MainController {
 						}
 					}
 					/* refresh the tableView according to the change of listview */
-					initTableViews(CleaningAgentFetcher.fetchCleaningAgentsOfTypes(TagBean.convert(getChosenTags())));
+					initTableViews(CleaningAgentFetcher.fetchCleaningAgentsOfTags(TagBean.convert(getChosenTags())));
 				}
 			});
 		}
@@ -174,9 +174,9 @@ public final class MainController {
 			}
 		});
 		initMain();
-		
-		Image image=new Image(getClass().getResourceAsStream("/res/image/icon-user.png"));
-		ImageView imageView=new ImageView(image);
+
+		Image image = new Image(getClass().getResourceAsStream("/res/image/icon-user.png"));
+		ImageView imageView = new ImageView(image);
 		imageView.setFitWidth(23);
 		imageView.setFitHeight(23);
 		userCentreButton.setGraphic(imageView);
@@ -218,10 +218,10 @@ public final class MainController {
 	private void initListView(ListView<TagBean> listView) {
 		if (getChosenTags().isEmpty()) {
 			/* If no tag has been chosen, fetch all tags of the tagType of the listView */
-			listView.setItems(TagBean.generateList(TagFetcher.fetchTagsOfType(listViewMap.get(listView))));
+			listView.setItems(TagBean.generateList(TagFetcher.fetchTagsAllOfType(listViewMap.get(listView))));
 		} else {
 			/* If some tags have been chosen, fetch tags according to the chosen tags */
-			listView.setItems(TagBean.generateList(TagFetcher.fetchTagOfTypeOfTags(TagBean.convert(getChosenTags()), listViewMap.get(listView))));
+			listView.setItems(TagBean.generateList(TagFetcher.fetchTagsOfType(TagFetcher.fetchTagOfTags(TagBean.convert(getChosenTags())), listViewMap.get(listView))));
 		}
 	}
 

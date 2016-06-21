@@ -18,14 +18,14 @@ public final class TagFetcher {
 	/**
 	 * Fetch from all tags according to the given tagType
 	 */
-	public static Set<Tag> fetchTagsOfType(TagType type) {
-		return fetchTagsOfTypeFrom(Tag.getTagsAll(), type);
+	public static Set<Tag> fetchTagsAllOfType(TagType type) {
+		return fetchTagsOfType(Tag.getTagsAll(), type);
 	}
 
 	/**
 	 * Fetch from those tags related to all of tags given according to the given tagType
 	 */
-	public static Set<Tag> fetchTagOfTypeOfTags(Set<Tag> tags, TagType type) {
+	public static Set<Tag> fetchTagOfTags(Set<Tag> tags) {
 		Set<Tag> result = null;
 		for (Tag tag : tags) {
 			if (result == null) {
@@ -42,13 +42,13 @@ public final class TagFetcher {
 				result = tempSet;
 			}
 		}
-		return fetchTagsOfTypeFrom(result, type);
+		return result;
 	}
 
 	/**
 	 * Fetch from given tags according to the given tagType
 	 */
-	private static Set<Tag> fetchTagsOfTypeFrom(Set<Tag> source, TagType type) {
+	public static Set<Tag> fetchTagsOfType(Set<Tag> source, TagType type) {
 		Set<Tag> result = new HashSet<>();
 		for (Tag tag : source) {
 			if (tag.getTagType() == type)
