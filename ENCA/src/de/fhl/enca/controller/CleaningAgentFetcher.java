@@ -18,7 +18,7 @@ public final class CleaningAgentFetcher {
 	/**
 	 * Fetch cleaning agents related to all of the given tags
 	 */
-	public static Set<CleaningAgent> fetchCleaningAgentsOfTypes(Set<Tag> tags) {
+	public static Set<CleaningAgent> fetchCleaningAgentsOfTags(Set<Tag> tags) {
 		Set<CleaningAgent> result = null;
 		for (Tag tag : tags) {
 			if (result == null) {
