@@ -1,5 +1,6 @@
 package de.fhl.enca.test;
 
+import de.fhl.enca.bl.LanguageType;
 import de.fhl.enca.bl.User;
 
 public final class ConsoleTest {

@@ -6,9 +6,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.Serializable;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -16,57 +13,16 @@ import java.util.Date;
  * @version 31.05.2016
  * 
  * Class User
- * This class contains metadata for user
+ * This class contains metadata for user.
  * It can be stored and read out of a file.
  */
 public final class User {
 
-	/**
-	 * @author Bobby
-	 * @version 31.05.2016
-	 * 
-	 * Class UserCarrier
-	 * This class is designed to realize generating an object that carries
-	 * user data and can be serialized.
-	 */
-	private static final class UserCarrier implements Serializable {
-
-		private static final long serialVersionUID = 6837137300470719827L;
-
-		private boolean isFirstUse;
-		private String name;
-		private Date regDate;
-		private LanguageType interfaceLanguage;
-		private LanguageType contentLanguage;
-
-		public UserCarrier() {
-			this.isFirstUse = User.isFirstUse;
-			this.name = User.name;
-			this.regDate = User.regDate;
-			this.interfaceLanguage = User.interfaceLanguage;
-			this.contentLanguage = User.contentLanguage;
-		}
-		
-		public void applyCarrier() {
-			User.isFirstUse=this.isFirstUse;
-			User.name=this.name;
-			User.regDate=this.regDate;
-			User.interfaceLanguage=this.interfaceLanguage;
-			User.contentLanguage=this.contentLanguage;
-		}
-	}
-
-	private static final DateFormat FORMAT = new SimpleDateFormat("dd.MM.yyyy");
-	private static final LanguageType DefaultLanguage = LanguageType.ENGLISH;
-
 	private static File directory;
 	private static File file;
 
-	private static boolean isFirstUse = true;
-	private static String name = null;
-	private static Date regDate = null;
-	private static LanguageType interfaceLanguage = DefaultLanguage;
-	private static LanguageType contentLanguage = DefaultLanguage;
+	private static UserPreference userPreference;
+	private static LanguagePreference languagePreference;
 
 	/* initialization */
 	static {
@@ -91,7 +47,8 @@ public final class User {
 	private static void readUser() {
 		try {
 			ObjectInputStream oStream = new ObjectInputStream(new FileInputStream(file));
-			((UserCarrier) oStream.readObject()).applyCarrier();
+			userPreference = (UserPreference) oStream.readObject();
+			languagePreference = (LanguagePreference) oStream.readObject();
 			oStream.close();
 		} catch (ClassNotFoundException | IOException e) {
 			e.printStackTrace();
@@ -104,7 +61,8 @@ public final class User {
 	public static void writeUser() {
 		try {
 			ObjectOutputStream oStream = new ObjectOutputStream(new FileOutputStream(file));
-			oStream.writeObject(new UserCarrier());
+			oStream.writeObject(userPreference);
+			oStream.writeObject(languagePreference);
 			oStream.close();
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -112,52 +70,49 @@ public final class User {
 	}
 
 	public static void firstTimeInitialize() {
-		setFirstUse(true);
-		setName(null);
-		setRegDate(null);
-		setInterfaceLanguage(DefaultLanguage);
-		setContentLanguage(DefaultLanguage);
+		userPreference = new UserPreference();
+		languagePreference = new LanguagePreference();
 		writeUser();
 	}
 
-	public static String getDateString() {
-		return FORMAT.format(regDate);
-	}
-
 	/* getters and setters */
-	public static void setFirstUse(boolean isFirstUse) {
-		User.isFirstUse = isFirstUse;
+	public static boolean isFirstUse() {
+		return userPreference.isFirstUse();
 	}
 
-	public static boolean isFirstUse() {
-		return isFirstUse;
+	public static void setFirstUse(boolean isFirstUse) {
+		userPreference.setFirstUse(isFirstUse);
 	}
 
 	public static String getName() {
-		return name;
+		return userPreference.getName();
 	}
 
 	public static void setName(String name) {
-		User.name = name;
+		userPreference.setName(name);
+	}
+
+	public static String getDateString() {
+		return userPreference.getRegDate();
 	}
 
 	public static void setRegDate(Date regDate) {
-		User.regDate = regDate;
+		userPreference.setRegDate(regDate);
 	}
 
 	public static LanguageType getInterfaceLanguage() {
-		return interfaceLanguage;
+		return languagePreference.getInterfaceLanguage();
 	}
 
 	public static void setInterfaceLanguage(LanguageType interfaceLanguage) {
-		User.interfaceLanguage = interfaceLanguage;
+		languagePreference.setInterfaceLanguage(interfaceLanguage);
 	}
 
 	public static LanguageType getContentLanguage() {
-		return contentLanguage;
+		return languagePreference.getContentLanguage();
 	}
 
 	public static void setContentLanguage(LanguageType contentLanguage) {
-		User.contentLanguage = contentLanguage;
+		languagePreference.setContentLanguage(contentLanguage);
 	}
 }
