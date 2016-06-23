@@ -34,8 +34,7 @@ public final class Search {
 				tempMap.put(cleaningAgent, relevance);
 			}
 		}
-		List<Map.Entry<CleaningAgent, Integer>> sortingList = new ArrayList<>();
-		sortingList.addAll(tempMap.entrySet());
+		List<Map.Entry<CleaningAgent, Integer>> sortingList = new ArrayList<>(tempMap.entrySet());
 		sortingList.sort((o1, o2) -> o2.getValue() - o1.getValue());
 		Set<CleaningAgent> tempSet = new LinkedHashSet<>();
 		for (Map.Entry<CleaningAgent, Integer> entry : sortingList) {

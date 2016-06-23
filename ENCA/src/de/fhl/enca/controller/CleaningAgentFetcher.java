@@ -1,9 +1,13 @@
 package de.fhl.enca.controller;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.Set;
 import de.fhl.enca.bl.CleaningAgent;
 import de.fhl.enca.bl.Tag;
+import de.fhl.enca.dao.SQLVisitor;
+import javafx.scene.image.Image;
 
 /**
  * @author Bobby
@@ -36,5 +40,19 @@ public final class CleaningAgentFetcher {
 			}
 		}
 		return result;
+	}
+
+	public static Image fetchImageOfCleaningAgent(int cleaningAgentID) {
+		ResultSet resultSet = SQLVisitor.visitImage(cleaningAgentID);
+		try {
+			if (resultSet.next()) {
+				return resultSet.getObject(1, Image.class);
+			} else {
+				return null;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 }
