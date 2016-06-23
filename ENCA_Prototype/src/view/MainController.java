@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import application.Detail;
 import application.UserCentre;
 import de.fhl.enca.bl.CleaningAgent;
 import de.fhl.enca.bl.LanguageType;
@@ -28,6 +29,7 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import model.CleaningAgentBean;
 import model.TagBean;
+import view.DetailController.DetailType;
 
 public final class MainController {
 
@@ -106,6 +108,14 @@ public final class MainController {
 		return set;
 	}
 
+	private TableView<CleaningAgentBean> getCurrentTableView() {
+		if (!tabPane.getSelectionModel().isEmpty()) {
+			return tableViewMap.get(LanguageType.getLanguageType((tabPane.getSelectionModel().getSelectedIndex())));
+		} else {
+			return null;
+		}
+	}
+
 	@FXML
 	private void initialize() {
 		listViewMap.put(roomTagListView, TagType.ROOM);
@@ -175,7 +185,7 @@ public final class MainController {
 		});
 		initMain();
 
-		Image image = new Image(getClass().getResourceAsStream("/res/image/icon-user.png"));
+		Image image = new Image(getClass().getResourceAsStream("/resource/image/icon-user.png"));
 		ImageView imageView = new ImageView(image);
 		imageView.setFitWidth(23);
 		imageView.setFitHeight(23);
@@ -238,5 +248,12 @@ public final class MainController {
 	@FXML
 	private void userCentre() {
 		new UserCentre().start(new Stage());
+	}
+
+	@FXML
+	private void detail() {
+		if (getCurrentTableView() != null && !getCurrentTableView().getSelectionModel().isEmpty()) {
+			new Detail(DetailType.DETAIL, CleaningAgent.getCleaningAgent(getCurrentTableView().getSelectionModel().getSelectedItem().getId())).start(new Stage());
+		}
 	}
 }
