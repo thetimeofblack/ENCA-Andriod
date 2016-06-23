@@ -15,7 +15,7 @@ public final class UserCentre extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-			primaryStage.setScene(new Scene(new FXMLLoader(Main.class.getResource("/view/UserCentre.fxml"), ResourceBundle.getBundle("res.UserCentre", User.getInterfaceLanguage().getLocale())).load()));
+			primaryStage.setScene(new Scene(new FXMLLoader(Main.class.getResource("/view/UserCentre.fxml"), ResourceBundle.getBundle("resource.UserCentre", User.getInterfaceLanguage().getLocale())).load()));
 			primaryStage.setTitle("User Centre");
 			primaryStage.initStyle(StageStyle.UNIFIED);
 			primaryStage.setResizable(false);

@@ -22,7 +22,7 @@ public final class Login extends Application {
 				primaryStage.setScene(new Scene(loader.load()));
 				((LoginFirstController) loader.getController()).setStage(primaryStage);
 			} else {
-				loader = new FXMLLoader(Login.class.getResource("/view/Login.fxml"), ResourceBundle.getBundle("res.Login", User.getInterfaceLanguage().getLocale()));
+				loader = new FXMLLoader(Login.class.getResource("/view/Login.fxml"), ResourceBundle.getBundle("resource.Login", User.getInterfaceLanguage().getLocale()));
 				primaryStage.setScene(new Scene(loader.load()));
 				((LoginController) loader.getController()).setStage(primaryStage);
 			}

@@ -17,7 +17,7 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 		Initialize.initialize();
 		try {
-			primaryStage.setScene(new Scene(new FXMLLoader(Main.class.getResource("/view/Main.fxml"), ResourceBundle.getBundle("res.Main", User.getInterfaceLanguage().getLocale())).load()));
+			primaryStage.setScene(new Scene(new FXMLLoader(Main.class.getResource("/view/Main.fxml"), ResourceBundle.getBundle("resource.Main", User.getInterfaceLanguage().getLocale())).load()));
 			primaryStage.setTitle("ENCA");
 			primaryStage.initStyle(StageStyle.UNIFIED);
 			MainController.setStage(primaryStage);
