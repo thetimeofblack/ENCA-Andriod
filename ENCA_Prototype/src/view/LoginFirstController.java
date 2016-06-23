@@ -26,11 +26,7 @@ public final class LoginFirstController {
 	@FXML
 	private TextField usernameTextField;
 
-	private static Stage loginStage;
-
-	public static void setLoginStage(Stage loginStage) {
-		LoginFirstController.loginStage = loginStage;
-	}
+	private Stage loginStage;
 
 	@FXML
 	private void initialize() {
@@ -56,5 +52,9 @@ public final class LoginFirstController {
 			new Main().start(new Stage());
 			loginStage.hide();
 		}
+	}
+
+	public void setStage(Stage stage) {
+		this.loginStage = stage;
 	}
 }
