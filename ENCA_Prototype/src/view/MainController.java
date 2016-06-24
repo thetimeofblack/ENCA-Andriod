@@ -146,7 +146,7 @@ public final class MainController {
 		}
 		/* assign action when the selection of the listView is changed */
 		for (ListView<TagBean> listView1 : listViewMap.keySet()) {
-			listView1.getSelectionModel().selectedItemProperty().addListener((ObservableValue<? extends TagBean> e, TagBean oldValue, TagBean newValue) -> {
+			listView1.getSelectionModel().selectedItemProperty().addListener((ObservableValue<? extends TagBean> o, TagBean oldValue, TagBean newValue) -> {
 				/* ensure the action is performed by user */
 				if (newValue != null) {
 					/* assign priority for each listView according to user's action */
@@ -172,7 +172,7 @@ public final class MainController {
 			});
 		}
 		/* add auto-search function for the textField */
-		textField.textProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
+		textField.textProperty().addListener((ObservableValue<? extends String> o, String oldValue, String newValue) -> {
 			if (newValue.equals("")) {
 				initTableViews(CleaningAgent.getCleaningAgentsAll());
 			} else {
