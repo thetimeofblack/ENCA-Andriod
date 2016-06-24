@@ -33,6 +33,7 @@ public class Detail extends Application {
 		((DetailController) loader.getController()).initializeContent(type, cleaningAgent);
 		primaryStage.setTitle("Detail");
 		primaryStage.initStyle(StageStyle.UNIFIED);
+		primaryStage.setResizable(false);
 		primaryStage.show();
 	}
 }
