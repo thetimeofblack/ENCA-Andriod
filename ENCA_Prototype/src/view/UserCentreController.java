@@ -14,12 +14,6 @@ import javafx.stage.Stage;
 
 public final class UserCentreController {
 
-	private static Stage userCentreStage;
-
-	public static void setStage(Stage stage) {
-		userCentreStage = stage;
-	}
-
 	@FXML
 	private TextField usernameTextField;
 	@FXML
@@ -32,6 +26,18 @@ public final class UserCentreController {
 	private Button saveButton;
 	@FXML
 	private Button cancelButton;
+
+	private Stage mainStage;
+
+	private Stage userCentreStage;
+
+	public void setMainStage(Stage mainStage) {
+		this.mainStage = mainStage;
+	}
+
+	public void setUserCentreStage(Stage userCentreStage) {
+		this.userCentreStage = userCentreStage;
+	}
 
 	@FXML
 	private void initialize() {
@@ -56,8 +62,7 @@ public final class UserCentreController {
 				User.setInterfaceLanguage(LanguageType.getLanguageType(interfaceComboBox.getSelectionModel().getSelectedIndex()));
 				User.setContentLanguage(LanguageType.getLanguageType(contentComboBox.getSelectionModel().getSelectedIndex()));
 				User.writeUser();
-				userCentreStage.hide();
-				MainController.hideStage();
+				mainStage.hide();
 				new Main().start(new Stage());
 				return;
 			}

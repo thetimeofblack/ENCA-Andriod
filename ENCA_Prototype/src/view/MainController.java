@@ -33,16 +33,6 @@ import view.DetailController.DetailType;
 
 public final class MainController {
 
-	private static Stage mainStage;
-
-	public static void setStage(Stage stage) {
-		mainStage = stage;
-	}
-
-	public static void hideStage() {
-		mainStage.hide();
-	}
-
 	@FXML
 	private ListView<TagBean> roomTagListView;
 	@FXML
@@ -67,6 +57,8 @@ public final class MainController {
 	private TextField textField;
 	@FXML
 	private Button userCentreButton;
+
+	private Stage mainStage;
 
 	/**
 	 * Store the three listView and their representing tagType
@@ -97,6 +89,10 @@ public final class MainController {
 	 * Store the current cleaning agent fetch result
 	 */
 	private Set<CleaningAgent> result = new HashSet<>();
+
+	public void setMainStage(Stage stage) {
+		this.mainStage = stage;
+	}
 
 	private Set<TagBean> getChosenTags() {
 		Set<TagBean> set = new HashSet<>();
@@ -247,7 +243,7 @@ public final class MainController {
 
 	@FXML
 	private void userCentre() {
-		new UserCentre().start(new Stage());
+		new UserCentre(mainStage).start(new Stage());
 	}
 
 	@FXML

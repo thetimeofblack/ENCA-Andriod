@@ -12,17 +12,25 @@ import view.UserCentreController;
 
 public final class UserCentre extends Application {
 
+	private Stage mainStage;
+
+	public UserCentre(Stage mainStage) {
+		this.mainStage = mainStage;
+	}
+
 	@Override
 	public void start(Stage primaryStage) {
+		FXMLLoader loader = new FXMLLoader(Main.class.getResource("/view/UserCentre.fxml"), ResourceBundle.getBundle("resource.UserCentre", User.getInterfaceLanguage().getLocale()));
 		try {
-			primaryStage.setScene(new Scene(new FXMLLoader(Main.class.getResource("/view/UserCentre.fxml"), ResourceBundle.getBundle("resource.UserCentre", User.getInterfaceLanguage().getLocale())).load()));
-			primaryStage.setTitle("User Centre");
-			primaryStage.initStyle(StageStyle.UNIFIED);
-			primaryStage.setResizable(false);
-			UserCentreController.setStage(primaryStage);
-			primaryStage.show();
+			primaryStage.setScene(new Scene(loader.load()));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		((UserCentreController) loader.getController()).setMainStage(mainStage);
+		((UserCentreController) loader.getController()).setUserCentreStage(primaryStage);
+		primaryStage.setTitle("User Centre");
+		primaryStage.initStyle(StageStyle.UNIFIED);
+		primaryStage.setResizable(false);
+		primaryStage.show();
 	}
 }

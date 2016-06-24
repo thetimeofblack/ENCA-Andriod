@@ -27,7 +27,7 @@ public final class LoginController {
 		loginStage.hide();
 	}
 
-	public void setStage(Stage stage) {
+	public void setLoginStage(Stage stage) {
 		this.loginStage = stage;
 	}
 }

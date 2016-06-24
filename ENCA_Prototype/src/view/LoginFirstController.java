@@ -54,7 +54,7 @@ public final class LoginFirstController {
 		}
 	}
 
-	public void setStage(Stage stage) {
+	public void setLoginFirstStage(Stage stage) {
 		this.loginStage = stage;
 	}
 }
