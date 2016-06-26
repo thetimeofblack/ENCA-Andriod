@@ -11,7 +11,6 @@ import de.fhl.enca.bl.LanguageType;
 import de.fhl.enca.bl.TagType;
 import de.fhl.enca.bl.User;
 import de.fhl.enca.controller.CleaningAgentFetcher;
-import de.fhl.enca.controller.Search;
 import de.fhl.enca.controller.TagFetcher;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
@@ -211,9 +210,9 @@ public final class MainController {
 	private void search() {
 		if (!textField.getText().equals("")) {
 			if (getChosenTags().isEmpty()) {
-				initTableViews(Search.search(CleaningAgent.getCleaningAgentsAll(), textField.getText()));
+				initTableViews(CleaningAgentFetcher.fetchResult(CleaningAgent.getCleaningAgentsAll(), textField.getText()));
 			} else {
-				initTableViews(Search.search(result, textField.getText()));
+				initTableViews(CleaningAgentFetcher.fetchResult(result, textField.getText()));
 			}
 		}
 	}
@@ -224,10 +223,10 @@ public final class MainController {
 	private void initListView(ListView<TagBean> listView) {
 		if (getChosenTags().isEmpty()) {
 			/* If no tag has been chosen, fetch all tags of the tagType of the listView */
-			listView.setItems(TagBean.generateList(TagFetcher.fetchTagsAllOfType(listViewMap.get(listView))));
+			listView.setItems(TagBean.generateList(TagFetcher.fetchTagsAllOfCertainType(listViewMap.get(listView))));
 		} else {
 			/* If some tags have been chosen, fetch tags according to the chosen tags */
-			listView.setItems(TagBean.generateList(TagFetcher.fetchTagsOfType(TagFetcher.fetchTagOfTags(TagBean.convert(getChosenTags())), listViewMap.get(listView))));
+			listView.setItems(TagBean.generateList(TagFetcher.fetchTagsOfCertainType(TagFetcher.fetchTagsRelated(TagBean.convert(getChosenTags())), listViewMap.get(listView))));
 		}
 	}
 

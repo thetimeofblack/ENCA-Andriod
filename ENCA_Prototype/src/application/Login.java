@@ -15,6 +15,7 @@ public final class Login extends Application {
 
 	@Override
 	public void start(Stage primaryStage) {
+		User.initialize();
 		FXMLLoader loader;
 		try {
 			if (User.isFirstUse()) {

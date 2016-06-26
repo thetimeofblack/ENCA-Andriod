@@ -24,13 +24,16 @@ public class Detail extends Application {
 
 	@Override
 	public void start(Stage primaryStage) {
-		FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/view/Detail.fxml"), ResourceBundle.getBundle("resource.Detail", User.getInterfaceLanguage().getLocale()));
+		ResourceBundle resourceBundle = ResourceBundle.getBundle("resource.Detail", User.getInterfaceLanguage().getLocale());
+		FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/view/Detail.fxml"), resourceBundle);
 		try {
 			primaryStage.setScene(new Scene(loader.load()));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		((DetailController) loader.getController()).initializeContent(type, cleaningAgent);
+		((DetailController) loader.getController()).setDetailStage(primaryStage);
+		((DetailController) loader.getController()).setResourceBundle(resourceBundle);
 		primaryStage.setTitle("Detail");
 		primaryStage.initStyle(StageStyle.UNIFIED);
 		primaryStage.setResizable(false);
