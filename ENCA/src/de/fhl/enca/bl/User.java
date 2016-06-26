@@ -21,37 +21,49 @@ public final class User {
 	private static File directory;
 	private static File file;
 
-	private static UserPreference userPreference;
-	private static LanguagePreference languagePreference;
+	private static boolean isFirstUse = true;
+	private static UserPreference userPreference = new UserPreference();
+	private static LanguagePreference languagePreference = new LanguagePreference();
 
-	/* initialization */
-	static {
+	/* static method */
+	public static void initialize() {
 		/* initialize directory and file location */
 		if (System.getProperty("os.name").startsWith("Windows")) {
 			directory = new File(System.getProperty("user.home") + "\\Documents\\Enca");
 			file = new File(directory, "user.ini");
 		}
-		if (!directory.exists()) {
-			directory.mkdirs();
-		}
-		if (!file.exists()) {
-			firstTimeInitialize();
-		}
-		readUser();
+		isFirstUse = readUser();
 	}
 
-	/* static method */
 	/**
 	 * Read user data from a serialized carrier from the file
 	 */
-	private static void readUser() {
-		try {
-			ObjectInputStream oStream = new ObjectInputStream(new FileInputStream(file));
-			userPreference = (UserPreference) oStream.readObject();
-			languagePreference = (LanguagePreference) oStream.readObject();
-			oStream.close();
-		} catch (ClassNotFoundException | IOException e) {
-			e.printStackTrace();
+	private static boolean readUser() {
+		if (directory.exists() && file.exists()) {
+			try {
+				ObjectInputStream oStream = new ObjectInputStream(new FileInputStream(file));
+				UserPreference userPreferenceTemp = (UserPreference) oStream.readObject();
+				if (userPreferenceTemp != null) {
+					userPreference = userPreferenceTemp;
+				} else {
+					oStream.close();
+					return true;
+				}
+				LanguagePreference languagePreferenceTemp = (LanguagePreference) oStream.readObject();
+				if (languagePreferenceTemp != null) {
+					languagePreference = languagePreferenceTemp;
+				} else {
+					oStream.close();
+					return true;
+				}
+				oStream.close();
+				return false;
+			} catch (ClassNotFoundException | IOException e) {
+				e.printStackTrace();
+				return true;
+			}
+		} else {
+			return true;
 		}
 	}
 
@@ -59,29 +71,26 @@ public final class User {
 	 * Serialize the carrier and write it to the file
 	 */
 	public static void writeUser() {
+		if (isFirstUse) {
+			if (!directory.exists()) {
+				directory.mkdirs();
+			}
+		}
 		try {
 			ObjectOutputStream oStream = new ObjectOutputStream(new FileOutputStream(file));
 			oStream.writeObject(userPreference);
 			oStream.writeObject(languagePreference);
 			oStream.close();
+			isFirstUse = false;
 		} catch (IOException e) {
 			e.printStackTrace();
+			isFirstUse = true;
 		}
-	}
-
-	public static void firstTimeInitialize() {
-		userPreference = new UserPreference();
-		languagePreference = new LanguagePreference();
-		writeUser();
 	}
 
 	/* getters and setters */
 	public static boolean isFirstUse() {
-		return userPreference.isFirstUse();
-	}
-
-	public static void setFirstUse(boolean isFirstUse) {
-		userPreference.setFirstUse(isFirstUse);
+		return isFirstUse;
 	}
 
 	public static String getName() {

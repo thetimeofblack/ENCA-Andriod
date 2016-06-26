@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author Bobby
@@ -15,19 +17,16 @@ import java.util.Date;
 public final class UserPreference implements Serializable {
 
 	private static final long serialVersionUID = -5000180069279808816L;
-	private static final DateFormat FORMAT = new SimpleDateFormat("dd.MM.yyyy");
+	
+	private static Map<LanguageType, DateFormat> dateFormatMap = new HashMap<>();
+	static {
+		dateFormatMap.put(LanguageType.ENGLISH, new SimpleDateFormat("MM/dd/yyyy"));
+		dateFormatMap.put(LanguageType.GERMAN, new SimpleDateFormat("dd.MM.yyyy"));
+		dateFormatMap.put(LanguageType.CHINESE, new SimpleDateFormat("yyyy年MM月dd日"));
+	}
 
-	private boolean isFirstUse = true;
 	private String name = "";
 	private Date regDate = new Date();
-
-	public boolean isFirstUse() {
-		return isFirstUse;
-	}
-
-	public void setFirstUse(boolean isFirstUse) {
-		this.isFirstUse = isFirstUse;
-	}
 
 	public String getName() {
 		return name;
@@ -38,7 +37,7 @@ public final class UserPreference implements Serializable {
 	}
 
 	public String getRegDate() {
-		return FORMAT.format(regDate);
+		return dateFormatMap.get(User.getInterfaceLanguage()).format(regDate);
 	}
 
 	public void setRegDate(Date regDate) {

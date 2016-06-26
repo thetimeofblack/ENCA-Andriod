@@ -3,6 +3,7 @@ package de.fhl.enca.controller;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import de.fhl.enca.bl.CleaningAgent;
@@ -66,7 +67,7 @@ public final class Initialize {
 		ResultSet r = SQLVisitor.visitTagsAll();
 		try {
 			while (r.next()) {
-				new Tag(r.getInt(1), iStringGenerator(r, 2), TagType.getTagType(r.getString(5)));
+				new Tag(r.getInt(1), iStringGenerator(r, 2), TagType.getTagType(r.getString(5)), r.getBoolean(6));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -78,35 +79,26 @@ public final class Initialize {
 	 * and the relations between tags
 	 */
 	private static void initRelations() {
-		/* Key: a cleaning agent, value: the set of related tags of the cleaning agent */
 		Map<CleaningAgent, Set<Tag>> ctMap = new HashMap<>();
-		/* Key: a tag, value: the set of related cleaning agents of the tag */
-		Map<Tag, Set<CleaningAgent>> tcMap = new HashMap<>();
-		initTCRelations(ctMap, tcMap);
+		initTCRelations(ctMap);
 		initTTRelations(ctMap);
 	}
 
 	/**
 	 * Initialize the relations between cleaning agents and tags
 	 */
-	private static void initTCRelations(Map<CleaningAgent, Set<Tag>> ctMap, Map<Tag, Set<CleaningAgent>> tcMap) {
+	private static void initTCRelations(Map<CleaningAgent, Set<Tag>> ctMap) {
 		ResultSet r = SQLVisitor.visitRelations();
 		try {
 			while (r.next()) {
 				CleaningAgent cleaningAgent = CleaningAgent.getCleaningAgent(r.getInt(1));
 				Tag tag = Tag.getTag(r.getInt(2));
-				/* Add the cleaning agent and its tags set to ctMap */
 				if (!ctMap.containsKey(cleaningAgent)) {
-					ctMap.put(cleaningAgent, cleaningAgent.getTags());
+					ctMap.put(cleaningAgent, new HashSet<>());
 				}
-				/* Add the tag and its cleaning agents set to tcMap */
-				if (!tcMap.containsKey(tag)) {
-					tcMap.put(tag, tag.getCleaningAgents());
-				}
-				/* Add the tag into the tags set of the cleaning agent */
+				cleaningAgent.addTag(tag);
+				tag.addCleaningAgent(cleaningAgent);
 				ctMap.get(cleaningAgent).add(tag);
-				/* Add the cleaning agent into the cleaning agents set of the tag */
-				tcMap.get(tag).add(cleaningAgent);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -124,7 +116,7 @@ public final class Initialize {
 				for (Tag tag2 : group) {
 					/* Ensure the two tags are not with the same tagType*/
 					if (tag1.getTagType() != tag2.getTagType()) {
-						tag1.getTagsRelated().add(tag2);
+						tag1.addTagRelated(tag2);
 					}
 				}
 			}

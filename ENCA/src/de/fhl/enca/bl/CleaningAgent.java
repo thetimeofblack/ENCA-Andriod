@@ -1,10 +1,10 @@
 package de.fhl.enca.bl;
 
-import java.awt.Image;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import de.fhl.enca.controller.TagFetcher;
 
 /**
  * @author Bobby
@@ -31,7 +31,6 @@ public final class CleaningAgent {
 	private CleaningAgentType agentType;
 	private int rate;
 	private LanguageType mainLanguage;
-	private Image image = null;
 
 	private Set<Tag> tags = new HashSet<>();
 
@@ -45,11 +44,7 @@ public final class CleaningAgent {
 	}
 
 	public static Set<CleaningAgent> getCleaningAgentsAll() {
-		Set<CleaningAgent> set = new HashSet<>();
-		for (CleaningAgent cleaningAgent : cleaningAgentAll.values()) {
-			set.add(cleaningAgent);
-		}
-		return set;
+		return new HashSet<CleaningAgent>(cleaningAgentAll.values());
 	}
 
 	/* non-static method */
@@ -62,9 +57,13 @@ public final class CleaningAgent {
 		return name.search(keyword) + description.search(keyword) + instruction.search(keyword);
 	}
 
+	public void addTag(Tag tag) {
+		this.tags.add(tag);
+	}
+
 	@Override
 	public String toString() {
-		return "CA[" + cleaningAgentID + " - " + name.getString() + "]\n";
+		return "CA[" + cleaningAgentID + " - " + name.getString(User.getInterfaceLanguage()) + "]\n";
 	}
 
 	/* getters and setters */
@@ -140,15 +139,7 @@ public final class CleaningAgent {
 		this.mainLanguage = lang;
 	}
 
-	public Image getImage() {
-		return image;
-	}
-
-	public void setImage(Image image) {
-		this.image = image;
-	}
-
 	public Set<Tag> getTags() {
-		return tags;
+		return TagFetcher.fetchSortedTags(tags);
 	}
 }

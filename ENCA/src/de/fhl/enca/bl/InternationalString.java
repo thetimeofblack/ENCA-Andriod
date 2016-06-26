@@ -15,21 +15,19 @@ public final class InternationalString {
 	/**
 	 * Map that stores strings in different languages
 	 */
-	private Map<LanguageType, String> stringMap = new HashMap<LanguageType, String>(LanguageType.getLanguageCount());
+	private Map<LanguageType, String> stringMap = new HashMap<>(LanguageType.getLanguageCount());
 
 	public InternationalString() {}
 
 	/**
 	 * Search those strings with given keyword
 	 * @param keyword
-	 * @return the relevance, whose value indicates the count that
-	 * the keyword occurs in the content.
+	 * @return the relevance, whose value indicates the count that the keyword occurs in the content.
 	 */
 	public int search(String keyword) {
-		String pattern = ".*" + keyword + ".*";
 		int relevance = 0;
 		for (String string : stringMap.values()) {
-			if (string != null && string.toLowerCase().matches(pattern)) {
+			if (string != null && string.toLowerCase().matches(".*" + keyword.toLowerCase() + ".*")) {
 				relevance++;
 			}
 		}
@@ -41,13 +39,16 @@ public final class InternationalString {
 	}
 
 	public String getString(LanguageType lType) {
-		return stringMap.get(lType);
-	}
-
-	/**
-	 * Get string according to the content language located in class LanguagePreference
-	 */
-	public String getString() {
-		return stringMap.get(User.getContentLanguage());
+		String result = stringMap.get(lType);
+		if (result != null && !result.equals("")) {
+			return result;
+		} else {
+			for (String string : stringMap.values()) {
+				if (string != null && !string.equals("")) {
+					return string;
+				}
+			}
+			return null;
+		}
 	}
 }
