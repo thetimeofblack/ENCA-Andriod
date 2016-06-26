@@ -20,6 +20,7 @@ public final class CleaningAgent {
 	 * Store the references of all cleaning agents
 	 */
 	private static Map<Integer, CleaningAgent> cleaningAgentAll = new HashMap<>();
+	private static int maxID = 0;
 
 	/* non-static member */
 	private int cleaningAgentID;
@@ -47,6 +48,14 @@ public final class CleaningAgent {
 		return new HashSet<CleaningAgent>(cleaningAgentAll.values());
 	}
 
+	public static int getMaxID() {
+		return maxID;
+	}
+
+	public static void setMaxID(int maxID) {
+		CleaningAgent.maxID = maxID;
+	}
+
 	/* non-static method */
 	/**
 	 * search the cleaning agent according to given keyword
@@ -59,6 +68,18 @@ public final class CleaningAgent {
 
 	public void addTag(Tag tag) {
 		this.tags.add(tag);
+	}
+
+	public void addTagsAll(Tag tag) {
+		this.tags.addAll(tags);
+	}
+
+	public void removeTag(Tag tag) {
+		this.tags.remove(tag);
+	}
+
+	public void removeTagsAll(Set<Tag> tags) {
+		this.tags.removeAll(tags);
 	}
 
 	@Override

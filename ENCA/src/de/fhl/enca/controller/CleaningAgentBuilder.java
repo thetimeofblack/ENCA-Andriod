@@ -58,7 +58,6 @@ public final class CleaningAgentBuilder {
 	 * will also store this result.
 	 */
 	public CleaningAgent getResult() {
-		CleaningAgent.addCleaningAgent(cleaningAgent);
 		return cleaningAgent;
 	}
 }

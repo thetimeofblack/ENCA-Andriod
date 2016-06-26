@@ -44,7 +44,11 @@ public final class Initialize {
 		try {
 			while (r.next()) {
 				CleaningAgentBuilder builder = new CleaningAgentBuilder();
-				builder.setID(r.getInt(1));
+				int id = r.getInt(1);
+				builder.setID(id);
+				if (id > CleaningAgent.getMaxID()) {
+					CleaningAgent.setMaxID(id);
+				}
 				builder.setName(iStringGenerator(r, 2));
 				builder.setDescription(iStringGenerator(r, 5));
 				builder.setInstruction(iStringGenerator(r, 8));
@@ -53,7 +57,7 @@ public final class Initialize {
 				builder.setType(r.getString(13));
 				builder.setRate(r.getInt(14));
 				builder.setMainLanguage(r.getInt(15));
-				builder.getResult();
+				CleaningAgent.addCleaningAgent(builder.getResult());
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -67,7 +71,11 @@ public final class Initialize {
 		ResultSet r = SQLVisitor.visitTagsAll();
 		try {
 			while (r.next()) {
-				new Tag(r.getInt(1), iStringGenerator(r, 2), TagType.getTagType(r.getString(5)), r.getBoolean(6));
+				int id = r.getInt(1);
+				new Tag(id, iStringGenerator(r, 2), TagType.getTagType(r.getString(5)), r.getBoolean(6));
+				if (id > Tag.getMaxID()) {
+					Tag.setMaxID(id);
+				}
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -86,6 +94,7 @@ public final class Initialize {
 
 	/**
 	 * Initialize the relations between cleaning agents and tags
+	 * If a cleaning agent is with on tags, it will be made related to Tag noTag.
 	 */
 	private static void initTCRelations(Map<CleaningAgent, Set<Tag>> ctMap) {
 		ResultSet r = SQLVisitor.visitRelations();
@@ -102,6 +111,11 @@ public final class Initialize {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}
+		for (CleaningAgent cleaningAgent : CleaningAgent.getCleaningAgentsAll()) {
+			if (!ctMap.containsKey(cleaningAgent)) {
+				Tag.getTag(0).addCleaningAgent(cleaningAgent);
+			}
 		}
 	}
 
