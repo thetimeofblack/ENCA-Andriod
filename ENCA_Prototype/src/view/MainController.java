@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
-import application.Detail;
+import application.CleaningAgentDetail;
 import application.UserCentre;
 import de.fhl.enca.bl.CleaningAgent;
 import de.fhl.enca.bl.LanguageType;
@@ -22,13 +22,10 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import model.CleaningAgentBean;
 import model.TagBean;
-import view.DetailController.DetailType;
 
 public final class MainController {
 
@@ -127,6 +124,11 @@ public final class MainController {
 		for (TableView<CleaningAgentBean> tableView : tableViewMap.values()) {
 			tableView.getColumns().get(0).setCellValueFactory(new PropertyValueFactory<>("name"));
 			tableView.getColumns().get(1).setCellValueFactory(new PropertyValueFactory<>("tags"));
+			tableView.setOnMouseClicked(e -> {
+				if (e.getClickCount() > 1) {
+					detail();
+				}
+			});
 		}
 		/* put those tag labels into the table cell */
 		for (TableColumn<CleaningAgentBean, HBox> column : columnList) {
@@ -179,12 +181,6 @@ public final class MainController {
 			}
 		});
 		initMain();
-
-		Image image = new Image(getClass().getResourceAsStream("/resource/image/icon-user.png"));
-		ImageView imageView = new ImageView(image);
-		imageView.setFitWidth(23);
-		imageView.setFitHeight(23);
-		userCentreButton.setGraphic(imageView);
 	}
 
 	/**
@@ -248,7 +244,12 @@ public final class MainController {
 	@FXML
 	private void detail() {
 		if (getCurrentTableView() != null && !getCurrentTableView().getSelectionModel().isEmpty()) {
-			new Detail(DetailType.DETAIL, CleaningAgent.getCleaningAgent(getCurrentTableView().getSelectionModel().getSelectedItem().getId())).start(new Stage());
+			new CleaningAgentDetail(CleaningAgent.getCleaningAgent(getCurrentTableView().getSelectionModel().getSelectedItem().getId())).start(new Stage());
 		}
+	}
+	
+	@FXML
+	private void exit() {
+		System.exit(0);
 	}
 }

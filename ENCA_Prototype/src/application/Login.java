@@ -3,6 +3,7 @@ package application;
 import java.io.IOException;
 import java.util.ResourceBundle;
 import de.fhl.enca.bl.User;
+import de.fhl.enca.controller.Initialize;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -16,6 +17,7 @@ public final class Login extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		User.initialize();
+		Initialize.initialize();
 		FXMLLoader loader;
 		try {
 			if (User.isFirstUse()) {
