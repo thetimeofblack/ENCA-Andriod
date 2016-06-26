@@ -26,11 +26,7 @@ public final class LoginFirstController {
 	@FXML
 	private TextField usernameTextField;
 
-	private static Stage loginStage;
-
-	public static void setLoginStage(Stage loginStage) {
-		LoginFirstController.loginStage = loginStage;
-	}
+	private Stage loginStage;
 
 	@FXML
 	private void initialize() {
@@ -49,12 +45,15 @@ public final class LoginFirstController {
 		if (!usernameTextField.getText().equals("") && !interfaceComboBox.getSelectionModel().isEmpty() && !contentComboBox.getSelectionModel().isEmpty()) {
 			User.setName(usernameTextField.getText());
 			User.setRegDate(new Date());
-			User.setFirstUse(false);
 			User.setInterfaceLanguage(LanguageType.getLanguageType(interfaceComboBox.getSelectionModel().getSelectedIndex()));
 			User.setContentLanguage(LanguageType.getLanguageType(contentComboBox.getSelectionModel().getSelectedIndex()));
 			User.writeUser();
 			new Main().start(new Stage());
 			loginStage.hide();
 		}
+	}
+
+	public void setLoginFirstStage(Stage stage) {
+		this.loginStage = stage;
 	}
 }

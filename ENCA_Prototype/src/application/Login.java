@@ -15,23 +15,25 @@ public final class Login extends Application {
 
 	@Override
 	public void start(Stage primaryStage) {
+		User.initialize();
+		FXMLLoader loader;
 		try {
-			FXMLLoader loader;
 			if (User.isFirstUse()) {
 				loader = new FXMLLoader(Login.class.getResource("/view/LoginFirst.fxml"));
-				LoginFirstController.setLoginStage(primaryStage);
+				primaryStage.setScene(new Scene(loader.load()));
+				((LoginFirstController) loader.getController()).setLoginFirstStage(primaryStage);
 			} else {
-				loader = new FXMLLoader(Login.class.getResource("/view/Login.fxml"), ResourceBundle.getBundle("res.Login", User.getInterfaceLanguage().getLocale()));
-				LoginController.setLoginStage(primaryStage);
+				loader = new FXMLLoader(Login.class.getResource("/view/Login.fxml"), ResourceBundle.getBundle("resource.Login", User.getInterfaceLanguage().getLocale()));
+				primaryStage.setScene(new Scene(loader.load()));
+				((LoginController) loader.getController()).setLoginStage(primaryStage);
 			}
-			primaryStage.setScene(new Scene(loader.load()));
-			primaryStage.setResizable(false);
-			primaryStage.setTitle("ENCA");
-			primaryStage.initStyle(StageStyle.UNIFIED);
-			primaryStage.show();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		primaryStage.setResizable(false);
+		primaryStage.setTitle("ENCA");
+		primaryStage.initStyle(StageStyle.UNIFIED);
+		primaryStage.show();
 	}
 
 	public static void main(String[] args) {

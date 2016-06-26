@@ -4,13 +4,13 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import application.Detail;
 import application.UserCentre;
 import de.fhl.enca.bl.CleaningAgent;
 import de.fhl.enca.bl.LanguageType;
 import de.fhl.enca.bl.TagType;
 import de.fhl.enca.bl.User;
 import de.fhl.enca.controller.CleaningAgentFetcher;
-import de.fhl.enca.controller.Search;
 import de.fhl.enca.controller.TagFetcher;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
@@ -28,18 +28,9 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import model.CleaningAgentBean;
 import model.TagBean;
+import view.DetailController.DetailType;
 
 public final class MainController {
-
-	private static Stage mainStage;
-
-	public static void setStage(Stage stage) {
-		mainStage = stage;
-	}
-
-	public static void hideStage() {
-		mainStage.hide();
-	}
 
 	@FXML
 	private ListView<TagBean> roomTagListView;
@@ -65,6 +56,8 @@ public final class MainController {
 	private TextField textField;
 	@FXML
 	private Button userCentreButton;
+
+	private Stage mainStage;
 
 	/**
 	 * Store the three listView and their representing tagType
@@ -96,6 +89,10 @@ public final class MainController {
 	 */
 	private Set<CleaningAgent> result = new HashSet<>();
 
+	public void setMainStage(Stage stage) {
+		this.mainStage = stage;
+	}
+
 	private Set<TagBean> getChosenTags() {
 		Set<TagBean> set = new HashSet<>();
 		for (ListView<TagBean> listView : listViewMap.keySet()) {
@@ -104,6 +101,14 @@ public final class MainController {
 			}
 		}
 		return set;
+	}
+
+	private TableView<CleaningAgentBean> getCurrentTableView() {
+		if (!tabPane.getSelectionModel().isEmpty()) {
+			return tableViewMap.get(LanguageType.getLanguageType((tabPane.getSelectionModel().getSelectedIndex())));
+		} else {
+			return null;
+		}
 	}
 
 	@FXML
@@ -140,7 +145,7 @@ public final class MainController {
 		}
 		/* assign action when the selection of the listView is changed */
 		for (ListView<TagBean> listView1 : listViewMap.keySet()) {
-			listView1.getSelectionModel().selectedItemProperty().addListener((ObservableValue<? extends TagBean> e, TagBean oldValue, TagBean newValue) -> {
+			listView1.getSelectionModel().selectedItemProperty().addListener((ObservableValue<? extends TagBean> o, TagBean oldValue, TagBean newValue) -> {
 				/* ensure the action is performed by user */
 				if (newValue != null) {
 					/* assign priority for each listView according to user's action */
@@ -161,12 +166,12 @@ public final class MainController {
 						}
 					}
 					/* refresh the tableView according to the change of listview */
-					initTableViews(CleaningAgentFetcher.fetchCleaningAgentsOfTypes(TagBean.convert(getChosenTags())));
+					initTableViews(CleaningAgentFetcher.fetchCleaningAgentsOfTags(TagBean.convert(getChosenTags())));
 				}
 			});
 		}
 		/* add auto-search function for the textField */
-		textField.textProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
+		textField.textProperty().addListener((ObservableValue<? extends String> o, String oldValue, String newValue) -> {
 			if (newValue.equals("")) {
 				initTableViews(CleaningAgent.getCleaningAgentsAll());
 			} else {
@@ -174,9 +179,9 @@ public final class MainController {
 			}
 		});
 		initMain();
-		
-		Image image=new Image(getClass().getResourceAsStream("/res/image/icon-user.png"));
-		ImageView imageView=new ImageView(image);
+
+		Image image = new Image(getClass().getResourceAsStream("/resource/image/icon-user.png"));
+		ImageView imageView = new ImageView(image);
 		imageView.setFitWidth(23);
 		imageView.setFitHeight(23);
 		userCentreButton.setGraphic(imageView);
@@ -205,9 +210,9 @@ public final class MainController {
 	private void search() {
 		if (!textField.getText().equals("")) {
 			if (getChosenTags().isEmpty()) {
-				initTableViews(Search.search(CleaningAgent.getCleaningAgentsAll(), textField.getText()));
+				initTableViews(CleaningAgentFetcher.fetchResult(CleaningAgent.getCleaningAgentsAll(), textField.getText()));
 			} else {
-				initTableViews(Search.search(result, textField.getText()));
+				initTableViews(CleaningAgentFetcher.fetchResult(result, textField.getText()));
 			}
 		}
 	}
@@ -218,10 +223,10 @@ public final class MainController {
 	private void initListView(ListView<TagBean> listView) {
 		if (getChosenTags().isEmpty()) {
 			/* If no tag has been chosen, fetch all tags of the tagType of the listView */
-			listView.setItems(TagBean.generateList(TagFetcher.fetchTagsOfType(listViewMap.get(listView))));
+			listView.setItems(TagBean.generateList(TagFetcher.fetchTagsAllOfCertainType(listViewMap.get(listView))));
 		} else {
 			/* If some tags have been chosen, fetch tags according to the chosen tags */
-			listView.setItems(TagBean.generateList(TagFetcher.fetchTagOfTypeOfTags(TagBean.convert(getChosenTags()), listViewMap.get(listView))));
+			listView.setItems(TagBean.generateList(TagFetcher.fetchTagsOfCertainType(TagFetcher.fetchTagsRelated(TagBean.convert(getChosenTags())), listViewMap.get(listView))));
 		}
 	}
 
@@ -237,6 +242,13 @@ public final class MainController {
 
 	@FXML
 	private void userCentre() {
-		new UserCentre().start(new Stage());
+		new UserCentre(mainStage).start(new Stage());
+	}
+
+	@FXML
+	private void detail() {
+		if (getCurrentTableView() != null && !getCurrentTableView().getSelectionModel().isEmpty()) {
+			new Detail(DetailType.DETAIL, CleaningAgent.getCleaningAgent(getCurrentTableView().getSelectionModel().getSelectedItem().getId())).start(new Stage());
+		}
 	}
 }

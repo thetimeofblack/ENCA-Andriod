@@ -20,7 +20,7 @@ public final class Connector {
 
 	static {
 		try {
-			connection = DriverManager.getConnection("jdbc:sqlite:res/data/data.db");
+			connection = DriverManager.getConnection("jdbc:sqlite:" + Connector.class.getResource("/data/data.db"));
 		} catch (SQLException e) {
 			e.printStackTrace();
 			connection = null;

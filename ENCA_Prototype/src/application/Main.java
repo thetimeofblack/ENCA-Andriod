@@ -16,14 +16,15 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		Initialize.initialize();
+		FXMLLoader loader = new FXMLLoader(Main.class.getResource("/view/Main.fxml"), ResourceBundle.getBundle("resource.Main", User.getInterfaceLanguage().getLocale()));
 		try {
-			primaryStage.setScene(new Scene(new FXMLLoader(Main.class.getResource("/view/Main.fxml"), ResourceBundle.getBundle("res.Main", User.getInterfaceLanguage().getLocale())).load()));
-			primaryStage.setTitle("ENCA");
-			primaryStage.initStyle(StageStyle.UNIFIED);
-			MainController.setStage(primaryStage);
-			primaryStage.show();
+			primaryStage.setScene(new Scene(loader.load()));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		((MainController) loader.getController()).setMainStage(primaryStage);
+		primaryStage.setTitle("ENCA");
+		primaryStage.initStyle(StageStyle.UNIFIED);
+		primaryStage.show();
 	}
 }
