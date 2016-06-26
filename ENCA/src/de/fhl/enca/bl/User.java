@@ -26,8 +26,10 @@ public final class User {
 	private static LanguagePreference languagePreference = new LanguagePreference();
 
 	/* static method */
+	/**
+	 * Initialize the directory and file location, and read preference
+	 */
 	public static void initialize() {
-		/* initialize directory and file location */
 		if (System.getProperty("os.name").startsWith("Windows")) {
 			directory = new File(System.getProperty("user.home") + "\\Documents\\Enca");
 			file = new File(directory, "user.ini");
@@ -36,7 +38,8 @@ public final class User {
 	}
 
 	/**
-	 * Read user data from a serialized carrier from the file
+	 * Read user data from the file
+	 * @return whether it is user's first use depending on the existance and integrity of the file
 	 */
 	private static boolean readUser() {
 		if (directory.exists() && file.exists()) {
@@ -68,7 +71,8 @@ public final class User {
 	}
 
 	/**
-	 * Serialize the carrier and write it to the file
+	 * Write user data to the file and set isFirstUse to false
+	 * If the directory of the file does not exist, they will be created.
 	 */
 	public static void writeUser() {
 		if (isFirstUse) {

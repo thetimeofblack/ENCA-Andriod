@@ -9,7 +9,7 @@ import de.fhl.enca.bl.TagType;
 
 /**
  * @author Bobby
- * @version 31.05.2016
+ * @version 26.06.2016
  * 
  * Class TagFetcher
  * This class contains methods of operating tags
@@ -19,17 +19,20 @@ public final class TagFetcher {
 
 	/**
 	 * Fetch from all tags according to the given tagType
+	 * @param type the certain TagType
 	 */
 	public static Set<Tag> fetchTagsAllOfCertainType(TagType type) {
 		return fetchTagsOfCertainType(Tag.getTagsAll(), type);
 	}
 
 	/**
-	 * Fetch from those tags related to all of tags given according to the given tagType
+	 * Fetch from those tags related to all of tags given
+	 * @param source the given tags
+	 * @return set of tags which are related to all of tags given
 	 */
-	public static Set<Tag> fetchTagsRelated(Set<Tag> tags) {
+	public static Set<Tag> fetchTagsRelated(Set<Tag> source) {
 		Set<Tag> result = null;
-		for (Tag tag : tags) {
+		for (Tag tag : source) {
 			if (result == null) {
 				/* Put all of the related tags of the first tag into the result */
 				result = tag.getTagsRelated();
@@ -49,6 +52,9 @@ public final class TagFetcher {
 
 	/**
 	 * Fetch from given tags according to the given tagType
+	 * @param source the given tags
+	 * @param type the certain tagType
+	 * @return set of tags from source which are with the given type
 	 */
 	public static Set<Tag> fetchTagsOfCertainType(Set<Tag> source, TagType type) {
 		Set<Tag> result = new LinkedHashSet<>();
@@ -61,6 +67,8 @@ public final class TagFetcher {
 
 	/**
 	 * Sort Set of Tags before provided to other classes.
+	 * @param source set of tags to be sorted
+	 * @return set of tags which have been sorted
 	 */
 	public static Set<Tag> fetchSortedTags(Set<Tag> source) {
 		List<Tag> tempTagList = new ArrayList<>(source);

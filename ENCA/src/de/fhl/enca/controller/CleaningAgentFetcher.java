@@ -27,6 +27,8 @@ public final class CleaningAgentFetcher {
 
 	/**
 	 * Fetch cleaning agents related to all of the given tags
+	 * @param tags the given set of tags
+	 * @return set of cleaning agents which are related to all of the given tags
 	 */
 	public static Set<CleaningAgent> fetchCleaningAgentsOfTags(Set<Tag> tags) {
 		Set<CleaningAgent> result = null;
