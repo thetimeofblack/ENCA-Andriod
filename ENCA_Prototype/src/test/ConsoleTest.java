@@ -1,4 +1,4 @@
-package de.fhl.enca.test;
+package test;
 
 public final class ConsoleTest {
 
