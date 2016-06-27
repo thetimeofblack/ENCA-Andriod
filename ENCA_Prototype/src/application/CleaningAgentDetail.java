@@ -30,7 +30,7 @@ public class CleaningAgentDetail extends Application {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		((CleaningAgentDetailController) loader.getController()).setCleaningAgent(cleaningAgent);
+		((CleaningAgentDetailController) loader.getController()).initializeContent(cleaningAgent);
 		primaryStage.setTitle("Cleaning Agent Detail");
 		primaryStage.initStyle(StageStyle.UNIFIED);
 		primaryStage.show();

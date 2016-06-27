@@ -4,13 +4,16 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import application.CleaningAgentModifier;
 import de.fhl.enca.bl.CleaningAgent;
 import de.fhl.enca.bl.LanguageType;
 import de.fhl.enca.bl.Tag;
 import de.fhl.enca.controller.CleaningAgentFetcher;
+import de.fhl.enca.controller.CleaningAgentOperator;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderStroke;
@@ -19,6 +22,8 @@ import javafx.scene.layout.BorderWidths;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.paint.Color;
+import javafx.stage.Stage;
+import view.CleaningAgentModifierController.OperationType;
 
 public final class CleaningAgentDetailController {
 
@@ -73,7 +78,7 @@ public final class CleaningAgentDetailController {
 	private Label description_en;
 	@FXML
 	private Label instruction_en;
-	
+
 	@FXML
 	private ImageView imageView;
 	@FXML
@@ -82,20 +87,38 @@ public final class CleaningAgentDetailController {
 	private Label frequency;
 	@FXML
 	private Label rate;
+	@FXML
+	private TextArea memo;
 
 	@FXML
 	private void initialize() {
 		contentGroups.add(new ContentGroup(LanguageType.ENGLISH, name_en, tags_en, description_en, instruction_en));
 	}
 
-	public void setCleaningAgent(CleaningAgent cleaningAgent) {
+	@FXML
+	private void modify() {
+		new CleaningAgentModifier(OperationType.MODIFY, cleaningAgent).start(new Stage());
+	}
+
+	@FXML
+	private void clear() {
+		memo.setText("");
+	}
+	
+	@FXML
+	private void save() {
+		CleaningAgentOperator.saveMemo(cleaningAgent, memo.getText());
+	}
+
+	public void initializeContent(CleaningAgent cleaningAgent) {
 		this.cleaningAgent = cleaningAgent;
 		for (ContentGroup contentGroup : contentGroups) {
 			contentGroup.showContent();
 		}
-		imageView.setImage(CleaningAgentFetcher.fetchImageOfCleaningAgent(cleaningAgent.getCleaningAgentID()));
+		imageView.setImage(CleaningAgentFetcher.fetchImageOfCleaningAgent(cleaningAgent));
 		applicationTime.setText(String.valueOf(cleaningAgent.getApplicationTime()));
 		frequency.setText(String.valueOf(cleaningAgent.getFrequency()));
 		rate.setText(rateMap.get(cleaningAgent.getRate()));
+		memo.setText(cleaningAgent.getMemo());
 	}
 }
