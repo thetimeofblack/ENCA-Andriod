@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import application.CleaningAgentDetail;
+import application.TagModifier;
 import application.UserCentre;
 import de.fhl.enca.bl.CleaningAgent;
 import de.fhl.enca.bl.LanguageType;
@@ -247,7 +248,12 @@ public final class MainController {
 			new CleaningAgentDetail(CleaningAgent.getCleaningAgent(getCurrentTableView().getSelectionModel().getSelectedItem().getId())).start(new Stage());
 		}
 	}
-	
+
+	@FXML
+	private void tagModifier() {
+		new TagModifier().start(new Stage());
+	}
+
 	@FXML
 	private void exit() {
 		System.exit(0);

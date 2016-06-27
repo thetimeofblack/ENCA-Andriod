@@ -36,6 +36,11 @@
                      </accelerator></MenuItem>
             </items>
           </Menu>
+            <Menu mnemonicParsing="false" text="%modify">
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#tagModifier" text="%modifyTag" />
+              </items>
+            </Menu>
           <Menu mnemonicParsing="false" text="%system">
             <items>
               <MenuItem mnemonicParsing="false" onAction="#userCentre" text="%userCenter" />
