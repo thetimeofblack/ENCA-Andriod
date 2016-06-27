@@ -29,21 +29,13 @@ public final class CleaningAgentDetailController {
 		private FlowPane tags;
 		private Label description;
 		private Label instruction;
-		private ImageView imageView;
-		private Label applicationTime;
-		private Label frequency;
-		private Label rate;
 
-		public ContentGroup(LanguageType type, Label name, FlowPane tags, Label description, Label instruction, ImageView imageView, Label applicationTime, Label frequency, Label rate) {
+		public ContentGroup(LanguageType type, Label name, FlowPane tags, Label description, Label instruction) {
 			this.type = type;
 			this.name = name;
 			this.tags = tags;
 			this.description = description;
 			this.instruction = instruction;
-			this.imageView = imageView;
-			this.applicationTime = applicationTime;
-			this.frequency = frequency;
-			this.rate = rate;
 		}
 
 		public void showContent() {
@@ -56,10 +48,7 @@ public final class CleaningAgentDetailController {
 			}
 			description.setText(cleaningAgent.getDescription().getString(type));
 			instruction.setText(cleaningAgent.getInstruction().getString(type));
-			imageView.setImage(CleaningAgentFetcher.fetchImageOfCleaningAgent(cleaningAgent.getCleaningAgentID()));
-			applicationTime.setText(String.valueOf(cleaningAgent.getApplicationTime()));
-			frequency.setText(String.valueOf(cleaningAgent.getFrequency()));
-			rate.setText(rateMap.get(cleaningAgent.getRate()));
+
 		}
 	}
 
@@ -84,18 +73,19 @@ public final class CleaningAgentDetailController {
 	private Label description_en;
 	@FXML
 	private Label instruction_en;
+	
 	@FXML
-	private ImageView imageView_en;
+	private ImageView imageView;
 	@FXML
-	private Label applicationTime_en;
+	private Label applicationTime;
 	@FXML
-	private Label frequency_en;
+	private Label frequency;
 	@FXML
-	private Label rate_en;
+	private Label rate;
 
 	@FXML
 	private void initialize() {
-		contentGroups.add(new ContentGroup(LanguageType.ENGLISH, name_en, tags_en, description_en, instruction_en, imageView_en, applicationTime_en, frequency_en, rate_en));
+		contentGroups.add(new ContentGroup(LanguageType.ENGLISH, name_en, tags_en, description_en, instruction_en));
 	}
 
 	public void setCleaningAgent(CleaningAgent cleaningAgent) {
@@ -103,5 +93,9 @@ public final class CleaningAgentDetailController {
 		for (ContentGroup contentGroup : contentGroups) {
 			contentGroup.showContent();
 		}
+		imageView.setImage(CleaningAgentFetcher.fetchImageOfCleaningAgent(cleaningAgent.getCleaningAgentID()));
+		applicationTime.setText(String.valueOf(cleaningAgent.getApplicationTime()));
+		frequency.setText(String.valueOf(cleaningAgent.getFrequency()));
+		rate.setText(rateMap.get(cleaningAgent.getRate()));
 	}
 }

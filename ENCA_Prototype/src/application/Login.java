@@ -21,11 +21,11 @@ public final class Login extends Application {
 		FXMLLoader loader;
 		try {
 			if (User.isFirstUse()) {
-				loader = new FXMLLoader(Login.class.getResource("/view/LoginFirst.fxml"));
+				loader = new FXMLLoader(this.getClass().getResource("/view/LoginFirst.fxml"));
 				primaryStage.setScene(new Scene(loader.load()));
 				((LoginFirstController) loader.getController()).setLoginFirstStage(primaryStage);
 			} else {
-				loader = new FXMLLoader(Login.class.getResource("/view/Login.fxml"), ResourceBundle.getBundle("resource.Login", User.getInterfaceLanguage().getLocale()));
+				loader = new FXMLLoader(this.getClass().getResource("/view/Login.fxml"), ResourceBundle.getBundle("resource.Login", User.getInterfaceLanguage().getLocale()));
 				primaryStage.setScene(new Scene(loader.load()));
 				((LoginController) loader.getController()).setLoginStage(primaryStage);
 			}

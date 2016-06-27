@@ -22,16 +22,17 @@ public class CleaningAgentDetail extends Application {
 
 	@Override
 	public void start(Stage primaryStage) {
-		FXMLLoader loader = new FXMLLoader(CleaningAgentDetail.class.getResource("/view/CleaningAgentDetail.fxml"), ResourceBundle.getBundle("resource.CleaningAgentDetail", User.getInterfaceLanguage().getLocale()));
+		FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/view/CleaningAgentDetail.fxml"), ResourceBundle.getBundle("resource.CleaningAgentDetail", User.getInterfaceLanguage().getLocale()));
 		try {
-			primaryStage.setScene(new Scene(loader.load()));
+			Scene scene = new Scene(loader.load());
+			scene.getStylesheets().add(this.getClass().getResource("/css/TabPaneHeader.css").toString());
+			primaryStage.setScene(scene);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		((CleaningAgentDetailController) loader.getController()).setCleaningAgent(cleaningAgent);
 		primaryStage.setTitle("Cleaning Agent Detail");
 		primaryStage.initStyle(StageStyle.UNIFIED);
-		primaryStage.setResizable(false);
 		primaryStage.show();
 	}
 }

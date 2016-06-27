@@ -20,7 +20,7 @@ public final class UserCentre extends Application {
 
 	@Override
 	public void start(Stage primaryStage) {
-		FXMLLoader loader = new FXMLLoader(Main.class.getResource("/view/UserCentre.fxml"), ResourceBundle.getBundle("resource.UserCentre", User.getInterfaceLanguage().getLocale()));
+		FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/view/UserCentre.fxml"), ResourceBundle.getBundle("resource.UserCentre", User.getInterfaceLanguage().getLocale()));
 		try {
 			primaryStage.setScene(new Scene(loader.load()));
 		} catch (IOException e) {

@@ -14,9 +14,11 @@ public class Main extends Application {
 
 	@Override
 	public void start(Stage primaryStage) {
-		FXMLLoader loader = new FXMLLoader(Main.class.getResource("/view/Main.fxml"), ResourceBundle.getBundle("resource.Main", User.getInterfaceLanguage().getLocale()));
+		FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/view/Main.fxml"), ResourceBundle.getBundle("resource.Main", User.getInterfaceLanguage().getLocale()));
 		try {
-			primaryStage.setScene(new Scene(loader.load()));
+			Scene scene = new Scene(loader.load());
+			scene.getStylesheets().add(this.getClass().getResource("/css/TabPaneHeader.css").toString());
+			primaryStage.setScene(scene);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
