@@ -13,7 +13,7 @@ import de.fhl.enca.dao.SQLAmender;
  * Class CleaningAgentModifier
  * Modify and create cleaning agent
  */
-public final class CleaningAgentModifier {
+public final class CleaningAgentOperator {
 
 	public static void modifyCleaningAgent(CleaningAgent newCleaningAgent) {
 		Set<Tag> oldTags = CleaningAgent.getCleaningAgent(newCleaningAgent.getCleaningAgentID()).getTags();
@@ -62,5 +62,11 @@ public final class CleaningAgentModifier {
 
 	public static void createCleaningAgent(CleaningAgent cleaningAgent) {
 
+	}
+
+	public static void saveMemo(CleaningAgent cleaningAgent, String memo) {
+		cleaningAgent.setMemo(memo);
+		CleaningAgent.refreshCleaningAgentWithMemo(cleaningAgent);
+		SQLAmender.writeMemo(cleaningAgent.getCleaningAgentID(), memo);
 	}
 }

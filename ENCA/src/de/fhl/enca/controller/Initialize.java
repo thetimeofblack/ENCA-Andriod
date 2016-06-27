@@ -9,7 +9,6 @@ import java.util.Set;
 import de.fhl.enca.bl.CleaningAgent;
 import de.fhl.enca.bl.InternationalString;
 import de.fhl.enca.bl.LanguageType;
-import de.fhl.enca.bl.Memo;
 import de.fhl.enca.bl.Tag;
 import de.fhl.enca.bl.TagType;
 import de.fhl.enca.dao.SQLVisitor;
@@ -57,6 +56,7 @@ public final class Initialize {
 				builder.setType(r.getString(13));
 				builder.setRate(r.getInt(14));
 				builder.setMainLanguage(r.getInt(15));
+				builder.setMemo(r.getString(17));
 				CleaningAgent.addCleaningAgent(builder.getResult());
 			}
 		} catch (SQLException e) {
@@ -151,19 +151,5 @@ public final class Initialize {
 			e.printStackTrace();
 		}
 		return iString;
-	}
-
-	/**
-	 * Initialize memos.
-	 */
-	private static void initMemos() {
-		ResultSet r = SQLVisitor.visitMemos();
-		try {
-			while (r.next()) {
-				new Memo(r.getInt(1), CleaningAgent.getCleaningAgent(r.getInt(3)), r.getString(4), r.getDate(2));
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
 	}
 }

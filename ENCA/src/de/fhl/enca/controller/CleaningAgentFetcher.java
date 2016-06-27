@@ -80,8 +80,8 @@ public final class CleaningAgentFetcher {
 	/**
 	 * Get the image of certain cleaning agent
 	 */
-	public static Image fetchImageOfCleaningAgent(int cleaningAgentID) {
-		ResultSet resultSet = SQLVisitor.visitImage(cleaningAgentID);
+	public static Image fetchImageOfCleaningAgent(CleaningAgent cleaningAgent) {
+		ResultSet resultSet = SQLVisitor.visitImage(cleaningAgent.getCleaningAgentID());
 		try {
 			if (resultSet.next()) {
 				return new Image(new ByteArrayInputStream(resultSet.getBytes(1)));
