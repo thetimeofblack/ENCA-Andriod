@@ -53,6 +53,10 @@ public final class CleaningAgentBuilder {
 		cleaningAgent.setMainLanguage(LanguageType.getLanguageType(index));
 	}
 
+	public void setMemo(String memo) {
+		cleaningAgent.setMemo(memo);
+	}
+
 	/**
 	 * Return the cleaning agent just built,
 	 * will also store this result.

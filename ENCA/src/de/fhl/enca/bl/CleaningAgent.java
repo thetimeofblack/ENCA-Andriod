@@ -20,6 +20,7 @@ public final class CleaningAgent {
 	 * Store the references of all cleaning agents
 	 */
 	private static Map<Integer, CleaningAgent> cleaningAgentAll = new HashMap<>();
+	private static Set<CleaningAgent> cleaningAgentsWithMemo = new HashSet<>();
 	private static int maxID = 0;
 
 	/* non-static member */
@@ -32,6 +33,7 @@ public final class CleaningAgent {
 	private CleaningAgentType agentType;
 	private int rate;
 	private LanguageType mainLanguage;
+	private String memo;
 
 	private Set<Tag> tags = new HashSet<>();
 
@@ -42,10 +44,37 @@ public final class CleaningAgent {
 
 	public static void addCleaningAgent(CleaningAgent cleaningAgent) {
 		cleaningAgentAll.put(cleaningAgent.getCleaningAgentID(), cleaningAgent);
+
+	}
+
+	public static void refreshCleaningAgentWithMemo(CleaningAgent cleaningAgent) {
+		if (cleaningAgent.getMemo() != null && !cleaningAgent.getMemo().equals("")) {
+			if (!cleaningAgentsWithMemo.contains(cleaningAgent)) {
+				cleaningAgentsWithMemo.add(cleaningAgent);
+				System.out.println("added");
+			}
+		} else {
+			if (cleaningAgentsWithMemo.contains(cleaningAgent)) {
+				cleaningAgentsWithMemo.remove(cleaningAgent);
+			}
+		}
+	}
+
+	public static void removeCleaningAgent(CleaningAgent cleaningAgent) {
+		if (cleaningAgentAll.containsKey(cleaningAgent.getCleaningAgentID())) {
+			cleaningAgentAll.remove(cleaningAgent.getCleaningAgentID());
+			if (cleaningAgentsWithMemo.contains(cleaningAgent)) {
+				cleaningAgentsWithMemo.remove(cleaningAgent);
+			}
+		}
 	}
 
 	public static Set<CleaningAgent> getCleaningAgentsAll() {
 		return new HashSet<CleaningAgent>(cleaningAgentAll.values());
+	}
+
+	public static Set<CleaningAgent> getCleaningAgentsWithMemo() {
+		return new HashSet<CleaningAgent>(cleaningAgentsWithMemo);
 	}
 
 	public static int getMaxID() {
@@ -158,6 +187,14 @@ public final class CleaningAgent {
 
 	public void setMainLanguage(LanguageType lang) {
 		this.mainLanguage = lang;
+	}
+
+	public String getMemo() {
+		return memo;
+	}
+
+	public void setMemo(String memo) {
+		this.memo = memo;
 	}
 
 	public Set<Tag> getTags() {
