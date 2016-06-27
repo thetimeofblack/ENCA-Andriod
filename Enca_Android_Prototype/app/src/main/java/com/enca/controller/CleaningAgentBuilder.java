@@ -1,6 +1,9 @@
 package com.enca.controller;
 
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+
 import com.enca.bl.CleaningAgent;
 import com.enca.bl.CleaningAgentType;
 import com.enca.bl.InternationalString;
@@ -61,5 +64,10 @@ public final class CleaningAgentBuilder {
 	public CleaningAgent getResult() {
 		CleaningAgent.addCleaningAgent(cleaningAgent);
 		return cleaningAgent;
+	}
+
+	public void setImage(byte[] image) {
+		Bitmap bmp = BitmapFactory.decodeByteArray(image,0, image.length);
+		cleaningAgent.setImage(bmp);
 	}
 }

@@ -41,7 +41,7 @@ public class ItemActivity extends AppCompatActivity {
         Intent intent = getIntent();
         int roomTagId = intent.getIntExtra("roomTagId",0);
         itemTag.add(Tag.getTag(roomTagId));
-        itemTag = TagFetcher.fetchTagOfTypeOfTags(itemTag,TagType.ITEM);
+        itemTag = TagFetcher.fetchTagsOfCertainType(TagFetcher.fetchTagsRelated(itemTag),TagType.ITEM);
         items.addAll(itemTag);
         myItemAdapter = new MyItemAdapter(this, items,roomTagId);
 //        recyclerViewItem.hasFixedSize();

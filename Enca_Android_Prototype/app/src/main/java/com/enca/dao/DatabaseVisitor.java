@@ -22,4 +22,8 @@ public class DatabaseVisitor {
     public static Cursor visitMemos() {
         return DatabaseAccess.executeSelect("select * from Memos");
     }
+
+    public static byte[] visitImage(int cleaningAgentID) {
+        return  DatabaseAccess.getImage(cleaningAgentID);
+    }
 }

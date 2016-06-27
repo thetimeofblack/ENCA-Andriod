@@ -8,9 +8,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.Serializable;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -23,145 +20,113 @@ import java.util.Date;
  */
 public final class User {
 
-	/**
-	 * @author Bobby
-	 * @version 31.05.2016
-	 * 
-	 * Class UserCarrier
-	 * This class is designed to realize generating an object that carries
-	 * user data and can be serialized.
-	 */
-	private static final class UserCarrier implements Serializable {
-
-		private static final long serialVersionUID = 6837137300470719827L;
-
-		private boolean isFirstUse;
-		private String name;
-		private Date regDate;
-		private LanguageType interfaceLanguage;
-		private LanguageType contentLanguage;
-
-		public UserCarrier() {
-			this.isFirstUse = User.isFirstUse;
-			this.name = User.name;
-			this.regDate = User.regDate;
-			this.interfaceLanguage = User.interfaceLanguage;
-			this.contentLanguage = User.contentLanguage;
-		}
-		
-		public void applyCarrier() {
-//			User.isFirstUse=this.isFirstUse;
-			User.name=this.name;
-			User.regDate=this.regDate;
-			User.interfaceLanguage=this.interfaceLanguage;
-			User.contentLanguage=this.contentLanguage;
-		}
-	}
-
-	private static final DateFormat FORMAT = new SimpleDateFormat("dd.MM.yyyy");
-	private static final LanguageType DefaultLanguage = LanguageType.ENGLISH;
-
 	private static File directory;
 	private static File file;
 
 	private static boolean isFirstUse = true;
-	private static String name = null;
-	private static Date regDate = null;
-	private static LanguageType interfaceLanguage = DefaultLanguage;
-	private static LanguageType contentLanguage = DefaultLanguage;
-
-	/* initialization */
-	static {
-		/* initialize directory and file location */
-//		if (System.getProperty("os.name").startsWith("Windows")) {
-//			directory = new File(System.getProperty("user.home") + "\\Documents\\Enca");
-//			file = new File(directory, "user.ini");
-//		}
-		directory = new File(Environment.getExternalStorageDirectory().getAbsolutePath()+File.separator+"Enca");
-		file = new File(directory, "user.txt");
-		if (!directory.exists()) {
-			directory.mkdirs();
-		}
-		if (!file.exists()) {
-			firstTimeInitialize();
-		}
-		readUser();
-	}
+	private static UserPreference userPreference = new UserPreference();
+	private static LanguagePreference languagePreference = new LanguagePreference();
 
 	/* static method */
 	/**
-	 * Read user data from a serialized carrier from the file
+	 * Initialize the directory and file location, and read preference
 	 */
-	public static void readUser() {
-		try {
-			ObjectInputStream oStream = new ObjectInputStream(new FileInputStream(file));
-			((UserCarrier) oStream.readObject()).applyCarrier();
-			oStream.close();
-		} catch (ClassNotFoundException | IOException e) {
-			e.printStackTrace();
+	public static void initialize() {
+		directory = new File(Environment.getExternalStorageDirectory().getAbsolutePath()+File.separator+"Enca");
+		file = new File(directory, "user.txt");
+
+		isFirstUse = readUser();
+}
+
+	/**
+	 * Read user data from the file
+	 * @return whether it is user's first use depending on the existance and integrity of the file
+	 */
+	private static boolean readUser() {
+		if (directory.exists() && file.exists()) {
+			try {
+				ObjectInputStream oStream = new ObjectInputStream(new FileInputStream(file));
+				UserPreference userPreferenceTemp = (UserPreference) oStream.readObject();
+				if (userPreferenceTemp != null) {
+					userPreference = userPreferenceTemp;
+				} else {
+					oStream.close();
+					return true;
+				}
+				LanguagePreference languagePreferenceTemp = (LanguagePreference) oStream.readObject();
+				if (languagePreferenceTemp != null) {
+					languagePreference = languagePreferenceTemp;
+				} else {
+					oStream.close();
+					return true;
+				}
+				oStream.close();
+				return false;
+			} catch (ClassNotFoundException | IOException e) {
+				e.printStackTrace();
+				return true;
+			}
+		} else {
+			return true;
 		}
 	}
 
 	/**
-	 * Serialize the carrier and write it to the file
+	 * Write user data to the file and set isFirstUse to false
+	 * If the directory of the file does not exist, they will be created.
 	 */
 	public static void writeUser() {
+		if (isFirstUse) {
+			if (!directory.exists()) {
+				directory.mkdirs();
+			}
+		}
 		try {
 			ObjectOutputStream oStream = new ObjectOutputStream(new FileOutputStream(file));
-			oStream.writeObject(new UserCarrier());
+			oStream.writeObject(userPreference);
+			oStream.writeObject(languagePreference);
 			oStream.close();
+			isFirstUse = false;
 		} catch (IOException e) {
 			e.printStackTrace();
+			isFirstUse = true;
 		}
 	}
 
-	public static void firstTimeInitialize() {
-		setFirstUse(true);
-		setName(null);
-		setRegDate(null);
-		setInterfaceLanguage(DefaultLanguage);
-		setContentLanguage(DefaultLanguage);
-		writeUser();
-	}
-
-	public static String getDateString() {
-		return FORMAT.format(regDate);
-	}
-
 	/* getters and setters */
-	public static void setFirstUse(boolean isFirstUse) {
-		User.isFirstUse = isFirstUse;
-	}
-
 	public static boolean isFirstUse() {
 		return isFirstUse;
 	}
 
 	public static String getName() {
-		return name;
+		return userPreference.getName();
 	}
 
 	public static void setName(String name) {
-		User.name = name;
+		userPreference.setName(name);
+	}
+
+	public static String getDateString() {
+		return userPreference.getRegDate();
 	}
 
 	public static void setRegDate(Date regDate) {
-		User.regDate = regDate;
+		userPreference.setRegDate(regDate);
 	}
 
 	public static LanguageType getInterfaceLanguage() {
-		return interfaceLanguage;
+		return languagePreference.getInterfaceLanguage();
 	}
 
 	public static void setInterfaceLanguage(LanguageType interfaceLanguage) {
-		User.interfaceLanguage = interfaceLanguage;
+		languagePreference.setInterfaceLanguage(interfaceLanguage);
 	}
 
 	public static LanguageType getContentLanguage() {
-		return contentLanguage;
+		return languagePreference.getContentLanguage();
 	}
 
 	public static void setContentLanguage(LanguageType contentLanguage) {
-		User.contentLanguage = contentLanguage;
+		languagePreference.setContentLanguage(contentLanguage);
 	}
 }

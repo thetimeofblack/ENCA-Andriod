@@ -54,6 +54,7 @@ public class DataInitialize {
                         builder.setType(cursor.getString(12));
                         builder.setRate(cursor.getInt(13));
                         builder.setMainLanguage(cursor.getInt(14));
+//                        builder.setImage(cursor.getBlob(15));
                         builder.getResult();
                         cursor.moveToNext();
                     }
@@ -181,4 +182,6 @@ public class DataInitialize {
             e.printStackTrace();
         }
     }
+
+
 }

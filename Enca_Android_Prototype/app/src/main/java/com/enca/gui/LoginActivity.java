@@ -25,10 +25,10 @@ public class LoginActivity extends AppCompatActivity {
     private Spinner loginContentLanguage;
     private Button loginButton;
     private TextView loginName;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        User.initialize();
         if (User.isFirstUse()) {
             setContentView(R.layout.activity_firstlogin);
             registerName = (EditText) findViewById(R.id.login_name);
@@ -74,7 +74,6 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (User.isFirstUse()) {
-                    User.setFirstUse(false);
                     User.setName(registerName.getText().toString());
                     User.setRegDate(new Date());
                     User.writeUser();

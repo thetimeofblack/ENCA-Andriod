@@ -69,14 +69,15 @@ public class CleaningAgentActivity extends AppCompatActivity {
             getSupportActionBar().setTitle(query);
             doMySearch(query);
         }
-        cleaningAgentAdapter = new CleaningAgentAdapter(this, cleaningAgents);
+            cleaningAgentAdapter = new CleaningAgentAdapter(this, cleaningAgents);
         recyclerViewItem.setLayoutManager(new LinearLayoutManager(this));
         recyclerViewItem.setAdapter(cleaningAgentAdapter);
+
 
     }
     public void doMySearch(String query) {
         if(cleaningAgentSet.isEmpty()){
-            cleaningAgents.addAll(Search.search(CleaningAgent.getCleaningAgentsAll(),query));
+            cleaningAgents.addAll(CleaningAgentFetcher.fetchResult(CleaningAgent.getCleaningAgentsAll(),query));
         }else {
             cleaningAgents.addAll(Search.search(cleaningAgentSet, query));
             Toast.makeText(CleaningAgentActivity.this, query, Toast.LENGTH_SHORT).show();

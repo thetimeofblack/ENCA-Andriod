@@ -1,6 +1,7 @@
 package com.enca.bl;
 
 
+import android.graphics.Bitmap;
 import android.media.Image;
 
 import java.util.HashMap;
@@ -33,7 +34,7 @@ public final class CleaningAgent {
 	private CleaningAgentType agentType;
 	private int rate;
 	private LanguageType mainLanguage;
-	private Image image = null;
+	private Bitmap image = null;
 
 	private Set<Tag> tags = new HashSet<>();
 
@@ -142,11 +143,11 @@ public final class CleaningAgent {
 		this.mainLanguage = lang;
 	}
 
-	public Image getImage() {
+	public Bitmap getImage() {
 		return image;
 	}
 
-	public void setImage(Image image) {
+	public void setImage(Bitmap image) {
 		this.image = image;
 	}
 

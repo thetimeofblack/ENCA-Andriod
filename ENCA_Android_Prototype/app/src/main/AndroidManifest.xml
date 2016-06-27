@@ -18,19 +18,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".RoomActivity" >
+        <activity android:name=".RoomActivity">
             <meta-data
                 android:name="android.app.default_searchable"
                 android:value="com.enca.gui.RoomActivity" />
         </activity>
-        <activity android:name=".ItemActivity" >
-
-        </activity>
+        <activity android:name=".ItemActivity" />
         <activity android:name=".CleaningAgentActivity">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
-                <action android:name="com.android.enca.search"/>
+                <action android:name="com.android.enca.search" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
 
@@ -38,6 +36,8 @@
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable" />
         </activity>
+        <activity android:name=".CleaningAgentDetailActivity" />
+        <activity android:name=".UserCenterActivity"></activity>
     </application>
 
 </manifest>

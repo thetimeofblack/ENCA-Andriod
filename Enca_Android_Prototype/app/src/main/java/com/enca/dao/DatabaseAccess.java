@@ -62,12 +62,12 @@ public class DatabaseAccess {
     /**
      * Read the BLOB data as byte[]
      *
-     * @param name
+     * @param cleaningAgentID
      * @return image as byte[]
      */
-    public byte[] getImage(String name) {
+    public static byte[] getImage(int cleaningAgentID) {
         byte[] data = null;
-        Cursor cursor = database.rawQuery("SELECT image FROM CleaningAgents WHERE nameEn = ?", new String[]{name});
+        Cursor cursor = database.rawQuery("SELECT image FROM CleaningAgents WHERE cleaningAgentID = ?", new String[]{String.valueOf(cleaningAgentID)});
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
             data = cursor.getBlob(0);

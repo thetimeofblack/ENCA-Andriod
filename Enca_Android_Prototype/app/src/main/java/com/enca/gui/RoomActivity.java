@@ -4,6 +4,7 @@ import android.app.SearchManager;
 import android.app.SearchableInfo;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -43,13 +44,15 @@ public class RoomActivity extends AppCompatActivity {
             toolbar.setNavigationOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Toast.makeText(RoomActivity.this, "This is the User Center", Toast.LENGTH_SHORT).show();
+                    Intent userIntent = new Intent(getApplicationContext(), UserCenterActivity.class);
+                    userIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(userIntent);
                 }
             });
         }
 
         recyclerViewRoom = (RecyclerView) findViewById(R.id.room_recyclerView);
-        roomTag = TagFetcher.fetchTagsOfType(TagType.ROOM);
+        roomTag = TagFetcher.fetchTagsAllOfCertainType(TagType.ROOM);
         rooms.addAll(roomTag);
         myAdapterRoom = new MyAdapter(this, rooms);
         recyclerViewRoom.hasFixedSize();
