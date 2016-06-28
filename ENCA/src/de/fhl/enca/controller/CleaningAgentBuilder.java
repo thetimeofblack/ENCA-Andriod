@@ -1,7 +1,6 @@
 package de.fhl.enca.controller;
 
 import de.fhl.enca.bl.CleaningAgent;
-import de.fhl.enca.bl.CleaningAgentType;
 import de.fhl.enca.bl.InternationalString;
 import de.fhl.enca.bl.LanguageType;
 
@@ -41,8 +40,8 @@ public final class CleaningAgentBuilder {
 		cleaningAgent.setFrequency(f);
 	}
 
-	public void setType(String type) {
-		cleaningAgent.setAgentType(CleaningAgentType.getCleaningAgentType(type));
+	public void setBelongsToSystem(boolean b) {
+		cleaningAgent.setBelongsToSystem(b);
 	}
 
 	public void setRate(int rate) {
@@ -57,10 +56,6 @@ public final class CleaningAgentBuilder {
 		cleaningAgent.setMemo(memo);
 	}
 
-	/**
-	 * Return the cleaning agent just built,
-	 * will also store this result.
-	 */
 	public CleaningAgent getResult() {
 		return cleaningAgent;
 	}

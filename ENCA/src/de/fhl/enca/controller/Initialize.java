@@ -31,10 +31,6 @@ public final class Initialize {
 		initRelations();
 	}
 
-	public static void initializeConcurrently() {
-		new Thread(() -> initialize()).start();
-	}
-
 	/**
 	 * Initialize all cleaning agents and store them into the memory
 	 */
@@ -53,7 +49,7 @@ public final class Initialize {
 				builder.setInstruction(iStringGenerator(r, 8));
 				builder.setApplicationTime(r.getLong(11));
 				builder.setFrequency(r.getLong(12));
-				builder.setType(r.getString(13));
+				builder.setBelongsToSystem(r.getBoolean(13));
 				builder.setRate(r.getInt(14));
 				builder.setMainLanguage(r.getInt(15));
 				builder.setMemo(r.getString(17));
