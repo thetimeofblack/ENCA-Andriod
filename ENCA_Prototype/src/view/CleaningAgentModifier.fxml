@@ -240,17 +240,17 @@
                   <RowConstraints vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <ComboBox fx:id="addRoom" prefWidth="150.0">
+                  <ComboBox fx:id="addRoom" prefWidth="150.0" promptText="%addRoom">
                      <GridPane.margin>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </GridPane.margin>
                   </ComboBox>
-                  <ComboBox fx:id="addItem" prefWidth="150.0" GridPane.rowIndex="1">
+                  <ComboBox fx:id="addItem" prefWidth="150.0" promptText="%addItem" GridPane.rowIndex="1">
                      <GridPane.margin>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </GridPane.margin>
                   </ComboBox>
-                  <ComboBox fx:id="addOthers" prefWidth="150.0" GridPane.rowIndex="2">
+                  <ComboBox fx:id="addOthers" prefWidth="150.0" promptText="%addOthers" GridPane.rowIndex="2">
                      <GridPane.margin>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </GridPane.margin>
