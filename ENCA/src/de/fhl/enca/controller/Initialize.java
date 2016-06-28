@@ -38,22 +38,21 @@ public final class Initialize {
 		ResultSet r = SQLVisitor.visitCleaningAgentsAll();
 		try {
 			while (r.next()) {
-				CleaningAgentBuilder builder = new CleaningAgentBuilder();
 				int id = r.getInt(1);
-				builder.setID(id);
+				CleaningAgent cleaningAgent = new CleaningAgent(id);
 				if (id > CleaningAgent.getMaxID()) {
 					CleaningAgent.setMaxID(id);
 				}
-				builder.setName(iStringGenerator(r, 2));
-				builder.setDescription(iStringGenerator(r, 5));
-				builder.setInstruction(iStringGenerator(r, 8));
-				builder.setApplicationTime(r.getLong(11));
-				builder.setFrequency(r.getLong(12));
-				builder.setBelongsToSystem(r.getBoolean(13));
-				builder.setRate(r.getInt(14));
-				builder.setMainLanguage(r.getInt(15));
-				builder.setMemo(r.getString(17));
-				CleaningAgent.addCleaningAgent(builder.getResult());
+				cleaningAgent.setName(iStringGenerator(r, 2));
+				cleaningAgent.setDescription(iStringGenerator(r, 5));
+				cleaningAgent.setInstruction(iStringGenerator(r, 8));
+				cleaningAgent.setApplicationTime(r.getLong(11));
+				cleaningAgent.setFrequency(r.getLong(12));
+				cleaningAgent.setBelongsToSystem(r.getBoolean(13));
+				cleaningAgent.setRate(r.getInt(14));
+				cleaningAgent.setMainLanguage(LanguageType.getLanguageType(r.getInt(15)));
+				cleaningAgent.setMemo(r.getString(17));
+				CleaningAgent.addCleaningAgent(cleaningAgent);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

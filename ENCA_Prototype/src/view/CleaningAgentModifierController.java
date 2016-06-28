@@ -13,7 +13,6 @@ import de.fhl.enca.bl.LanguageType;
 import de.fhl.enca.bl.Tag;
 import de.fhl.enca.bl.TagType;
 import de.fhl.enca.bl.User;
-import de.fhl.enca.controller.CleaningAgentBuilder;
 import de.fhl.enca.controller.CleaningAgentFetcher;
 import de.fhl.enca.controller.TagFetcher;
 import javafx.beans.value.ObservableValue;
@@ -181,29 +180,30 @@ public final class CleaningAgentModifierController {
 	}
 
 	private CleaningAgent assembly() {
-		CleaningAgentBuilder builder = new CleaningAgentBuilder();
+		int id = 0;
 		switch (operationType) {
 		case MODIFY: {
-			builder.setID(cleaningAgent.getCleaningAgentID());
+			id = cleaningAgent.getCleaningAgentID();
 			break;
 		}
 		case ADD: {
-			builder.setID(CleaningAgent.getMaxID() + 1);
-			CleaningAgent.setMaxID(CleaningAgent.getMaxID() + 1);
+			id = CleaningAgent.getMaxID() + 1;
+			CleaningAgent.setMaxID(id);
 			break;
 		}
 		}
-		builder.setName(new InternationalString());
-		builder.setDescription(new InternationalString());
-		builder.setInstruction(new InternationalString());
+		CleaningAgent newCleaningAgent = new CleaningAgent(id);
+		newCleaningAgent.setName(new InternationalString());
+		newCleaningAgent.setDescription(new InternationalString());
+		newCleaningAgent.setInstruction(new InternationalString());
 		for (ContentGroup contentGroup : contentGroups) {
-			contentGroup.assemblyContent(builder.getResult());
+			contentGroup.assemblyContent(newCleaningAgent);
 		}
-		builder.setApplicationTime(Long.valueOf(applicationTime.getText()));
-		builder.setFrequency(Long.valueOf(frequency.getText()));
-		builder.setRate(rate.getSelectionModel().getSelectedIndex());
-		builder.getResult().addTagsAll(tags);
-		return builder.getResult();
+		newCleaningAgent.setApplicationTime(Long.valueOf(applicationTime.getText()));
+		newCleaningAgent.setFrequency(Long.valueOf(frequency.getText()));
+		newCleaningAgent.setRate(rate.getSelectionModel().getSelectedIndex());
+		newCleaningAgent.addTagsAll(tags);
+		return newCleaningAgent;
 	}
 
 	public void setStage(Stage stage) {

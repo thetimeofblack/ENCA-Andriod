@@ -90,6 +90,10 @@ public final class CleaningAgent {
 	}
 
 	/* non-static method */
+	public CleaningAgent(int id) {
+		this.cleaningAgentID = id;
+	}
+
 	/**
 	 * search the cleaning agent according to given keyword
 	 * @param keyword
@@ -123,10 +127,6 @@ public final class CleaningAgent {
 	/* getters and setters */
 	public int getCleaningAgentID() {
 		return cleaningAgentID;
-	}
-
-	public void setCleaningAgentID(int cleaningAgentID) {
-		this.cleaningAgentID = cleaningAgentID;
 	}
 
 	public InternationalString getName() {
