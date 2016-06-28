@@ -2,10 +2,6 @@ package de.fhl.enca.controller;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
 import de.fhl.enca.bl.CleaningAgent;
 import de.fhl.enca.bl.InternationalString;
 import de.fhl.enca.bl.LanguageType;
@@ -82,53 +78,22 @@ public final class Initialize {
 	 * and the relations between tags
 	 */
 	private static void initRelations() {
-		Map<CleaningAgent, Set<Tag>> ctMap = new HashMap<>();
-		initTCRelations(ctMap);
-		initTTRelations(ctMap);
-	}
-
-	/**
-	 * Initialize the relations between cleaning agents and tags
-	 * If a cleaning agent is with on tags, it will be made related to Tag noTag.
-	 */
-	private static void initTCRelations(Map<CleaningAgent, Set<Tag>> ctMap) {
 		ResultSet r = SQLVisitor.visitRelations();
 		try {
 			while (r.next()) {
 				CleaningAgent cleaningAgent = CleaningAgent.getCleaningAgent(r.getInt(1));
 				Tag tag = Tag.getTag(r.getInt(2));
-				if (!ctMap.containsKey(cleaningAgent)) {
-					ctMap.put(cleaningAgent, new HashSet<>());
-				}
 				cleaningAgent.addTag(tag);
 				tag.addCleaningAgent(cleaningAgent);
-				ctMap.get(cleaningAgent).add(tag);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		for (CleaningAgent cleaningAgent : CleaningAgent.getCleaningAgentsAll()) {
-			if (!ctMap.containsKey(cleaningAgent)) {
+			if (cleaningAgent.getTags().isEmpty()) {
 				Tag.getTag(0).addCleaningAgent(cleaningAgent);
 			}
-		}
-	}
-
-	/**
-	 * Initialize the relations between tags
-	 */
-	private static void initTTRelations(Map<CleaningAgent, Set<Tag>> ctMap) {
-		/* Go through every single tags set */
-		for (Set<Tag> group : ctMap.values()) {
-			/* The following two layers of loop is to build the relation of every two tags in a tags set */
-			for (Tag tag1 : group) {
-				for (Tag tag2 : group) {
-					/* Ensure the two tags are not with the same tagType*/
-					if (tag1.getTagType() != tag2.getTagType()) {
-						tag1.addTagRelated(tag2);
-					}
-				}
-			}
+			CleaningAgentOperator.attachTTRelation(cleaningAgent.getTags());
 		}
 	}
 

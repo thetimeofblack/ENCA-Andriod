@@ -34,8 +34,10 @@ public final class CleaningAgentOperator {
 		attachTTRelation(newTags);
 	}
 
-	public static void createCleaningAgent(CleaningAgent cleaningAgent) {
-
+	public static void createCleaningAgent(CleaningAgent newCleaningAgent) {
+		 bearCleaningAgent(newCleaningAgent);
+		 SQLAmender.createCleaningAgent(newCleaningAgent);
+		 attachTTRelation(newCleaningAgent.getTags());
 	}
 
 	private static void killCleaningAgent(CleaningAgent oldCleaningAgent) {
@@ -51,6 +53,7 @@ public final class CleaningAgentOperator {
 	}
 
 	private static void bearCleaningAgent(CleaningAgent newCleaningAgent) {
+		CleaningAgent.addCleaningAgent(newCleaningAgent);
 		if (!newCleaningAgent.getTags().isEmpty()) {
 			for (Tag tag : newCleaningAgent.getTags()) {
 				tag.addCleaningAgent(newCleaningAgent);
@@ -59,10 +62,9 @@ public final class CleaningAgentOperator {
 		} else {
 			Tag.getTag(0).addCleaningAgent(newCleaningAgent);
 		}
-		CleaningAgent.addCleaningAgent(newCleaningAgent);
 	}
 
-	private static void attachTTRelation(Set<Tag> attachingTags) {
+	public static void attachTTRelation(Set<Tag> attachingTags) {
 		for (Tag attachingTag1 : attachingTags) {
 			for (Tag attachingTag2 : attachingTags) {
 				if (attachingTag1 != attachingTag2) {

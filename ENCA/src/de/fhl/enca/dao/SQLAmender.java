@@ -19,4 +19,8 @@ public final class SQLAmender {
 	public static void modifyCleaningAgent(CleaningAgent cleaningAgent) {
 		
 	}
+	
+	public static void createCleaningAgent(CleaningAgent cleaningAgent) {
+		
+	}
 }
