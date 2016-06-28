@@ -20,7 +20,6 @@ public final class CleaningAgentOperator {
 		Set<Tag> newTags = newCleaningAgent.getTags();
 		Set<Tag> commonTags = new HashSet<>();
 		Set<Tag> removedTags = new HashSet<>();
-		Set<Tag> addedTags = new HashSet<>();
 		for (Tag oldTag : oldTags) {
 			if (newTags.contains(oldTag)) {
 				commonTags.add(oldTag);
@@ -28,40 +27,72 @@ public final class CleaningAgentOperator {
 				removedTags.add(oldTag);
 			}
 		}
-		for (Tag newTag : newTags) {
-			if (!commonTags.contains(newTag)) {
-				addedTags.add(newTag);
+		killCleaningAgent(CleaningAgent.getCleaningAgent(newCleaningAgent.getCleaningAgentID()));
+		bearCleaningAgent(newCleaningAgent);
+		SQLAmender.modifyCleaningAgent(newCleaningAgent);
+		detachTTRelation(removedTags, oldTags);
+		attachTTRelation(newTags);
+	}
+
+	public static void createCleaningAgent(CleaningAgent cleaningAgent) {
+
+	}
+
+	private static void killCleaningAgent(CleaningAgent oldCleaningAgent) {
+		if (!oldCleaningAgent.getTags().isEmpty()) {
+			for (Tag tag : oldCleaningAgent.getTags()) {
+				tag.removeCleaningAgent(oldCleaningAgent);
+				SQLAmender.removeTCRelation(oldCleaningAgent.getCleaningAgentID(), tag.getTagID());
 			}
+		} else {
+			Tag.getTag(0).removeCleaningAgent(oldCleaningAgent);
 		}
-		for (Tag addedTag : addedTags) {
-			SQLAmender.createTCRelation(newCleaningAgent.getCleaningAgentID(), addedTag.getTagID());
-			for (Tag commonTag : commonTags) {
-				if (!addedTag.getTagsRelated().contains(commonTag)) {
-					addedTag.addTagRelated(commonTag);
-					commonTag.addTagRelated(addedTag);
-				}
+		CleaningAgent.removeCleaningAgent(oldCleaningAgent);
+	}
+
+	private static void bearCleaningAgent(CleaningAgent newCleaningAgent) {
+		if (!newCleaningAgent.getTags().isEmpty()) {
+			for (Tag tag : newCleaningAgent.getTags()) {
+				tag.addCleaningAgent(newCleaningAgent);
+				SQLAmender.createTCRelation(newCleaningAgent.getCleaningAgentID(), tag.getTagID());
 			}
+		} else {
+			Tag.getTag(0).addCleaningAgent(newCleaningAgent);
 		}
-		for (Tag removedTag : removedTags) {
-			SQLAmender.removeTCRelation(newCleaningAgent.getCleaningAgentID(), removedTag.getTagID());
-			for (Tag commonTag : commonTags) {
-				boolean isRelated = false;
-				for (CleaningAgent cleaningAgent : removedTag.getCleaningAgents()) {
-					if (cleaningAgent.getTags().contains(commonTag)) {
-						isRelated = true;
-						break;
+		CleaningAgent.addCleaningAgent(newCleaningAgent);
+	}
+
+	private static void attachTTRelation(Set<Tag> attachingTags) {
+		for (Tag attachingTag1 : attachingTags) {
+			for (Tag attachingTag2 : attachingTags) {
+				if (attachingTag1 != attachingTag2) {
+					if (!attachingTag1.getTagsRelated().contains(attachingTag2)) {
+						attachingTag1.addTagRelated(attachingTag2);
+						attachingTag2.addTagRelated(attachingTag1);
 					}
-				}
-				if (!isRelated) {
-					removedTag.removeTagRelated(commonTag);
-					commonTag.removeTagRelated(removedTag);
 				}
 			}
 		}
 	}
 
-	public static void createCleaningAgent(CleaningAgent cleaningAgent) {
-
+	private static void detachTTRelation(Set<Tag> detachingTags, Set<Tag> detachedTags) {
+		for (Tag detachingTag : detachingTags) {
+			for (Tag detachedTag : detachedTags) {
+				if (detachingTag != detachedTag) {
+					boolean isRelated = false;
+					for (CleaningAgent cleaningAgent : detachingTag.getCleaningAgents()) {
+						if (cleaningAgent.getTags().contains(detachedTag)) {
+							isRelated = true;
+							break;
+						}
+					}
+					if (!isRelated) {
+						detachingTag.removeTagRelated(detachedTag);
+						detachedTag.removeTagRelated(detachingTag);
+					}
+				}
+			}
+		}
 	}
 
 	public static void saveMemo(CleaningAgent cleaningAgent, String memo) {

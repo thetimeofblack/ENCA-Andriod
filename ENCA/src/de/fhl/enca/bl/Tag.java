@@ -50,7 +50,9 @@ public class Tag {
 	}
 
 	public static Set<Tag> getTagsAll() {
-		return new LinkedHashSet<Tag>(tagsAll.values());
+		Set<Tag> tags = new HashSet<>(tagsAll.values());
+		tags.remove(Tag.getTag(0));
+		return TagFetcher.fetchSortedTags(tags);
 	}
 
 	public static int getMaxID() {
