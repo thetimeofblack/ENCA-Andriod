@@ -38,7 +38,6 @@ import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
-import model.TagBean;
 import utility.Utility;
 
 public final class CleaningAgentModifierController {
@@ -79,7 +78,7 @@ public final class CleaningAgentModifierController {
 	private OperationType operationType;
 	private CleaningAgent cleaningAgent;
 	private Set<ContentGroup> contentGroups = new HashSet<>();
-	private Map<ComboBox<TagBean>, TagType> comboBoxes = new HashMap<>();
+	private Map<ComboBox<Tag>, TagType> comboBoxes = new HashMap<>();
 	private Set<Tag> tags = new HashSet<>();
 
 	private Stage stage;
@@ -116,11 +115,11 @@ public final class CleaningAgentModifierController {
 	@FXML
 	private VBox tagBox;
 	@FXML
-	private ComboBox<TagBean> addRoom;
+	private ComboBox<Tag> addRoom;
 	@FXML
-	private ComboBox<TagBean> addItem;
+	private ComboBox<Tag> addItem;
 	@FXML
-	private ComboBox<TagBean> addOthers;
+	private ComboBox<Tag> addOthers;
 
 	@FXML
 	private void initialize() {
@@ -132,9 +131,9 @@ public final class CleaningAgentModifierController {
 		comboBoxes.put(addOthers, TagType.OTHERS);
 		ObservableList<String> rateList = FXCollections.observableArrayList("☆", "★", "★☆", "★★", "★★☆", "★★★", "★★★☆", "★★★★", "★★★★☆", "★★★★★");
 		rate.setItems(rateList);
-		for (Map.Entry<ComboBox<TagBean>, TagType> entry : comboBoxes.entrySet()) {
-			entry.getKey().setItems(TagBean.generateList(TagFetcher.fetchTagsAllOfCertainType(entry.getValue())));
-			entry.getKey().getSelectionModel().selectedItemProperty().addListener((ObservableValue<? extends TagBean> o, TagBean oldValue, TagBean newValue) -> {
+		for (Map.Entry<ComboBox<Tag>, TagType> entry : comboBoxes.entrySet()) {
+			entry.getKey().setItems(FXCollections.observableArrayList(TagFetcher.fetchTagsAllOfCertainType(entry.getValue())));
+			entry.getKey().getSelectionModel().selectedItemProperty().addListener((ObservableValue<? extends Tag> o, Tag oldValue, Tag newValue) -> {
 				if (newValue != null) {
 					Tag tag = Tag.getTag(newValue.getTagID());
 					if (!tags.contains(tag)) {

@@ -9,23 +9,23 @@ import de.fhl.enca.bl.Tag;
 import de.fhl.enca.bl.TagType;
 import de.fhl.enca.controller.TagFetcher;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
-import model.TagBean;
 
 public final class TagModifierController {
 
 	private final class ContentGroup {
 
 		private TagType type;
-		private ListView<TagBean> listView;
+		private ListView<Tag> listView;
 		private Map<LanguageType, TextField> textFieldMap = new HashMap<>();
 		private Button addNew;
 		private Button delete;
 
-		public ContentGroup(TagType type, ListView<TagBean> listView, TextField english, TextField german, TextField chinese, Button addNew, Button delete) {
+		public ContentGroup(TagType type, ListView<Tag> listView, TextField english, TextField german, TextField chinese, Button addNew, Button delete) {
 			this.type = type;
 			this.listView = listView;
 			this.textFieldMap.put(LanguageType.ENGLISH, english);
@@ -36,8 +36,8 @@ public final class TagModifierController {
 		}
 
 		public void showContent() {
-			listView.setItems(TagBean.generateList(TagFetcher.fetchTagsAllOfCertainType(type)));
-			listView.getSelectionModel().selectedItemProperty().addListener((ObservableValue<? extends TagBean> o, TagBean oldValue, TagBean newValue) -> {
+			listView.setItems(FXCollections.observableArrayList(TagFetcher.fetchTagsAllOfCertainType(type)));
+			listView.getSelectionModel().selectedItemProperty().addListener((ObservableValue<? extends Tag> o, Tag oldValue, Tag newValue) -> {
 				if (newValue != null) {
 					Tag tag = Tag.getTag(newValue.getTagID());
 					for (Map.Entry<LanguageType, TextField> entry : textFieldMap.entrySet()) {
@@ -55,7 +55,7 @@ public final class TagModifierController {
 	private static Set<ContentGroup> contentGroups = new HashSet<>();
 
 	@FXML
-	private ListView<TagBean> room;
+	private ListView<Tag> room;
 	@FXML
 	private TextField english_room;
 	@FXML

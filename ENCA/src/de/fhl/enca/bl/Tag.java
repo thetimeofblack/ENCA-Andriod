@@ -74,7 +74,7 @@ public class Tag {
 
 	@Override
 	public String toString() {
-		return "Tag[" + tagID + " - " + name.getString(User.getInterfaceLanguage()) + "]\n";
+		return name.getString(User.getInterfaceLanguage());
 	}
 
 	public void addCleaningAgent(CleaningAgent cleaningAgent) {
