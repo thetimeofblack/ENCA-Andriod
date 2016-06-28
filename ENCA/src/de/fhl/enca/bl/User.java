@@ -24,20 +24,15 @@ public final class User {
 	private static boolean isFirstUse = true;
 	private static UserPreference userPreference = new UserPreference();
 	private static LanguagePreference languagePreference = new LanguagePreference();
+	private static TagPreference tagPreference = new TagPreference();
 
 	/* static method */
 	/**
 	 * Initialize the directory and file location, and read preference
 	 */
 	public static void initialize() {
-		if (System.getProperty("os.name").startsWith("Windows")) {
-			directory = new File(System.getProperty("user.home") + "\\Documents\\Enca");
-			file = new File(directory, "user.ini");
-		}
-		else {
-			directory = new File(System.getProperty("user.home") + "/Documents/Enca");
-			file = new File(directory, "user.ini");
-		}
+		directory = new File(System.getProperty("user.home") + "/Documents/Enca");
+		file = new File(directory, "user.ini");
 		isFirstUse = readUser();
 	}
 
@@ -59,6 +54,13 @@ public final class User {
 				LanguagePreference languagePreferenceTemp = (LanguagePreference) oStream.readObject();
 				if (languagePreferenceTemp != null) {
 					languagePreference = languagePreferenceTemp;
+				} else {
+					oStream.close();
+					return true;
+				}
+				TagPreference tagPreferenceTemp = (TagPreference) oStream.readObject();
+				if (tagPreferenceTemp != null) {
+					tagPreference = tagPreferenceTemp;
 				} else {
 					oStream.close();
 					return true;
@@ -88,6 +90,7 @@ public final class User {
 			ObjectOutputStream oStream = new ObjectOutputStream(new FileOutputStream(file));
 			oStream.writeObject(userPreference);
 			oStream.writeObject(languagePreference);
+			oStream.writeObject(tagPreference);
 			oStream.close();
 			isFirstUse = false;
 		} catch (IOException e) {
