@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Enca</string>
+    <string name="enter_name">用户名</string>
+    <string name="items">物品</string>
+    <string name="login_confirm">登录</string>
+    <string name="login_contentlanguage">内容语言</string>
+    <string name="login_interfacelanguage">界面语言</string>
+    <string name="login_namehint">请输入名字</string>
+    <string name="login_welcome">欢迎使用ENCA</string>
+    <string name="rooms">房间</string>
+    <string name="search">搜索</string>
+    <string name="search_hint">搜索</string>
+</resources>

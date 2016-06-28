@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Enca</string>
+    <string name="enter_name">Benutzername</string>
+    <string name="items">Artikel</string>
+    <string name="login_confirm">Anmeldung</string>
+    <string name="login_interfacelanguage"> Schnittstellensprache</string>
+    <string name="login_contentlanguage">Inhaltsparache</string>
+    <string name="rooms">Zimmer</string>
+    <string name="search">Suchen</string>
+    <string name="search_hint">Suchen</string>
+    <string name="login_namehint">Gib deinen Namen ein</string>
+    <string name="login_welcome">Willkommen </string>
+</resources>

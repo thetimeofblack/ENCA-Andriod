@@ -1,8 +1,10 @@
 package com.enca.gui;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -13,11 +15,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.enca.bl.LanguageType;
+import com.enca.bl.Tag;
 import com.enca.bl.User;
 import com.enca.controller.DataInitialize;
 import com.enca.dao.DatabaseAccess;
 
 import java.util.Date;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 public class LoginActivity extends AppCompatActivity {
     private EditText registerName;
@@ -25,6 +30,7 @@ public class LoginActivity extends AppCompatActivity {
     private Spinner loginContentLanguage;
     private Button loginButton;
     private TextView loginName;
+    Configuration config ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +48,9 @@ public class LoginActivity extends AppCompatActivity {
                 @Override
                 public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
                     User.setInterfaceLanguage(LanguageType.getLanguageType(position));
+                    config = new Configuration(getResources().getConfiguration());
+                    config.locale = LanguageType.getLanguageType(position).getLocale();
+                    getResources().updateConfiguration(config,getResources().getDisplayMetrics());
                 }
 
                 @Override
@@ -70,6 +79,7 @@ public class LoginActivity extends AppCompatActivity {
             Toast.makeText(this,User.getName(), Toast.LENGTH_SHORT).show();
         }
         loginButton = (Button) findViewById(R.id.login_comfirm);
+        loginButton.setText(getResources().getString(R.string.login_confirm));
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -86,5 +96,7 @@ public class LoginActivity extends AppCompatActivity {
         databaseAccess.open();
         DataInitialize.initialize();
         databaseAccess.close();
-    }
+
+}
+
 }
