@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Enca.iml" filepath="$PROJECT_DIR$/Enca.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Enca_Android_Prototype.iml" filepath="$PROJECT_DIR$/Enca_Android_Prototype.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/enca.bl/enca.bl.iml" filepath="$PROJECT_DIR$/enca.bl/enca.bl.iml" />
     </modules>

@@ -129,4 +129,6 @@ public final class User {
 	public static void setContentLanguage(LanguageType contentLanguage) {
 		languagePreference.setContentLanguage(contentLanguage);
 	}
+
+
 }

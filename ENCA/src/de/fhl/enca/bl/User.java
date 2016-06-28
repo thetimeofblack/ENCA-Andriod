@@ -24,6 +24,7 @@ public final class User {
 	private static boolean isFirstUse = true;
 	private static UserPreference userPreference = new UserPreference();
 	private static LanguagePreference languagePreference = new LanguagePreference();
+	private static TagPreference tagPreference = new TagPreference();
 
 	/* static method */
 	/**
@@ -63,6 +64,13 @@ public final class User {
 					oStream.close();
 					return true;
 				}
+				TagPreference tagPreferenceTemp = (TagPreference) oStream.readObject();
+				if (tagPreferenceTemp != null) {
+					tagPreference = tagPreferenceTemp;
+				} else {
+					oStream.close();
+					return true;
+				}
 				oStream.close();
 				return false;
 			} catch (ClassNotFoundException | IOException e) {
@@ -88,6 +96,7 @@ public final class User {
 			ObjectOutputStream oStream = new ObjectOutputStream(new FileOutputStream(file));
 			oStream.writeObject(userPreference);
 			oStream.writeObject(languagePreference);
+			oStream.writeObject(tagPreference);
 			oStream.close();
 			isFirstUse = false;
 		} catch (IOException e) {

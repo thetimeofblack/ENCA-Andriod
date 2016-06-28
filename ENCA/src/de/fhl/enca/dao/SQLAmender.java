@@ -1,5 +1,7 @@
 package de.fhl.enca.dao;
 
+import de.fhl.enca.bl.CleaningAgent;
+
 public final class SQLAmender {
 
 	public static void writeMemo(int cleaningAgentID, String memo) {
@@ -12,5 +14,9 @@ public final class SQLAmender {
 
 	public static void removeTCRelation(int cleaningAgentID, int tagID) {
 		Connector.executeNonSelect("delete from TC where cleaningAgentID=" + cleaningAgentID + " and tagID=" + tagID);
+	}
+	
+	public static void modifyCleaningAgent(CleaningAgent cleaningAgent) {
+		
 	}
 }

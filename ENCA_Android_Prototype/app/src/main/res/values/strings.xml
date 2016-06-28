@@ -5,7 +5,7 @@
     <string name="login_interfacelanguage">Interface Language</string>
     <string name="login_contentlanguage">Content Language</string>
     <string name="login_confirm">Login</string>
-    <string name="enter_name">Name</string>
+    <string name="enter_name">UserName</string>
     <string name="search_hint">Search</string>
     <string name="search">Search</string>
     <string name="rooms">Rooms</string>
@@ -15,7 +15,7 @@
     <string name="Delete">Delete</string>
     <string-array name="language_type">
         <item>English</item>
-        <item>中文</item>
         <item>Deutsch</item>
+        <item>中文</item>
     </string-array>
 </resources>

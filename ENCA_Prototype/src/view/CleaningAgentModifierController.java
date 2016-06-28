@@ -7,14 +7,15 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import application.CleaningAgentDetail;
 import de.fhl.enca.bl.CleaningAgent;
 import de.fhl.enca.bl.InternationalString;
 import de.fhl.enca.bl.LanguageType;
 import de.fhl.enca.bl.Tag;
 import de.fhl.enca.bl.TagType;
 import de.fhl.enca.bl.User;
-import de.fhl.enca.controller.CleaningAgentBuilder;
 import de.fhl.enca.controller.CleaningAgentFetcher;
+import de.fhl.enca.controller.CleaningAgentOperator;
 import de.fhl.enca.controller.TagFetcher;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -77,7 +78,7 @@ public final class CleaningAgentModifierController {
 	private OperationType operationType;
 	private CleaningAgent cleaningAgent;
 	private Set<ContentGroup> contentGroups = new HashSet<>();
-	private Map<ComboBox<TagBean>, TagType> splitMenuButtons = new HashMap<>();
+	private Map<ComboBox<TagBean>, TagType> comboBoxes = new HashMap<>();
 	private Set<Tag> tags = new HashSet<>();
 
 	private Stage stage;
@@ -88,6 +89,18 @@ public final class CleaningAgentModifierController {
 	private TextArea description_en;
 	@FXML
 	private TextArea instruction_en;
+	@FXML
+	private TextField name_de;
+	@FXML
+	private TextArea description_de;
+	@FXML
+	private TextArea instruction_de;
+	@FXML
+	private TextField name_zh;
+	@FXML
+	private TextArea description_zh;
+	@FXML
+	private TextArea instruction_zh;
 
 	@FXML
 	private TextArea memo;
@@ -111,12 +124,14 @@ public final class CleaningAgentModifierController {
 	@FXML
 	private void initialize() {
 		contentGroups.add(new ContentGroup(LanguageType.ENGLISH, name_en, description_en, instruction_en));
-		splitMenuButtons.put(addRoom, TagType.ROOM);
-		splitMenuButtons.put(addItem, TagType.ITEM);
-		splitMenuButtons.put(addOthers, TagType.OTHERS);
-		ObservableList<String> rateList = FXCollections.observableArrayList("☆☆☆☆☆", "★☆☆☆☆", "★★☆☆☆", "★★★☆☆", "★★★★☆", "★★★★★");
+		contentGroups.add(new ContentGroup(LanguageType.GERMAN, name_de, description_de, instruction_de));
+		contentGroups.add(new ContentGroup(LanguageType.CHINESE, name_zh, description_zh, instruction_zh));
+		comboBoxes.put(addRoom, TagType.ROOM);
+		comboBoxes.put(addItem, TagType.ITEM);
+		comboBoxes.put(addOthers, TagType.OTHERS);
+		ObservableList<String> rateList = FXCollections.observableArrayList("☆", "★", "★☆", "★★", "★★☆", "★★★", "★★★☆", "★★★★", "★★★★☆", "★★★★★");
 		rate.setItems(rateList);
-		for (Map.Entry<ComboBox<TagBean>, TagType> entry : splitMenuButtons.entrySet()) {
+		for (Map.Entry<ComboBox<TagBean>, TagType> entry : comboBoxes.entrySet()) {
 			entry.getKey().setItems(TagBean.generateList(TagFetcher.fetchTagsAllOfCertainType(entry.getValue())));
 			entry.getKey().getSelectionModel().selectedItemProperty().addListener((ObservableValue<? extends TagBean> o, TagBean oldValue, TagBean newValue) -> {
 				if (newValue != null) {
@@ -131,7 +146,7 @@ public final class CleaningAgentModifierController {
 	}
 
 	@FXML
-	private void clearMemo() {
+	private void clear() {
 		memo.setText("");
 	}
 
@@ -152,6 +167,30 @@ public final class CleaningAgentModifierController {
 		}
 	}
 
+	@FXML
+	private void detail() {
+		if (operationType == OperationType.MODIFY) {
+			new CleaningAgentDetail(CleaningAgent.getCleaningAgent(cleaningAgent.getCleaningAgentID())).start(new Stage());
+			stage.hide();
+		}
+	}
+
+	@FXML
+	private void save() {
+		CleaningAgent newCleaningAgent = assembly();
+		switch (operationType) {
+			case MODIFY:
+				CleaningAgentOperator.modifyCleaningAgent(newCleaningAgent);
+				CleaningAgentOperator.saveMemo(newCleaningAgent, memo.getText());
+				break;
+		}
+	}
+	
+	@FXML
+	private void cancel() {
+		stage.hide();
+	}
+
 	public void initializeContent(OperationType operationType, CleaningAgent cleaningAgent) {
 		this.operationType = operationType;
 		this.cleaningAgent = cleaningAgent;
@@ -162,7 +201,7 @@ public final class CleaningAgentModifierController {
 		imageView.setImage(CleaningAgentFetcher.fetchImageOfCleaningAgent(cleaningAgent));
 		applicationTime.setText(String.valueOf(cleaningAgent.getApplicationTime()));
 		frequency.setText(String.valueOf(cleaningAgent.getFrequency()));
-		rate.getSelectionModel().clearAndSelect(cleaningAgent.getRate());
+		rate.getSelectionModel().clearAndSelect(cleaningAgent.getRate() - 1);
 		tags.addAll(cleaningAgent.getTags());
 		for (Tag tag : tags) {
 			addTagLabel(tag);
@@ -181,29 +220,29 @@ public final class CleaningAgentModifierController {
 	}
 
 	private CleaningAgent assembly() {
-		CleaningAgentBuilder builder = new CleaningAgentBuilder();
+		int id = 0;
 		switch (operationType) {
-		case MODIFY: {
-			builder.setID(cleaningAgent.getCleaningAgentID());
-			break;
+			case MODIFY:
+				id = cleaningAgent.getCleaningAgentID();
+				break;
+			case ADD:
+				id = CleaningAgent.getMaxID() + 1;
+				CleaningAgent.setMaxID(id);
+				break;
 		}
-		case ADD: {
-			builder.setID(CleaningAgent.getMaxID() + 1);
-			CleaningAgent.setMaxID(CleaningAgent.getMaxID() + 1);
-			break;
-		}
-		}
-		builder.setName(new InternationalString());
-		builder.setDescription(new InternationalString());
-		builder.setInstruction(new InternationalString());
+		CleaningAgent newCleaningAgent = new CleaningAgent(id);
+		newCleaningAgent.setName(new InternationalString());
+		newCleaningAgent.setDescription(new InternationalString());
+		newCleaningAgent.setInstruction(new InternationalString());
 		for (ContentGroup contentGroup : contentGroups) {
-			contentGroup.assemblyContent(builder.getResult());
+			contentGroup.assemblyContent(newCleaningAgent);
 		}
-		builder.setApplicationTime(Long.valueOf(applicationTime.getText()));
-		builder.setFrequency(Long.valueOf(frequency.getText()));
-		builder.setRate(rate.getSelectionModel().getSelectedIndex());
-		builder.getResult().addTagsAll(tags);
-		return builder.getResult();
+		newCleaningAgent.setApplicationTime(Long.valueOf(applicationTime.getText()));
+		newCleaningAgent.setFrequency(Long.valueOf(frequency.getText()));
+		newCleaningAgent.setRate(rate.getSelectionModel().getSelectedIndex());
+		newCleaningAgent.setMemo(memo.getText());
+		newCleaningAgent.addTagsAll(tags);
+		return newCleaningAgent;
 	}
 
 	public void setStage(Stage stage) {

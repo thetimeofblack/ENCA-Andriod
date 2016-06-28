@@ -59,16 +59,22 @@ public final class CleaningAgentDetailController {
 
 	private static Map<Integer, String> rateMap = new HashMap<>();
 	static {
-		rateMap.put(0, "☆☆☆☆☆");
-		rateMap.put(1, "★☆☆☆☆");
-		rateMap.put(2, "★★☆☆☆");
-		rateMap.put(3, "★★★☆☆");
-		rateMap.put(4, "★★★★☆");
-		rateMap.put(5, "★★★★★");
+		rateMap.put(1, "☆");
+		rateMap.put(2, "★");
+		rateMap.put(3, "★☆");
+		rateMap.put(4, "★★");
+		rateMap.put(5, "★★☆");
+		rateMap.put(6, "★★★");
+		rateMap.put(7, "★★★☆");
+		rateMap.put(8, "★★★★");
+		rateMap.put(9, "★★★★☆");
+		rateMap.put(10, "★★★★★");
 	}
 
 	private CleaningAgent cleaningAgent;
 	private Set<ContentGroup> contentGroups = new HashSet<>();
+
+	private Stage stage;
 
 	@FXML
 	private Label name_en;
@@ -78,6 +84,22 @@ public final class CleaningAgentDetailController {
 	private Label description_en;
 	@FXML
 	private Label instruction_en;
+	@FXML
+	private Label name_de;
+	@FXML
+	private FlowPane tags_de;
+	@FXML
+	private Label description_de;
+	@FXML
+	private Label instruction_de;
+	@FXML
+	private Label name_zh;
+	@FXML
+	private FlowPane tags_zh;
+	@FXML
+	private Label description_zh;
+	@FXML
+	private Label instruction_zh;
 
 	@FXML
 	private ImageView imageView;
@@ -93,21 +115,29 @@ public final class CleaningAgentDetailController {
 	@FXML
 	private void initialize() {
 		contentGroups.add(new ContentGroup(LanguageType.ENGLISH, name_en, tags_en, description_en, instruction_en));
-	}
-
-	@FXML
-	private void modify() {
-		new CleaningAgentModifier(OperationType.MODIFY, cleaningAgent).start(new Stage());
+		contentGroups.add(new ContentGroup(LanguageType.GERMAN, name_de, tags_de, description_de, instruction_de));
+		contentGroups.add(new ContentGroup(LanguageType.CHINESE, name_zh, tags_zh, description_zh, instruction_zh));
 	}
 
 	@FXML
 	private void clear() {
 		memo.setText("");
 	}
-	
+
 	@FXML
 	private void save() {
 		CleaningAgentOperator.saveMemo(cleaningAgent, memo.getText());
+	}
+
+	@FXML
+	private void modify() {
+		new CleaningAgentModifier(OperationType.MODIFY, cleaningAgent).start(new Stage());
+		stage.hide();
+	}
+
+	@FXML
+	private void cancel() {
+		stage.hide();
 	}
 
 	public void initializeContent(CleaningAgent cleaningAgent) {
@@ -120,5 +150,9 @@ public final class CleaningAgentDetailController {
 		frequency.setText(String.valueOf(cleaningAgent.getFrequency()));
 		rate.setText(rateMap.get(cleaningAgent.getRate()));
 		memo.setText(cleaningAgent.getMemo());
+	}
+
+	public void setStage(Stage stage) {
+		this.stage = stage;
 	}
 }

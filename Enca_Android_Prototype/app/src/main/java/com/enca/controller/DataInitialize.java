@@ -156,8 +156,8 @@ public class DataInitialize {
         InternationalString iString = new InternationalString();
         try {
             iString.setString(LanguageType.ENGLISH, cursor.getString(i));
-            iString.setString(LanguageType.GERMAN, cursor.getString(i+1));
-            iString.setString(LanguageType.CHINESE, cursor.getString(i+2));
+            iString.setString(LanguageType.GERMAN, cursor.getString(i+2));
+            iString.setString(LanguageType.CHINESE, cursor.getString(i+1));
         } catch (Exception e) {
             e.printStackTrace();
         }

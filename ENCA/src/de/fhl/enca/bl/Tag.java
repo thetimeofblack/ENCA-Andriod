@@ -2,7 +2,6 @@ package de.fhl.enca.bl;
 
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
 import de.fhl.enca.controller.TagFetcher;
@@ -23,9 +22,9 @@ public class Tag {
 	private static Map<Integer, Tag> tagsAll = new HashMap<>();
 	static {
 		InternationalString string = new InternationalString();
-		string.setString(LanguageType.ENGLISH, "No Tag");
-		string.setString(LanguageType.GERMAN, "Keine Markierung");
-		string.setString(LanguageType.CHINESE, "无标签");
+		string.setString(LanguageType.ENGLISH, "(No Tag)");
+		string.setString(LanguageType.GERMAN, "(Keine Markierung)");
+		string.setString(LanguageType.CHINESE, "(无标签)");
 		tagsAll.put(0, new Tag(0, string, TagType.OTHERS, true));
 	}
 
@@ -50,7 +49,9 @@ public class Tag {
 	}
 
 	public static Set<Tag> getTagsAll() {
-		return new LinkedHashSet<Tag>(tagsAll.values());
+		Set<Tag> tags = new HashSet<>(tagsAll.values());
+		tags.remove(Tag.getTag(0));
+		return TagFetcher.fetchSortedTags(tags);
 	}
 
 	public static int getMaxID() {

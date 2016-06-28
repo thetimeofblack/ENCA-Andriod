@@ -20,7 +20,7 @@ public final class CleaningAgent {
 	 * Store the references of all cleaning agents
 	 */
 	private static Map<Integer, CleaningAgent> cleaningAgentAll = new HashMap<>();
-	
+
 	/**
 	 * Store the references of those cleaning agents with memo
 	 */
@@ -34,7 +34,7 @@ public final class CleaningAgent {
 	private InternationalString instruction;
 	private long applicationTime;
 	private long frequency;
-	private CleaningAgentType agentType;
+	private boolean belongsToSystem;
 	private int rate;
 	private LanguageType mainLanguage;
 	private String memo;
@@ -90,6 +90,10 @@ public final class CleaningAgent {
 	}
 
 	/* non-static method */
+	public CleaningAgent(int id) {
+		this.cleaningAgentID = id;
+	}
+
 	/**
 	 * search the cleaning agent according to given keyword
 	 * @param keyword
@@ -123,10 +127,6 @@ public final class CleaningAgent {
 	/* getters and setters */
 	public int getCleaningAgentID() {
 		return cleaningAgentID;
-	}
-
-	public void setCleaningAgentID(int cleaningAgentID) {
-		this.cleaningAgentID = cleaningAgentID;
 	}
 
 	public InternationalString getName() {
@@ -165,16 +165,16 @@ public final class CleaningAgent {
 		return frequency;
 	}
 
+	public boolean BelongsToSystem() {
+		return belongsToSystem;
+	}
+
+	public void setBelongsToSystem(boolean belongsToSystem) {
+		this.belongsToSystem = belongsToSystem;
+	}
+
 	public void setFrequency(long frequency) {
 		this.frequency = frequency;
-	}
-
-	public CleaningAgentType getAgentType() {
-		return agentType;
-	}
-
-	public void setAgentType(CleaningAgentType agentType) {
-		this.agentType = agentType;
 	}
 
 	public int getRate() {
