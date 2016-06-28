@@ -20,6 +20,10 @@ public final class CleaningAgent {
 	 * Store the references of all cleaning agents
 	 */
 	private static Map<Integer, CleaningAgent> cleaningAgentAll = new HashMap<>();
+	
+	/**
+	 * Store the references of those cleaning agents with memo
+	 */
 	private static Set<CleaningAgent> cleaningAgentsWithMemo = new HashSet<>();
 	private static int maxID = 0;
 
@@ -44,6 +48,7 @@ public final class CleaningAgent {
 
 	public static void addCleaningAgent(CleaningAgent cleaningAgent) {
 		cleaningAgentAll.put(cleaningAgent.getCleaningAgentID(), cleaningAgent);
+		refreshCleaningAgentWithMemo(cleaningAgent);
 
 	}
 
@@ -51,7 +56,6 @@ public final class CleaningAgent {
 		if (cleaningAgent.getMemo() != null && !cleaningAgent.getMemo().equals("")) {
 			if (!cleaningAgentsWithMemo.contains(cleaningAgent)) {
 				cleaningAgentsWithMemo.add(cleaningAgent);
-				System.out.println("added");
 			}
 		} else {
 			if (cleaningAgentsWithMemo.contains(cleaningAgent)) {
@@ -99,7 +103,7 @@ public final class CleaningAgent {
 		this.tags.add(tag);
 	}
 
-	public void addTagsAll(Tag tag) {
+	public void addTagsAll(Set<Tag> tags) {
 		this.tags.addAll(tags);
 	}
 

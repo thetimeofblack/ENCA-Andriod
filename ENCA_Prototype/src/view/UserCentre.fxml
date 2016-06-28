@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.UserCentreController">
+<BorderPane prefHeight="400.0" prefWidth="400.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.UserCentreController">
    <center>
       <GridPane BorderPane.alignment="CENTER">
         <columnConstraints>

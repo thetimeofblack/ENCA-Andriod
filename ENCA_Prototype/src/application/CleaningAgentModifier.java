@@ -33,6 +33,8 @@ public class CleaningAgentModifier extends Application {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+
+		((CleaningAgentModifierController) loader.getController()).setStage(primaryStage);
 		((CleaningAgentModifierController) loader.getController()).initializeContent(operationType, cleaningAgent);
 		primaryStage.setTitle("Cleaning Agent Modifier");
 		primaryStage.initStyle(StageStyle.UNIFIED);
