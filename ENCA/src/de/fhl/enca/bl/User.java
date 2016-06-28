@@ -31,8 +31,14 @@ public final class User {
 	 * Initialize the directory and file location, and read preference
 	 */
 	public static void initialize() {
-		directory = new File(System.getProperty("user.home") + "/Documents/Enca");
-		file = new File(directory, "user.ini");
+		if (System.getProperty("os.name").startsWith("Windows")) {
+			directory = new File(System.getProperty("user.home") + "\\Documents\\Enca");
+			file = new File(directory, "user.ini");
+		}
+		else if (System.getProperty("os.name").startsWith("Mac")){
+			directory = new File(System.getProperty("user.home") + "/Library/Application Support/Enca");
+			file = new File(directory, "user.ini");
+		}
 		isFirstUse = readUser();
 	}
 
