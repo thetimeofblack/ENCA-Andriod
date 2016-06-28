@@ -100,7 +100,11 @@ public final class CleaningAgent {
 	 * @return integer representing the relevance
 	 */
 	public int search(String keyword) {
-		return name.search(keyword) + description.search(keyword) + instruction.search(keyword);
+		int tagRelevance = 0;
+		for (Tag tag : tags) {
+			tagRelevance += tag.search(keyword);
+		}
+		return name.search(keyword) + description.search(keyword) + instruction.search(keyword) + 2 * tagRelevance;
 	}
 
 	public void addTag(Tag tag) {

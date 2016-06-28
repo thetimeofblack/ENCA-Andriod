@@ -71,6 +71,10 @@ public class Tag {
 		/* directly put this tag into tagsAll */
 		tagsAll.put(tagID, this);
 	}
+	
+	public int search(String keyword) {
+		return name.search(keyword);
+	}
 
 	@Override
 	public String toString() {
