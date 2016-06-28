@@ -9,6 +9,7 @@ import application.TagModifier;
 import application.UserCentre;
 import de.fhl.enca.bl.CleaningAgent;
 import de.fhl.enca.bl.LanguageType;
+import de.fhl.enca.bl.Tag;
 import de.fhl.enca.bl.TagType;
 import de.fhl.enca.bl.User;
 import de.fhl.enca.controller.CleaningAgentFetcher;
@@ -224,6 +225,11 @@ public final class MainController {
 		} else {
 			/* If some tags have been chosen, fetch tags according to the chosen tags */
 			listView.setItems(TagBean.generateList(TagFetcher.fetchTagsOfCertainType(TagFetcher.fetchTagsRelated(TagBean.convert(getChosenTags())), listViewMap.get(listView))));
+		}
+		if(listView==otherTaglistView) {
+			if(!Tag.getTag(0).getCleaningAgents().isEmpty()) {
+				listView.getItems().add(new TagBean(Tag.getTag(0)));
+			}
 		}
 	}
 
