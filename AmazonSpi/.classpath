@@ -25,7 +25,6 @@
 	<classpathentry kind="lib" path="libs/testng-6.9.9.jar"/>
 	<classpathentry kind="lib" path="selenium-java-2.53.0-srcs.jar"/>
 	<classpathentry kind="lib" path="selenium-java-2.53.0.jar" sourcepath="selenium-java-2.53.0-srcs.jar"/>
-	<classpathentry kind="lib" path="E:/eclipse workspace/AmazonSpi/sqlite-jdbc-3.8.11.2.jar"/>
 	<classpathentry kind="lib" path="sqlite-jdbc-3.8.11.2.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
