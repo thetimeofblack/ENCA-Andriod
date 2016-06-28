@@ -23,6 +23,7 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import utility.Utility;
 import view.CleaningAgentModifierController.OperationType;
 
 public final class CleaningAgentDetailController {
@@ -121,7 +122,9 @@ public final class CleaningAgentDetailController {
 
 	@FXML
 	private void clear() {
-		memo.setText("");
+		if(Utility.showClearAlert()) {
+			memo.setText("");
+		}
 	}
 
 	@FXML

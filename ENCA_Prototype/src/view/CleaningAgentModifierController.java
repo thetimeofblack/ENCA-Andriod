@@ -39,6 +39,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
 import model.TagBean;
+import utility.Utility;
 
 public final class CleaningAgentModifierController {
 
@@ -147,7 +148,9 @@ public final class CleaningAgentModifierController {
 
 	@FXML
 	private void clear() {
-		memo.setText("");
+		if (Utility.showClearAlert()) {
+			memo.setText("");
+		}
 	}
 
 	@FXML
@@ -183,9 +186,11 @@ public final class CleaningAgentModifierController {
 				CleaningAgentOperator.modifyCleaningAgent(newCleaningAgent);
 				CleaningAgentOperator.saveMemo(newCleaningAgent, memo.getText());
 				break;
+			case ADD:
+				break;
 		}
 	}
-	
+
 	@FXML
 	private void cancel() {
 		stage.hide();
@@ -239,8 +244,7 @@ public final class CleaningAgentModifierController {
 		}
 		newCleaningAgent.setApplicationTime(Long.valueOf(applicationTime.getText()));
 		newCleaningAgent.setFrequency(Long.valueOf(frequency.getText()));
-		newCleaningAgent.setRate(rate.getSelectionModel().getSelectedIndex());
-		newCleaningAgent.setMemo(memo.getText());
+		newCleaningAgent.setRate(rate.getSelectionModel().getSelectedIndex() + 1);
 		newCleaningAgent.addTagsAll(tags);
 		return newCleaningAgent;
 	}

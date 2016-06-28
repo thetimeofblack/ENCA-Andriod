@@ -14,14 +14,14 @@ import javafx.scene.layout.BorderStroke;
 import javafx.scene.layout.BorderStrokeStyle;
 import javafx.scene.layout.BorderWidths;
 import javafx.scene.layout.CornerRadii;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.paint.Color;
 
 public final class CleaningAgentBean {
 
 	private final int id;
 	private final SimpleStringProperty name;
-	private final HBox tags;
+	private final FlowPane tags;
 
 	public static ObservableList<CleaningAgentBean> generateList(Set<CleaningAgent> source, LanguageType type) {
 		ObservableList<CleaningAgentBean> list = FXCollections.observableArrayList();
@@ -34,7 +34,9 @@ public final class CleaningAgentBean {
 	public CleaningAgentBean(CleaningAgent cleaningAgent, LanguageType type) {
 		this.id = cleaningAgent.getCleaningAgentID();
 		this.name = new SimpleStringProperty(cleaningAgent.getName().getString(type));
-		tags = new HBox(4);
+		tags = new FlowPane(5, 5);
+		tags.setPrefHeight(0);
+		tags.setPrefWrapLength(700);
 		for (Tag tag : cleaningAgent.getTags()) {
 			Label label = new Label(tag.getName().getString(type));
 			label.setBorder(new Border(new BorderStroke(Color.GRAY, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
@@ -51,7 +53,7 @@ public final class CleaningAgentBean {
 		return name.get();
 	}
 
-	public HBox getTags() {
+	public FlowPane getTags() {
 		return tags;
 	}
 }

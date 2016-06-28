@@ -18,13 +18,14 @@ import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.control.SplitMenuButton;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.FlowPane;
 import javafx.stage.Stage;
 import model.CleaningAgentBean;
 import model.TagBean;
@@ -46,13 +47,15 @@ public final class MainController {
 	@FXML
 	private TableView<CleaningAgentBean> chineseTableView;
 	@FXML
-	private TableColumn<CleaningAgentBean, HBox> englishTagsColumn;
+	private TableColumn<CleaningAgentBean, FlowPane> englishTagsColumn;
 	@FXML
-	private TableColumn<CleaningAgentBean, HBox> germanTagsColumn;
+	private TableColumn<CleaningAgentBean, FlowPane> germanTagsColumn;
 	@FXML
-	private TableColumn<CleaningAgentBean, HBox> chineseTagsColumn;
+	private TableColumn<CleaningAgentBean,FlowPane> chineseTagsColumn;
 	@FXML
 	private TextField textField;
+	@FXML
+	private SplitMenuButton add;
 	@FXML
 	private Button userCentreButton;
 
@@ -81,7 +84,7 @@ public final class MainController {
 	/**
 	 * Store the three tag columns
 	 */
-	private Set<TableColumn<CleaningAgentBean, HBox>> columnList = new HashSet<>();
+	private Set<TableColumn<CleaningAgentBean, FlowPane>> columnList = new HashSet<>();
 
 	/**
 	 * Store the current cleaning agent fetch result
@@ -133,11 +136,11 @@ public final class MainController {
 			});
 		}
 		/* put those tag labels into the table cell */
-		for (TableColumn<CleaningAgentBean, HBox> column : columnList) {
-			column.setCellFactory(e -> new TableCell<CleaningAgentBean, HBox>() {
+		for (TableColumn<CleaningAgentBean, FlowPane> column : columnList) {
+			column.setCellFactory(e -> new TableCell<CleaningAgentBean, FlowPane>() {
 
 				@Override
-				protected void updateItem(HBox item, boolean empty) {
+				protected void updateItem(FlowPane item, boolean empty) {
 					if (empty) {
 						setText(null);
 						setGraphic(null);
@@ -222,14 +225,14 @@ public final class MainController {
 		if (getChosenTags().isEmpty()) {
 			/* If no tag has been chosen, fetch all tags of the tagType of the listView */
 			listView.setItems(TagBean.generateList(TagFetcher.fetchTagsAllOfCertainType(listViewMap.get(listView))));
+			if(listView==otherTaglistView) {
+				if(!Tag.getTag(0).getCleaningAgents().isEmpty()) {
+					listView.getItems().add(new TagBean(Tag.getTag(0)));
+				}
+			}
 		} else {
 			/* If some tags have been chosen, fetch tags according to the chosen tags */
 			listView.setItems(TagBean.generateList(TagFetcher.fetchTagsOfCertainType(TagFetcher.fetchTagsRelated(TagBean.convert(getChosenTags())), listViewMap.get(listView))));
-		}
-		if(listView==otherTaglistView) {
-			if(!Tag.getTag(0).getCleaningAgents().isEmpty()) {
-				listView.getItems().add(new TagBean(Tag.getTag(0)));
-			}
 		}
 	}
 
@@ -253,6 +256,11 @@ public final class MainController {
 		if (getCurrentTableView() != null && !getCurrentTableView().getSelectionModel().isEmpty()) {
 			new CleaningAgentDetail(CleaningAgent.getCleaningAgent(getCurrentTableView().getSelectionModel().getSelectedItem().getId())).start(new Stage());
 		}
+	}
+	
+	@FXML
+	private void add() {
+		add.show();
 	}
 
 	@FXML
