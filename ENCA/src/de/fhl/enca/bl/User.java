@@ -34,8 +34,8 @@ public final class User {
 			directory = new File(System.getProperty("user.home") + "\\Documents\\Enca");
 			file = new File(directory, "user.ini");
 		}
-		else {
-			directory = new File(System.getProperty("user.home") + "/Documents/Enca");
+		else if (System.getProperty("os.name").startsWith("Mac")){
+			directory = new File(System.getProperty("user.home") + "/Library/Application Support/Enca");
 			file = new File(directory, "user.ini");
 		}
 		isFirstUse = readUser();
