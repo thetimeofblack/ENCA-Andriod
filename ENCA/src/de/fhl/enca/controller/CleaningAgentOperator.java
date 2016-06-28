@@ -35,9 +35,15 @@ public final class CleaningAgentOperator {
 	}
 
 	public static void createCleaningAgent(CleaningAgent newCleaningAgent) {
-		 bearCleaningAgent(newCleaningAgent);
-		 SQLAmender.createCleaningAgent(newCleaningAgent);
-		 attachTTRelation(newCleaningAgent.getTags());
+		bearCleaningAgent(newCleaningAgent);
+		SQLAmender.createCleaningAgent(newCleaningAgent);
+		attachTTRelation(newCleaningAgent.getTags());
+	}
+
+	public static void removeCleaningAgent(CleaningAgent oldCleaningAgent) {
+		killCleaningAgent(oldCleaningAgent);
+		SQLAmender.removeCleaningAgent(oldCleaningAgent);
+		detachTTRelation(oldCleaningAgent.getTags(), oldCleaningAgent.getTags());
 	}
 
 	private static void killCleaningAgent(CleaningAgent oldCleaningAgent) {

@@ -15,12 +15,16 @@ public final class SQLAmender {
 	public static void removeTCRelation(int cleaningAgentID, int tagID) {
 		Connector.executeNonSelect("delete from TC where cleaningAgentID=" + cleaningAgentID + " and tagID=" + tagID);
 	}
-	
+
 	public static void modifyCleaningAgent(CleaningAgent cleaningAgent) {
-		
+
 	}
-	
+
 	public static void createCleaningAgent(CleaningAgent cleaningAgent) {
-		
+
+	}
+
+	public static void removeCleaningAgent(CleaningAgent cleaningAgent) {
+
 	}
 }

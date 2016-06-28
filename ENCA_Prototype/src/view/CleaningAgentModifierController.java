@@ -149,7 +149,7 @@ public final class CleaningAgentModifierController {
 	@FXML
 	private void clear() {
 		if (Utility.showClearAlert()) {
-			memo.setText("");
+			memo.clear();
 		}
 	}
 

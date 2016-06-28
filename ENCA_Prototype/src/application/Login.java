@@ -30,7 +30,7 @@ public final class Login extends Application {
 				((LoginController) loader.getController()).setLoginStage(primaryStage);
 			}
 		} catch (IOException e) {
-			e.printStackTrace();
+			e.printStackTrace();	
 		}
 		primaryStage.setResizable(false);
 		primaryStage.setTitle("ENCA");

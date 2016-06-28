@@ -1,5 +1,7 @@
 package model;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 import de.fhl.enca.bl.CleaningAgent;
 import de.fhl.enca.bl.LanguageType;
@@ -23,10 +25,21 @@ public final class CleaningAgentBean {
 	private final SimpleStringProperty name;
 	private final FlowPane tags;
 
+	private static Map<Integer, Map<LanguageType, CleaningAgentBean>> map = new HashMap<>();
+	static {
+		for (CleaningAgent cleaningAgent : CleaningAgent.getCleaningAgentsAll()) {
+			Map<LanguageType, CleaningAgentBean> tempMap = new HashMap<>();
+			for (LanguageType languageType : LanguageType.values()) {
+				tempMap.put(languageType, new CleaningAgentBean(cleaningAgent, languageType));
+			}
+			map.put(cleaningAgent.getCleaningAgentID(), tempMap);
+		}
+	}
+
 	public static ObservableList<CleaningAgentBean> generateList(Set<CleaningAgent> source, LanguageType type) {
 		ObservableList<CleaningAgentBean> list = FXCollections.observableArrayList();
 		for (CleaningAgent cleaningAgent : source) {
-			list.add(new CleaningAgentBean(cleaningAgent, type));
+			list.add(map.get(cleaningAgent.getCleaningAgentID()).get(type));
 		}
 		return list;
 	}

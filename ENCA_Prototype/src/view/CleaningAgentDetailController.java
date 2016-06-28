@@ -123,7 +123,7 @@ public final class CleaningAgentDetailController {
 	@FXML
 	private void clear() {
 		if(Utility.showClearAlert()) {
-			memo.setText("");
+			memo.clear();
 		}
 	}
 

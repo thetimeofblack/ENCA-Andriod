@@ -202,6 +202,7 @@ public final class MainController {
 			initListView(listView);
 		}
 		initTableViews(CleaningAgent.getCleaningAgentsAll());
+		textField.clear();
 	}
 
 	/**
