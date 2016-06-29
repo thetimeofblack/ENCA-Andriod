@@ -18,7 +18,7 @@ public class Tag {
 	 * Store the references of all tags.
 	 */
 	private static Map<Integer, Tag> tagsAll = new HashMap<>();
-	
+
 	/**
 	 * 'no tag' tag will be stored.
 	 */
@@ -45,7 +45,7 @@ public class Tag {
 	 * Cleaning agents related to self.
 	 */
 	private Set<CleaningAgent> cleaningAgents = new HashSet<>();
-	
+
 	/**
 	 * Tags related to self.
 	 */

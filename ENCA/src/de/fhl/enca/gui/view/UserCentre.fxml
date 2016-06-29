@@ -17,6 +17,10 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
+<!-- 
+	Author: Zhaowen.Gong
+	Version: 30.06.2016
+-->
 <BorderPane prefHeight="500.0" prefWidth="400.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.fhl.enca.gui.view.UserCentreController">
    <center>
       <GridPane BorderPane.alignment="CENTER">

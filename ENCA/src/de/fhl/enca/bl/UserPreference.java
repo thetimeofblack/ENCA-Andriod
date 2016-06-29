@@ -8,14 +8,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Stores the basic information of the user.
+ * Store the basic information of the user.
  * @author Zhaowen.Gong
  * @version 30.06.2016
  */
 public final class UserPreference implements Serializable {
 
 	private static final long serialVersionUID = -5000180069279808816L;
-	
+
 	/**
 	 * Provide different DateForamt for different interface language.
 	 */
@@ -30,7 +30,7 @@ public final class UserPreference implements Serializable {
 	 * The Name of the user.
 	 */
 	private String name = "";
-	
+
 	/**
 	 * The date the user uses the software at the first time.</br>
 	 * Will be auto generated.

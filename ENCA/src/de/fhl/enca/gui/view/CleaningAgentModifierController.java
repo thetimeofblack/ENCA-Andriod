@@ -44,12 +44,27 @@ import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
 
+/**
+ * Controller of CleaningAgentModifier interface.
+ * @author Zhaowen.Gong
+ * @version 30.06.2016
+ */
 public final class CleaningAgentModifierController {
 
+	/**
+	 * Determine whether this interface is used for modifying or adding cleaning agent.
+	 * @author Zhaowen.Gong
+	 * @version 30.06.2016
+	 */
 	public static enum OperationType {
 		MODIFY, ADD
 	}
 
+	/**
+	 * Representing a group of controls showing content.
+	 * @author Zhaowen.Gong
+	 * @version 30.06.2016
+	 */
 	private final class ContentGroup {
 
 		private LanguageType type;
@@ -139,6 +154,10 @@ public final class CleaningAgentModifierController {
 	@FXML
 	private Button save;
 
+	/**
+	 * Initialize the interface.</br>
+	 * Will be called automatically during the construction of the Stage.
+	 */
 	@FXML
 	private void initialize() {
 		contentGroups.add(new ContentGroup(LanguageType.ENGLISH, name_en, description_en, instruction_en));

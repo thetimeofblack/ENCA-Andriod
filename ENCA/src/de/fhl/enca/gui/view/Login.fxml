@@ -8,6 +8,10 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
+<!-- 
+	Author: Zhaowen.Gong
+	Version: 30.06.2016
+-->
 <BorderPane xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.fhl.enca.gui.view.LoginController">
    <center>
 		<AnchorPane prefHeight="400.0" prefWidth="300.0" style="-fx-background-color: #FFFFFF;" BorderPane.alignment="CENTER">

@@ -18,7 +18,14 @@ import javafx.stage.StageStyle;
  */
 public class CleaningAgentModifier extends Application {
 
+	/**
+	 * Indicates whether this applcation is used for modifying or adding.
+	 */
 	private OperationType operationType;
+
+	/**
+	 * The cleaning agent to be modified.
+	 */
 	private CleaningAgent cleaningAgent;
 
 	public CleaningAgentModifier(OperationType operationType, CleaningAgent cleaningAgent) {

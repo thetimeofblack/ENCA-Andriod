@@ -13,6 +13,7 @@ import javafx.stage.StageStyle;
  * The main interface
  * @author Zhaowen.Gong
  * @version 30.06.2016
+ * @see de.fhl.enca.gui.view.MainController
  */
 public class Main extends Application {
 

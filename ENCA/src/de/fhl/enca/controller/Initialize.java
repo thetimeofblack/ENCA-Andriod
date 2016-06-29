@@ -10,7 +10,7 @@ import de.fhl.enca.bl.TagType;
 import de.fhl.enca.dao.SQLVisitor;
 
 /**
- * Contains the operations of initialization.</br>
+ * Contain the operations of initialization.</br>
  * During the initialization, all of tags and cleaning agents will be read into memory.</br>
  * The relations between cleaning agents and tags and the relations between tags will be realized.
  * @author Zhaowen.Gong

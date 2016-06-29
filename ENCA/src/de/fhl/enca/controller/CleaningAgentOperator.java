@@ -10,8 +10,8 @@ import de.fhl.enca.bl.Tag;
 import de.fhl.enca.dao.SQLAmender;
 
 /**
- * Contains operations of modifying, creating and deleting cleaning agent.</br>
- * Contains both operations of memory and operations of SQL database.
+ * Contain operations of modifying, creating and deleting cleaning agent.</br>
+ * Contain both operations of memory and operations of SQL database.
  * @author Zhaowen.Gong
  * @version 30.06.2016
  * @see de.fhl.enca.dao.SQLAmender

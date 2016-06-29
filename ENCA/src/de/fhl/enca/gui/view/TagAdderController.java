@@ -19,6 +19,11 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+/**
+ * Controller of TagAdder interface.
+ * @author Zhaowen.Gong
+ * @version 30.06.2016
+ */
 public final class TagAdderController {
 
 	private Stage stage;
@@ -38,6 +43,10 @@ public final class TagAdderController {
 	@FXML
 	private Button cancel;
 
+	/**
+	 * Initialize the interface.</br>
+	 * Will be called automatically during the construction of the Stage.
+	 */
 	@FXML
 	private void initialize() {
 		ResourceBundle resourceBundle = Utility.getResourceBundle();

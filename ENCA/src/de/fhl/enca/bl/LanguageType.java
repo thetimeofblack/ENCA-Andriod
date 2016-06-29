@@ -30,7 +30,7 @@ public enum LanguageType {
 	 * Local name of the language
 	 */
 	private String name;
-	
+
 	/**
 	 * Related Locale instance, used when obtaining a ResourceBundle
 	 */

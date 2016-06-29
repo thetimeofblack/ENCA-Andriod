@@ -8,7 +8,7 @@ import de.fhl.enca.bl.Tag;
 import de.fhl.enca.bl.TagType;
 
 /**
- * Contains methods of fetching tags.
+ * Contain methods of fetching tags.
  * @author Zhaowen.Gong
  * @version 30.06.2016
  */
@@ -17,7 +17,7 @@ public final class TagFetcher {
 	/**
 	 * Fetch from all tags according to the given tagType.
 	 * @param type the certain TagType
-	 * @return set of tags which are with the given type
+	 * @return tags which are with the given type
 	 */
 	public static Set<Tag> fetchTagsAllOfCertainType(TagType type) {
 		return fetchTagsOfCertainType(Tag.getTagsAll(), type);
@@ -26,17 +26,15 @@ public final class TagFetcher {
 	/**
 	 * Fetch from those tags related to all of tags given.
 	 * @param source the given tags
-	 * @return set of tags which are related to all of tags given
+	 * @return tags which are related to all of tags given
 	 */
 	public static Set<Tag> fetchTagsRelated(Set<Tag> source) {
 		Set<Tag> result = null;
 		for (Tag tag : source) {
 			if (result == null) {
-				/* Put all of the related tags of the first tag into the result */
 				result = tag.getTagsRelated();
 			} else {
 				Set<Tag> tempSet = new LinkedHashSet<>();
-				/* Go through the result, only save those tags which are related to current tag */
 				for (Tag relatedTag : result) {
 					if (tag.getTagsRelated().contains(relatedTag)) {
 						tempSet.add(relatedTag);
@@ -52,7 +50,7 @@ public final class TagFetcher {
 	 * Fetch from given tags according to the given tagType.
 	 * @param source the given tags
 	 * @param type the certain tagType
-	 * @return set of tags from source which are with the given type
+	 * @return tags from source which are with the given type
 	 */
 	public static Set<Tag> fetchTagsOfCertainType(Set<Tag> source, TagType type) {
 		Set<Tag> result = new LinkedHashSet<>();
@@ -66,7 +64,7 @@ public final class TagFetcher {
 	/**
 	 * Sort Set of Tags before provided to other classes.
 	 * @param source set of tags to be sorted
-	 * @return set of tags which have been sorted
+	 * @return tags which have been sorted
 	 */
 	public static Set<Tag> fetchSortedTags(Set<Tag> source) {
 		List<Tag> tempTagList = new ArrayList<>(source);

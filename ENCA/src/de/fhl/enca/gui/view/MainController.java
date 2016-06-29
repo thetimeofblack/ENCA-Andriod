@@ -36,6 +36,12 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.FlowPane;
 import javafx.stage.Stage;
 
+/**
+ * Controller of Main interface.
+ * @author Zhaowen.Gong
+ * @version 30.06.2016
+ * @see de.fhl.enca.gui.application.Main
+ */
 public final class MainController {
 
 	@FXML
@@ -83,38 +89,49 @@ public final class MainController {
 	private Stage stage;
 
 	/**
-	 * Store the three listView and their representing tagType
+	 * Store the three listView and their representing tagType.
 	 */
 	private Map<ListView<Tag>, TagType> listViewMap = new HashMap<>();
 
 	/**
-	 * Store the priority of three listView
+	 * Store the priority of three listView.
 	 */
 	private Map<ListView<Tag>, Integer> priorityMap = new HashMap<>();
 
 	/**
-	 * Current priority
+	 * Current priority.
 	 */
 	private int priority;
 
 	/**
-	 * Store the three tableView and their representing language
+	 * Store the three tableView and their representing language.
 	 */
 	private Map<LanguageType, TableView<CleaningAgentBean>> tableViewMap = new HashMap<>();
 
 	/**
-	 * Store the three tag columns
+	 * Store the three tag columns.
 	 */
 	private Set<TableColumn<CleaningAgentBean, FlowPane>> columns = new HashSet<>();
 
+	/**
+	 * Store MenuItem representing showing detail action.
+	 */
 	private Set<MenuItem> detailSet = new HashSet<>();
+
+	/**
+	 * Store MenuItem representing modifying action.
+	 */
 	private Set<MenuItem> modifyCASet = new HashSet<>();
 
 	/**
-	 * Store the current cleaning agent fetch result
+	 * Store the current cleaning agent fetch result.
 	 */
 	private Set<CleaningAgent> result = new HashSet<>();
 
+	/**
+	 * Return chosen tags from the three ListView.
+	 * @return tags chosen
+	 */
 	private Set<Tag> getChosenTags() {
 		Set<Tag> set = new HashSet<>();
 		for (ListView<Tag> listView : listViewMap.keySet()) {
@@ -125,6 +142,10 @@ public final class MainController {
 		return set;
 	}
 
+	/**
+	 * Return current active TableView.
+	 * @return the current active TableView
+	 */
 	private TableView<CleaningAgentBean> getCurrentTableView() {
 		if (!tabPane.getSelectionModel().isEmpty()) {
 			return tableViewMap.get(LanguageType.getLanguageType((tabPane.getSelectionModel().getSelectedIndex())));
@@ -133,6 +154,10 @@ public final class MainController {
 		}
 	}
 
+	/**
+	 * Initialize the interface.</br>
+	 * Will be called automatically during the construction of the Stage.
+	 */
 	@FXML
 	private void initialize() {
 		listViewMap.put(list_room, TagType.ROOM);
@@ -213,7 +238,7 @@ public final class MainController {
 	}
 
 	/**
-	 * Initialize all of the content
+	 * Initialize all of the content.
 	 */
 	@FXML
 	private void initMain() {
@@ -233,7 +258,7 @@ public final class MainController {
 	}
 
 	/**
-	 * Search cleaning agents according to current chosen tags and keywords
+	 * Search cleaning agents according to current chosen tags and keywords.
 	 */
 	@FXML
 	private void search() {
@@ -247,7 +272,7 @@ public final class MainController {
 	}
 
 	/**
-	 * Initialize or refresh a certain listView
+	 * Initialize or refresh a certain listView.
 	 */
 	private void initListView(ListView<Tag> listView) {
 		if (getChosenTags().isEmpty()) {
@@ -263,7 +288,7 @@ public final class MainController {
 	}
 
 	/**
-	 * initialize the tableView according to the source
+	 * initialize the tableView according to the source.
 	 */
 	private void initTableViews(Set<CleaningAgent> source) {
 		result = source;

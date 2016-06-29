@@ -13,6 +13,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+/**
+ * Controller of Login interface when it is user's first use.
+ * @author Zhaowen.Gong
+ * @version 30.06.2016
+ */
 public final class LoginFirstController {
 
 	@FXML
@@ -28,6 +33,10 @@ public final class LoginFirstController {
 
 	private Stage loginStage;
 
+	/**
+	 * Initialize the interface.</br>
+	 * Will be called automatically during the construction of the Stage.
+	 */
 	@FXML
 	private void initialize() {
 		ObservableList<String> languageList = FXCollections.observableArrayList();

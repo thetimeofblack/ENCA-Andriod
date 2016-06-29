@@ -29,8 +29,18 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
+/**
+ * Controller of CleaningAgentDetail interface.
+ * @author Zhaowen.Gong
+ * @version 30.06.2016
+ */
 public final class CleaningAgentDetailController {
 
+	/**
+	 * Representing a group of controls showing content.
+	 * @author Zhaowen.Gong
+	 * @version 30.06.2016
+	 */
 	private final class ContentGroup {
 
 		private LanguageType type;
@@ -120,6 +130,10 @@ public final class CleaningAgentDetailController {
 	@FXML
 	private Button modify;
 
+	/**
+	 * Initialize the interface.</br>
+	 * Will be called automatically during the construction of the Stage.
+	 */
 	@FXML
 	private void initialize() {
 		contentGroups.add(new ContentGroup(LanguageType.ENGLISH, name_en, tags_en, description_en, instruction_en));

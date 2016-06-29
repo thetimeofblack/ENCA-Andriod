@@ -20,6 +20,11 @@ import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+/**
+ * Controller of TagModifier interface.
+ * @author Zhaowen.Gong
+ * @version 30.06.2016
+ */
 public final class TagModifierController {
 
 	private Stage stage;
@@ -53,6 +58,10 @@ public final class TagModifierController {
 	@FXML
 	private Button cancel;
 
+	/**
+	 * Initialize the interface.</br>
+	 * Will be called automatically during the construction of the Stage.
+	 */
 	@FXML
 	private void initialize() {
 		listViewMap.put(TagType.ROOM, room);

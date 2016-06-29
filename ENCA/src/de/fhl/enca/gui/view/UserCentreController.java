@@ -17,6 +17,11 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.stage.Stage;
 
+/**
+ * Controller of UserCentre interface.
+ * @author Zhaowen.Gong
+ * @version 30.06.2016
+ */
 public final class UserCentreController {
 
 	@FXML
@@ -46,6 +51,10 @@ public final class UserCentreController {
 		this.userCentreStage = userCentreStage;
 	}
 
+	/**
+	 * Initialize the interface.</br>
+	 * Will be called automatically during the construction of the Stage.
+	 */
 	@FXML
 	private void initialize() {
 		usernameTextField.setText(User.getName());

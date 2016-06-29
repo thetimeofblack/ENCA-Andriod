@@ -12,6 +12,10 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.shape.Line?>
 
+<!-- 
+	Author: Zhaowen.Gong
+	Version: 30.06.2016
+-->
 <BorderPane style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.fhl.enca.gui.view.TagAdderController">
    <center>
       <GridPane BorderPane.alignment="CENTER">

@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Encapsulates strings in different languages into single object and operations for them.</br>
+ * Encapsulate strings in different languages into single object and operations for them.</br>
  * Language is based on enum LanguageType.
  * @author Zhaowen.Gong
  * @version 30.06.2016

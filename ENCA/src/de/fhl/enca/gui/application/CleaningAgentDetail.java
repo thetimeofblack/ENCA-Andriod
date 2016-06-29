@@ -17,6 +17,9 @@ import javafx.stage.StageStyle;
  */
 public class CleaningAgentDetail extends Application {
 
+	/**
+	 * The cleaning agent to be shown.
+	 */
 	private CleaningAgent cleaningAgent;
 
 	public CleaningAgentDetail(CleaningAgent cleaningAgent) {

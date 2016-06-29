@@ -20,24 +20,48 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.paint.Color;
 
 /**
- * Representing object shown in the tableView control.</br>
+ * Representing object shown in the TableView control.</br>
  * Derived from a cleaning agent object.
  * @author Zhaowen.Gong
  * @version 30.06.2016
  */
 public final class CleaningAgentBean {
 
+	/**
+	 * ID of the cleaning agent.
+	 */
 	private final int id;
+
+	/**
+	 * Name of the cleaning agent.
+	 */
 	private final SimpleStringProperty name;
+
+	/**
+	 * The FlowPane shown in the TableView.
+	 */
 	private final FlowPane tags;
 
+	/**
+	 * Store all CleaningAgentBean.
+	 */
 	private static Map<Integer, Map<LanguageType, CleaningAgentBean>> map = new HashMap<>();
+
+	/**
+	 * Initialize all CleaningAgentBean.
+	 */
 	static {
 		for (CleaningAgent cleaningAgent : CleaningAgent.getCleaningAgentsAll()) {
 			addCleaningAgentBean(cleaningAgent);
 		}
 	}
 
+	/**
+	 * Generate an ObservableList for TableView control.
+	 * @param source cleaning agents as source
+	 * @param type the LanguageType
+	 * @return the ObservableList generated
+	 */
 	public static ObservableList<CleaningAgentBean> generateList(Set<CleaningAgent> source, LanguageType type) {
 		ObservableList<CleaningAgentBean> list = FXCollections.observableArrayList();
 		for (CleaningAgent cleaningAgent : source) {
@@ -50,6 +74,10 @@ public final class CleaningAgentBean {
 		return list;
 	}
 
+	/**
+	 * Add a cleaning agent to the map.
+	 * @param cleaningAgent the cleaning agent to be added
+	 */
 	public static void addCleaningAgentBean(CleaningAgent cleaningAgent) {
 		Map<LanguageType, CleaningAgentBean> tempMap = new HashMap<>();
 		for (LanguageType languageType : LanguageType.values()) {
@@ -58,10 +86,20 @@ public final class CleaningAgentBean {
 		map.put(cleaningAgent.getCleaningAgentID(), tempMap);
 	}
 
+	/**
+	 * Remove a cleaning agent from the map.
+	 * @param cleaningAgent the cleaning agent to be removed
+	 */
 	public static void removeCleaningAgentBean(CleaningAgent cleaningAgent) {
 		map.remove(cleaningAgent.getCleaningAgentID());
 	}
 
+	/**
+	 * Constructor.</br>
+	 * Will generate the FlowPane containing those Label containing those related tags of the cleaning agent.
+	 * @param cleaningAgent the cleaning agent basing on
+	 * @param type the LanguageType
+	 */
 	public CleaningAgentBean(CleaningAgent cleaningAgent, LanguageType type) {
 		this.id = cleaningAgent.getCleaningAgentID();
 		this.name = new SimpleStringProperty(cleaningAgent.getName().getString(type));

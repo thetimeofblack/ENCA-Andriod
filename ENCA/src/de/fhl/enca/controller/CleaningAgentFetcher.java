@@ -17,7 +17,7 @@ import de.fhl.enca.dao.SQLVisitor;
 import javafx.scene.image.Image;
 
 /**
- * Contains methods of fetching cleaning agents.
+ * Contain methods of fetching cleaning agents.
  * @author Zhaowen.Gong
  * @version 30.06.2016
  */

@@ -9,7 +9,7 @@ import java.io.ObjectOutputStream;
 import java.util.Date;
 
 /**
- * Contains metadata of user, providing saving and reading function of the metadata.
+ * Contain metadata of user, providing saving and reading function of the metadata.
  * @author Zhaowen.Gong
  * @version 30.06.2016
  * @see UserPreference
@@ -22,7 +22,7 @@ public final class User {
 	 * Representing the directory of save file.
 	 */
 	private static File directory;
-	
+
 	/**
 	 * Representing the save file.
 	 */
@@ -46,8 +46,7 @@ public final class User {
 		if (System.getProperty("os.name").startsWith("Windows")) {
 			directory = new File(System.getProperty("user.home") + "\\Documents\\Enca");
 			file = new File(directory, "user.ini");
-		}
-		else if (System.getProperty("os.name").startsWith("Mac")){
+		} else if (System.getProperty("os.name").startsWith("Mac")) {
 			directory = new File(System.getProperty("user.home") + "/Library/Application Support/Enca");
 			file = new File(directory, "user.ini");
 		}

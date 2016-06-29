@@ -23,7 +23,7 @@ public final class CleaningAgent {
 	 * Store the references of those cleaning agents with memo.
 	 */
 	private static Set<CleaningAgent> cleaningAgentsWithMemo = new HashSet<>();
-	
+
 	/**
 	 * Max id stored for creating new cleaning agent.
 	 */
