@@ -11,21 +11,25 @@ import view.MainController;
 public final class Utility {
 
 	private static MainController mainController;
+	
+	public static ResourceBundle getResourceBundle() {
+		return ResourceBundle.getBundle("resource.message", User.getInterfaceLanguage().getLocale());
+	}
 
 	public static boolean showClearAlert() {
-		return showAlert("clear");
+		return showAlert("clearAlert");
 	}
 
 	public static boolean showDeleteCAAlert() {
-		return showAlert("deleteCA");
+		return showAlert("deleteCAAlert");
 	}
 
 	public static boolean showDeleteTagAlert() {
-		return showAlert("deleteTag");
+		return showAlert("deleteTagAlert");
 	}
 
 	private static boolean showAlert(String key) {
-		ResourceBundle resourceBundle = ResourceBundle.getBundle("resource.Utility", User.getInterfaceLanguage().getLocale());
+		ResourceBundle resourceBundle = getResourceBundle();
 		ButtonType yes = new ButtonType(resourceBundle.getString("yes"), ButtonData.YES);
 		ButtonType no = new ButtonType(resourceBundle.getString("no"), ButtonData.NO);
 		ButtonType cancel = new ButtonType(resourceBundle.getString("cancel"), ButtonData.CANCEL_CLOSE);

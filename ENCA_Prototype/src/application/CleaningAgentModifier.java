@@ -1,14 +1,13 @@
 package application;
 
 import java.io.IOException;
-import java.util.ResourceBundle;
 import de.fhl.enca.bl.CleaningAgent;
-import de.fhl.enca.bl.User;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import utility.Utility;
 import view.CleaningAgentModifierController;
 import view.CleaningAgentModifierController.OperationType;
 
@@ -25,7 +24,7 @@ public class CleaningAgentModifier extends Application {
 
 	@Override
 	public void start(Stage primaryStage) {
-		FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/view/CleaningAgentModifier.fxml"), ResourceBundle.getBundle("resource.CleaningAgentModifier", User.getInterfaceLanguage().getLocale()));
+		FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/view/CleaningAgentModifier.fxml"), Utility.getResourceBundle());
 		try {
 			Scene scene = new Scene(loader.load());
 			scene.getStylesheets().add(this.getClass().getResource("/css/TabPaneHeader.css").toString());

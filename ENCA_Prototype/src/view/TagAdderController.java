@@ -8,7 +8,6 @@ import de.fhl.enca.bl.InternationalString;
 import de.fhl.enca.bl.LanguageType;
 import de.fhl.enca.bl.Tag;
 import de.fhl.enca.bl.TagType;
-import de.fhl.enca.bl.User;
 import de.fhl.enca.controller.TagOperator;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -41,7 +40,7 @@ public final class TagAdderController {
 
 	@FXML
 	private void initialize() {
-		ResourceBundle resourceBundle = ResourceBundle.getBundle("resource.TagAdder", User.getInterfaceLanguage().getLocale());
+		ResourceBundle resourceBundle = Utility.getResourceBundle();
 		ObservableList<String> list = FXCollections.observableArrayList();
 		for (TagType type : TagType.values()) {
 			list.add(resourceBundle.getString(type.toString().toLowerCase()));

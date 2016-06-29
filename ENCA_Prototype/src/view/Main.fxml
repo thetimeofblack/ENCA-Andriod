@@ -36,7 +36,7 @@
           </Menu>
             <Menu mnemonicParsing="false" text="%modify">
               <items>
-                  <MenuItem fx:id="modifyCA" mnemonicParsing="false" text="%modifyCA" />
+                  <MenuItem fx:id="modifyCA" mnemonicParsing="false" onAction="#modifyCA" text="%modifyCA" />
                 <MenuItem mnemonicParsing="false" onAction="#modifyTag" text="%modifyTag" />
               </items>
             </Menu>
@@ -49,6 +49,7 @@
           <Menu mnemonicParsing="false" text="%system">
             <items>
               <MenuItem mnemonicParsing="false" onAction="#userCentre" text="%userCenter" />
+                  <MenuItem mnemonicParsing="false" onAction="#about" text="%about" />
             </items>
           </Menu>
         </menus>
@@ -75,15 +76,15 @@
                   <RowConstraints vgrow="ALWAYS" />
                </rowConstraints>
                <children>
-                  <ListView fx:id="roomTagListView" GridPane.rowIndex="1">
+                  <ListView fx:id="list_room" GridPane.rowIndex="1">
                      <GridPane.margin>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </GridPane.margin></ListView>
-                  <ListView fx:id="itemTagListView" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  <ListView fx:id="list_items" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <GridPane.margin>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </GridPane.margin></ListView>
-                  <ListView fx:id="otherTaglistView" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                  <ListView fx:id="list_others" GridPane.columnIndex="2" GridPane.rowIndex="1">
                      <GridPane.margin>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </GridPane.margin></ListView>
@@ -92,12 +93,12 @@
                         <Font size="16.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" prefHeight="25.0" prefWidth="93.0" text="%item" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                  <Label alignment="CENTER" prefHeight="25.0" prefWidth="93.0" text="%items" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" prefHeight="25.0" prefWidth="92.0" text="%other" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                  <Label alignment="CENTER" prefHeight="25.0" prefWidth="92.0" text="%others" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                      <font>
                         <Font size="16.0" />
                      </font>
@@ -117,10 +118,10 @@
                      <tabs>
                         <Tab text="%english">
                            <content>
-                              <TableView fx:id="englishTableView">
+                              <TableView fx:id="table_en">
                                  <columns>
                                     <TableColumn prefWidth="300.0" text="%name" />
-                                    <TableColumn fx:id="englishTagsColumn" prefWidth="700.0" text="%tags" />
+                                    <TableColumn fx:id="column_en" prefWidth="650.0" text="%tags" />
                                  </columns>
                                  <contextMenu>
                                     <ContextMenu>
@@ -135,10 +136,10 @@
                         </Tab>
                         <Tab text="%german">
                            <content>
-                              <TableView fx:id="germanTableView">
+                              <TableView fx:id="table_de">
                                  <columns>
                                     <TableColumn prefWidth="300.0" text="%name" />
-                                    <TableColumn fx:id="germanTagsColumn" prefWidth="700.0" text="%tags" />
+                                    <TableColumn fx:id="column_de" prefWidth="700.0" text="%tags" />
                                  </columns>
                                  <contextMenu>
                                     <ContextMenu>
@@ -153,10 +154,10 @@
                         </Tab>
                         <Tab text="%chinese">
                            <content>
-                              <TableView fx:id="chineseTableView">
+                              <TableView fx:id="table_zh">
                                  <columns>
                                     <TableColumn prefWidth="300.0" text="%name" />
-                                    <TableColumn fx:id="chineseTagsColumn" prefWidth="700.0" text="%tags" />
+                                    <TableColumn fx:id="column_zh" prefWidth="700.0" text="%tags" />
                                  </columns>
                                  <contextMenu>
                                     <ContextMenu>

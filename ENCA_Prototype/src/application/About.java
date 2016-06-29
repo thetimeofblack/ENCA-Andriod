@@ -7,20 +7,20 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import utility.Utility;
-import view.TagAdderController;
+import view.AboutController;
 
-public class TagAdder extends Application {
+public class About extends Application {
 
 	@Override
 	public void start(Stage primaryStage) {
-		FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/view/TagAdder.fxml"), Utility.getResourceBundle());
+		FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/view/About.fxml"), Utility.getResourceBundle());
 		try {
 			primaryStage.setScene(new Scene(loader.load()));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		((TagAdderController) loader.getController()).setStage(primaryStage);
-		primaryStage.setTitle("Tag Adder");
+		((AboutController) loader.getController()).setStage(primaryStage);
+		primaryStage.setTitle("About");
 		primaryStage.initStyle(StageStyle.UNIFIED);
 		primaryStage.setResizable(false);
 		primaryStage.show();

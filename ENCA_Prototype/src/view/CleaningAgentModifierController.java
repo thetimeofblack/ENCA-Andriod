@@ -26,6 +26,7 @@ import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -93,6 +94,8 @@ public final class CleaningAgentModifierController {
 	private Stage stage;
 
 	@FXML
+	private TabPane tabPane;
+	@FXML
 	private TextField name_en;
 	@FXML
 	private TextArea description_en;
@@ -157,6 +160,7 @@ public final class CleaningAgentModifierController {
 				}
 			});
 		}
+		tabPane.getSelectionModel().clearAndSelect(User.getContentLanguage().getId());
 	}
 
 	@FXML

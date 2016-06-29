@@ -8,12 +8,14 @@ import application.CleaningAgentModifier;
 import de.fhl.enca.bl.CleaningAgent;
 import de.fhl.enca.bl.LanguageType;
 import de.fhl.enca.bl.Tag;
+import de.fhl.enca.bl.User;
 import de.fhl.enca.controller.CleaningAgentFetcher;
 import de.fhl.enca.controller.CleaningAgentOperator;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Border;
@@ -79,6 +81,8 @@ public final class CleaningAgentDetailController {
 	private Stage stage;
 
 	@FXML
+	private TabPane tabPane;
+	@FXML
 	private Label name_en;
 	@FXML
 	private FlowPane tags_en;
@@ -121,6 +125,7 @@ public final class CleaningAgentDetailController {
 		contentGroups.add(new ContentGroup(LanguageType.ENGLISH, name_en, tags_en, description_en, instruction_en));
 		contentGroups.add(new ContentGroup(LanguageType.GERMAN, name_de, tags_de, description_de, instruction_de));
 		contentGroups.add(new ContentGroup(LanguageType.CHINESE, name_zh, tags_zh, description_zh, instruction_zh));
+		tabPane.getSelectionModel().clearAndSelect(User.getContentLanguage().getId());
 	}
 
 	@FXML

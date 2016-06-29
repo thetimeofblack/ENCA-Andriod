@@ -67,7 +67,7 @@ public final class TagModifierController {
 			entry.getValue().getSelectionModel().selectedItemProperty().addListener((ObservableValue<? extends Tag> o, Tag x, Tag y) -> refreshTextField());
 		}
 		for (TextField textField : textFieldMap.values()) {
-			textField.textProperty().addListener((ObservableValue<? extends String> o, String x, String y) -> save.setDisable(!validate()));
+			textField.textProperty().addListener((ObservableValue<? extends String> o, String x, String y) -> save.setDisable(textField.isDisable() || !validate()));
 		}
 		setDisable(true);
 	}

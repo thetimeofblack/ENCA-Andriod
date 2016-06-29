@@ -2,6 +2,7 @@ package view;
 
 import application.Main;
 import de.fhl.enca.bl.User;
+import de.fhl.enca.controller.Initialize;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -18,6 +19,7 @@ public final class LoginController {
 
 	@FXML
 	private void initialize() {
+		Initialize.initialize();
 		usernameLabel.setText(User.getName());
 	}
 

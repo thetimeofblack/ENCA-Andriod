@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import application.About;
 import application.CleaningAgentDetail;
 import application.CleaningAgentModifier;
 import application.TagAdder;
@@ -36,25 +37,25 @@ import view.CleaningAgentModifierController.OperationType;
 public final class MainController {
 
 	@FXML
-	private ListView<Tag> roomTagListView;
+	private ListView<Tag> list_room;
 	@FXML
-	private ListView<Tag> itemTagListView;
+	private ListView<Tag> list_items;
 	@FXML
-	private ListView<Tag> otherTaglistView;
+	private ListView<Tag> list_others;
 	@FXML
 	private TabPane tabPane;
 	@FXML
-	private TableView<CleaningAgentBean> englishTableView;
+	private TableView<CleaningAgentBean> table_en;
 	@FXML
-	private TableView<CleaningAgentBean> germanTableView;
+	private TableView<CleaningAgentBean> table_de;
 	@FXML
-	private TableView<CleaningAgentBean> chineseTableView;
+	private TableView<CleaningAgentBean> table_zh;
 	@FXML
-	private TableColumn<CleaningAgentBean, FlowPane> englishTagsColumn;
+	private TableColumn<CleaningAgentBean, FlowPane> column_en;
 	@FXML
-	private TableColumn<CleaningAgentBean, FlowPane> germanTagsColumn;
+	private TableColumn<CleaningAgentBean, FlowPane> column_de;
 	@FXML
-	private TableColumn<CleaningAgentBean, FlowPane> chineseTagsColumn;
+	private TableColumn<CleaningAgentBean, FlowPane> column_zh;
 	@FXML
 	private TextField textField;
 	@FXML
@@ -102,7 +103,7 @@ public final class MainController {
 	/**
 	 * Store the three tag columns
 	 */
-	private Set<TableColumn<CleaningAgentBean, FlowPane>> columnList = new HashSet<>();
+	private Set<TableColumn<CleaningAgentBean, FlowPane>> columns = new HashSet<>();
 
 	private Set<MenuItem> detailSet = new HashSet<>();
 	private Set<MenuItem> modifyCASet = new HashSet<>();
@@ -132,15 +133,15 @@ public final class MainController {
 
 	@FXML
 	private void initialize() {
-		listViewMap.put(roomTagListView, TagType.ROOM);
-		listViewMap.put(itemTagListView, TagType.ITEM);
-		listViewMap.put(otherTaglistView, TagType.OTHERS);
-		tableViewMap.put(LanguageType.ENGLISH, englishTableView);
-		tableViewMap.put(LanguageType.GERMAN, germanTableView);
-		tableViewMap.put(LanguageType.CHINESE, chineseTableView);
-		columnList.add(englishTagsColumn);
-		columnList.add(germanTagsColumn);
-		columnList.add(chineseTagsColumn);
+		listViewMap.put(list_room, TagType.ROOM);
+		listViewMap.put(list_items, TagType.ITEM);
+		listViewMap.put(list_others, TagType.OTHERS);
+		tableViewMap.put(LanguageType.ENGLISH, table_en);
+		tableViewMap.put(LanguageType.GERMAN, table_de);
+		tableViewMap.put(LanguageType.CHINESE, table_zh);
+		columns.add(column_en);
+		columns.add(column_de);
+		columns.add(column_zh);
 		detailSet.add(detail);
 		detailSet.add(detail_en);
 		detailSet.add(detail_de);
@@ -162,7 +163,7 @@ public final class MainController {
 			});
 		}
 		/* put those tag labels into the table cell */
-		for (TableColumn<CleaningAgentBean, FlowPane> column : columnList) {
+		for (TableColumn<CleaningAgentBean, FlowPane> column : columns) {
 			column.setCellFactory(e -> new TableCell<CleaningAgentBean, FlowPane>() {
 
 				@Override
@@ -254,7 +255,7 @@ public final class MainController {
 		if (getChosenTags().isEmpty()) {
 			/* If no tag has been chosen, fetch all tags of the tagType of the listView */
 			listView.setItems(FXCollections.observableArrayList(TagFetcher.fetchTagsAllOfCertainType(listViewMap.get(listView))));
-			if (listView == otherTaglistView) {
+			if (listView == list_others) {
 				if (!Tag.getTag(0).getCleaningAgents().isEmpty()) {
 					listView.getItems().add(Tag.getTag(0));
 				}
@@ -335,10 +336,15 @@ public final class MainController {
 		System.exit(0);
 	}
 
+	@FXML
+	private void about() {
+		new About().start(new Stage());
+	}
+
 	public void setMainStage(Stage stage) {
 		this.mainStage = stage;
 	}
-	
+
 	public void refreshMain() {
 		initMain();
 	}
