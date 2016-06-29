@@ -72,7 +72,7 @@ public class LoginActivity extends AppCompatActivity {
                     startActivity(i);
                     finish();
                 }
-            }, 2000);
+            }, 1500);
         }
 
         DatabaseAccess databaseAccess = DatabaseAccess.getInstance(this);

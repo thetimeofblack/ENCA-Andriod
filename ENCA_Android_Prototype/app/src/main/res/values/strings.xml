@@ -30,6 +30,7 @@
     <string name="cleaningagent_instructionhint">Instruction</string>
     <string name="cleaningagent_descriptionhint">Description</string>
     <string name="cleaningagent_taghint">Tag Related</string>
+    <string name="promt">Choose Language</string>
     <string-array name="language_type">
         <item>English</item>
         <item>Deutsch</item>

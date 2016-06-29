@@ -16,7 +16,14 @@
         android:layout_below="@+id/toolbar"
         android:layout_alignParentLeft="true"/>
 
-
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/cleaning_agent_spinner_content"
+        android:layout_toRightOf="@+id/cleaning_agent_image_detail"
+        android:gravity="end"
+        android:layout_below="@+id/toolbar"
+        />
 
         <TextView
             android:layout_width="match_parent"
@@ -24,11 +31,11 @@
             android:id="@+id/cleaning_agent_name_detail"
             android:textStyle="bold"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:layout_below="@+id/toolbar"
+            android:layout_below="@+id/cleaning_agent_spinner_content"
             android:layout_toRightOf="@+id/cleaning_agent_image_detail"
             android:text="Name"
            android:layout_centerHorizontal="true"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="10dp"
             android:maxLines="5"
             android:scrollbars="vertical"
             android:ellipsize = "marquee"
@@ -89,7 +96,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/cleaning_agent_rate"
-            android:layout_gravity="center_horizontal"
             android:padding="8dp"
             android:textStyle="bold"
             android:text="@string/cleaningagent_ratehint"
@@ -115,15 +121,23 @@
             android:padding="8dp"
             android:layout_row="3"
             android:layout_column="0" />
-
+        <ScrollView
+            android:layout_width="250dp"
+            android:layout_height="100dp"
+            android:layout_row="3"
+            android:layout_column="1"
+            android:fillViewport="true"
+            android:scrollbars = "vertical"
+            android:scrollbarStyle="outsideOverlay">
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/cleaning_agent_instruction_detail"
             android:text="Instruction"
             android:padding="8dp"
-            android:layout_row="3"
-            android:layout_column="1" />
+            android:maxLines="8"
+            android:ellipsize="end" />
+        </ScrollView>
         <TextView
             android:id="@+id/cleaning_agent_description"
             android:layout_width="wrap_content"
@@ -136,7 +150,7 @@
 
         <ScrollView
             android:layout_width="250dp"
-            android:layout_height="150dp"
+            android:layout_height="140dp"
             android:layout_row="4"
             android:layout_column="1"
             android:fillViewport="true"
@@ -147,7 +161,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="8dp"
-                android:maxLines="10"
+                android:maxLines="8"
                 android:ellipsize="end"
                 android:text="Description" />
         </ScrollView>

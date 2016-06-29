@@ -97,6 +97,27 @@ public class DataInitialize {
         initTTRelations(ctMap);
     }
 
+//    /**
+//     * Initialize the relations between cleaning agents and tags
+//     * and the relations between tags
+//     */
+//    private static void initRelations() {
+//        Cursor cursor = DatabaseVisitor.visitRelations();
+//            cursor.moveToFirst();
+//            while (cursor.isAfterLast()) {
+//                CleaningAgent cleaningAgent = CleaningAgent.getCleaningAgent(cursor.getInt(1));
+//                Tag tag = Tag.getTag(cursor.getInt(2));
+//                cleaningAgent.addTag(tag);
+//                tag.addCleaningAgent(cleaningAgent);
+//            }
+//        for (CleaningAgent cleaningAgent : CleaningAgent.getCleaningAgentsAll()) {
+//            if (cleaningAgent.getTags().isEmpty()) {
+//                Tag.getTag(0).addCleaningAgent(cleaningAgent);
+//            }
+//            CleaningAgentOperator.attachTTRelation(cleaningAgent.getTags());
+//        }
+//    }
+
     /**
      * Initialize the relations between cleaning agents and tags
      */

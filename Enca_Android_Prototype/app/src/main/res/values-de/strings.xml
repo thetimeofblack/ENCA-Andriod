@@ -27,4 +27,6 @@
     <string name="cleaningagent_locationhint">Ort</string>
     <string name="cleaningagent_ratehint">Bewertung</string>
     <string name="cleaningagent_typehint"> Art</string>
+    <string name="cleaningagent_taghint"> Etikett Verbunden</string>
+    <string name="promt">Wähle eine Sprache</string>
 </resources>

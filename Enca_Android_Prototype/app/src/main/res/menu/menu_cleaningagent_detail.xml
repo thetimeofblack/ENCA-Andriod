@@ -1,19 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-<item
-    android:id="@+id/cleaning_agent_add"
-    android:title="@string/Add"
-    android:icon="@drawable/ic_action_add"
-    />
-    <item
-        android:id="@+id/cleaning_agent_modify"
-        android:title="@string/Modify"
-        android:icon="@drawable/ic_action_modify"
-        />
-    <item
-        android:id="@+id/cleaning_agent_delete"
-        android:title="@string/Delete"
-        android:icon="@drawable/ic_action_delete"
-        />
+
 </menu>
