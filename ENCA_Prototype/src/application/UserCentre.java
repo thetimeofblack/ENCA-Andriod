@@ -22,7 +22,9 @@ public final class UserCentre extends Application {
 	public void start(Stage primaryStage) {
 		FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/view/UserCentre.fxml"), ResourceBundle.getBundle("resource.UserCentre", User.getInterfaceLanguage().getLocale()));
 		try {
-			primaryStage.setScene(new Scene(loader.load()));
+			Scene scene = new Scene(loader.load());
+			scene.getStylesheets().add(this.getClass().getResource("/css/TabPaneHeader.css").toString());
+			primaryStage.setScene(scene);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

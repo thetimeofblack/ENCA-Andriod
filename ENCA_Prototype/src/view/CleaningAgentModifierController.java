@@ -250,8 +250,6 @@ public final class CleaningAgentModifierController {
 			delete.setDisable(true);
 			save.setDisable(true);
 		}
-		System.out.println(applicationTime.getText() == null);
-		System.out.println(applicationTime.getText().equals(""));
 	}
 
 	private void addTagLabel(Tag tag) {

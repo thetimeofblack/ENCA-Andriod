@@ -1,8 +1,11 @@
 package view;
 
+import application.CleaningAgentDetail;
 import application.Main;
+import de.fhl.enca.bl.CleaningAgent;
 import de.fhl.enca.bl.LanguageType;
 import de.fhl.enca.bl.User;
+import de.fhl.enca.controller.CleaningAgentFetcher;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -10,6 +13,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.FlowPane;
 import javafx.stage.Stage;
 
 public final class UserCentreController {
@@ -22,6 +27,8 @@ public final class UserCentreController {
 	private ComboBox<String> interfaceComboBox;
 	@FXML
 	private ComboBox<String> contentComboBox;
+	@FXML
+	private FlowPane flowPane;
 	@FXML
 	private Button saveButton;
 	@FXML
@@ -51,6 +58,13 @@ public final class UserCentreController {
 		contentComboBox.setItems(languageList);
 		interfaceComboBox.setValue(User.getInterfaceLanguage().toString());
 		contentComboBox.setValue(User.getContentLanguage().toString());
+		for (CleaningAgent cleaningAgent : CleaningAgent.getCleaningAgentsWithMemo()) {
+			ImageView imageView = new ImageView(CleaningAgentFetcher.fetchImageOfCleaningAgent(cleaningAgent));
+			imageView.setFitWidth(100);
+			imageView.setFitHeight(100);
+			imageView.setOnMouseClicked(e -> new CleaningAgentDetail(cleaningAgent).start(new Stage()));
+			flowPane.getChildren().add(imageView);
+		}
 	}
 
 	@FXML
