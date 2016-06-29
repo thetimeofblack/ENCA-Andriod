@@ -97,6 +97,7 @@ public class UserCenterActivity extends AppCompatActivity {
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
+                getResources().updateConfiguration(config, getResources().getDisplayMetrics());
             }
         });
 

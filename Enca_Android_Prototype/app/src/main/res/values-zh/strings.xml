@@ -27,4 +27,6 @@
     <string name="cleaningagent_locationhint">原产地</string>
     <string name="cleaningagent_ratehint">评分</string>
     <string name="cleaningagent_typehint">类型</string>
+    <string name="cleaningagent_taghint">相关标签</string>
+    <string name="promt">选择语言</string>
 </resources>

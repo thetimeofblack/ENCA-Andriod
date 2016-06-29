@@ -39,7 +39,7 @@ public enum LanguageType {
 		return LanguageList.get(id);
 	}
 
-	private LanguageType(String string, Locale locale, int id) {
+	 LanguageType(String string, Locale locale, int id) {
 		this.name = string;
 		this.locale = locale;
 		this.id = id;

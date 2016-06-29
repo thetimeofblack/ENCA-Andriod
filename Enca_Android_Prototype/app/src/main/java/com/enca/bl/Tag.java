@@ -1,5 +1,7 @@
 package com.enca.bl;
 
+import com.enca.controller.TagFetcher;
+
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -91,4 +93,12 @@ public class Tag {
 	public Set<Tag> getTagsRelated() {
 		return tagsRelated;
 	}
+
+	public int search(String keyword) {
+		return name.search(keyword);
+	}
+
+
+
+
 }

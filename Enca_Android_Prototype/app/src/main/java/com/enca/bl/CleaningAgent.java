@@ -4,6 +4,8 @@ package com.enca.bl;
 import android.graphics.Bitmap;
 import android.media.Image;
 
+import com.enca.dao.DatabaseAccess;
+
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -73,6 +75,10 @@ public final class CleaningAgent {
 	/* getters and setters */
 	public int getCleaningAgentID() {
 		return cleaningAgentID;
+	}
+
+	public void addTag(Tag tag) {
+		this.tags.add(tag);
 	}
 
 	public void setCleaningAgentID(int cleaningAgentID) {

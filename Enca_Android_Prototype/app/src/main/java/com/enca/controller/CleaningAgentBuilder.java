@@ -70,4 +70,6 @@ public final class CleaningAgentBuilder {
 		Bitmap bmp = BitmapFactory.decodeByteArray(image,0, image.length);
 		cleaningAgent.setImage(bmp);
 	}
+
+
 }

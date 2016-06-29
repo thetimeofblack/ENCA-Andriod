@@ -26,4 +26,6 @@ public class DatabaseVisitor {
     public static byte[] visitImage(int cleaningAgentID) {
         return  DatabaseAccess.getImage(cleaningAgentID);
     }
+
+
 }

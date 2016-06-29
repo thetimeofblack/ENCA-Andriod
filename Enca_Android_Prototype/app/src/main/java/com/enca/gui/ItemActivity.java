@@ -11,6 +11,7 @@ import android.view.Window;
 
 import com.enca.bl.Tag;
 import com.enca.bl.TagType;
+import com.enca.controller.DataInitialize;
 import com.enca.controller.TagFetcher;
 
 import java.util.ArrayList;
