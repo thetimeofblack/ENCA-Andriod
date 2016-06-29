@@ -1,5 +1,6 @@
 package view;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -73,6 +74,10 @@ public final class CleaningAgentModifierController {
 			cleaningAgent.getDescription().setString(type, description.getText());
 			cleaningAgent.getInstruction().setString(type, instruction.getText());
 		}
+
+		public String getName() {
+			return name.getText();
+		}
 	}
 
 	private OperationType operationType;
@@ -80,6 +85,7 @@ public final class CleaningAgentModifierController {
 	private Set<ContentGroup> contentGroups = new HashSet<>();
 	private Map<ComboBox<Tag>, TagType> comboBoxes = new HashMap<>();
 	private Set<Tag> tags = new HashSet<>();
+	private File imageFile = null;
 
 	private Stage stage;
 
@@ -137,7 +143,6 @@ public final class CleaningAgentModifierController {
 				if (newValue != null) {
 					Tag tag = Tag.getTag(newValue.getTagID());
 					if (!tags.contains(tag)) {
-						tags.add(tag);
 						addTagLabel(tag);
 					}
 				}
@@ -162,6 +167,7 @@ public final class CleaningAgentModifierController {
 				Image image = new Image(new FileInputStream(file));
 				if (image != null && !image.isError()) {
 					imageView.setImage(image);
+					imageFile = file;
 				}
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
@@ -178,15 +184,31 @@ public final class CleaningAgentModifierController {
 	}
 
 	@FXML
+	private void delete() {
+		if (operationType == OperationType.MODIFY) {
+			if (Utility.showDeleteCAAlert()) {
+				CleaningAgentOperator.removeCleaningAgent(cleaningAgent);
+				stage.hide();
+			}
+		}
+	}
+
+	@FXML
 	private void save() {
-		CleaningAgent newCleaningAgent = assembly();
-		switch (operationType) {
-			case MODIFY:
-				CleaningAgentOperator.modifyCleaningAgent(newCleaningAgent);
-				CleaningAgentOperator.saveMemo(newCleaningAgent, memo.getText());
-				break;
-			case ADD:
-				break;
+		if (validate()) {
+			CleaningAgent newCleaningAgent = assembly();
+			switch (operationType) {
+				case MODIFY:
+					CleaningAgentOperator.modifyCleaningAgent(newCleaningAgent);
+					break;
+				case ADD:
+					CleaningAgentOperator.createCleaningAgent(newCleaningAgent);
+					break;
+			}
+			CleaningAgentOperator.saveMemo(newCleaningAgent, memo.getText());
+			if (imageFile!=null) {
+				CleaningAgentOperator.saveImage(newCleaningAgent, imageFile);
+			}
 		}
 	}
 
@@ -198,21 +220,24 @@ public final class CleaningAgentModifierController {
 	public void initializeContent(OperationType operationType, CleaningAgent cleaningAgent) {
 		this.operationType = operationType;
 		this.cleaningAgent = cleaningAgent;
-		for (ContentGroup contentGroup : contentGroups) {
-			contentGroup.showContent();
-		}
-		memo.setText(cleaningAgent.getMemo());
-		imageView.setImage(CleaningAgentFetcher.fetchImageOfCleaningAgent(cleaningAgent));
-		applicationTime.setText(String.valueOf(cleaningAgent.getApplicationTime()));
-		frequency.setText(String.valueOf(cleaningAgent.getFrequency()));
-		rate.getSelectionModel().clearAndSelect(cleaningAgent.getRate() - 1);
-		tags.addAll(cleaningAgent.getTags());
-		for (Tag tag : tags) {
-			addTagLabel(tag);
+		if (operationType == OperationType.MODIFY) {
+			for (ContentGroup contentGroup : contentGroups) {
+				contentGroup.showContent();
+			}
+			memo.setText(cleaningAgent.getMemo());
+			imageView.setImage(CleaningAgentFetcher.fetchImageOfCleaningAgent(cleaningAgent));
+			applicationTime.setText(String.valueOf(cleaningAgent.getApplicationTime()));
+			frequency.setText(String.valueOf(cleaningAgent.getFrequency()));
+			rate.getSelectionModel().clearAndSelect(cleaningAgent.getRate() - 1);
+			tags.addAll(cleaningAgent.getTags());
+			for (Tag tag : tags) {
+				addTagLabel(tag);
+			}
 		}
 	}
 
 	private void addTagLabel(Tag tag) {
+		tags.add(tag);
 		Label label = new Label(tag.getName().getString(User.getInterfaceLanguage()));
 		label.setBorder(new Border(new BorderStroke(Color.GRAY, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 		label.setPadding(new Insets(0, 4, 0, 4));
@@ -246,6 +271,17 @@ public final class CleaningAgentModifierController {
 		newCleaningAgent.setRate(rate.getSelectionModel().getSelectedIndex() + 1);
 		newCleaningAgent.addTagsAll(tags);
 		return newCleaningAgent;
+	}
+
+	private boolean validate() {
+		boolean valid = false;
+		for (ContentGroup contentGroup : contentGroups) {
+			if (contentGroup.getName() != null && !contentGroup.getName().equals("")) {
+				valid = true;
+				break;
+			}
+		}
+		return valid;
 	}
 
 	public void setStage(Stage stage) {

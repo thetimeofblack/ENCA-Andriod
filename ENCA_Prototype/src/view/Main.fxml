@@ -125,8 +125,8 @@
                            <content>
                               <TableView fx:id="germanTableView">
                                  <columns>
-                                    <TableColumn prefWidth="200.0" text="%name" />
-                                    <TableColumn fx:id="germanTagsColumn" prefWidth="600.0" text="%tags" />
+                                    <TableColumn prefWidth="300.0" text="%name" />
+                                    <TableColumn fx:id="germanTagsColumn" prefWidth="700.0" text="%tags" />
                                  </columns>
                               </TableView>
                            </content>
@@ -135,8 +135,8 @@
                            <content>
                               <TableView fx:id="chineseTableView">
                                  <columns>
-                                    <TableColumn prefWidth="200.0" text="%name" />
-                                    <TableColumn fx:id="chineseTagsColumn" prefWidth="600.0" text="%tags" />
+                                    <TableColumn prefWidth="300.0" text="%name" />
+                                    <TableColumn fx:id="chineseTagsColumn" prefWidth="700.0" text="%tags" />
                                  </columns>
                               </TableView>
                            </content>

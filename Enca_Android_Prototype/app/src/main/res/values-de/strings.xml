@@ -11,4 +11,20 @@
     <string name="search_hint">Suchen</string>
     <string name="login_namehint">Gib deinen Namen ein</string>
     <string name="login_welcome">Willkommen </string>
+    <string name="usercenter_interfacelanguage">Zurücksetzen Schnittstellensprache</string>
+    <string name="usercenter_contentlanguage">Zurücksetzen Inhaltsprache</string>
+    <string name="usercenter">User Center</string>
+    <string name="usercenter_namehint">Zurücksetzen Benutzername</string>
+    <string name="noinput">Bitte Namen eingeben</string>
+    <string name="reset_confirm"> Bestätigen</string>
+    <string name="inputinvalid"> Eingabe ungültig</string>
+    <string name="resetdialog"> zurücksetzen zu bestätigen</string>
+    <string name="resetdialogmessage">Sind Sie sicher, dass Sie die Daten zurücksetzen?</string>
+    <string name="exitinformation"> Sind Sie sicher, dass Sie ENCA zu beenden</string>
+    <string name="exittitle"> Beenden Achtung</string>
+    <string name="cleaningagent_descriptionhint"> Beschreibung</string>
+    <string name="cleaningagent_instructionhint">Anweisung</string>
+    <string name="cleaningagent_locationhint">Ort</string>
+    <string name="cleaningagent_ratehint">Bewertung</string>
+    <string name="cleaningagent_typehint"> Art</string>
 </resources>

@@ -26,6 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
+        android:layout_marginLeft="50dp"
         android:id="@+id/login_tablelayout"
         android:layout_below="@+id/login_welcome"
         >
@@ -40,12 +41,14 @@
             <TextView
                 android:text="@string/login_namehint"
                 android:id="@+id/textView"
+                android:layout_gravity="center"
                 android:layout_column="0" />
 
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/login_name"
+
                 android:layout_column="1"
                 android:hint="@string/enter_name"
                 />
@@ -55,7 +58,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="20dp">
+            android:layout_marginTop="30dp">
 
             <TextView
                 android:text="@string/login_interfacelanguage"
@@ -73,7 +76,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="20dp">
+            android:layout_marginTop="30dp">
 
             <TextView
                 android:text="@string/login_contentlanguage"

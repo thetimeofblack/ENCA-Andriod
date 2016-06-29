@@ -1,5 +1,8 @@
 package de.fhl.enca.controller;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 import de.fhl.enca.bl.CleaningAgent;
@@ -107,5 +110,17 @@ public final class CleaningAgentOperator {
 		cleaningAgent.setMemo(memo);
 		CleaningAgent.refreshCleaningAgentWithMemo(cleaningAgent);
 		SQLAmender.writeMemo(cleaningAgent.getCleaningAgentID(), memo);
+	}
+
+	public static void saveImage(CleaningAgent cleaningAgent, File file) {
+		byte[] content = null;
+		try {
+			FileInputStream stream = new FileInputStream(file);
+			stream.read(content);
+			stream.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		SQLAmender.writeImage(cleaningAgent.getCleaningAgentID(), content);
 	}
 }
