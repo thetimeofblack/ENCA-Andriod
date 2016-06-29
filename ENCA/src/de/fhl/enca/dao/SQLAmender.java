@@ -8,6 +8,10 @@ public final class SQLAmender {
 		Connector.executeNonSelect("update CleaningAgents set memo='" + memo + "' where cleaningAgentID=" + cleaningAgentID);
 	}
 
+	public static void writeImage(int cleaningAgentID, byte[] content) {
+
+	}
+
 	public static void createTCRelation(int cleaningAgentID, int tagID) {
 		Connector.executeNonSelect("insert into TC values (" + cleaningAgentID + "," + tagID + ")");
 	}

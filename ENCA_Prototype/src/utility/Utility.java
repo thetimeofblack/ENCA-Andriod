@@ -16,7 +16,15 @@ public final class Utility {
 	private static final ButtonType CANCEL = new ButtonType(RESOURCE_BUNDLE.getString("cancel"), ButtonData.CANCEL_CLOSE);
 
 	public static boolean showClearAlert() {
-		Alert alert = new Alert(AlertType.WARNING, RESOURCE_BUNDLE.getString("clear"), YES, NO, CANCEL);
+		return showAlert("clear");
+	}
+
+	public static boolean showDeleteCAAlert() {
+		return showAlert("deleteCA");
+	}
+
+	private static boolean showAlert(String key) {
+		Alert alert = new Alert(AlertType.WARNING, RESOURCE_BUNDLE.getString(key), YES, NO, CANCEL);
 		return alert.showAndWait().filter(e -> e == YES).isPresent();
 	}
 }
