@@ -18,6 +18,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import utility.Utility;
 
 public final class TagModifierController {
 
@@ -76,13 +77,18 @@ public final class TagModifierController {
 		if (tag != null && validate()) {
 			TagOperator.modifyTag(assembly());
 			refreshListView();
+			Utility.refreshMain();
 		}
 	}
 
 	@FXML
 	private void delete() {
 		if (tag != null) {
-			TagOperator.removeTag(tag);
+			if (Utility.showDeleteTagAlert()) {
+				TagOperator.removeTag(tag);
+				refreshListView();
+				Utility.refreshMain();
+			}
 		}
 	}
 
@@ -122,12 +128,13 @@ public final class TagModifierController {
 			}
 		}
 	}
-	
+
 	private void refreshListView() {
 		for (Entry<TagType, ListView<Tag>> entry : listViewMap.entrySet()) {
 			entry.getValue().setItems(FXCollections.observableArrayList(TagFetcher.fetchTagsAllOfCertainType(entry.getKey())));
 		}
 	}
+
 	private boolean validate() {
 		boolean valid = false;
 		for (TextField textField : textFieldMap.values()) {

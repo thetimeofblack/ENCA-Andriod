@@ -8,6 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import utility.Utility;
 import view.MainController;
 
 public class Main extends Application {
@@ -23,6 +24,7 @@ public class Main extends Application {
 			e.printStackTrace();
 		}
 		((MainController) loader.getController()).setMainStage(primaryStage);
+		Utility.setMainController(((MainController) loader.getController()));
 		primaryStage.setTitle("ENCA");
 		primaryStage.initStyle(StageStyle.UNIFIED);
 		primaryStage.show();

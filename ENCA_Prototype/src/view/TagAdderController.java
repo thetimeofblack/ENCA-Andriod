@@ -18,6 +18,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import utility.Utility;
 
 public final class TagAdderController {
 
@@ -59,6 +60,7 @@ public final class TagAdderController {
 	private void save() {
 		if (validate()) {
 			TagOperator.createTag(assembly());
+			Utility.refreshMain();
 		}
 	}
 

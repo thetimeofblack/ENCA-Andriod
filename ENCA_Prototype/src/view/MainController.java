@@ -19,8 +19,8 @@ import de.fhl.enca.controller.TagFetcher;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.SplitMenuButton;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TableCell;
@@ -59,8 +59,23 @@ public final class MainController {
 	private TextField textField;
 	@FXML
 	private SplitMenuButton add;
+
 	@FXML
-	private Button userCentreButton;
+	private MenuItem detail;
+	@FXML
+	private MenuItem modifyCA;
+	@FXML
+	private MenuItem detail_en;
+	@FXML
+	private MenuItem modifyCA_en;
+	@FXML
+	private MenuItem detail_de;
+	@FXML
+	private MenuItem modifyCA_de;
+	@FXML
+	private MenuItem detail_zh;
+	@FXML
+	private MenuItem modifyCA_zh;
 
 	private Stage mainStage;
 
@@ -89,14 +104,13 @@ public final class MainController {
 	 */
 	private Set<TableColumn<CleaningAgentBean, FlowPane>> columnList = new HashSet<>();
 
+	private Set<MenuItem> detailSet = new HashSet<>();
+	private Set<MenuItem> modifyCASet = new HashSet<>();
+
 	/**
 	 * Store the current cleaning agent fetch result
 	 */
 	private Set<CleaningAgent> result = new HashSet<>();
-
-	public void setMainStage(Stage stage) {
-		this.mainStage = stage;
-	}
 
 	private Set<Tag> getChosenTags() {
 		Set<Tag> set = new HashSet<>();
@@ -127,12 +141,21 @@ public final class MainController {
 		columnList.add(englishTagsColumn);
 		columnList.add(germanTagsColumn);
 		columnList.add(chineseTagsColumn);
+		detailSet.add(detail);
+		detailSet.add(detail_en);
+		detailSet.add(detail_de);
+		detailSet.add(detail_zh);
+		modifyCASet.add(modifyCA);
+		modifyCASet.add(modifyCA_en);
+		modifyCASet.add(modifyCA_de);
+		modifyCASet.add(modifyCA_zh);
 		tabPane.getSelectionModel().clearAndSelect(User.getContentLanguage().getId());
 		/* assign the two columns of the tableView */
 		for (TableView<CleaningAgentBean> tableView : tableViewMap.values()) {
 			tableView.getColumns().get(0).setCellValueFactory(new PropertyValueFactory<>("name"));
 			tableView.getColumns().get(1).setCellValueFactory(new PropertyValueFactory<>("tags"));
 			tableView.setOnMouseClicked(e -> {
+				validate();
 				if (e.getClickCount() > 1) {
 					detail();
 				}
@@ -207,6 +230,7 @@ public final class MainController {
 		}
 		initTableViews(CleaningAgent.getCleaningAgentsAll());
 		textField.clear();
+		validate();
 	}
 
 	/**
@@ -258,6 +282,16 @@ public final class MainController {
 	}
 
 	@FXML
+	private void validate() {
+		for (MenuItem menuItem : detailSet) {
+			menuItem.setDisable(!validateDetail());
+		}
+		for (MenuItem menuItem : modifyCASet) {
+			menuItem.setDisable(!validateModify());
+		}
+	}
+
+	@FXML
 	private void userCentre() {
 		new UserCentre(mainStage).start(new Stage());
 	}
@@ -266,6 +300,13 @@ public final class MainController {
 	private void detail() {
 		if (validateDetail()) {
 			new CleaningAgentDetail(CleaningAgent.getCleaningAgent(getCurrentTableView().getSelectionModel().getSelectedItem().getId())).start(new Stage());
+		}
+	}
+
+	@FXML
+	private void modifyCA() {
+		if (validateModify()) {
+			new CleaningAgentModifier(OperationType.MODIFY, CleaningAgent.getCleaningAgent(getCurrentTableView().getSelectionModel().getSelectedItem().getId())).start(new Stage());
 		}
 	}
 
@@ -285,12 +326,20 @@ public final class MainController {
 	}
 
 	@FXML
-	private void tagModifier() {
+	private void modifyTag() {
 		new TagModifier().start(new Stage());
 	}
 
 	@FXML
 	private void exit() {
 		System.exit(0);
+	}
+
+	public void setMainStage(Stage stage) {
+		this.mainStage = stage;
+	}
+	
+	public void refreshMain() {
+		initMain();
 	}
 }

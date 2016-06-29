@@ -195,6 +195,7 @@ public final class CleaningAgentModifierController {
 		if (Utility.showDeleteCAAlert()) {
 			CleaningAgentOperator.removeCleaningAgent(cleaningAgent);
 			CleaningAgentBean.removeCleaningAgentBean(cleaningAgent);
+			Utility.refreshMain();
 			stage.hide();
 		}
 	}
@@ -218,6 +219,7 @@ public final class CleaningAgentModifierController {
 			if (imageFile != null) {
 				CleaningAgentOperator.saveImage(cleaningAgent, imageFile);
 			}
+			Utility.refreshMain();
 		}
 	}
 
