@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="resetdialogmessage" type="id">Are you sure you want to reset the data?</item>
+</resources>

@@ -51,8 +51,8 @@ public class DataInitialize {
                         builder.setInstruction(iStringGenerator(cursor, 7));
                         builder.setApplicationTime(cursor.getLong(10));
                         builder.setFrequency(cursor.getLong(11));
-                        builder.setType(cursor.getString(12));
-                        builder.setRate(cursor.getInt(13));
+//                        builder.setType(cursor.getString(12));
+                        builder.setRate(cursor.getInt(12));
                         builder.setMainLanguage(cursor.getInt(14));
 //                        builder.setImage(cursor.getBlob(15));
                         builder.getResult();
