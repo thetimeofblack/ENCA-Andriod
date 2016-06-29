@@ -11,4 +11,20 @@
     <string name="rooms">房间</string>
     <string name="search">搜索</string>
     <string name="search_hint">搜索</string>
+    <string name="usercenter">用户中心</string>
+    <string name="usercenter_contentlanguage">重置内容语言</string>
+    <string name="usercenter_interfacelanguage">重置界面语言</string>
+    <string name="usercenter_namehint">重置用户名</string>
+    <string name="reset_confirm">确认</string>
+    <string name="noinput">请输入名字</string>
+    <string name="inputinvalid">输入无效</string>
+    <string name="resetdialog">重置确认</string>
+    <string name="resetdialogmessage">你确定要重置这些信息吗？</string>
+    <string name="exittitle">退出提醒</string>
+    <string name="exitinformation">你确定要退出ENCA吗？</string>
+    <string name="cleaningagent_descriptionhint">描述</string>
+    <string name="cleaningagent_instructionhint">说明</string>
+    <string name="cleaningagent_locationhint">原产地</string>
+    <string name="cleaningagent_ratehint">评分</string>
+    <string name="cleaningagent_typehint">类型</string>
 </resources>

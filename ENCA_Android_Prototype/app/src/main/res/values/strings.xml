@@ -13,6 +13,23 @@
     <string name="Add">Add</string>
     <string name="Modify">Modify</string>
     <string name="Delete">Delete</string>
+    <string name="usercenter_namehint">Reset User Name</string>
+    <string name="usercenter_interfacelanguage">Reset Interface Language</string>
+    <string name="usercenter_contentlanguage">Reset Content Language</string>
+    <string name="noinput">Please Enter Name</string>
+    <string name="reset_confirm">Confirm</string>
+    <string name="usercenter">User Center</string>
+    <string name="resetdialog">Reset Confirm</string>
+    <string name="resetdialogmessage">Are you sure you want to reset the data?</string>
+    <string name="inputinvalid">Input Invalid</string>
+    <string name="exitinformation">Are you sure you want to exit ENCA?</string>
+    <string name="exittitle">Exit Attention</string>
+    <string name="cleaningagent_locationhint">Location</string>
+    <string name="cleaningagent_typehint">Type</string>
+    <string name="cleaningagent_ratehint">Rate</string>
+    <string name="cleaningagent_instructionhint">Instruction</string>
+    <string name="cleaningagent_descriptionhint">Description</string>
+    <string name="cleaningagent_taghint">Tag Related</string>
     <string-array name="language_type">
         <item>English</item>
         <item>Deutsch</item>
