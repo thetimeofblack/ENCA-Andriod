@@ -3,3 +3,9 @@ Background color: a verdent green, looks natural
 
 Highlight color: a greenish blue, rather mild
 #0ac2c2	rgb(10, 194, 194)	hsl(180, 90%, 40%)
+
+java fx default css color spec:
+SteelBlue
+#4682b4
+rgb(70, 130, 180)
+hsl(207, 44%, 49%)
