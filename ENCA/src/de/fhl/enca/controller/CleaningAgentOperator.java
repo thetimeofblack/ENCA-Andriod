@@ -18,6 +18,24 @@ import de.fhl.enca.dao.SQLAmender;
  */
 public final class CleaningAgentOperator {
 
+	public static void saveMemo(CleaningAgent cleaningAgent, String memo) {
+		cleaningAgent.setMemo(memo);
+		CleaningAgent.refreshCleaningAgentWithMemo(cleaningAgent);
+		SQLAmender.writeMemo(cleaningAgent.getCleaningAgentID(), memo);
+	}
+
+	public static void saveImage(CleaningAgent cleaningAgent, File file) {
+		byte[] content = new byte[65536];
+		try {
+			FileInputStream stream = new FileInputStream(file);
+			stream.read(content);
+			stream.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		SQLAmender.writeImage(cleaningAgent.getCleaningAgentID(), content);
+	}
+
 	public static void modifyCleaningAgent(CleaningAgent newCleaningAgent) {
 		Set<Tag> oldTags = CleaningAgent.getCleaningAgent(newCleaningAgent.getCleaningAgentID()).getTags();
 		Set<Tag> newTags = newCleaningAgent.getTags();
@@ -49,18 +67,6 @@ public final class CleaningAgentOperator {
 		detachTTRelation(oldCleaningAgent.getTags(), oldCleaningAgent.getTags());
 	}
 
-	private static void killCleaningAgent(CleaningAgent oldCleaningAgent) {
-		if (!oldCleaningAgent.getTags().isEmpty()) {
-			for (Tag tag : oldCleaningAgent.getTags()) {
-				tag.removeCleaningAgent(oldCleaningAgent);
-				SQLAmender.removeTCRelation(oldCleaningAgent.getCleaningAgentID(), tag.getTagID());
-			}
-		} else {
-			Tag.getTag(0).removeCleaningAgent(oldCleaningAgent);
-		}
-		CleaningAgent.removeCleaningAgent(oldCleaningAgent);
-	}
-
 	private static void bearCleaningAgent(CleaningAgent newCleaningAgent) {
 		CleaningAgent.addCleaningAgent(newCleaningAgent);
 		if (!newCleaningAgent.getTags().isEmpty()) {
@@ -71,6 +77,18 @@ public final class CleaningAgentOperator {
 		} else {
 			Tag.getTag(0).addCleaningAgent(newCleaningAgent);
 		}
+	}
+
+	private static void killCleaningAgent(CleaningAgent oldCleaningAgent) {
+		if (!oldCleaningAgent.getTags().isEmpty()) {
+			for (Tag tag : oldCleaningAgent.getTags()) {
+				tag.removeCleaningAgent(oldCleaningAgent);
+				SQLAmender.removeTCRelation(oldCleaningAgent.getCleaningAgentID(), tag.getTagID());
+			}
+		} else {
+			Tag.getTag(0).removeCleaningAgent(oldCleaningAgent);
+		}
+		CleaningAgent.removeCleaningAgent(oldCleaningAgent);
 	}
 
 	public static void attachTTRelation(Set<Tag> attachingTags) {
@@ -104,23 +122,5 @@ public final class CleaningAgentOperator {
 				}
 			}
 		}
-	}
-
-	public static void saveMemo(CleaningAgent cleaningAgent, String memo) {
-		cleaningAgent.setMemo(memo);
-		CleaningAgent.refreshCleaningAgentWithMemo(cleaningAgent);
-		SQLAmender.writeMemo(cleaningAgent.getCleaningAgentID(), memo);
-	}
-
-	public static void saveImage(CleaningAgent cleaningAgent, File file) {
-		byte[] content = null;
-		try {
-			FileInputStream stream = new FileInputStream(file);
-			stream.read(content);
-			stream.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		SQLAmender.writeImage(cleaningAgent.getCleaningAgentID(), content);
 	}
 }

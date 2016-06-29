@@ -39,7 +39,14 @@
           </Menu>
             <Menu mnemonicParsing="false" text="%modify">
               <items>
+                  <MenuItem mnemonicParsing="false" text="%modifyCA" />
                 <MenuItem mnemonicParsing="false" onAction="#tagModifier" text="%modifyTag" />
+              </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="%add">
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#addCleaningAgent" text="%addCA" />
+                  <MenuItem mnemonicParsing="false" onAction="#addTag" text="%addTag" />
               </items>
             </Menu>
           <Menu mnemonicParsing="false" text="%system">
@@ -176,8 +183,8 @@
                            </GridPane.margin></Button>
                         <SplitMenuButton fx:id="add" alignment="CENTER" mnemonicParsing="false" onAction="#add" prefWidth="100.0" text="%add" GridPane.columnIndex="3">
                           <items>
-                            <MenuItem mnemonicParsing="false" text="%addCA" />
-                            <MenuItem mnemonicParsing="false" text="%addTag" />
+                            <MenuItem mnemonicParsing="false" onAction="#addCleaningAgent" text="%addCA" />
+                            <MenuItem mnemonicParsing="false" onAction="#addTag" text="%addTag" />
                           </items>
                            <GridPane.margin>
                               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />

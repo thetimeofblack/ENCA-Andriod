@@ -5,6 +5,8 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import application.CleaningAgentDetail;
+import application.CleaningAgentModifier;
+import application.TagAdder;
 import application.TagModifier;
 import application.UserCentre;
 import de.fhl.enca.bl.CleaningAgent;
@@ -29,6 +31,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.FlowPane;
 import javafx.stage.Stage;
 import model.CleaningAgentBean;
+import view.CleaningAgentModifierController.OperationType;
 
 public final class MainController {
 
@@ -246,6 +249,14 @@ public final class MainController {
 		getCurrentTableView().setItems(CleaningAgentBean.generateList(source, LanguageType.getLanguageType((tabPane.getSelectionModel().getSelectedIndex()))));
 	}
 
+	private boolean validateDetail() {
+		return getCurrentTableView() != null && !getCurrentTableView().getSelectionModel().isEmpty();
+	}
+
+	private boolean validateModify() {
+		return validateDetail() && !CleaningAgent.getCleaningAgent(getCurrentTableView().getSelectionModel().getSelectedItem().getId()).BelongsToSystem();
+	}
+
 	@FXML
 	private void userCentre() {
 		new UserCentre(mainStage).start(new Stage());
@@ -253,7 +264,7 @@ public final class MainController {
 
 	@FXML
 	private void detail() {
-		if (getCurrentTableView() != null && !getCurrentTableView().getSelectionModel().isEmpty()) {
+		if (validateDetail()) {
 			new CleaningAgentDetail(CleaningAgent.getCleaningAgent(getCurrentTableView().getSelectionModel().getSelectedItem().getId())).start(new Stage());
 		}
 	}
@@ -261,6 +272,16 @@ public final class MainController {
 	@FXML
 	private void add() {
 		add.show();
+	}
+
+	@FXML
+	private void addCleaningAgent() {
+		new CleaningAgentModifier(OperationType.ADD, null).start(new Stage());
+	}
+
+	@FXML
+	private void addTag() {
+		new TagAdder().start(new Stage());
 	}
 
 	@FXML

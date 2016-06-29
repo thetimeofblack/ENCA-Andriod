@@ -1,12 +1,12 @@
 package view;
 
-import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 import application.CleaningAgentDetail;
 import de.fhl.enca.bl.CleaningAgent;
@@ -23,6 +23,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
@@ -39,6 +40,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
+import model.CleaningAgentBean;
 import utility.Utility;
 
 public final class CleaningAgentModifierController {
@@ -57,6 +59,7 @@ public final class CleaningAgentModifierController {
 		public ContentGroup(LanguageType type, TextField name, TextArea description, TextArea instruction) {
 			this.type = type;
 			this.name = name;
+			this.name.textProperty().addListener((ObservableValue<? extends String> o, String x, String y) -> save.setDisable(!validate()));
 			this.description = description;
 			this.instruction = instruction;
 		}
@@ -126,6 +129,12 @@ public final class CleaningAgentModifierController {
 	private ComboBox<Tag> addItem;
 	@FXML
 	private ComboBox<Tag> addOthers;
+	@FXML
+	private Button detail;
+	@FXML
+	private Button delete;
+	@FXML
+	private Button save;
 
 	@FXML
 	private void initialize() {
@@ -137,7 +146,7 @@ public final class CleaningAgentModifierController {
 		comboBoxes.put(addOthers, TagType.OTHERS);
 		ObservableList<String> rateList = FXCollections.observableArrayList("☆", "★", "★☆", "★★", "★★☆", "★★★", "★★★☆", "★★★★", "★★★★☆", "★★★★★");
 		rate.setItems(rateList);
-		for (Map.Entry<ComboBox<Tag>, TagType> entry : comboBoxes.entrySet()) {
+		for (Entry<ComboBox<Tag>, TagType> entry : comboBoxes.entrySet()) {
 			entry.getKey().setItems(FXCollections.observableArrayList(TagFetcher.fetchTagsAllOfCertainType(entry.getValue())));
 			entry.getKey().getSelectionModel().selectedItemProperty().addListener((ObservableValue<? extends Tag> o, Tag oldValue, Tag newValue) -> {
 				if (newValue != null) {
@@ -177,37 +186,37 @@ public final class CleaningAgentModifierController {
 
 	@FXML
 	private void detail() {
-		if (operationType == OperationType.MODIFY) {
-			new CleaningAgentDetail(CleaningAgent.getCleaningAgent(cleaningAgent.getCleaningAgentID())).start(new Stage());
-			stage.hide();
-		}
+		new CleaningAgentDetail(cleaningAgent).start(new Stage());
+		stage.hide();
 	}
 
 	@FXML
 	private void delete() {
-		if (operationType == OperationType.MODIFY) {
-			if (Utility.showDeleteCAAlert()) {
-				CleaningAgentOperator.removeCleaningAgent(cleaningAgent);
-				stage.hide();
-			}
+		if (Utility.showDeleteCAAlert()) {
+			CleaningAgentOperator.removeCleaningAgent(cleaningAgent);
+			CleaningAgentBean.removeCleaningAgentBean(cleaningAgent);
+			stage.hide();
 		}
 	}
 
 	@FXML
 	private void save() {
 		if (validate()) {
-			CleaningAgent newCleaningAgent = assembly();
+			cleaningAgent = assembly();
 			switch (operationType) {
 				case MODIFY:
-					CleaningAgentOperator.modifyCleaningAgent(newCleaningAgent);
+					CleaningAgentOperator.modifyCleaningAgent(cleaningAgent);
 					break;
 				case ADD:
-					CleaningAgentOperator.createCleaningAgent(newCleaningAgent);
+					CleaningAgentOperator.createCleaningAgent(cleaningAgent);
 					break;
 			}
-			CleaningAgentOperator.saveMemo(newCleaningAgent, memo.getText());
-			if (imageFile!=null) {
-				CleaningAgentOperator.saveImage(newCleaningAgent, imageFile);
+			CleaningAgentBean.addCleaningAgentBean(cleaningAgent);
+			detail.setDisable(false);
+			delete.setDisable(false);
+			CleaningAgentOperator.saveMemo(cleaningAgent, memo.getText());
+			if (imageFile != null) {
+				CleaningAgentOperator.saveImage(cleaningAgent, imageFile);
 			}
 		}
 	}
@@ -233,7 +242,14 @@ public final class CleaningAgentModifierController {
 			for (Tag tag : tags) {
 				addTagLabel(tag);
 			}
+		} else {
+			rate.getSelectionModel().clearAndSelect(0);
+			detail.setDisable(true);
+			delete.setDisable(true);
+			save.setDisable(true);
 		}
+		System.out.println(applicationTime.getText() == null);
+		System.out.println(applicationTime.getText().equals(""));
 	}
 
 	private void addTagLabel(Tag tag) {
@@ -266,9 +282,10 @@ public final class CleaningAgentModifierController {
 		for (ContentGroup contentGroup : contentGroups) {
 			contentGroup.assemblyContent(newCleaningAgent);
 		}
-		newCleaningAgent.setApplicationTime(Long.valueOf(applicationTime.getText()));
-		newCleaningAgent.setFrequency(Long.valueOf(frequency.getText()));
+		newCleaningAgent.setApplicationTime(applicationTime.getText().equals("") ? 0 : Long.valueOf(applicationTime.getText()));
+		newCleaningAgent.setFrequency(frequency.getText().equals("") ? 0 : Long.valueOf(frequency.getText()));
 		newCleaningAgent.setRate(rate.getSelectionModel().getSelectedIndex() + 1);
+		newCleaningAgent.setBelongsToSystem(false);
 		newCleaningAgent.addTagsAll(tags);
 		return newCleaningAgent;
 	}

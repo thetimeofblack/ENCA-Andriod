@@ -16,10 +16,6 @@ import java.util.Map;
 public enum LanguageType {
 	ENGLISH("English", Locale.ENGLISH, 0), GERMAN("Deutsch", Locale.GERMAN, 1), CHINESE("中文", Locale.CHINESE, 2);
 
-	private String name;
-	private Locale locale;
-	private int id;
-
 	/**
 	 * An Integer to LanguageType map that allows searching LanguageType
 	 * using an integer.
@@ -30,6 +26,10 @@ public enum LanguageType {
 			LanguageList.put(lType.id, lType);
 		}
 	}
+
+	private String name;
+	private Locale locale;
+	private int id;
 
 	public static int getLanguageCount() {
 		return LanguageType.values().length;

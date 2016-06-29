@@ -308,7 +308,7 @@
             <Line endX="3000.0" stroke="LIGHTGRAY" GridPane.halignment="CENTER" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
             <HBox alignment="CENTER_RIGHT" spacing="10.0" GridPane.rowIndex="1">
                <children>
-                  <Button alignment="CENTER" mnemonicParsing="false" onAction="#modify" prefHeight="25.0" prefWidth="75.0" text="%modify" />
+                  <Button fx:id="modify" alignment="CENTER" mnemonicParsing="false" onAction="#modify" prefHeight="25.0" prefWidth="75.0" text="%modify" />
                   <Button alignment="CENTER" mnemonicParsing="false" onAction="#cancel" prefHeight="25.0" prefWidth="75.0" text="%cancel" />
                </children>
                <padding>

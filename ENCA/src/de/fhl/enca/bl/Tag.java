@@ -48,6 +48,10 @@ public class Tag {
 		tagsAll.put(tag.getTagID(), tag);
 	}
 
+	public static void removeTag(Tag tag) {
+		tagsAll.remove(tag.getTagID());
+	}
+
 	public static Set<Tag> getTagsAll() {
 		Set<Tag> tags = new HashSet<>(tagsAll.values());
 		tags.remove(Tag.getTag(0));
@@ -68,10 +72,8 @@ public class Tag {
 		this.name = name;
 		this.tagType = tagType;
 		this.belongsToSystem = belongsToSystem;
-		/* directly put this tag into tagsAll */
-		tagsAll.put(tagID, this);
 	}
-	
+
 	public int search(String keyword) {
 		return name.search(keyword);
 	}

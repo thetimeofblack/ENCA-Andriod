@@ -63,7 +63,7 @@ public final class Initialize {
 		try {
 			while (r.next()) {
 				int id = r.getInt(1);
-				new Tag(id, iStringGenerator(r, 2), TagType.getTagType(r.getString(5)), r.getBoolean(6));
+				Tag.addTag(new Tag(id, iStringGenerator(r, 2), TagType.getTagType(r.getString(5)), r.getBoolean(6)));
 				if (id > Tag.getMaxID()) {
 					Tag.setMaxID(id);
 				}

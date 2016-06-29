@@ -8,6 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import view.TagModifierController;
 
 public class TagModifier extends Application {
 
@@ -21,6 +22,7 @@ public class TagModifier extends Application {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		((TagModifierController) loader.getController()).setStage(primaryStage);
 		primaryStage.setTitle("Tag Modifier");
 		primaryStage.initStyle(StageStyle.UNIFIED);
 		primaryStage.setResizable(false);

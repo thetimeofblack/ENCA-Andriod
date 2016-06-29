@@ -28,11 +28,7 @@ public final class CleaningAgentBean {
 	private static Map<Integer, Map<LanguageType, CleaningAgentBean>> map = new HashMap<>();
 	static {
 		for (CleaningAgent cleaningAgent : CleaningAgent.getCleaningAgentsAll()) {
-			Map<LanguageType, CleaningAgentBean> tempMap = new HashMap<>();
-			for (LanguageType languageType : LanguageType.values()) {
-				tempMap.put(languageType, new CleaningAgentBean(cleaningAgent, languageType));
-			}
-			map.put(cleaningAgent.getCleaningAgentID(), tempMap);
+			addCleaningAgentBean(cleaningAgent);
 		}
 	}
 
@@ -46,6 +42,18 @@ public final class CleaningAgentBean {
 			}
 		}
 		return list;
+	}
+
+	public static void addCleaningAgentBean(CleaningAgent cleaningAgent) {
+		Map<LanguageType, CleaningAgentBean> tempMap = new HashMap<>();
+		for (LanguageType languageType : LanguageType.values()) {
+			tempMap.put(languageType, new CleaningAgentBean(cleaningAgent, languageType));
+		}
+		map.put(cleaningAgent.getCleaningAgentID(), tempMap);
+	}
+
+	public static void removeCleaningAgentBean(CleaningAgent cleaningAgent) {
+		map.remove(cleaningAgent.getCleaningAgentID());
 	}
 
 	public CleaningAgentBean(CleaningAgent cleaningAgent, LanguageType type) {

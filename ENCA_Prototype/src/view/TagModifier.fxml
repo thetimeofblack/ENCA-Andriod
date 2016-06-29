@@ -15,237 +15,6 @@
 <?import javafx.scene.shape.Line?>
 
 <BorderPane style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.TagModifierController">
-   <center>
-      <TabPane tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
-        <tabs>
-          <Tab text="%room">
-               <content>
-                  <GridPane>
-                    <columnConstraints>
-                      <ColumnConstraints hgrow="NEVER" />
-                      <ColumnConstraints hgrow="ALWAYS" />
-                    </columnConstraints>
-                    <rowConstraints>
-                      <RowConstraints prefHeight="300.0" vgrow="NEVER" />
-                    </rowConstraints>
-                     <children>
-                        <ListView fx:id="room" prefWidth="125.0" GridPane.hgrow="NEVER" GridPane.vgrow="NEVER">
-                           <GridPane.margin>
-                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                           </GridPane.margin>
-                        </ListView>
-                        <GridPane GridPane.columnIndex="1">
-                          <columnConstraints>
-                            <ColumnConstraints hgrow="NEVER" />
-                            <ColumnConstraints hgrow="ALWAYS" />
-                          </columnConstraints>
-                          <rowConstraints>
-                            <RowConstraints vgrow="NEVER" />
-                            <RowConstraints vgrow="NEVER" />
-                            <RowConstraints vgrow="NEVER" />
-                              <RowConstraints vgrow="NEVER" />
-                          </rowConstraints>
-                           <children>
-                              <Label text="%english">
-                                 <GridPane.margin>
-                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                 </GridPane.margin>
-                              </Label>
-                              <TextField fx:id="english_room" disable="true" editable="false" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
-                                 <GridPane.margin>
-                                    <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-                                 </GridPane.margin>
-                              </TextField>
-                              <Label text="%german" GridPane.rowIndex="1">
-                                 <GridPane.margin>
-                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                 </GridPane.margin>
-                              </Label>
-                              <Label text="%chinese" GridPane.rowIndex="2">
-                                 <GridPane.margin>
-                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                 </GridPane.margin>
-                              </Label>
-                              <TextField fx:id="german_room" disable="true" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                                 <GridPane.margin>
-                                    <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-                                 </GridPane.margin>
-                              </TextField>
-                              <TextField fx:id="chinese_room" disable="true" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                                 <GridPane.margin>
-                                    <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-                                 </GridPane.margin>
-                              </TextField>
-                              <HBox alignment="CENTER_RIGHT" spacing="20.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
-                                 <children>
-                                    <Button fx:id="save_room" disable="true" mnemonicParsing="false" prefHeight="25.0" prefWidth="75.0" text="%save" />
-                                    <Button fx:id="delete_room" disable="true" mnemonicParsing="false" prefHeight="25.0" prefWidth="75.0" text="%delete" />
-                                 </children>
-                                 <padding>
-                                    <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-                                 </padding>
-                              </HBox>
-                           </children>
-                        </GridPane>
-                     </children>
-                  </GridPane>
-               </content>
-          </Tab>
-          <Tab text="%item">
-               <content>
-                  <GridPane>
-                     <columnConstraints>
-                        <ColumnConstraints hgrow="NEVER" />
-                        <ColumnConstraints hgrow="ALWAYS" />
-                     </columnConstraints>
-                     <rowConstraints>
-                        <RowConstraints prefHeight="300.0" vgrow="NEVER" />
-                     </rowConstraints>
-                     <children>
-                        <ListView fx:id="item" prefWidth="125.0" GridPane.hgrow="NEVER" GridPane.vgrow="NEVER">
-                           <GridPane.margin>
-                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                           </GridPane.margin>
-                        </ListView>
-                        <GridPane GridPane.columnIndex="1">
-                           <columnConstraints>
-                              <ColumnConstraints hgrow="NEVER" />
-                              <ColumnConstraints hgrow="ALWAYS" />
-                           </columnConstraints>
-                           <rowConstraints>
-                              <RowConstraints vgrow="NEVER" />
-                              <RowConstraints vgrow="NEVER" />
-                              <RowConstraints vgrow="NEVER" />
-                              <RowConstraints vgrow="NEVER" />
-                           </rowConstraints>
-                           <children>
-                              <Label text="%english">
-                                 <GridPane.margin>
-                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                 </GridPane.margin>
-                              </Label>
-                              <TextField fx:id="english_item" disable="true" editable="false" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
-                                 <GridPane.margin>
-                                    <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-                                 </GridPane.margin>
-                              </TextField>
-                              <Label text="%german" GridPane.rowIndex="1">
-                                 <GridPane.margin>
-                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                 </GridPane.margin>
-                              </Label>
-                              <Label text="%chinese" GridPane.rowIndex="2">
-                                 <GridPane.margin>
-                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                 </GridPane.margin>
-                              </Label>
-                              <TextField fx:id="german_item" disable="true" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                                 <GridPane.margin>
-                                    <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-                                 </GridPane.margin>
-                              </TextField>
-                              <TextField fx:id="chinese_item" disable="true" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                                 <GridPane.margin>
-                                    <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-                                 </GridPane.margin>
-                              </TextField>
-                              <HBox alignment="CENTER_RIGHT" spacing="20.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
-                                 <children>
-                                    <Button fx:id="save_item" disable="true" mnemonicParsing="false" prefHeight="25.0" prefWidth="75.0" text="%save" />
-                                    <Button fx:id="delete_item" disable="true" mnemonicParsing="false" prefHeight="25.0" prefWidth="75.0" text="%delete" />
-                                 </children>
-                                 <padding>
-                                    <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-                                 </padding>
-                              </HBox>
-                           </children>
-                        </GridPane>
-                     </children>
-                  </GridPane>
-               </content>
-          </Tab>
-            <Tab text="%others">
-               <content>
-                  <GridPane>
-                     <columnConstraints>
-                        <ColumnConstraints hgrow="NEVER" />
-                        <ColumnConstraints hgrow="ALWAYS" />
-                     </columnConstraints>
-                     <rowConstraints>
-                        <RowConstraints prefHeight="300.0" vgrow="NEVER" />
-                     </rowConstraints>
-                     <children>
-                        <ListView fx:id="others" prefWidth="125.0" GridPane.hgrow="NEVER" GridPane.vgrow="NEVER">
-                           <GridPane.margin>
-                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                           </GridPane.margin>
-                        </ListView>
-                        <GridPane GridPane.columnIndex="1">
-                           <columnConstraints>
-                              <ColumnConstraints hgrow="NEVER" />
-                              <ColumnConstraints hgrow="ALWAYS" />
-                           </columnConstraints>
-                           <rowConstraints>
-                              <RowConstraints vgrow="NEVER" />
-                              <RowConstraints vgrow="NEVER" />
-                              <RowConstraints vgrow="NEVER" />
-                              <RowConstraints vgrow="NEVER" />
-                           </rowConstraints>
-                           <children>
-                              <Label text="%english">
-                                 <GridPane.margin>
-                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                 </GridPane.margin>
-                              </Label>
-                              <TextField fx:id="english_others" disable="true" editable="false" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
-                                 <GridPane.margin>
-                                    <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-                                 </GridPane.margin>
-                              </TextField>
-                              <Label text="%german" GridPane.rowIndex="1">
-                                 <GridPane.margin>
-                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                 </GridPane.margin>
-                              </Label>
-                              <Label text="%chinese" GridPane.rowIndex="2">
-                                 <GridPane.margin>
-                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                 </GridPane.margin>
-                              </Label>
-                              <TextField fx:id="german_others" disable="true" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                                 <GridPane.margin>
-                                    <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-                                 </GridPane.margin>
-                              </TextField>
-                              <TextField fx:id="chinese_others" disable="true" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                                 <GridPane.margin>
-                                    <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-                                 </GridPane.margin>
-                              </TextField>
-                              <HBox alignment="CENTER_RIGHT" spacing="20.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
-                                 <children>
-                                    <Button fx:id="save_others" disable="true" mnemonicParsing="false" prefHeight="25.0" prefWidth="75.0" text="%save" />
-                                    <Button fx:id="delete_others" disable="true" mnemonicParsing="false" prefHeight="25.0" prefWidth="75.0" text="%delete" />
-                                 </children>
-                                 <padding>
-                                    <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-                                 </padding>
-                              </HBox>
-                           </children>
-                        </GridPane>
-                     </children>
-                  </GridPane>
-               </content>
-            </Tab>
-        </tabs>
-         <BorderPane.margin>
-            <Insets bottom="20.0" left="20.0" right="20.0" />
-         </BorderPane.margin>
-         <opaqueInsets>
-            <Insets />
-         </opaqueInsets>
-      </TabPane>
-   </center>
    <bottom>
       <GridPane BorderPane.alignment="CENTER">
         <columnConstraints>
@@ -261,12 +30,106 @@
                   <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                </padding>
                <children>
-                  <Button fx:id="addNew" mnemonicParsing="false" prefHeight="25.0" prefWidth="75.0" text="%addNew" />
-                  <Button fx:id="cancel" mnemonicParsing="false" prefHeight="25.0" prefWidth="75.0" text="%cancel" />
+                  <Button fx:id="addNew" mnemonicParsing="false" onAction="#addNew" prefHeight="25.0" prefWidth="75.0" text="%addNew" />
+                  <Button fx:id="cancel" mnemonicParsing="false" onAction="#cancel" prefHeight="25.0" prefWidth="75.0" text="%cancel" />
                </children>
             </HBox>
             <Line endX="400.0" startX="-100.0" stroke="LIGHTGRAY" GridPane.hgrow="NEVER" GridPane.vgrow="NEVER" />
          </children>
       </GridPane>
    </bottom>
+   <center>
+      <GridPane BorderPane.alignment="CENTER">
+        <columnConstraints>
+          <ColumnConstraints hgrow="NEVER" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints vgrow="NEVER" />
+        </rowConstraints>
+         <children>
+            <TabPane fx:id="tabPane" tabClosingPolicy="UNAVAILABLE">
+               <tabs>
+                  <Tab text="%room">
+                     <content>
+                        <ListView fx:id="room" prefWidth="125.0" />
+                     </content>
+                  </Tab>
+                  <Tab text="%item">
+                     <content>
+                        <ListView fx:id="item" prefWidth="125.0" />
+                     </content>
+                  </Tab>
+                  <Tab text="%others">
+                     <content>
+                        <ListView fx:id="others" prefWidth="125.0" />
+                     </content>
+                  </Tab>
+               </tabs>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <GridPane.margin>
+                  <Insets bottom="10.0" left="20.0" right="10.0" top="10.0" />
+               </GridPane.margin>
+            </TabPane>
+            <GridPane GridPane.columnIndex="1">
+              <columnConstraints>
+                <ColumnConstraints hgrow="NEVER" />
+                <ColumnConstraints hgrow="ALWAYS" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints vgrow="NEVER" />
+                <RowConstraints vgrow="NEVER" />
+                <RowConstraints vgrow="NEVER" />
+                  <RowConstraints vgrow="NEVER" />
+              </rowConstraints>
+               <children>
+                  <Label text="%english">
+                     <GridPane.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </GridPane.margin>
+                  </Label>
+                  <TextField fx:id="english" disable="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                     <GridPane.margin>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                     </GridPane.margin>
+                  </TextField>
+                  <Label text="%german" GridPane.rowIndex="1">
+                     <GridPane.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </GridPane.margin>
+                  </Label>
+                  <Label text="%chinese" GridPane.rowIndex="2">
+                     <GridPane.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </GridPane.margin>
+                  </Label>
+                  <TextField fx:id="german" disable="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <GridPane.margin>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                     </GridPane.margin>
+                  </TextField>
+                  <TextField fx:id="chinese" disable="true" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                     <GridPane.margin>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                     </GridPane.margin>
+                  </TextField>
+                  <HBox alignment="CENTER_RIGHT" spacing="20.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                     <children>
+                        <Button fx:id="save" disable="true" mnemonicParsing="false" onAction="#save" prefHeight="25.0" prefWidth="75.0" text="%save" />
+                        <Button fx:id="delete" disable="true" mnemonicParsing="false" onAction="#delete" prefHeight="25.0" prefWidth="75.0" text="%delete" />
+                     </children>
+                     <padding>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                     </padding>
+                  </HBox>
+               </children>
+            </GridPane>
+         </children>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+      </GridPane>
+   </center>
 </BorderPane>

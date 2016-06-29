@@ -1,5 +1,8 @@
 package de.fhl.enca.bl;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * @author David
  * @version 2016-05-30
@@ -12,6 +15,12 @@ package de.fhl.enca.bl;
 public enum TagType {
 	ROOM("Room", 0), ITEM("Items", 1), OTHERS("Others", 2);
 
+	private static Map<Integer, TagType> tagTypeList = new HashMap<>();
+	static {
+		for (TagType tagType : TagType.values()) {
+			tagTypeList.put(tagType.getId(), tagType);
+		}
+	}
 	/**
 	 * name: String representation of a type
 	 */
@@ -25,6 +34,10 @@ public enum TagType {
 			}
 		}
 		return null;
+	}
+
+	public static TagType getTagType(int id) {
+		return tagTypeList.get(id);
 	}
 
 	private TagType(String name, int id) {

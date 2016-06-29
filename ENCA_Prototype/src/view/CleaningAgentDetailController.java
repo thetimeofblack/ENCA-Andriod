@@ -12,6 +12,7 @@ import de.fhl.enca.controller.CleaningAgentFetcher;
 import de.fhl.enca.controller.CleaningAgentOperator;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
@@ -112,6 +113,8 @@ public final class CleaningAgentDetailController {
 	private Label rate;
 	@FXML
 	private TextArea memo;
+	@FXML
+	private Button modify;
 
 	@FXML
 	private void initialize() {
@@ -122,7 +125,7 @@ public final class CleaningAgentDetailController {
 
 	@FXML
 	private void clear() {
-		if(Utility.showClearAlert()) {
+		if (Utility.showClearAlert()) {
 			memo.clear();
 		}
 	}
@@ -153,6 +156,7 @@ public final class CleaningAgentDetailController {
 		frequency.setText(String.valueOf(cleaningAgent.getFrequency()));
 		rate.setText(rateMap.get(cleaningAgent.getRate()));
 		memo.setText(cleaningAgent.getMemo());
+		modify.setDisable(cleaningAgent.BelongsToSystem());
 	}
 
 	public void setStage(Stage stage) {

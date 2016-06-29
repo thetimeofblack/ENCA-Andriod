@@ -1,96 +1,52 @@
 package view;
 
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
+import java.util.Map.Entry;
+import application.TagAdder;
+import de.fhl.enca.bl.InternationalString;
 import de.fhl.enca.bl.LanguageType;
 import de.fhl.enca.bl.Tag;
 import de.fhl.enca.bl.TagType;
 import de.fhl.enca.controller.TagFetcher;
+import de.fhl.enca.controller.TagOperator;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 public final class TagModifierController {
 
-	private final class ContentGroup {
+	private Stage stage;
+	private Map<TagType, ListView<Tag>> listViewMap = new HashMap<>();
+	private Map<LanguageType, TextField> textFieldMap = new HashMap<>();
+	private Tag tag = null;
 
-		private TagType type;
-		private ListView<Tag> listView;
-		private Map<LanguageType, TextField> textFieldMap = new HashMap<>();
-		private Button save;
-		private Button delete;
-
-		public ContentGroup(TagType type, ListView<Tag> listView, TextField english, TextField german, TextField chinese, Button save, Button delete) {
-			this.type = type;
-			this.listView = listView;
-			this.textFieldMap.put(LanguageType.ENGLISH, english);
-			this.textFieldMap.put(LanguageType.GERMAN, german);
-			this.textFieldMap.put(LanguageType.CHINESE, chinese);
-			this.save = save;
-			this.delete = delete;
-		}
-
-		public void showContent() {
-			listView.setItems(FXCollections.observableArrayList(TagFetcher.fetchTagsAllOfCertainType(type)));
-			listView.getSelectionModel().selectedItemProperty().addListener((ObservableValue<? extends Tag> o, Tag oldValue, Tag newValue) -> {
-				if (newValue != null) {
-					Tag tag = Tag.getTag(newValue.getTagID());
-					for (Map.Entry<LanguageType, TextField> entry : textFieldMap.entrySet()) {
-						entry.getValue().setText(tag.getName().getString(entry.getKey()));
-						entry.getValue().setDisable(tag.belongsToSystem());
-						entry.getValue().setEditable(!tag.belongsToSystem());
-						delete.setDisable(tag.belongsToSystem());
-						save.setDisable(tag.belongsToSystem());
-					}
-				}
-			});
-		}
-	}
-
-	private static Set<ContentGroup> contentGroups = new HashSet<>();
+	@FXML
+	private TabPane tabPane;
 
 	@FXML
 	private ListView<Tag> room;
 	@FXML
-	private TextField english_room;
-	@FXML
-	private TextField german_room;
-	@FXML
-	private TextField chinese_room;
-	@FXML
-	private Button save_room;
-	@FXML
-	private Button delete_room;
-	@FXML
 	private ListView<Tag> item;
 	@FXML
-	private TextField english_item;
-	@FXML
-	private TextField german_item;
-	@FXML
-	private TextField chinese_item;
-	@FXML
-	private Button save_item;
-	@FXML
-	private Button delete_item;
-	@FXML
 	private ListView<Tag> others;
-	@FXML
-	private TextField english_others;
-	@FXML
-	private TextField german_others;
-	@FXML
-	private TextField chinese_others;
-	@FXML
-	private Button save_others;
-	@FXML
-	private Button delete_others;
 
+	@FXML
+	private TextField english;
+	@FXML
+	private TextField german;
+	@FXML
+	private TextField chinese;
+
+	@FXML
+	private Button save;
+	@FXML
+	private Button delete;
 	@FXML
 	private Button addNew;
 	@FXML
@@ -98,11 +54,108 @@ public final class TagModifierController {
 
 	@FXML
 	private void initialize() {
-		contentGroups.add(new ContentGroup(TagType.ROOM, room, english_room, german_room, chinese_room, save_room, delete_room));
-		contentGroups.add(new ContentGroup(TagType.ITEM, item, english_item, german_item, chinese_item, save_item, delete_item));
-		contentGroups.add(new ContentGroup(TagType.OTHERS, others, english_others, german_others, chinese_others, save_others, delete_others));
-		for (ContentGroup contentGroup : contentGroups) {
-			contentGroup.showContent();
+		listViewMap.put(TagType.ROOM, room);
+		listViewMap.put(TagType.ITEM, item);
+		listViewMap.put(TagType.OTHERS, others);
+		textFieldMap.put(LanguageType.ENGLISH, english);
+		textFieldMap.put(LanguageType.GERMAN, german);
+		textFieldMap.put(LanguageType.CHINESE, chinese);
+		tabPane.getSelectionModel().selectedIndexProperty().addListener((ObservableValue<? extends Number> o, Number x, Number y) -> refreshTextField());
+		refreshListView();
+		for (Entry<TagType, ListView<Tag>> entry : listViewMap.entrySet()) {
+			entry.getValue().getSelectionModel().selectedItemProperty().addListener((ObservableValue<? extends Tag> o, Tag x, Tag y) -> refreshTextField());
 		}
+		for (TextField textField : textFieldMap.values()) {
+			textField.textProperty().addListener((ObservableValue<? extends String> o, String x, String y) -> save.setDisable(!validate()));
+		}
+		setDisable(true);
+	}
+
+	@FXML
+	private void save() {
+		if (tag != null && validate()) {
+			TagOperator.modifyTag(assembly());
+			refreshListView();
+		}
+	}
+
+	@FXML
+	private void delete() {
+		if (tag != null) {
+			TagOperator.removeTag(tag);
+		}
+	}
+
+	@FXML
+	private void addNew() {
+		new TagAdder().start(new Stage());
+		stage.hide();
+	}
+
+	@FXML
+	private void cancel() {
+		stage.hide();
+	}
+
+	private void refreshTextField() {
+		tag = null;
+		if (!tabPane.getSelectionModel().isEmpty()) {
+			ListView<Tag> listView = listViewMap.get(TagType.getTagType(tabPane.getSelectionModel().getSelectedIndex()));
+			if (!listView.getSelectionModel().isEmpty()) {
+				tag = listView.getSelectionModel().getSelectedItem();
+				if (!tag.belongsToSystem()) {
+					setDisable(false);
+				} else {
+					setDisable(true);
+				}
+			} else {
+				setDisable(true);
+			}
+		} else {
+			setDisable(true);
+		}
+		for (Entry<LanguageType, TextField> entry : textFieldMap.entrySet()) {
+			if (tag != null) {
+				entry.getValue().setText(tag.getName().getString(entry.getKey()));
+			} else {
+				entry.getValue().setText("");
+			}
+		}
+	}
+	
+	private void refreshListView() {
+		for (Entry<TagType, ListView<Tag>> entry : listViewMap.entrySet()) {
+			entry.getValue().setItems(FXCollections.observableArrayList(TagFetcher.fetchTagsAllOfCertainType(entry.getKey())));
+		}
+	}
+	private boolean validate() {
+		boolean valid = false;
+		for (TextField textField : textFieldMap.values()) {
+			if (!textField.getText().equals("")) {
+				valid = true;
+				break;
+			}
+		}
+		return valid;
+	}
+
+	private void setDisable(boolean b) {
+		for (TextField textField : textFieldMap.values()) {
+			textField.setDisable(b);
+		}
+		save.setDisable(b);
+		delete.setDisable(b);
+	}
+
+	private Tag assembly() {
+		InternationalString name = new InternationalString();
+		for (Entry<LanguageType, TextField> entry : textFieldMap.entrySet()) {
+			name.setString(entry.getKey(), entry.getValue().getText());
+		}
+		return new Tag(tag.getTagID(), name, tag.getTagType(), tag.belongsToSystem());
+	}
+
+	public void setStage(Stage stage) {
+		this.stage = stage;
 	}
 }
