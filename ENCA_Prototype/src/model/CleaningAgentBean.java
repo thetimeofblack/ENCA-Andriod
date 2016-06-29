@@ -39,7 +39,11 @@ public final class CleaningAgentBean {
 	public static ObservableList<CleaningAgentBean> generateList(Set<CleaningAgent> source, LanguageType type) {
 		ObservableList<CleaningAgentBean> list = FXCollections.observableArrayList();
 		for (CleaningAgent cleaningAgent : source) {
-			list.add(map.get(cleaningAgent.getCleaningAgentID()).get(type));
+			if (list.size() <= 100) {
+				list.add(map.get(cleaningAgent.getCleaningAgentID()).get(type));
+			} else {
+				break;
+			}
 		}
 		return list;
 	}

@@ -14,7 +14,6 @@ import de.fhl.enca.bl.TagType;
 import de.fhl.enca.bl.User;
 import de.fhl.enca.controller.CleaningAgentFetcher;
 import de.fhl.enca.controller.TagFetcher;
-import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
@@ -186,13 +185,7 @@ public final class MainController {
 				search();
 			}
 		});
-		tabPane.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
-
-			@Override
-			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-				initTableViews(result);
-			}
-		});
+		tabPane.getSelectionModel().selectedIndexProperty().addListener((ObservableValue<? extends Number> o, Number x, Number y) -> initTableViews(result));
 		initMain();
 	}
 
