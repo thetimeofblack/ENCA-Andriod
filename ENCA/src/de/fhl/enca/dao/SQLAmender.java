@@ -3,6 +3,12 @@ package de.fhl.enca.dao;
 import de.fhl.enca.bl.CleaningAgent;
 import de.fhl.enca.bl.Tag;
 
+/**
+ * Execute update, insert into and delete SQL operation
+ * @author Zhaowen.Gong
+ * @version 30.06.2016
+ * @see Connector
+ */
 public final class SQLAmender {
 
 	public static void writeMemo(int cleaningAgentID, String memo) {

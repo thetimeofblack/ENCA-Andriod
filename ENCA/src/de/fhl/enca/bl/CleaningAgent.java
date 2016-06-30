@@ -7,24 +7,26 @@ import java.util.Set;
 import de.fhl.enca.controller.TagFetcher;
 
 /**
- * @author Bobby
- * @version 31.05.2016
- * 
- * Class CleaningAgent
- * Object representing cleaning agent
+ * Object representing cleaning agent.
+ * @author Zhaowen.Gong
+ * @version 30.06.2016
  */
 public final class CleaningAgent {
 
 	/* static member */
 	/**
-	 * Store the references of all cleaning agents
+	 * Store the references of all cleaning agents.
 	 */
 	private static Map<Integer, CleaningAgent> cleaningAgentAll = new HashMap<>();
 
 	/**
-	 * Store the references of those cleaning agents with memo
+	 * Store the references of those cleaning agents with memo.
 	 */
 	private static Set<CleaningAgent> cleaningAgentsWithMemo = new HashSet<>();
+	
+	/**
+	 * Max id stored for creating new cleaning agent.
+	 */
 	private static int maxID = 0;
 
 	/* non-static member */
@@ -39,19 +41,33 @@ public final class CleaningAgent {
 	private LanguageType mainLanguage;
 	private String memo;
 
+	/**
+	 * Tags related to self.
+	 */
 	private Set<Tag> tags = new HashSet<>();
 
 	/* static method */
+	/**
+	 * Get cleaning agent by id.
+	 */
 	public static CleaningAgent getCleaningAgent(int ID) {
 		return cleaningAgentAll.get(ID);
 	}
 
+	/**
+	 * Store new cleaning agent in the map.
+	 * @param cleaningAgent the cleaning agent to be added
+	 */
 	public static void addCleaningAgent(CleaningAgent cleaningAgent) {
 		cleaningAgentAll.put(cleaningAgent.getCleaningAgentID(), cleaningAgent);
 		refreshCleaningAgentWithMemo(cleaningAgent);
 
 	}
 
+	/**
+	 * Check the given cleaning agent, determine whether it should be included in set cleaningAgentsWithMemo.
+	 * @param cleaningAgent the cleaning agent to be checked
+	 */
 	public static void refreshCleaningAgentWithMemo(CleaningAgent cleaningAgent) {
 		if (cleaningAgent.getMemo() != null && !cleaningAgent.getMemo().equals("")) {
 			if (!cleaningAgentsWithMemo.contains(cleaningAgent)) {
@@ -64,6 +80,10 @@ public final class CleaningAgent {
 		}
 	}
 
+	/**
+	 * Remove the given cleaning agent from the map.
+	 * @param cleaningAgent the cleaning agent to be removed
+	 */
 	public static void removeCleaningAgent(CleaningAgent cleaningAgent) {
 		if (cleaningAgentAll.containsKey(cleaningAgent.getCleaningAgentID())) {
 			cleaningAgentAll.remove(cleaningAgent.getCleaningAgentID());
@@ -90,13 +110,18 @@ public final class CleaningAgent {
 	}
 
 	/* non-static method */
+	/**
+	 * Constructor.</br>
+	 * Only id is needed, other properties will be assigned using setters.
+	 * @param id the id of the cleaning agent
+	 */
 	public CleaningAgent(int id) {
 		this.cleaningAgentID = id;
 	}
 
 	/**
-	 * search the cleaning agent according to given keyword
-	 * @param keyword
+	 * Search the cleaning agent according to given keyword.
+	 * @param keyword the given keyword
 	 * @return integer representing the relevance
 	 */
 	public int search(String keyword) {
@@ -123,6 +148,9 @@ public final class CleaningAgent {
 		this.tags.removeAll(tags);
 	}
 
+	/**
+	 * Show the name in interface language.
+	 */
 	@Override
 	public String toString() {
 		return "CA[" + cleaningAgentID + " - " + name.getString(User.getInterfaceLanguage()) + "]\n";
@@ -205,6 +233,9 @@ public final class CleaningAgent {
 		this.memo = memo;
 	}
 
+	/**
+	 * Order will be sorted before return.
+	 */
 	public Set<Tag> getTags() {
 		return TagFetcher.fetchSortedTags(tags);
 	}

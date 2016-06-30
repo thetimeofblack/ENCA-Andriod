@@ -8,25 +8,23 @@ import de.fhl.enca.bl.Tag;
 import de.fhl.enca.bl.TagType;
 
 /**
- * @author Bobby
- * @version 26.06.2016
- * 
- * Class TagFetcher
- * This class contains methods of operating tags
- * which are stored in memory in map Tag.tagsAll.
+ * Contains methods of fetching tags.
+ * @author Zhaowen.Gong
+ * @version 30.06.2016
  */
 public final class TagFetcher {
 
 	/**
-	 * Fetch from all tags according to the given tagType
+	 * Fetch from all tags according to the given tagType.
 	 * @param type the certain TagType
+	 * @return set of tags which are with the given type
 	 */
 	public static Set<Tag> fetchTagsAllOfCertainType(TagType type) {
 		return fetchTagsOfCertainType(Tag.getTagsAll(), type);
 	}
 
 	/**
-	 * Fetch from those tags related to all of tags given
+	 * Fetch from those tags related to all of tags given.
 	 * @param source the given tags
 	 * @return set of tags which are related to all of tags given
 	 */
@@ -51,7 +49,7 @@ public final class TagFetcher {
 	}
 
 	/**
-	 * Fetch from given tags according to the given tagType
+	 * Fetch from given tags according to the given tagType.
 	 * @param source the given tags
 	 * @param type the certain tagType
 	 * @return set of tags from source which are with the given type

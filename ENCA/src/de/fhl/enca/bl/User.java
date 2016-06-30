@@ -9,18 +9,29 @@ import java.io.ObjectOutputStream;
 import java.util.Date;
 
 /**
- * @author Bobby
- * @version 31.05.2016
- * 
- * Class User
- * This class contains metadata for user.
- * It can be stored and read out of a file.
+ * Contains metadata of user, providing saving and reading function of the metadata.
+ * @author Zhaowen.Gong
+ * @version 30.06.2016
+ * @see UserPreference
+ * @see LanguagePreference
+ * @see TagPreference
  */
 public final class User {
 
+	/**
+	 * Representing the directory of save file.
+	 */
 	private static File directory;
+	
+	/**
+	 * Representing the save file.
+	 */
 	private static File file;
 
+	/**
+	 * Whether it is user's first use.</br>
+	 * Will influence the login interface.
+	 */
 	private static boolean isFirstUse = true;
 	private static UserPreference userPreference = new UserPreference();
 	private static LanguagePreference languagePreference = new LanguagePreference();
@@ -28,7 +39,8 @@ public final class User {
 
 	/* static method */
 	/**
-	 * Initialize the directory and file location, and read preference
+	 * Initialize the directory and file location, and read preference.</br>
+	 * Different operation systems are distinguished.
 	 */
 	public static void initialize() {
 		if (System.getProperty("os.name").startsWith("Windows")) {
@@ -43,7 +55,7 @@ public final class User {
 	}
 
 	/**
-	 * Read user data from the file
+	 * Read user data from the file.
 	 * @return whether it is user's first use depending on the existance and integrity of the file
 	 */
 	private static boolean readUser() {
@@ -83,8 +95,8 @@ public final class User {
 	}
 
 	/**
-	 * Write user data to the file and set isFirstUse to false
-	 * If the directory of the file does not exist, they will be created.
+	 * Write user data to the file and set isFirstUse to false.</br>
+	 * If the directory of the file does not exist, it will be created.
 	 */
 	public static void writeUser() {
 		if (isFirstUse) {

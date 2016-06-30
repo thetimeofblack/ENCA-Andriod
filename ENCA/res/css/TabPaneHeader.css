@@ -1,0 +1,11 @@
+.tab-pane .tab-header-area .tab-header-background {
+	-fx-background-color: #FFFFFF;
+}
+
+.tab-pane .tab-header-area .tab {  
+	-fx-background-color: #FFFFFF;
+}
+
+.scroll-pane .viewport{
+	-fx-background-color: #FFFFFF;
+}

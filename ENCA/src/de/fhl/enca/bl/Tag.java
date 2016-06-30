@@ -7,19 +7,21 @@ import java.util.Set;
 import de.fhl.enca.controller.TagFetcher;
 
 /**
- * @author Bobby
- * @version 31.05.2016
- * 
- * Class Tag
- * Object representing tag
+ * Object representing tag.
+ * @author Zhaowen.Gong
+ * @version 30.06.2016
  */
 public class Tag {
 
 	/* static member */
 	/**
-	 * Store the references of all tags
+	 * Store the references of all tags.
 	 */
 	private static Map<Integer, Tag> tagsAll = new HashMap<>();
+	
+	/**
+	 * 'no tag' tag will be stored.
+	 */
 	static {
 		InternationalString string = new InternationalString();
 		string.setString(LanguageType.ENGLISH, "(No Tag)");
@@ -28,6 +30,9 @@ public class Tag {
 		tagsAll.put(0, new Tag(0, string, TagType.OTHERS, true));
 	}
 
+	/**
+	 * Max id stored for creating new tag.
+	 */
 	private static int maxID = 0;
 
 	/* non-static member */
@@ -36,22 +41,42 @@ public class Tag {
 	private TagType tagType;
 	private boolean belongsToSystem;
 
+	/**
+	 * Cleaning agents related to self.
+	 */
 	private Set<CleaningAgent> cleaningAgents = new HashSet<>();
+	
+	/**
+	 * Tags related to self.
+	 */
 	private Set<Tag> tagsRelated = new HashSet<>();
 
 	/* static method */
+	/**
+	 * Get tag by id.
+	 */
 	public static Tag getTag(int ID) {
 		return tagsAll.get(ID);
 	}
 
+	/**
+	 * Store new tag in the map.
+	 * @param tag the tag to be stored
+	 */
 	public static void addTag(Tag tag) {
 		tagsAll.put(tag.getTagID(), tag);
 	}
 
+	/**
+	 * Remove the given tag from the map.
+	 */
 	public static void removeTag(Tag tag) {
 		tagsAll.remove(tag.getTagID());
 	}
 
+	/**
+	 * Tag representing having no tag will not be presented.
+	 */
 	public static Set<Tag> getTagsAll() {
 		Set<Tag> tags = new HashSet<>(tagsAll.values());
 		tags.remove(Tag.getTag(0));
@@ -74,6 +99,11 @@ public class Tag {
 		this.belongsToSystem = belongsToSystem;
 	}
 
+	/**
+	 * Search the tag according to given keyword.
+	 * @param keyword
+	 * @return integer representing the relevance
+	 */
 	public int search(String keyword) {
 		return name.search(keyword);
 	}
@@ -87,32 +117,16 @@ public class Tag {
 		this.cleaningAgents.add(cleaningAgent);
 	}
 
-	public void addCleaningAgentsAll(Set<CleaningAgent> cleaningAgents) {
-		this.cleaningAgents.addAll(cleaningAgents);
-	}
-
 	public void removeCleaningAgent(CleaningAgent cleaningAgent) {
 		this.cleaningAgents.remove(cleaningAgent);
-	}
-
-	public void removeCleaningAgentsAll(Set<CleaningAgent> cleaningAgents) {
-		this.cleaningAgents.removeAll(cleaningAgents);
 	}
 
 	public void addTagRelated(Tag tag) {
 		this.tagsRelated.add(tag);
 	}
 
-	public void addTagsRelatedAll(Set<Tag> tags) {
-		this.tagsRelated.addAll(tags);
-	}
-
 	public void removeTagRelated(Tag tag) {
 		this.tagsRelated.remove(tag);
-	}
-
-	public void removeTagsRelatedAll(Set<Tag> tags) {
-		this.tagsRelated.removeAll(tags);
 	}
 
 	/* getters and setters */
@@ -148,6 +162,9 @@ public class Tag {
 		return cleaningAgents;
 	}
 
+	/**
+	 * Order will be sorted before return.
+	 */
 	public Set<Tag> getTagsRelated() {
 		return TagFetcher.fetchSortedTags(tagsRelated);
 	}

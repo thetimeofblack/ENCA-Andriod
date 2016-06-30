@@ -3,11 +3,10 @@ package de.fhl.enca.dao;
 import java.sql.ResultSet;
 
 /**
- * @author Bobby
- * @version 01.06.2016
- * 
- * Class SQLVisitor
- * Class generates select sql query and sends them
+ * Execute select SQL operations
+ * @author Zhaowen.Gong
+ * @version 30.06.2016
+ * @see Connector
  */
 public final class SQLVisitor {
 

@@ -8,16 +8,17 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @author Bobby
- * @version 21.06.2016
- * 
- * Class UserPreference
- * Store the basic information of the user.
+ * Stores the basic information of the user.
+ * @author Zhaowen.Gong
+ * @version 30.06.2016
  */
 public final class UserPreference implements Serializable {
 
 	private static final long serialVersionUID = -5000180069279808816L;
 	
+	/**
+	 * Provide different DateForamt for different interface language.
+	 */
 	private static Map<LanguageType, DateFormat> dateFormatMap = new HashMap<>();
 	static {
 		dateFormatMap.put(LanguageType.ENGLISH, new SimpleDateFormat("MM/dd/yyyy"));
@@ -25,7 +26,15 @@ public final class UserPreference implements Serializable {
 		dateFormatMap.put(LanguageType.CHINESE, new SimpleDateFormat("yyyy年MM月dd日"));
 	}
 
+	/**
+	 * The Name of the user.
+	 */
 	private String name = "";
+	
+	/**
+	 * The date the user uses the software at the first time.</br>
+	 * Will be auto generated.
+	 */
 	private Date regDate = new Date();
 
 	public String getName() {

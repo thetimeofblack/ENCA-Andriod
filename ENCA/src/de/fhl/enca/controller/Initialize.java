@@ -10,17 +10,17 @@ import de.fhl.enca.bl.TagType;
 import de.fhl.enca.dao.SQLVisitor;
 
 /**
- * @author Bobby
- * @version 01.06.2016
- * 
- * Class Initialize
- * This class contains the operations of initialization.
- * During the initialization, all of tags and cleaning agents
- * will be read into memory. The relations between cleaning agents
- * and tags and the relations between tags will be realize.
+ * Contains the operations of initialization.</br>
+ * During the initialization, all of tags and cleaning agents will be read into memory.</br>
+ * The relations between cleaning agents and tags and the relations between tags will be realized.
+ * @author Zhaowen.Gong
+ * @version 30.06.2016
  */
 public final class Initialize {
 
+	/**
+	 * Do all the initialization.
+	 */
 	public static void initialize() {
 		initCleaningAgents();
 		initTags();
@@ -28,7 +28,8 @@ public final class Initialize {
 	}
 
 	/**
-	 * Initialize all cleaning agents and store them into the memory
+	 * Initialize all cleaning agents and store them into the memory.</br>
+	 * Will also generate and set max id.
 	 */
 	private static void initCleaningAgents() {
 		ResultSet r = SQLVisitor.visitCleaningAgentsAll();
@@ -56,7 +57,8 @@ public final class Initialize {
 	}
 
 	/**
-	 * Initialize all tags and store them into the memory
+	 * Initialize all tags and store them into the memory.</br>
+	 * 	Will also generate and set max id.
 	 */
 	private static void initTags() {
 		ResultSet r = SQLVisitor.visitTagsAll();
@@ -74,8 +76,9 @@ public final class Initialize {
 	}
 
 	/**
-	 * Initialize the relations between cleaning agents and tags
-	 * and the relations between tags
+	 * Initialize the relations between cleaning agents and tags and the relations between tags.</br>
+	 * Will also add 'no tag' tag to those cleaning agents without tags.
+	 * @see CleaningAgentOperator
 	 */
 	private static void initRelations() {
 		ResultSet r = SQLVisitor.visitRelations();
@@ -92,14 +95,19 @@ public final class Initialize {
 		for (CleaningAgent cleaningAgent : CleaningAgent.getCleaningAgentsAll()) {
 			if (cleaningAgent.getTags().isEmpty()) {
 				Tag.getTag(0).addCleaningAgent(cleaningAgent);
+			} else {
+				CleaningAgentOperator.attachTTRelation(cleaningAgent.getTags());
 			}
-			CleaningAgentOperator.attachTTRelation(cleaningAgent.getTags());
 		}
 	}
 
 	/**
-	 * Generate InternationalString according to ResultSet object and column number, 
-	 * allows reusing replicate codes.
+	 * Generate InternationalString according to ResultSet object and column number.</br>
+	 * Generation is based on the current line and three String data in three columns starting at the index.</br>
+	 * Designed for reusing replicate codes.
+	 * @param r the ResultSet source
+	 * @param i the first column index
+	 * @return the generated InternationalString instance
 	 */
 	private static InternationalString iStringGenerator(ResultSet r, int i) {
 		InternationalString iString = new InternationalString();

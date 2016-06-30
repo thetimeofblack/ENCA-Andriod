@@ -4,59 +4,53 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 /**
- * @author Bobby
- * @version 31.05.2016
- * 
- * Class Connector
- * Class responible for connecting the database and
- * sending sql query to database
+ * Responible for connecting the database and sending SQL query to database
+ * @author Zhaowen.Gong
+ * @version 30.06.2016
  */
 public final class Connector {
 
-	private static Connection connection;
+	/**
+	 * The unique connection.
+	 */
+	private static Connection connection = null;
 
+	/**
+	 * Establish the connection.
+	 */
 	static {
 		try {
 			connection = DriverManager.getConnection("jdbc:sqlite:" + Connector.class.getResource("/data/data.db"));
 		} catch (SQLException e) {
 			e.printStackTrace();
-			connection = null;
 		}
 	}
 
-	private static Statement statement;
-
-	static {
-		if (connection != null) {
-			try {
-				statement = connection.createStatement();
-			} catch (SQLException e) {
-				e.printStackTrace();
-				statement = null;
-			}
-		} else {
-			statement = null;
-		}
-	}
-
+	/**
+	 * Send select SQL query to the database.
+	 * @param sql select SQL query
+	 * @return the result get from the database
+	 */
 	public static ResultSet executeSelect(String sql) {
 		try {
-			return statement.executeQuery(sql);
+			return connection.createStatement().executeQuery(sql);
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return null;
 		}
 	}
 
-	public static boolean executeNonSelect(String sql) {
+	/**
+	 * Send update, insert into and delete SQL query to the database.
+	 * @param sql update, insert into and delete SQL query
+	 */
+	public static void executeNonSelect(String sql) {
 		try {
-			return statement.execute(sql);
+			connection.createStatement().execute(sql);
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return false;
 		}
 	}
 }

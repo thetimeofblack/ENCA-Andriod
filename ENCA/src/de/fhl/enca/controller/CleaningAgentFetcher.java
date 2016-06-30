@@ -9,6 +9,7 @@ import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 import de.fhl.enca.bl.CleaningAgent;
 import de.fhl.enca.bl.Tag;
@@ -16,17 +17,14 @@ import de.fhl.enca.dao.SQLVisitor;
 import javafx.scene.image.Image;
 
 /**
- * @author Bobby
- * @version 31.05.2016
- * 
- * Class CleaningAgentFetcher
- * This class contains methods of operating cleaning agents
- * which are stored in memory in map CleaningAgent.cleaningAgentAll.
+ * Contains methods of fetching cleaning agents.
+ * @author Zhaowen.Gong
+ * @version 30.06.2016
  */
 public final class CleaningAgentFetcher {
 
 	/**
-	 * Fetch cleaning agents related to all of the given tags
+	 * Fetch cleaning agents related to all of the given tags.
 	 * @param tags the given set of tags
 	 * @return set of cleaning agents which are related to all of the given tags
 	 */
@@ -34,10 +32,8 @@ public final class CleaningAgentFetcher {
 		Set<CleaningAgent> result = null;
 		for (Tag tag : tags) {
 			if (result == null) {
-				/* Put all of the related cleaning agents of the first tag into the result */
 				result = tag.getCleaningAgents();
 			} else {
-				/* Go through the result, only save those cleaning agents which are related to current tag */
 				Set<CleaningAgent> tempSet = new HashSet<>();
 				for (CleaningAgent cleaningAgent : result) {
 					if (cleaningAgent.getTags().contains(tag)) {
@@ -51,10 +47,11 @@ public final class CleaningAgentFetcher {
 	}
 
 	/**
-	 * Search cleaning agents with the given keyword,
-	 * the result would be sorted according to the relevance.
+	 * Search cleaning agents with the given keyword.</br>
+	 * The result would be sorted according to the relevance.
 	 * @param source given cleaning agents
-	 * @param keyword
+	 * @param keyword the given keyword
+	 * @return the search result containing cleaning agents with positive relevance
 	 */
 	public static Set<CleaningAgent> fetchResult(Set<CleaningAgent> source, String keyword) {
 		Map<CleaningAgent, Integer> tempMap = new HashMap<>();
@@ -68,7 +65,7 @@ public final class CleaningAgentFetcher {
 				tempMap.put(cleaningAgent, relevance);
 			}
 		}
-		List<Map.Entry<CleaningAgent, Integer>> sortingList = new ArrayList<>(tempMap.entrySet());
+		List<Entry<CleaningAgent, Integer>> sortingList = new ArrayList<>(tempMap.entrySet());
 		sortingList.sort((o1, o2) -> o2.getValue() - o1.getValue());
 		Set<CleaningAgent> tempSet = new LinkedHashSet<>();
 		for (Map.Entry<CleaningAgent, Integer> entry : sortingList) {
@@ -78,7 +75,10 @@ public final class CleaningAgentFetcher {
 	}
 
 	/**
-	 * Get the image of certain cleaning agent
+	 * Get the image of the given cleaning agent.</br>
+	 * Class Image is within the framework of JavaFX.
+	 * @param cleaningAgent the given cleaning agent
+	 * @return the image of the cleaning agent
 	 */
 	public static Image fetchImageOfCleaningAgent(CleaningAgent cleaningAgent) {
 		ResultSet resultSet = SQLVisitor.visitImage(cleaningAgent.getCleaningAgentID());
