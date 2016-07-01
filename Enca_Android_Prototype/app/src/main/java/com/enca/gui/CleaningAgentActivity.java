@@ -17,10 +17,7 @@ import android.widget.Toast;
 
 import com.enca.bl.CleaningAgent;
 import com.enca.bl.Tag;
-import com.enca.bl.TagType;
 import com.enca.controller.CleaningAgentFetcher;
-import com.enca.controller.Search;
-import com.enca.controller.TagFetcher;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -79,7 +76,7 @@ public class CleaningAgentActivity extends AppCompatActivity {
         if(cleaningAgentSet.isEmpty()){
             cleaningAgents.addAll(CleaningAgentFetcher.fetchResult(CleaningAgent.getCleaningAgentsAll(),query));
         }else {
-            cleaningAgents.addAll(Search.search(cleaningAgentSet, query));
+            cleaningAgents.addAll(CleaningAgentFetcher.fetchResult(cleaningAgentSet, query));
             Toast.makeText(CleaningAgentActivity.this, query, Toast.LENGTH_SHORT).show();
         }
     }

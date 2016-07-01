@@ -1,14 +1,13 @@
 package com.enca.gui;
 
+
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.enca.bl.Tag;
 
@@ -21,32 +20,30 @@ import java.util.Map;
 /**
  * Created by 85102 on 6/18/2016.
  */
-public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>{
+public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder>{
     private Context context;
-    List<Tag> rooms = new ArrayList<>();
+    List<Tag> items = new ArrayList<>();
+    int roomTagId;
 
     public class MyViewHolder extends RecyclerView.ViewHolder  implements  View.OnClickListener{
-        TextView roomTagName;
+        TextView itemTagName;
         public MyViewHolder(View view){
             super(view);
-            roomTagName = (TextView) view.findViewById(R.id.tag_name);
-            roomTagName.setOnClickListener(this);
+            itemTagName = (TextView) view.findViewById(R.id.tag_name);
+            itemTagName.setOnClickListener(this);
 
         }
 
-//        @Override
+        @Override
         public void onClick(View view) {
-//            if(view.getId() == roomTagName.getId()){
-//                Intent intent = new Intent(context, ItemActivity.class);
-//                intent.putExtra("position", view.getVerticalScrollbarPosition());
-//                context.startActivity(intent);
-//            }
+
         }
     }
 
-    public  MyAdapter(Context context, List<Tag> rooms){
+    public ItemAdapter(Context context, List<Tag> items, int roomTagId){
         this.context = context;
-        this.rooms = rooms;
+        this.items = items;
+        this.roomTagId = roomTagId;
     }
 
     @Override
@@ -58,14 +55,15 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>{
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
-        Tag tags = rooms.get(position);
-        holder.roomTagName.setText((tags.getName()).getInterfaceString());
-        holder.roomTagName.setOnClickListener(new View.OnClickListener() {
+        Tag tags = items.get(position);
+        holder.itemTagName.setText((tags.getName()).getInterfaceString());
+        holder.itemTagName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, ItemActivity.class);
-                int roomTagId = getRoomTagId(position);
+//                Intent intent = new Intent(context, CleaningAgentActivity.class);
+                Intent intent = new Intent("com.android.enca.search");
                 intent.putExtra("roomTagId", roomTagId);
+                intent.putExtra("itemTagId",getItemTagId(position));
                 context.startActivity(intent);
             }
         });
@@ -73,16 +71,16 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>{
 
     @Override
     public int getItemCount() {
-        return rooms.size();
+        return items.size();
     }
 
-
-    public int getRoomTagId(int position){
+    public int getItemTagId(int position){
         int count =0;
-        Map<Integer,Integer> roomTagId = new HashMap<>();
-        for (Tag tag: rooms){
-            roomTagId.put(count++,tag.getTagID());
+        Map<Integer,Integer> itemTagId = new HashMap<>();
+        for (Tag tag: items){
+            itemTagId.put(count++,tag.getTagID());
         }
-        return roomTagId.get(position);
+        return itemTagId.get(position);
     }
+
 }

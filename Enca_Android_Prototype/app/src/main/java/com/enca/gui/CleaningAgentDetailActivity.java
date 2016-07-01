@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.method.ScrollingMovementMethod;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -24,11 +25,12 @@ import com.enca.dao.DatabaseAccess;
 
 
 public class CleaningAgentDetailActivity extends AppCompatActivity {
-    private TextView caName, caDecripition, caLocation, caTag, caRate, caInstruction;
+    private TextView caName, caDecripition, caRate, caInstruction;
     private ImageView caImage;
     private Spinner contentSpinner;
     private Configuration config ;
     Toolbar toolbar;
+    private int cleaningAgentId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,8 +43,6 @@ public class CleaningAgentDetailActivity extends AppCompatActivity {
 
         caName = (TextView) findViewById(R.id.cleaning_agent_name_detail);
         caDecripition = (TextView) findViewById(R.id.cleaning_agent_description_detail);
-        caLocation = (TextView) findViewById(R.id.cleaning_agent_mainlanguage_detail);
-        caTag = (TextView) findViewById(R.id.cleaning_agent_tag_detail);
         caRate = (TextView) findViewById(R.id.cleaning_agent_rate_detail);
         caInstruction = (TextView) findViewById(R.id.cleaning_agent_instruction_detail);
         caImage = (ImageView) findViewById(R.id.cleaning_agent_image_detail);
@@ -50,24 +50,21 @@ public class CleaningAgentDetailActivity extends AppCompatActivity {
         config = new Configuration(getResources().getConfiguration());
         ConfigureSpinner();
         Intent intent = getIntent();
-        int cleaningAgentId= intent.getIntExtra("CleaningAgentId",0);
+        cleaningAgentId= intent.getIntExtra("CleaningAgentId",0);
         DatabaseAccess databaseAccess = DatabaseAccess.getInstance(this);
         databaseAccess.open();
 
+        showDetailInformation(cleaningAgentId);
+    }
+
+    private void showDetailInformation(int cleaningAgentId) {
         caName.setMovementMethod(ScrollingMovementMethod.getInstance());
         caName.setText(CleaningAgent.getCleaningAgent(cleaningAgentId).getName().getContentString());
-//        caLocation.setText(CleaningAgent.getCleaningAgent(cleaningAgentId).getMainLanguage().toString());
-//        Log.d("Location",CleaningAgent.getCleaningAgent(cleaningAgentId).getMainLanguage().toString());
-//        caTag.setMovementMethod(ScrollingMovementMethod.getInstance());
-//        Set<Tag> tags = CleaningAgent.getCleaningAgent(cleaningAgentId).getTags();
-//        Log.d("Tags",tags.toString());
         caRate.setText(String.valueOf(CleaningAgent.getCleaningAgent(cleaningAgentId).getRate()));
         caInstruction.setText(CleaningAgent.getCleaningAgent(cleaningAgentId).getInstruction().getContentString());
         caDecripition.setText(CleaningAgent.getCleaningAgent(cleaningAgentId).getDescription().getContentString());
         caImage.setImageBitmap(CleaningAgentFetcher.fetchImageOfCleaningAgent(cleaningAgentId));
-//        caImage.setImageBitmap(CleaningAgent.getCleaningAgent(cleaningAgentId).getImage());
     }
-
 
 
     public boolean onOptionsItemSelected(MenuItem menuItem) {
@@ -82,14 +79,16 @@ public class CleaningAgentDetailActivity extends AppCompatActivity {
     private void ConfigureSpinner() {
         ArrayAdapter<CharSequence> languageAdapter = ArrayAdapter.createFromResource(this, R.array.language_type, android.R.layout.simple_spinner_item);
         languageAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        contentSpinner.setAdapter(languageAdapter);
+//        contentSpinner.setAdapter(languageAdapter);
+        contentSpinner.setAdapter(new NothingSelectedSpinnerAdapter(languageAdapter,R.layout.spinner_nothing_selected,this));
         contentSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
-                User.setContentLanguage(LanguageType.getLanguageType(position));
-                config.locale = LanguageType.getLanguageType(position).getLocale();
-                getResources().updateConfiguration(config, getResources().getDisplayMetrics());
-                User.writeUser();
+                if (position == 0){
+                    User.setContentLanguage(User.getContentLanguage());
+                }else
+                User.setContentLanguage(LanguageType.getLanguageType(position-1));
+                showDetailInformation(cleaningAgentId);
             }
 
             @Override

@@ -69,6 +69,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/login_spinner_interface"
+                style="?android:attr/spinnerDropDownItemStyle"
                 android:layout_column="1" />
         </TableRow>
 
@@ -87,6 +88,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/login_spinner_content"
+                style="?android:attr/spinnerDropDownItemStyle"
                 android:layout_column="1" />
         </TableRow>
     </TableLayout>

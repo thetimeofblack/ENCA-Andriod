@@ -1,16 +1,12 @@
 package com.enca.controller;
 
 import android.database.Cursor;
-import android.provider.ContactsContract;
-
 import com.enca.bl.CleaningAgent;
 import com.enca.bl.InternationalString;
 import com.enca.bl.LanguageType;
-import com.enca.bl.Memo;
 import com.enca.bl.Tag;
 import com.enca.bl.TagType;
 import com.enca.dao.DatabaseVisitor;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -185,24 +181,6 @@ public class DataInitialize {
         return iString;
     }
 
-    /**
-     * Initialize memos.
-     */
-    private static void initMemos() {
-        Cursor cursor = DatabaseVisitor.visitMemos();
-        try {
-            if(cursor!=null && cursor.getCount() > 0) {
-                if (cursor.moveToFirst()) {
-                    while (!cursor.isAfterLast()) {
-                        new Memo(cursor.getInt(0), CleaningAgent.getCleaningAgent(cursor.getInt(2)), cursor.getString(3), new Date());
-                        cursor.moveToNext();
-                    }
-                }
-            }
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-    }
 
 
 }

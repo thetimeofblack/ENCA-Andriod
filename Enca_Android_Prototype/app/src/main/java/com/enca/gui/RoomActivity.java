@@ -13,15 +13,12 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.Window;
-import android.widget.Toast;
 
 import com.enca.bl.Tag;
 import com.enca.bl.TagType;
-import com.enca.bl.User;
 import com.enca.controller.TagFetcher;
 
 import java.util.ArrayList;
@@ -30,7 +27,7 @@ import java.util.List;
 import java.util.Set;
 
 public class RoomActivity extends AppCompatActivity {
-    MyAdapter myAdapterRoom;
+    RoomAdapter roomAdapterRoom;
     RecyclerView recyclerViewRoom;
     Set<Tag> roomTag= new HashSet<>();
     List<Tag> rooms = new ArrayList<>();
@@ -59,11 +56,11 @@ public class RoomActivity extends AppCompatActivity {
         recyclerViewRoom = (RecyclerView) findViewById(R.id.room_recyclerView);
         roomTag = TagFetcher.fetchTagsAllOfCertainType(TagType.ROOM);
         rooms.addAll(roomTag);
-        myAdapterRoom = new MyAdapter(this, rooms);
+        roomAdapterRoom = new RoomAdapter(this, rooms);
         recyclerViewRoom.hasFixedSize();
         recyclerViewRoom.setLayoutManager(new LinearLayoutManager(this));
         recyclerViewRoom.addItemDecoration(new DividerItemDecoration(this,LinearLayoutManager.VERTICAL));
-        recyclerViewRoom.setAdapter(myAdapterRoom);
+        recyclerViewRoom.setAdapter(roomAdapterRoom);
 
     }
 

@@ -11,19 +11,16 @@ import android.view.Window;
 
 import com.enca.bl.Tag;
 import com.enca.bl.TagType;
-import com.enca.controller.DataInitialize;
 import com.enca.controller.TagFetcher;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 public class ItemActivity extends AppCompatActivity {
 
-    MyItemAdapter myItemAdapter;
+    ItemAdapter itemAdapter;
     RecyclerView recyclerViewItem;
     Set<Tag> itemTag = new HashSet<>();
     List<Tag> items = new ArrayList<>();
@@ -46,11 +43,11 @@ public class ItemActivity extends AppCompatActivity {
         itemTag.add(Tag.getTag(roomTagId));
         itemTag = TagFetcher.fetchTagsOfCertainType(TagFetcher.fetchTagsRelated(itemTag),TagType.ITEM);
         items.addAll(itemTag);
-        myItemAdapter = new MyItemAdapter(this, items,roomTagId);
+        itemAdapter = new ItemAdapter(this, items,roomTagId);
 //        recyclerViewItem.hasFixedSize();
         recyclerViewItem.setLayoutManager(new LinearLayoutManager(this));
         recyclerViewItem.addItemDecoration(new DividerItemDecoration(this,LinearLayoutManager.VERTICAL));
-        recyclerViewItem.setAdapter(myItemAdapter);
+        recyclerViewItem.setAdapter(itemAdapter);
         getSupportActionBar().setTitle(Tag.getTag(roomTagId).getName().getInterfaceString());
     }
 

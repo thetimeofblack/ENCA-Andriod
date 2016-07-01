@@ -14,7 +14,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.enca.bl.LanguageType;
 import com.enca.bl.User;
@@ -37,14 +36,14 @@ public class LoginActivity extends AppCompatActivity {
         User.initialize();//Initialize the directory and file location, and read preference
         config = new Configuration(getResources().getConfiguration());
         config.locale = Locale.ENGLISH;
+        getResources().updateConfiguration(config,getResources().getDisplayMetrics());
+
         if (User.isFirstUse()) {
             setContentView(R.layout.activity_firstlogin);
             registerName = (EditText) findViewById(R.id.login_name);
             loginInterfaceLanguage = (Spinner) findViewById(R.id.login_spinner_interface);
             loginContentLanguage = (Spinner) findViewById(R.id.login_spinner_content);
             loginButton = (Button) findViewById(R.id.login_comfirm);
-
-            getResources().updateConfiguration(config,getResources().getDisplayMetrics());
 
             ConfigureSpinner();
             loginButton.setText(getResources().getString(R.string.login_confirm));
@@ -107,13 +106,16 @@ public class LoginActivity extends AppCompatActivity {
     private void ConfigureSpinner() {
         ArrayAdapter<CharSequence> languageAdapter = ArrayAdapter.createFromResource(this, R.array.language_type, android.R.layout.simple_spinner_item);
         languageAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        loginInterfaceLanguage.setAdapter(languageAdapter);
+//        loginInterfaceLanguage.setAdapter(languageAdapter);
+        loginInterfaceLanguage.setAdapter(new NothingSelectedSpinnerAdapter(languageAdapter,R.layout.spinner_nothing_selected,this));
         loginInterfaceLanguage.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
-                User.setInterfaceLanguage(LanguageType.getLanguageType(position));
-                config.locale = LanguageType.getLanguageType(position).getLocale();
-                getResources().updateConfiguration(config,getResources().getDisplayMetrics());
+                if (position !=0) {
+                    User.setInterfaceLanguage(LanguageType.getLanguageType(position - 1));
+                    config.locale = LanguageType.getLanguageType(position - 1).getLocale();
+                    getResources().updateConfiguration(config, getResources().getDisplayMetrics());
+                }
             }
 
             @Override
@@ -121,11 +123,14 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        loginContentLanguage.setAdapter(languageAdapter);
+//        loginContentLanguage.setAdapter(languageAdapter);
+        loginContentLanguage.setAdapter(new NothingSelectedSpinnerAdapter(languageAdapter,R.layout.spinner_nothing_selected,this));
         loginContentLanguage.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
-                User.setContentLanguage(LanguageType.getLanguageType(position));
+                if (position !=0) {
+                    User.setContentLanguage(LanguageType.getLanguageType(position - 1));
+                }
             }
 
             @Override

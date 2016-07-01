@@ -85,13 +85,16 @@ public class UserCenterActivity extends AppCompatActivity {
     private void ConfigureSpinner() {
         ArrayAdapter<CharSequence> languageAdapter = ArrayAdapter.createFromResource(this, R.array.language_type, android.R.layout.simple_spinner_item);
         languageAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        userCenterInterfaceLanguage.setAdapter(languageAdapter);
+//        userCenterInterfaceLanguage.setAdapter(languageAdapter);
+        userCenterInterfaceLanguage.setAdapter(new NothingSelectedSpinnerAdapter(languageAdapter,R.layout.spinner_nothing_selected,this));
         userCenterInterfaceLanguage.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
-                    User.setInterfaceLanguage(LanguageType.getLanguageType(position));
-                    config.locale = LanguageType.getLanguageType(position).getLocale();
+                if (position !=0) {
+                    User.setInterfaceLanguage(LanguageType.getLanguageType(position-1));
+                    config.locale = LanguageType.getLanguageType(position-1).getLocale();
                     getResources().updateConfiguration(config, getResources().getDisplayMetrics());
+                }
 
             }
 
@@ -101,11 +104,14 @@ public class UserCenterActivity extends AppCompatActivity {
             }
         });
 
-        userCenterContentLanguage.setAdapter(languageAdapter);
+//        userCenterContentLanguage.setAdapter(languageAdapter);
+        userCenterContentLanguage.setAdapter(new NothingSelectedSpinnerAdapter(languageAdapter,R.layout.spinner_nothing_selected,this));
         userCenterContentLanguage.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
-                User.setContentLanguage(LanguageType.getLanguageType(position));
+                if (position !=0) {
+                    User.setContentLanguage(LanguageType.getLanguageType(position-1));
+                }
             }
 
             @Override
