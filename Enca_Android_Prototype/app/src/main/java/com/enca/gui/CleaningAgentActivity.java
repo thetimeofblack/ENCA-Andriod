@@ -42,7 +42,6 @@ public class CleaningAgentActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         if (toolbar != null) {
             setSupportActionBar(toolbar);
-//        toolbar.setNavigationIcon(R.drawable.ic_action_back);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
@@ -54,9 +53,6 @@ public class CleaningAgentActivity extends AppCompatActivity {
             tags.add(Tag.getTag(itemTagId));
             cleaningAgentSet = CleaningAgentFetcher.fetchCleaningAgentsOfTags(tags);
             cleaningAgents.addAll(cleaningAgentSet);
-//            cleaningAgentAdapter = new CleaningAgentAdapter(this, cleaningAgents);
-//            recyclerViewItem.setLayoutManager(new LinearLayoutManager(this));
-//            recyclerViewItem.setAdapter(cleaningAgentAdapter);
             getSupportActionBar().setTitle(Tag.getTag(roomTagId).getName().getInterfaceString());
             getSupportActionBar().setSubtitle(Tag.getTag(itemTagId).getName().getInterfaceString());
         }
@@ -101,22 +97,6 @@ public class CleaningAgentActivity extends AppCompatActivity {
         SearchableInfo info = searchManager.getSearchableInfo(cn);
         searchView.setSearchableInfo(info);
         searchView.setSubmitButtonEnabled(true);
-//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-//
-//
-//            @Override
-//            public boolean onQueryTextChange(String queryText) {
-//
-//                return true;
-//            }
-//
-//
-//            @Override
-//            public boolean onQueryTextSubmit(String queryText) {
-//
-//                return true;
-//            }
-//        });
         return true;
     }
 }

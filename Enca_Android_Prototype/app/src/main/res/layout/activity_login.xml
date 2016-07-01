@@ -16,9 +16,9 @@
         android:id="@+id/login_customername"
         android:layout_marginTop="30dp"
         android:layout_centerHorizontal="true"
+        android:text="Name"
         android:textStyle="italic"
         android:textSize="30sp"
-        android:background="@color/colorPrimary"
         />
     <TextView
         android:layout_width="wrap_content"
@@ -29,6 +29,7 @@
         android:textSize="40sp"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:layout_centerHorizontal="true"
+        android:gravity="center"
         android:layout_marginTop="50dp"
         android:layout_below="@+id/login_customername"
         />

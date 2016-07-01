@@ -27,18 +27,21 @@ public class UserCenterActivity extends AppCompatActivity {
     private Button resetButton;
     private Configuration config ;
     private Toolbar toolbar;
+    private int interfaceLanguageIndex = 0x0;
+    private int contentLanguageIndex = 0x0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_center);
         resetName = (EditText) findViewById(R.id.usercenter_name);
+        resetName.setText(User.getName());
         userCenterInterfaceLanguage = (Spinner) findViewById(R.id.usercenter_spinner_interface);
         userCenterContentLanguage = (Spinner) findViewById(R.id.usercenter_spinner_content);
         resetButton = (Button) findViewById(R.id.usercenter_confirm);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        toolbar.setTitle(getResources().getString(R.string.usercenter));
+        getSupportActionBar().setTitle(getResources().getString(R.string.usercenter));
         config = new Configuration(getResources().getConfiguration());
         ConfigureSpinner();
         resetButton.setText(getResources().getString(R.string.reset_confirm));
@@ -69,7 +72,17 @@ public class UserCenterActivity extends AppCompatActivity {
                 .setMessage(getResources().getString(R.string.resetdialogmessage))
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
+                        if (interfaceLanguageIndex != 0) {
+                            User.setInterfaceLanguage(LanguageType.getLanguageType(interfaceLanguageIndex-1));
+                            config.locale = LanguageType.getLanguageType(interfaceLanguageIndex-1).getLocale();
+                            getResources().updateConfiguration(config, getResources().getDisplayMetrics());
+                        }
+                        if (contentLanguageIndex != 0) {
+                            User.setContentLanguage(LanguageType.getLanguageType(contentLanguageIndex-1));
+                        }
                         User.writeUser();
+                        Intent homeIntent = new Intent(UserCenterActivity.this, RoomActivity.class);
+                        startActivity(homeIntent);
                     }
                 })
                 .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
@@ -90,12 +103,7 @@ public class UserCenterActivity extends AppCompatActivity {
         userCenterInterfaceLanguage.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
-                if (position !=0) {
-                    User.setInterfaceLanguage(LanguageType.getLanguageType(position-1));
-                    config.locale = LanguageType.getLanguageType(position-1).getLocale();
-                    getResources().updateConfiguration(config, getResources().getDisplayMetrics());
-                }
-
+                interfaceLanguageIndex = position;
             }
 
             @Override
@@ -103,21 +111,21 @@ public class UserCenterActivity extends AppCompatActivity {
                 getResources().updateConfiguration(config, getResources().getDisplayMetrics());
             }
         });
+        userCenterInterfaceLanguage.setSelection(User.getInterfaceLanguage().getId() + 1);
 
 //        userCenterContentLanguage.setAdapter(languageAdapter);
         userCenterContentLanguage.setAdapter(new NothingSelectedSpinnerAdapter(languageAdapter,R.layout.spinner_nothing_selected,this));
         userCenterContentLanguage.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
-                if (position !=0) {
-                    User.setContentLanguage(LanguageType.getLanguageType(position-1));
-                }
+                contentLanguageIndex = position;
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
             }
         });
+        userCenterContentLanguage.setSelection(User.getContentLanguage().getId() + 1);
     }
 
 }

@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import com.enca.bl.CleaningAgent;
 import com.enca.bl.LanguageType;
+import com.enca.bl.Tag;
 import com.enca.bl.User;
 import com.enca.controller.CleaningAgentFetcher;
 import com.enca.dao.DatabaseAccess;
@@ -25,7 +26,7 @@ import com.enca.dao.DatabaseAccess;
 
 
 public class CleaningAgentDetailActivity extends AppCompatActivity {
-    private TextView caName, caDecripition, caRate, caInstruction;
+    private TextView caName, caDecripition, caInstruction, caTags;
     private ImageView caImage;
     private Spinner contentSpinner;
     private Configuration config ;
@@ -39,11 +40,12 @@ public class CleaningAgentDetailActivity extends AppCompatActivity {
         if (toolbar != null) {
             setSupportActionBar(toolbar);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setTitle(getResources().getString(R.string.detail));
         }
 
         caName = (TextView) findViewById(R.id.cleaning_agent_name_detail);
         caDecripition = (TextView) findViewById(R.id.cleaning_agent_description_detail);
-        caRate = (TextView) findViewById(R.id.cleaning_agent_rate_detail);
+        caTags = (TextView) findViewById(R.id.cleaning_agent_tags);
         caInstruction = (TextView) findViewById(R.id.cleaning_agent_instruction_detail);
         caImage = (ImageView) findViewById(R.id.cleaning_agent_image_detail);
         contentSpinner = (Spinner) findViewById(R.id.cleaning_agent_spinner_content);
@@ -60,7 +62,11 @@ public class CleaningAgentDetailActivity extends AppCompatActivity {
     private void showDetailInformation(int cleaningAgentId) {
         caName.setMovementMethod(ScrollingMovementMethod.getInstance());
         caName.setText(CleaningAgent.getCleaningAgent(cleaningAgentId).getName().getContentString());
-        caRate.setText(String.valueOf(CleaningAgent.getCleaningAgent(cleaningAgentId).getRate()));
+        String tags = getResources().getString(R.string.tags)+": ";
+        for (Tag t: CleaningAgent.getCleaningAgent(cleaningAgentId).getTags()) {
+            tags += t.getName().getContentString()+"; ";
+        }
+        caTags.setText(tags);
         caInstruction.setText(CleaningAgent.getCleaningAgent(cleaningAgentId).getInstruction().getContentString());
         caDecripition.setText(CleaningAgent.getCleaningAgent(cleaningAgentId).getDescription().getContentString());
         caImage.setImageBitmap(CleaningAgentFetcher.fetchImageOfCleaningAgent(cleaningAgentId));

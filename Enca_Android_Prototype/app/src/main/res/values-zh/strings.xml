@@ -7,19 +7,19 @@
     <string name="login_contentlanguage">内容语言</string>
     <string name="login_interfacelanguage">界面语言</string>
     <string name="login_namehint">请输入名字</string>
-    <string name="login_welcome">欢迎使用ENCA</string>
+    <string name="login_welcome">该开始打扫啦！</string>
     <string name="rooms">房间</string>
     <string name="search">搜索</string>
     <string name="search_hint">搜索</string>
     <string name="usercenter">用户中心</string>
-    <string name="usercenter_contentlanguage">重置内容语言</string>
-    <string name="usercenter_interfacelanguage">重置界面语言</string>
-    <string name="usercenter_namehint">重置用户名</string>
+    <string name="usercenter_contentlanguage">设置内容语言</string>
+    <string name="usercenter_interfacelanguage">设置界面语言</string>
+    <string name="usercenter_namehint">设置用户名</string>
     <string name="reset_confirm">确认</string>
     <string name="noinput">请输入名字</string>
     <string name="inputinvalid">输入无效</string>
-    <string name="resetdialog">重置确认</string>
-    <string name="resetdialogmessage">你确定要重置这些信息吗？</string>
+    <string name="resetdialog">确认设置</string>
+    <string name="resetdialogmessage">你确定要更改这些信息吗？</string>
     <string name="exittitle">退出提醒</string>
     <string name="exitinformation">你确定要退出ENCA吗？</string>
     <string name="cleaningagent_descriptionhint">描述</string>
@@ -29,5 +29,8 @@
     <string name="cleaningagent_typehint">类型</string>
     <string name="cleaningagent_taghint">相关标签</string>
     <string name="promt">选择语言</string>
-    <string name="chooselanguage">选择一种语言</string>
+    <string name="chooselanguage">选择内容语言</string>
+    <string name="detail">详情界面</string>
+    <string name="tags">标签</string>
+    <string name="hey">嗨</string>
 </resources>

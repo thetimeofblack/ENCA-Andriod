@@ -35,7 +35,6 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         User.initialize();//Initialize the directory and file location, and read preference
         config = new Configuration(getResources().getConfiguration());
-        config.locale = Locale.ENGLISH;
         getResources().updateConfiguration(config,getResources().getDisplayMetrics());
 
         if (User.isFirstUse()) {
@@ -62,7 +61,8 @@ public class LoginActivity extends AppCompatActivity {
         } else {
             setContentView(R.layout.activity_login);
             loginName = (TextView) findViewById(R.id.login_customername);
-            loginName.setText(User.getName());
+            String heyName = getResources().getString(R.string.hey)+", "+User.getName();
+            loginName.setText(heyName);
             Handler handler = new Handler();
             handler.postDelayed(new Runnable() {
                 @Override

@@ -37,10 +37,31 @@
             android:text="Name"
            android:layout_centerHorizontal="true"
             android:layout_marginTop="10dp"
-            android:maxLines="5"
+            android:maxLines="3"
             android:scrollbars="vertical"
             android:ellipsize = "marquee"
             />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/cleaning_agent_tags"
+        android:layout_below="@+id/cleaning_agent_name_detail"
+        android:text="tags"
+        android:layout_toRightOf="@id/cleaning_agent_image_detail"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:maxLines="3"
+        android:textStyle="italic"
+        />
+
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:fillViewport="true"
+    android:scrollbars = "vertical"
+    android:scrollbarStyle="outsideOverlay"
+    android:layout_below="@id/cleaning_agent_image_detail"
+    android:layout_marginTop="30dp">
 
 
     <GridLayout
@@ -55,47 +76,23 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/cleaning_agent_rate"
-            android:padding="8dp"
-            android:textStyle="bold"
-            android:text="@string/cleaningagent_ratehint"
-            android:layout_row="0"
-            android:layout_column="0" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="New Text"
-            android:padding="8dp"
-            android:id="@+id/cleaning_agent_rate_detail"
-            android:layout_row="0"
-            android:layout_column="1" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:id="@+id/cleaning_agent_instruction"
             android:text="@string/cleaningagent_instructionhint"
             android:textStyle="bold"
             android:padding="8dp"
-            android:layout_row="1"
+            android:layout_row="2"
             android:layout_column="0" />
-        <ScrollView
-            android:layout_width="250dp"
-            android:layout_height="130dp"
-            android:layout_row="1"
-            android:layout_column="1"
-            android:fillViewport="true"
-            android:scrollbars = "vertical"
-            android:scrollbarStyle="outsideOverlay">
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/cleaning_agent_instruction_detail"
             android:text="Instruction"
             android:padding="8dp"
-            android:ellipsize="end" />
-        </ScrollView>
+            android:ellipsize="end"
+            android:layout_row="3"
+            android:layout_column="0"
+            />
+
         <TextView
             android:id="@+id/cleaning_agent_description"
             android:layout_width="wrap_content"
@@ -103,27 +100,20 @@
             android:padding="8dp"
             android:text="@string/cleaningagent_descriptionhint"
             android:textStyle="bold"
-            android:layout_row="2"
+            android:layout_row="0"
             android:layout_column="0"/>
 
-        <ScrollView
-            android:layout_width="250dp"
-            android:layout_height="170dp"
-            android:layout_row="2"
-            android:layout_column="1"
-            android:fillViewport="true"
-            android:scrollbars = "vertical"
-            android:scrollbarStyle="outsideOverlay">
             <TextView
                 android:id="@+id/cleaning_agent_description_detail"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="8dp"
                 android:ellipsize="end"
-                android:text="Description" />
-        </ScrollView>
+                android:text="Description"
+                android:layout_row="1"
+                android:layout_column="0"/>
 
     </GridLayout>
-
+</ScrollView>
 
 </RelativeLayout>

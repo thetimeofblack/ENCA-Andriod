@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Enca</string>
-    <string name="login_welcome">Welcome to ENCA</string>
+    <string name="login_welcome">What do you want to clean today?</string>
     <string name="login_namehint">Enter your name</string>
     <string name="login_interfacelanguage">Interface Language</string>
     <string name="login_contentlanguage">Content Language</string>
@@ -19,8 +19,8 @@
     <string name="noinput">Please Enter Name</string>
     <string name="reset_confirm">Confirm</string>
     <string name="usercenter">User Center</string>
-    <string name="resetdialog">Reset Confirm</string>
-    <string name="resetdialogmessage">Are you sure you want to reset the data?</string>
+    <string name="resetdialog">Setting Confirm</string>
+    <string name="resetdialogmessage">Are you sure you want to change the setting?</string>
     <string name="inputinvalid">Input Invalid</string>
     <string name="exitinformation">Are you sure you want to exit ENCA?</string>
     <string name="exittitle">Exit Attention</string>
@@ -32,6 +32,9 @@
     <string name="cleaningagent_taghint">Tag Related</string>
     <string name="promt">Choose Language</string>
     <string name="chooselanguage">Choose  Language</string>
+    <string name="detail">Detail Information</string>
+    <string name="tags">Tags</string>
+    <string name="hey">Hey</string>
     <string-array name="language_type">
         <item>English</item>
         <item>Deutsch</item>

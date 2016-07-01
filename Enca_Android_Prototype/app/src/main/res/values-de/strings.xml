@@ -10,7 +10,7 @@
     <string name="search">Suchen</string>
     <string name="search_hint">Suchen</string>
     <string name="login_namehint">Gib deinen Namen ein</string>
-    <string name="login_welcome">Willkommen </string>
+    <string name="login_welcome">Was möchten Sie heute zu reinigen ? </string>
     <string name="usercenter_interfacelanguage"> Schnittstellensprache</string>
     <string name="usercenter_contentlanguage"> Inhaltsprache</string>
     <string name="usercenter">User Center</string>
@@ -18,8 +18,8 @@
     <string name="noinput">Bitte Namen eingeben</string>
     <string name="reset_confirm"> Bestätigen</string>
     <string name="inputinvalid"> Eingabe ungültig</string>
-    <string name="resetdialog"> zurücksetzen zu bestätigen</string>
-    <string name="resetdialogmessage">Sind Sie sicher, dass Sie die Daten zurücksetzen?</string>
+    <string name="resetdialog"> Einstellung bestätigen</string>
+    <string name="resetdialogmessage">Sind Sie sicher, dass Sie die Einstellung zu ändern ?</string>
     <string name="exitinformation"> Sind Sie sicher, dass Sie ENCA zu beenden</string>
     <string name="exittitle"> Beenden Achtung</string>
     <string name="cleaningagent_descriptionhint"> Beschreibung</string>
@@ -30,4 +30,7 @@
     <string name="cleaningagent_taghint"> Etikett Verbunden</string>
     <string name="promt">Wähle  Sprache</string>
     <string name="chooselanguage">Wählen Sprache</string>
+    <string name="detail">Detail Information</string>
+    <string name="tags">Etikett</string>
+    <string name="hey">Hey</string>
 </resources>
