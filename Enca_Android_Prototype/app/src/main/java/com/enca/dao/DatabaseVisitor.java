@@ -3,7 +3,10 @@ package com.enca.dao;
 import android.database.Cursor;
 
 /**
- * Created by 85102 on 6/18/2016.
+ * Execute SQL operations
+ *
+ * @author Xiaoqi.Ma
+ * @version 02.07.2016
  */
 public class DatabaseVisitor {
 
@@ -24,7 +27,7 @@ public class DatabaseVisitor {
     }
 
     public static byte[] visitImage(int cleaningAgentID) {
-        return  DatabaseAccess.getImage(cleaningAgentID);
+        return DatabaseAccess.getImage(cleaningAgentID);
     }
 
 

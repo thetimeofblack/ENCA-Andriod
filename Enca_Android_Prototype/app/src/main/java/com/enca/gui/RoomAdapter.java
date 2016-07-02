@@ -7,17 +7,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import com.enca.bl.Tag;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
 /**
- * Created by 85102 on 6/18/2016.
+ * Adapter for presenting the roomTags in recyclerView
+ *
+ * @author Xiaoqi.Ma
+ * @version 02.07.2016
  */
 public class RoomAdapter extends RecyclerView.Adapter<RoomAdapter.MyViewHolder>{
     private Context context;
@@ -32,15 +32,15 @@ public class RoomAdapter extends RecyclerView.Adapter<RoomAdapter.MyViewHolder>{
 
         }
 
-//        @Override
         public void onClick(View view) {
-//            if(view.getId() == roomTagName.getId()){
-//                Intent intent = new Intent(context, ItemActivity.class);
-//                intent.putExtra("position", view.getVerticalScrollbarPosition());
-//                context.startActivity(intent);
-//            }
         }
     }
+
+    /**
+     * Constructor of the Adapter
+     * @param context Context of the Activity
+     * @param rooms List of rooms fetching from database
+     */
 
     public RoomAdapter(Context context, List<Tag> rooms){
         this.context = context;
@@ -49,7 +49,7 @@ public class RoomAdapter extends RecyclerView.Adapter<RoomAdapter.MyViewHolder>{
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_myadapter_recyclerview,parent,false);
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_recyclerview,parent,false);
 
         return new MyViewHolder(itemView);
     }
@@ -61,6 +61,7 @@ public class RoomAdapter extends RecyclerView.Adapter<RoomAdapter.MyViewHolder>{
         holder.roomTagName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //Transfer into ItemActivity with the roomTagId
                 Intent intent = new Intent(context, ItemActivity.class);
                 int roomTagId = getRoomTagId(position);
                 intent.putExtra("roomTagId", roomTagId);
@@ -74,7 +75,12 @@ public class RoomAdapter extends RecyclerView.Adapter<RoomAdapter.MyViewHolder>{
         return rooms.size();
     }
 
-
+    /**
+     * Map position and corresponding roomTagID
+     *
+     * @param position The choosen position in RoomActivity
+     * @return Map of position and corresponding roomTagID
+     */
     public int getRoomTagId(int position){
         int count =0;
         Map<Integer,Integer> roomTagId = new HashMap<>();

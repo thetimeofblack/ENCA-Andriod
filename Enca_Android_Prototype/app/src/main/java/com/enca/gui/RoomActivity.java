@@ -26,12 +26,19 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * Presenting  related roomTags in a recyclerView
+ *
+ * @author Xiaoqi.Ma
+ * @version 02.07.2016
+ */
 public class RoomActivity extends AppCompatActivity {
+    private Set<Tag> roomTag = new HashSet<>();
+    private List<Tag> rooms = new ArrayList<>();
     RoomAdapter roomAdapterRoom;
     RecyclerView recyclerViewRoom;
-    Set<Tag> roomTag= new HashSet<>();
-    List<Tag> rooms = new ArrayList<>();
     Toolbar toolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,7 +66,7 @@ public class RoomActivity extends AppCompatActivity {
         roomAdapterRoom = new RoomAdapter(this, rooms);
         recyclerViewRoom.hasFixedSize();
         recyclerViewRoom.setLayoutManager(new LinearLayoutManager(this));
-        recyclerViewRoom.addItemDecoration(new DividerItemDecoration(this,LinearLayoutManager.VERTICAL));
+        recyclerViewRoom.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
         recyclerViewRoom.setAdapter(roomAdapterRoom);
 
     }
@@ -74,27 +81,11 @@ public class RoomActivity extends AppCompatActivity {
         SearchableInfo info = searchManager.getSearchableInfo(cn);
         searchView.setSearchableInfo(info);
         searchView.setSubmitButtonEnabled(true);
-//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-//
-//
-//            @Override
-//            public boolean onQueryTextChange(String queryText) {
-//
-//                return true;
-//            }
-//
-//
-//            @Override
-//            public boolean onQueryTextSubmit(String queryText) {
-//
-//                return true;
-//            }
-//        });
         return true;
     }
+
     @Override
-    public void onBackPressed()
-    {
+    public void onBackPressed() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(getResources().getString(R.string.exittitle))
                 .setMessage(getResources().getString(R.string.exitinformation))
@@ -105,7 +96,6 @@ public class RoomActivity extends AppCompatActivity {
                 })
                 .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        // do nothing
                     }
                 })
                 .show();

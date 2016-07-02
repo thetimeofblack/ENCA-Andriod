@@ -14,8 +14,8 @@
     <string name="Modify">Modify</string>
     <string name="Delete">Delete</string>
     <string name="usercenter_namehint">Reset User Name</string>
-    <string name="usercenter_interfacelanguage">Reset Interface Language</string>
-    <string name="usercenter_contentlanguage">Reset Content Language</string>
+    <string name="usercenter_interfacelanguage">Set Interface Language</string>
+    <string name="usercenter_contentlanguage">Set Content Language</string>
     <string name="noinput">Please Enter Name</string>
     <string name="reset_confirm">Confirm</string>
     <string name="usercenter">User Center</string>

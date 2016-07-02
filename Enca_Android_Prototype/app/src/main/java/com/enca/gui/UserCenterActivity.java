@@ -14,12 +14,15 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.enca.bl.LanguageType;
 import com.enca.bl.User;
 
+/**
+ * Providing functions for user to change name and language
+ * @author Xiaoqi.Ma
+ * @version 02.07.2016
+ */
 public class UserCenterActivity extends AppCompatActivity {
     private EditText resetName;
     private Spinner userCenterInterfaceLanguage;
@@ -48,7 +51,7 @@ public class UserCenterActivity extends AppCompatActivity {
         resetButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(! resetName.getText().toString().equals("")){
+                if(! resetName.getText().toString().equals(User.getName())){
                     User.setName(resetName.getText().toString());
                 }
                 ConfirmReset();
@@ -82,12 +85,14 @@ public class UserCenterActivity extends AppCompatActivity {
                         }
                         User.writeUser();
                         Intent homeIntent = new Intent(UserCenterActivity.this, RoomActivity.class);
+                        homeIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        homeIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(homeIntent);
+                        finish();
                     }
                 })
                 .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        // do nothing
                     }
                 })
                 .show();
@@ -98,7 +103,6 @@ public class UserCenterActivity extends AppCompatActivity {
     private void ConfigureSpinner() {
         ArrayAdapter<CharSequence> languageAdapter = ArrayAdapter.createFromResource(this, R.array.language_type, android.R.layout.simple_spinner_item);
         languageAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        userCenterInterfaceLanguage.setAdapter(languageAdapter);
         userCenterInterfaceLanguage.setAdapter(new NothingSelectedSpinnerAdapter(languageAdapter,R.layout.spinner_nothing_selected,this));
         userCenterInterfaceLanguage.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -113,7 +117,6 @@ public class UserCenterActivity extends AppCompatActivity {
         });
         userCenterInterfaceLanguage.setSelection(User.getInterfaceLanguage().getId() + 1);
 
-//        userCenterContentLanguage.setAdapter(languageAdapter);
         userCenterContentLanguage.setAdapter(new NothingSelectedSpinnerAdapter(languageAdapter,R.layout.spinner_nothing_selected,this));
         userCenterContentLanguage.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override

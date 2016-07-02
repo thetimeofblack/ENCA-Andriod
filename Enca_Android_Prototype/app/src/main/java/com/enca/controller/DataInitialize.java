@@ -1,18 +1,25 @@
 package com.enca.controller;
 
 import android.database.Cursor;
+
 import com.enca.bl.CleaningAgent;
 import com.enca.bl.InternationalString;
 import com.enca.bl.LanguageType;
 import com.enca.bl.Tag;
 import com.enca.bl.TagType;
 import com.enca.dao.DatabaseVisitor;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
 /**
- * Created by 85102 on 6/18/2016.
+ * Contain the operations of initialization.</br>
+ * During the initialization, all of tags and cleaning agents will be read into memory.</br>
+ * The relations between cleaning agents and tags and the relations between tags will be realized.
+ *
+ * @author Xiaoqi.Ma
+ * @version 02.07.2016
  */
 public class DataInitialize {
 
@@ -22,14 +29,6 @@ public class DataInitialize {
         initRelations();
     }
 
-    public static void initializeConcurrently() {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                initialize();
-            }
-        });
-    }
 
     /**
      * Initialize all cleaning agents and store them into the memory
@@ -37,7 +36,7 @@ public class DataInitialize {
     private static void initCleaningAgents() {
         Cursor cursor = DatabaseVisitor.visitCleaningAgentsAll();
         try {
-            if(cursor!=null && cursor.getCount() > 0) {
+            if (cursor != null && cursor.getCount() > 0) {
                 if (cursor.moveToFirst()) {
                     while (!cursor.isAfterLast()) {
                         CleaningAgentBuilder builder = new CleaningAgentBuilder();
@@ -47,7 +46,6 @@ public class DataInitialize {
                         builder.setInstruction(iStringGenerator(cursor, 7));
                         builder.setApplicationTime(cursor.getLong(10));
                         builder.setFrequency(cursor.getLong(11));
-//                        builder.setType(cursor.getString(12));
                         builder.setRate(cursor.getInt(12));
                         builder.setMainLanguage(cursor.getInt(14));
 //                        builder.setImage(cursor.getBlob(15));
@@ -66,8 +64,8 @@ public class DataInitialize {
      */
     private static void initTags() {
         Cursor cursor = DatabaseVisitor.visitTagsAll();
-        try{
-            if(cursor!=null && cursor.getCount() > 0) {
+        try {
+            if (cursor != null && cursor.getCount() > 0) {
                 if (cursor.moveToFirst()) {
                     while (!cursor.isAfterLast()) {
                         new Tag(cursor.getInt(0), iStringGenerator(cursor, 1), TagType.getTagType(cursor.getString(4)));
@@ -75,7 +73,7 @@ public class DataInitialize {
                     }
                 }
             }
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -85,34 +83,14 @@ public class DataInitialize {
      * and the relations between tags
      */
     private static void initRelations() {
-		/* Key: a cleaning agent, value: the set of related tags of the cleaning agent */
+        /* Key: a cleaning agent, value: the set of related tags of the cleaning agent */
         Map<CleaningAgent, Set<Tag>> ctMap = new HashMap<>();
-		/* Key: a tag, value: the set of related cleaning agents of the tag */
+        /* Key: a tag, value: the set of related cleaning agents of the tag */
         Map<Tag, Set<CleaningAgent>> tcMap = new HashMap<>();
         initTCRelations(ctMap, tcMap);
         initTTRelations(ctMap);
     }
 
-//    /**
-//     * Initialize the relations between cleaning agents and tags
-//     * and the relations between tags
-//     */
-//    private static void initRelations() {
-//        Cursor cursor = DatabaseVisitor.visitRelations();
-//            cursor.moveToFirst();
-//            while (cursor.isAfterLast()) {
-//                CleaningAgent cleaningAgent = CleaningAgent.getCleaningAgent(cursor.getInt(1));
-//                Tag tag = Tag.getTag(cursor.getInt(2));
-//                cleaningAgent.addTag(tag);
-//                tag.addCleaningAgent(cleaningAgent);
-//            }
-//        for (CleaningAgent cleaningAgent : CleaningAgent.getCleaningAgentsAll()) {
-//            if (cleaningAgent.getTags().isEmpty()) {
-//                Tag.getTag(0).addCleaningAgent(cleaningAgent);
-//            }
-//            CleaningAgentOperator.attachTTRelation(cleaningAgent.getTags());
-//        }
-//    }
 
     /**
      * Initialize the relations between cleaning agents and tags
@@ -120,12 +98,12 @@ public class DataInitialize {
     private static void initTCRelations(Map<CleaningAgent, Set<Tag>> ctMap, Map<Tag, Set<CleaningAgent>> tcMap) {
         Cursor cursor = DatabaseVisitor.visitRelations();
         try {
-            if(cursor!=null && cursor.getCount() > 0) {
+            if (cursor != null && cursor.getCount() > 0) {
                 if (cursor.moveToFirst()) {
                     while (!cursor.isAfterLast()) {
                         CleaningAgent cleaningAgent = CleaningAgent.getCleaningAgent(cursor.getInt(0));
                         Tag tag = Tag.getTag(cursor.getInt(1));
-				/* Add the cleaning agent and its tags set to ctMap */
+                /* Add the cleaning agent and its tags set to ctMap */
                         if (!ctMap.containsKey(cleaningAgent)) {
                             ctMap.put(cleaningAgent, cleaningAgent.getTags());
                         }
@@ -141,7 +119,7 @@ public class DataInitialize {
                     }
                 }
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -169,18 +147,17 @@ public class DataInitialize {
      * allows reusing replicate codes.
      */
 
-    private static InternationalString iStringGenerator(Cursor cursor, int i){
+    private static InternationalString iStringGenerator(Cursor cursor, int i) {
         InternationalString iString = new InternationalString();
         try {
             iString.setString(LanguageType.ENGLISH, cursor.getString(i));
-            iString.setString(LanguageType.GERMAN, cursor.getString(i+2));
-            iString.setString(LanguageType.CHINESE, cursor.getString(i+1));
+            iString.setString(LanguageType.GERMAN, cursor.getString(i + 2));
+            iString.setString(LanguageType.CHINESE, cursor.getString(i + 1));
         } catch (Exception e) {
             e.printStackTrace();
         }
         return iString;
     }
-
 
 
 }

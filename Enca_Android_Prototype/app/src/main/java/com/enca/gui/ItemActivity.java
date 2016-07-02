@@ -18,13 +18,20 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * Presenting  related itemTags in a recyclerView
+ *
+ * @author Xiaoqi.Ma
+ * @version 02.07.2016
+ */
 public class ItemActivity extends AppCompatActivity {
 
+    private Set<Tag> itemTag = new HashSet<>();
+    private List<Tag> items = new ArrayList<>();
     ItemAdapter itemAdapter;
     RecyclerView recyclerViewItem;
-    Set<Tag> itemTag = new HashSet<>();
-    List<Tag> items = new ArrayList<>();
     Toolbar toolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,20 +40,18 @@ public class ItemActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         if (toolbar != null) {
             setSupportActionBar(toolbar);
-//        toolbar.setNavigationIcon(R.drawable.ic_action_back);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
         recyclerViewItem = (RecyclerView) findViewById(R.id.item_recyclerView);
         Intent intent = getIntent();
-        int roomTagId = intent.getIntExtra("roomTagId",0);
+        int roomTagId = intent.getIntExtra("roomTagId", 0);
         itemTag.add(Tag.getTag(roomTagId));
-        itemTag = TagFetcher.fetchTagsOfCertainType(TagFetcher.fetchTagsRelated(itemTag),TagType.ITEM);
+        itemTag = TagFetcher.fetchTagsOfCertainType(TagFetcher.fetchTagsRelated(itemTag), TagType.ITEM);
         items.addAll(itemTag);
-        itemAdapter = new ItemAdapter(this, items,roomTagId);
-//        recyclerViewItem.hasFixedSize();
+        itemAdapter = new ItemAdapter(this, items, roomTagId);
         recyclerViewItem.setLayoutManager(new LinearLayoutManager(this));
-        recyclerViewItem.addItemDecoration(new DividerItemDecoration(this,LinearLayoutManager.VERTICAL));
+        recyclerViewItem.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
         recyclerViewItem.setAdapter(itemAdapter);
         getSupportActionBar().setTitle(Tag.getTag(roomTagId).getName().getInterfaceString());
     }

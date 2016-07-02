@@ -3,11 +3,11 @@ package com.enca.bl;
 import java.io.Serializable;
 
 /**
- * @author Bobby
- * @version 21.06.2016
- *
- * Class LanguagePreference
  * Store the language preference of the user.
+ *
+ * @author Zhaowen.Gong
+ * @version 30.06.2016
+ * @see LanguageType
  */
 public final class LanguagePreference implements Serializable {
 

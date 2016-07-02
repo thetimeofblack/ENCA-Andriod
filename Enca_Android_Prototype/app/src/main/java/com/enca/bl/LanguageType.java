@@ -4,57 +4,60 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
+
 /**
- * @author Bobby
- * @version 31.05.2016
- * 
- * Enum LanguageType
- * Three languages are supported: English, German and Chinese.
- * LanguageType enum provides consistent and type-safe marking 
- * of language preferences. It is used globally in this application.
+ * Representing different languages supported in the software.</br>
+ * Currently three languages are supported: English, German and Chinese.</br>
+ * Used directly in class InternationalString and class LanguagePreference.
+ *
+ * @author Zhaowen.Gong
+ * @version 30.06.2016
+ * @see InternationalString
+ * @see LanguagePreference
  */
 public enum LanguageType {
-	ENGLISH("English", Locale.ENGLISH, 0), GERMAN("Deutsch", Locale.GERMAN, 1), CHINESE("中文", Locale.SIMPLIFIED_CHINESE, 2);
+    ENGLISH("English", Locale.ENGLISH, 0), GERMAN("Deutsch", Locale.GERMAN, 1), CHINESE("中文", Locale.SIMPLIFIED_CHINESE, 2);
 
-	private String name;
-	private Locale locale;
-	private int id;
+    private String name;
+    private Locale locale;
+    private int id;
 
-	/**
-	 * An Integer to LanguageType map that allows searching LanguageType
-	 * using an integer.
-	 */
-	private static Map<Integer, LanguageType> LanguageList = new HashMap<Integer, LanguageType>();
-	static {
-		for (LanguageType lType : LanguageType.values()) {
-			LanguageList.put(lType.id, lType);
-		}
-	}
+    /**
+     * An Integer to LanguageType map that allows searching LanguageType
+     * using an integer.
+     */
+    private static Map<Integer, LanguageType> LanguageList = new HashMap<>();
 
-	public static int getLanguageCount() {
-		return LanguageType.values().length;
-	}
+    static {
+        for (LanguageType lType : LanguageType.values()) {
+            LanguageList.put(lType.id, lType);
+        }
+    }
 
-	public static LanguageType getLanguageType(int id) {
-		return LanguageList.get(id);
-	}
+    public static int getLanguageCount() {
+        return LanguageType.values().length;
+    }
 
-	 LanguageType(String string, Locale locale, int id) {
-		this.name = string;
-		this.locale = locale;
-		this.id = id;
-	}
+    public static LanguageType getLanguageType(int id) {
+        return LanguageList.get(id);
+    }
 
-	public Locale getLocale() {
-		return this.locale;
-	}
+    LanguageType(String string, Locale locale, int id) {
+        this.name = string;
+        this.locale = locale;
+        this.id = id;
+    }
 
-	public int getId() {
-		return id;
-	}
+    public Locale getLocale() {
+        return this.locale;
+    }
 
-	@Override
-	public String toString() {
-		return this.name;
-	}
+    public int getId() {
+        return id;
+    }
+
+    @Override
+    public String toString() {
+        return this.name;
+    }
 }

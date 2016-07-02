@@ -36,7 +36,7 @@
                 android:padding="8dp"
                 android:layout_below="@+id/cleaning_agent"
                 android:id="@+id/cleaning_agent_description"
-                android:maxLines="3"
+                android:maxLines="4"
                 android:ellipsize="end"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 />

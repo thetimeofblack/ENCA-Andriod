@@ -11,20 +11,20 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".LoginActivity">
+        <activity android:name="com.enca.gui.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".RoomActivity">
+        <activity android:name="com.enca.gui.RoomActivity">
             <meta-data
                 android:name="android.app.default_searchable"
                 android:value="com.enca.gui.RoomActivity" />
         </activity>
-        <activity android:name=".ItemActivity" />
-        <activity android:name=".CleaningAgentActivity"
+        <activity android:name="com.enca.gui.ItemActivity" />
+        <activity android:name="com.enca.gui.CleaningAgentActivity"
             android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
@@ -37,8 +37,8 @@
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable" />
         </activity>
-        <activity android:name=".CleaningAgentDetailActivity" />
-        <activity android:name=".UserCenterActivity"></activity>
+        <activity android:name="com.enca.gui.CleaningAgentDetailActivity" />
+        <activity android:name="com.enca.gui.UserCenterActivity"></activity>
     </application>
 
 </manifest>

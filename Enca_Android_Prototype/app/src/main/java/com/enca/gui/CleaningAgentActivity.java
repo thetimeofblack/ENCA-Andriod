@@ -13,7 +13,6 @@ import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import com.enca.bl.CleaningAgent;
 import com.enca.bl.Tag;
@@ -24,35 +23,49 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * Presenting  brief information for CleaningAgents in a recyclerView
+ *
+ * @author Xiaoqi.Ma
+ * @version 02.07.2016
+ */
 public class CleaningAgentActivity extends AppCompatActivity {
 
-    CleaningAgentAdapter cleaningAgentAdapter;
-    RecyclerView recyclerViewItem;
-    Set<Tag> tags = new HashSet<>();
-    Set<CleaningAgent> cleaningAgentSet = new HashSet<>();
-    List<CleaningAgent> cleaningAgentsResult = new ArrayList<>();
-    Toolbar toolbar;
+    private CleaningAgentAdapter cleaningAgentAdapter;
+    private RecyclerView recyclerViewItem;
+    private Set<Tag> tags = new HashSet<>();
+    private Set<CleaningAgent> cleaningAgentSet = new HashSet<>();
+    private List<CleaningAgent> cleaningAgentsResult = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cleaning_agent);
-
         recyclerViewItem = (RecyclerView) findViewById(R.id.cleaning_agent_recyclerView);
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         if (toolbar != null) {
             setSupportActionBar(toolbar);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
         Intent intent = getIntent();
+        /**
+         * To distinguish the source of the intent
+         * One intent transfer from ItemAdapter
+         * One intent transfer from RoomActivity
+         * @see ItemAdapter
+         * @see RoomActivity
+         */
         if (intent.getAction().equals("com.android.enca.search")) {
-            int roomTagId = intent.getIntExtra("roomTagId", 0);
+            int roomTagId = intent.getIntExtra("roomTagId", 0);//Obtain roomTagId and itemTagId from ItemActivity
             int itemTagId = intent.getIntExtra("itemTagId", 0);
             tags.add(Tag.getTag(roomTagId));
             tags.add(Tag.getTag(itemTagId));
+            //Fetch cleaningAgent according to TagId
             cleaningAgentSet = CleaningAgentFetcher.fetchCleaningAgentsOfTags(tags);
+            //Save obtained cleaningAgents into cleaningAgentsResult
             cleaningAgentsResult.addAll(cleaningAgentSet);
+            //Set the title and subtitle of ActionBar
             getSupportActionBar().setTitle(Tag.getTag(roomTagId).getName().getInterfaceString());
             getSupportActionBar().setSubtitle(Tag.getTag(itemTagId).getName().getInterfaceString());
         }
@@ -64,14 +77,19 @@ public class CleaningAgentActivity extends AppCompatActivity {
             doMySearch(query);
         }
 
+        //Set Adapter to show recyclerView of cleaningAgents
         cleaningAgentAdapter = new CleaningAgentAdapter(this, cleaningAgentsResult);
         recyclerViewItem.setLayoutManager(new LinearLayoutManager(this));
         recyclerViewItem.setAdapter(cleaningAgentAdapter);
-
-
     }
+
+    /**
+     * Achieve search functions
+     *
+     * @param query Keyword for searching
+     */
     public void doMySearch(String query) {
-            cleaningAgentsResult.addAll(CleaningAgentFetcher.fetchResult(cleaningAgentSet, query));
+        cleaningAgentsResult.addAll(CleaningAgentFetcher.fetchResult(cleaningAgentSet, query));
     }
 
     public boolean onOptionsItemSelected(MenuItem menuItem) {
@@ -87,7 +105,6 @@ public class CleaningAgentActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         SearchView searchView;
         getMenuInflater().inflate(R.menu.menu_main, menu);
-
         SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
         searchView = (SearchView) menu.findItem(R.id.search).getActionView();
         ComponentName cn = new ComponentName(this, this.getClass());
@@ -105,7 +122,6 @@ public class CleaningAgentActivity extends AppCompatActivity {
             public boolean onQueryTextChange(String query) {
                 cleaningAgentsResult.clear();
                 cleaningAgentsResult.addAll(CleaningAgentFetcher.fetchResult(cleaningAgentSet, query));
-
                 cleaningAgentAdapter = new CleaningAgentAdapter(getApplicationContext(), cleaningAgentsResult);
                 recyclerViewItem.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
                 recyclerViewItem.setAdapter(cleaningAgentAdapter);

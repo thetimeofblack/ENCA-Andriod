@@ -20,23 +20,27 @@ import com.enca.bl.User;
 import com.enca.controller.DataInitialize;
 import com.enca.dao.DatabaseAccess;
 
-import java.util.Locale;
-
+/**
+ * Login interface, providing user custom choice of language
+ *
+ * @author Xiaoqi.Ma
+ * @version 02.07.2016
+ */
 public class LoginActivity extends AppCompatActivity {
     private EditText registerName;
     private Spinner loginInterfaceLanguage;
     private Spinner loginContentLanguage;
-    private Button loginButton;
-    private TextView loginName;
-    Configuration config ;
+    Button loginButton;
+    TextView loginName;
+    Configuration config;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         User.initialize();//Initialize the directory and file location, and read preference
         config = new Configuration(getResources().getConfiguration());
-        getResources().updateConfiguration(config,getResources().getDisplayMetrics());
-
+        getResources().updateConfiguration(config, getResources().getDisplayMetrics());
+        //If it is the first time for user to utilize the software, then get into this interface
         if (User.isFirstUse()) {
             setContentView(R.layout.activity_firstlogin);
             registerName = (EditText) findViewById(R.id.login_name);
@@ -49,19 +53,24 @@ public class LoginActivity extends AppCompatActivity {
             loginButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                   if (CheckInputName()){
-                       User.setName(registerName.getText().toString());
-                       User.writeUser();
-                       Intent intent = new Intent(LoginActivity.this, RoomActivity.class);
-                       startActivity(intent);
-                   }
+                    if (CheckInputName()) {
+                        User.setName(registerName.getText().toString());
+                        User.writeUser();
+                        Intent intent = new Intent(LoginActivity.this, RoomActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(intent);
+                        finish();
+                    }
                 }
             });
 
-        } else {
+        }
+        //Otherwise, if the user has registered, then enter this interface
+        else {
             setContentView(R.layout.activity_login);
             loginName = (TextView) findViewById(R.id.login_customername);
-            String heyName = getResources().getString(R.string.hey)+", "+User.getName();
+            String heyName = getResources().getString(R.string.hey) + ", " + User.getName();
             loginName.setText(heyName);
             Handler handler = new Handler();
             handler.postDelayed(new Runnable() {
@@ -73,13 +82,13 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }, 1500);
         }
-
+        //Get access to the database
         DatabaseAccess databaseAccess = DatabaseAccess.getInstance(this);
         databaseAccess.open();
         DataInitialize.initialize();
         databaseAccess.close();
 
-}
+    }
 
     private boolean CheckInputName() {
         if (registerName.getText().toString().equals("")) {
@@ -93,25 +102,23 @@ public class LoginActivity extends AppCompatActivity {
                     })
                     .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
-                            // do nothing
                         }
                     })
                     .show();
             return false;
-        }else
-        return true;
+        } else
+            return true;
     }
 
 
     private void ConfigureSpinner() {
         ArrayAdapter<CharSequence> languageAdapter = ArrayAdapter.createFromResource(this, R.array.language_type, android.R.layout.simple_spinner_item);
         languageAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        loginInterfaceLanguage.setAdapter(languageAdapter);
-        loginInterfaceLanguage.setAdapter(new NothingSelectedSpinnerAdapter(languageAdapter,R.layout.spinner_nothing_selected,this));
+        loginInterfaceLanguage.setAdapter(new NothingSelectedSpinnerAdapter(languageAdapter, R.layout.spinner_nothing_selected, this));
         loginInterfaceLanguage.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
-                if (position !=0) {
+                if (position != 0) {
                     User.setInterfaceLanguage(LanguageType.getLanguageType(position - 1));
                     config.locale = LanguageType.getLanguageType(position - 1).getLocale();
                     getResources().updateConfiguration(config, getResources().getDisplayMetrics());
@@ -123,12 +130,11 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-//        loginContentLanguage.setAdapter(languageAdapter);
-        loginContentLanguage.setAdapter(new NothingSelectedSpinnerAdapter(languageAdapter,R.layout.spinner_nothing_selected,this));
+        loginContentLanguage.setAdapter(new NothingSelectedSpinnerAdapter(languageAdapter, R.layout.spinner_nothing_selected, this));
         loginContentLanguage.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
-                if (position !=0) {
+                if (position != 0) {
                     User.setContentLanguage(LanguageType.getLanguageType(position - 1));
                 }
             }

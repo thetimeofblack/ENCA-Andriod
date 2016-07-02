@@ -8,13 +8,17 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by 85102 on 6/27/2016.
+ * Store the basic information of the user.
+ *
+ * @author Zhaowen.Gong
+ * @version 30.06.2016
  */
 public final class UserPreference implements Serializable {
 
     private static final long serialVersionUID = -5000180069279808816L;
 
     private static Map<LanguageType, DateFormat> dateFormatMap = new HashMap<>();
+
     static {
         dateFormatMap.put(LanguageType.ENGLISH, new SimpleDateFormat("MM/dd/yyyy"));
         dateFormatMap.put(LanguageType.GERMAN, new SimpleDateFormat("dd.MM.yyyy"));

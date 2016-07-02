@@ -5,10 +5,12 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-
+/**
+ * Connect Database, providing functions to read from Database and write into Database
+ *
+ * @author Xiaoqi.Ma
+ * @version 02.07.2016
+ */
 public class DatabaseAccess {
     private SQLiteOpenHelper openHelper;
     private static SQLiteDatabase database;
@@ -27,7 +29,7 @@ public class DatabaseAccess {
      * Return a singleton instance of DatabaseAccess.
      *
      * @param context the Context
-     * @return the instance of DabaseAccess
+     * @return the instance of DatabaseAccess
      */
     public static DatabaseAccess getInstance(Context context) {
         if (instance == null) {
@@ -54,16 +56,17 @@ public class DatabaseAccess {
 
     /**
      * Read all data from the database.
+     * @param query Execute SQL clause using Cursor
      */
 
     public static Cursor executeSelect(String query) {
-        return  database.rawQuery(query, null);
+        return database.rawQuery(query, null);
     }
 
     /**
      * Read the BLOB data as byte[]
      *
-     * @param cleaningAgentID
+     * @param cleaningAgentID Get corresponding image through cleaningAgentID
      * @return image as byte[]
      */
     public static byte[] getImage(int cleaningAgentID) {
@@ -72,7 +75,7 @@ public class DatabaseAccess {
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
             data = cursor.getBlob(0);
-            break;  //
+            break;
         }
         cursor.close();
         return data;
