@@ -1,0 +1,16 @@
+# welcome window, count down and disappear
+# add tag, checkname if exist, prompt "Exist, sure add?"
+# add tag, save then quit this window
+# tag, right click, modify
+# warning prompt, "yes" "cancel"
+# zh bundle is missing
+# about: two names miss taken, and should mention MIT license
+# user center, if memo empty, show "memo is empty", if not empty, show
+"you have memo on following CAs"
+# user center, tag modify should be singleton
+# assign weight for each search item
+# full word match should have high weight
+# CA modify, save quit window
+# CA modify, "detail" -> "view"
+# CA modify, tag modify entry
+# window for each object, eg. CA modify, CA detail and tag modify can only open once a time
