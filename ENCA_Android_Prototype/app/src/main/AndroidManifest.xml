@@ -24,7 +24,8 @@
                 android:value="com.enca.gui.RoomActivity" />
         </activity>
         <activity android:name=".ItemActivity" />
-        <activity android:name=".CleaningAgentActivity">
+        <activity android:name=".CleaningAgentActivity"
+            android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
                 <action android:name="com.android.enca.search" />

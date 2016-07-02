@@ -30,7 +30,7 @@ public class CleaningAgentActivity extends AppCompatActivity {
     RecyclerView recyclerViewItem;
     Set<Tag> tags = new HashSet<>();
     Set<CleaningAgent> cleaningAgentSet = new HashSet<>();
-    List<CleaningAgent> cleaningAgents = new ArrayList<>();
+    List<CleaningAgent> cleaningAgentsResult = new ArrayList<>();
     Toolbar toolbar;
 
     @Override
@@ -52,7 +52,7 @@ public class CleaningAgentActivity extends AppCompatActivity {
             tags.add(Tag.getTag(roomTagId));
             tags.add(Tag.getTag(itemTagId));
             cleaningAgentSet = CleaningAgentFetcher.fetchCleaningAgentsOfTags(tags);
-            cleaningAgents.addAll(cleaningAgentSet);
+            cleaningAgentsResult.addAll(cleaningAgentSet);
             getSupportActionBar().setTitle(Tag.getTag(roomTagId).getName().getInterfaceString());
             getSupportActionBar().setSubtitle(Tag.getTag(itemTagId).getName().getInterfaceString());
         }
@@ -60,21 +60,18 @@ public class CleaningAgentActivity extends AppCompatActivity {
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
             String query = intent.getStringExtra(SearchManager.QUERY);
             getSupportActionBar().setTitle(query);
+            cleaningAgentSet = CleaningAgent.getCleaningAgentsAll();
             doMySearch(query);
         }
-            cleaningAgentAdapter = new CleaningAgentAdapter(this, cleaningAgents);
+
+        cleaningAgentAdapter = new CleaningAgentAdapter(this, cleaningAgentsResult);
         recyclerViewItem.setLayoutManager(new LinearLayoutManager(this));
         recyclerViewItem.setAdapter(cleaningAgentAdapter);
 
 
     }
     public void doMySearch(String query) {
-        if(cleaningAgentSet.isEmpty()){
-            cleaningAgents.addAll(CleaningAgentFetcher.fetchResult(CleaningAgent.getCleaningAgentsAll(),query));
-        }else {
-            cleaningAgents.addAll(CleaningAgentFetcher.fetchResult(cleaningAgentSet, query));
-            Toast.makeText(CleaningAgentActivity.this, query, Toast.LENGTH_SHORT).show();
-        }
+            cleaningAgentsResult.addAll(CleaningAgentFetcher.fetchResult(cleaningAgentSet, query));
     }
 
     public boolean onOptionsItemSelected(MenuItem menuItem) {
@@ -93,10 +90,30 @@ public class CleaningAgentActivity extends AppCompatActivity {
 
         SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
         searchView = (SearchView) menu.findItem(R.id.search).getActionView();
-        ComponentName cn = new ComponentName(this, CleaningAgentActivity.class);
+        ComponentName cn = new ComponentName(this, this.getClass());
         SearchableInfo info = searchManager.getSearchableInfo(cn);
         searchView.setSearchableInfo(info);
         searchView.setSubmitButtonEnabled(true);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String query) {
+                cleaningAgentsResult.clear();
+                cleaningAgentsResult.addAll(CleaningAgentFetcher.fetchResult(cleaningAgentSet, query));
+
+                cleaningAgentAdapter = new CleaningAgentAdapter(getApplicationContext(), cleaningAgentsResult);
+                recyclerViewItem.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                recyclerViewItem.setAdapter(cleaningAgentAdapter);
+                return true;
+            }
+
+        });
+
         return true;
     }
 }
