@@ -33,4 +33,5 @@
     <string name="detail">详情界面</string>
     <string name="tags">标签</string>
     <string name="hey">嗨</string>
+    <string name="firstlogin_welcome">欢迎使用ENCA！</string>
 </resources>

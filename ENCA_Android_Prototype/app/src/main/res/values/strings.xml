@@ -35,6 +35,7 @@
     <string name="detail">Detail Information</string>
     <string name="tags">Tags</string>
     <string name="hey">Hey</string>
+    <string name="firstlogin_welcome">Welcome to ENCA!</string>
     <string-array name="language_type">
         <item>English</item>
         <item>Deutsch</item>

@@ -33,4 +33,5 @@
     <string name="detail">Detail Information</string>
     <string name="tags">Etikett</string>
     <string name="hey">Hey</string>
+    <string name="firstlogin_welcome"> Willkommen!</string>
 </resources>
