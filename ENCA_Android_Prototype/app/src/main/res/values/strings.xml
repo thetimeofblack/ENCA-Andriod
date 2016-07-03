@@ -10,10 +10,7 @@
     <string name="search">Search</string>
     <string name="rooms">Rooms</string>
     <string name="items">Items</string>
-    <string name="Add">Add</string>
-    <string name="Modify">Modify</string>
-    <string name="Delete">Delete</string>
-    <string name="usercenter_namehint">Reset User Name</string>
+    <string name="usercenter_namehint">Set User Name</string>
     <string name="usercenter_interfacelanguage">Set Interface Language</string>
     <string name="usercenter_contentlanguage">Set Content Language</string>
     <string name="noinput">Please Enter Name</string>

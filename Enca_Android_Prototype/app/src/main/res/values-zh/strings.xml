@@ -34,4 +34,9 @@
     <string name="tags">标签</string>
     <string name="hey">嗨</string>
     <string name="firstlogin_welcome">欢迎使用ENCA！</string>
+    <string-array name="language_type">
+        <item>English</item>
+        <item>Deutsch</item>
+        <item>中文</item>
+    </string-array>
 </resources>
