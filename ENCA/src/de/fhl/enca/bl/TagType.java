@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @author David
+ * @author Haoze Zhang
  * @version 2016-05-30
  * 
  * Enum TagType
@@ -12,21 +12,32 @@ import java.util.Map;
  * ITEM and OTHERS. TagType enum provides consistent and type-safe marking 
  * of tag type. It is used globally in this application.
  */
+
 public enum TagType {
+	
 	ROOM("Room", 0), ITEM("Items", 1), OTHERS("Others", 2);
 
+	/* Map: <ID, Type> */
 	private static Map<Integer, TagType> tagTypeList = new HashMap<>();
 	static {
 		for (TagType tagType : TagType.values()) {
 			tagTypeList.put(tagType.getId(), tagType);
 		}
 	}
+
 	/**
-	 * name: String representation of a type
+	 * name: String representation of a type;
+	 * id: ID number of a type.
 	 */
 	private String name;
 	private int id;
 
+	private TagType(String name, int id) {
+		this.name = name;
+		this.id = id;
+	}
+
+	/* Getters */
 	public static TagType getTagType(String string) {
 		for (TagType tagType : TagType.values()) {
 			if (tagType.name.equals(string)) {
@@ -40,10 +51,6 @@ public enum TagType {
 		return tagTypeList.get(id);
 	}
 
-	private TagType(String name, int id) {
-		this.name = name;
-		this.id = id;
-	}
 
 	public int getId() {
 		return id;
