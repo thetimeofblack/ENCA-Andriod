@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @author David
+ * @author Haoze Zhang
  * @version 2016-05-30
  * Class TagPreference
  * This class contains metadata for tags. It can be stored and read out of
@@ -18,10 +18,9 @@ public class TagPreference implements Serializable {
 
 	private static Map<TagType, Color> colors = new HashMap<TagType, Color>();
 	static {
-		colors.put(TagType.ROOM, Color.getHSBColor(0, 0, 0));
-		colors.put(TagType.ITEM, Color.getHSBColor(0, 0, 0));
-		colors.put(TagType.OTHERS, Color.getHSBColor(0, 0, 0));
-		//Remember to specify colors!
+		colors.put(TagType.ROOM, Color.getHSBColor(207, 55, 45));
+		colors.put(TagType.ITEM, Color.getHSBColor(207, 55, 65));
+		colors.put(TagType.OTHERS, Color.getHSBColor(207, 55, 85));
 	};
 	private static Map<TagType, InternationalString> descripsions = new HashMap<TagType, InternationalString>();
 	static {
@@ -33,14 +32,12 @@ public class TagPreference implements Serializable {
 		InternationalString desITEM = new InternationalString();
 		desITEM.setString(LanguageType.CHINESE, "物品");
 		desITEM.setString(LanguageType.ENGLISH, "Item");
-		desITEM.setString(LanguageType.GERMAN, "");
-		//remember to add!
+		desITEM.setString(LanguageType.GERMAN, "Artikel");
 
 		InternationalString desOTHERS = new InternationalString();
 		desOTHERS.setString(LanguageType.CHINESE, "其它");
 		desOTHERS.setString(LanguageType.ENGLISH, "Others");
-		desOTHERS.setString(LanguageType.GERMAN, "");
-		//remember to add!
+		desOTHERS.setString(LanguageType.GERMAN, "Andere");
 
 		descripsions.put(TagType.ROOM, desROOM);
 		descripsions.put(TagType.ITEM, desITEM);
@@ -48,9 +45,7 @@ public class TagPreference implements Serializable {
 
 	};
 
-	/*
-	 * Getters
-	 */
+	/* Getters */
 	public static Map<TagType, Color> getColors() {
 		return colors;
 	}
@@ -59,9 +54,7 @@ public class TagPreference implements Serializable {
 		return descripsions;
 	}
 
-	/*
-	 * Setters
-	 */
+	/* Setters */
 	public static void setColors(Map<TagType, Color> colors) {
 		TagPreference.colors = colors;
 	}
