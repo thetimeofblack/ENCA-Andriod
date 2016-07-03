@@ -18,10 +18,10 @@ public enum TagType {
 	ROOM("Room", 0), ITEM("Items", 1), OTHERS("Others", 2);
 
 	/* Map: <ID, Type> */
-	private static Map<Integer, TagType> tagTypeList = new HashMap<>();
+	private static Map<Integer, TagType> tagTypeMap = new HashMap<>();
 	static {
 		for (TagType tagType : TagType.values()) {
-			tagTypeList.put(tagType.getId(), tagType);
+			tagTypeMap.put(tagType.getId(), tagType);
 		}
 	}
 
@@ -48,7 +48,7 @@ public enum TagType {
 	}
 
 	public static TagType getTagType(int id) {
-		return tagTypeList.get(id);
+		return tagTypeMap.get(id);
 	}
 
 
