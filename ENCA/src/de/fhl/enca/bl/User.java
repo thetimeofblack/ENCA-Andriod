@@ -17,6 +17,13 @@ import java.util.Date;
  * @see TagPreference
  */
 public final class User {
+	
+	/**
+	 * Directory and file settings.
+	 */
+	static final String WINDOWS_DIR = "\\AppData\\Roaming\\Enca";
+	static final String OSX_DIR = "/Library/Application Support/Enca";
+	static final String FILE_NAME = "user.ini";
 
 	/**
 	 * Representing the directory of save file.
@@ -44,12 +51,11 @@ public final class User {
 	 */
 	public static void initialize() {
 		if (System.getProperty("os.name").startsWith("Windows")) {
-			directory = new File(System.getProperty("user.home") + "\\Documents\\Enca");
-			file = new File(directory, "user.ini");
+			directory = new File(System.getProperty("user.home") + WINDOWS_DIR);
 		} else if (System.getProperty("os.name").startsWith("Mac")) {
-			directory = new File(System.getProperty("user.home") + "/Library/Application Support/Enca");
-			file = new File(directory, "user.ini");
+			directory = new File(System.getProperty("user.home") + OSX_DIR);
 		}
+		file = new File(directory, FILE_NAME);
 		isFirstUse = readUser();
 	}
 
