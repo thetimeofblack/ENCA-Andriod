@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
- * Responible for connecting the database and sending SQL query to database
+ * Responsible for connecting the database and sending SQL query to database
  * @author Zhaowen.Gong
  * @version 30.06.2016
  */
