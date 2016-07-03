@@ -55,7 +55,7 @@ public final class User {
 
 	/**
 	 * Read user data from the file.
-	 * @return whether it is user's first use depending on the existance and integrity of the file
+	 * @return whether it is user's first use depending on the existence and integrity of the file
 	 */
 	private static boolean readUser() {
 		if (directory.exists() && file.exists()) {
