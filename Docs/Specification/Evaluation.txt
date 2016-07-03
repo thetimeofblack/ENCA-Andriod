@@ -1,0 +1,14 @@
+5. Evaluation
+5.1 Group Work
+In ENCA group, every member shows great passion, expertise and profession in the project. Our members are truly original and critical thinkers and strict practitioners. 
+We strongly stick to the process of real-life software development, achieving phases such as modeling, testing, refactoring and etc as professional as possible. We witness our progress in every iteration. It is the most delightful thing to finally put our software for delivery.
+We base our team collaboration on GitHub. Link: https://github.com/Nimita311/ENCA-Andriod.
+Our progress milestones and agenda are as followed.
+/////agenda/////
+
+5.2 Task Responsibility
+We set coherent division of responsibilities, yet our collaboration flows just as smooth. Division of responsibilities is as followed.
+Haoze Zhang: Requirement analysis, system structure, UI design and team collaboration.
+Zhaowen Gong: Business logic implementation, UI implementation and code revision.
+Zeling Wu: Data acquisition, database management and testing.
+Xiaoqi Ma: Android application, UI design and implementation.

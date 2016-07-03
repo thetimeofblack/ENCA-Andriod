@@ -1,0 +1,131 @@
+1.	 Specification
+1.1.	Description
+1.1.1.	Product Purpose
+Our product is a cleaning agent searching software, featured with quickly off-line searching,
+ updating and commenting about cleaning agent based on customers’ needs and favourites. 
+It is available on desktop computers and android mobile devices, supporting multi-platform. 
+1.1.2.	Product Scope
+Our product provides three different languages, including Chinese, English and German, 
+containing most commonly used cleaning agent in China and Germany.
+1.1.3.	Potential Customers
+This product is specially designed for those who will travel, work or study abroad, 
+attempting to assist them to easily find the necessary cleaning agent in an unfamiliar society.
+1.2.	Product functions
+The software serves unlimited number of users on a same device.
+Each user can: 
+•	Log in with username and password.
+-	Username and password will be forced to fit certain format.
+•	Change password.
+-	Old password is required to change password.
+•	Access to all the records of cleaning agent.
+-	The categories will be displayed first, and those cleaning agents will be displayed in the form of tables in each category.
+-	Multiple attributes of cleaning agents will be displayed as table columns with headers.
+-	Each cleaning agent can be selected and the detail information of which can be displayed.
+•	Create unlimited numbers of cleaning agent lists.
+-	Also allow user to modify, delete and sort those lists.
+•	Add, modify and delete his or her own record of cleaning agent.
+-	Specially designed UI will be displayed to enable user to add, modify and delete.
+-	Will also check if user's input is valid and show the execution status.
+•	Post, modify and delete his or her own rating and memo.
+-	The average rating will be calculated and displayed.
+-	The latest comment will be displayed in the first place. 
+1.3.	User characteristics
+Users are assumed to:
+1.	have basic computer operation knowledge, such as log in, GUI interaction and typing.
+2.	be uninfected with hearing, vision, touching and any other kinds of disability.
+3.	speak at least one of the following language: Chinese, English and German.	
+4.	be oversea students, business or casual travellers in the following country: China and Germany.	
+5.	have basic knowledge in choosing cleaning agent.
+6.	have either computer or mobile phone.
+7.	have access to cleaning agents in nearby supermarket.
+Users need the software to:	
+1.	find the name of a cleaning agent by its purpose.	
+2.	get a translation of a certain agent.	
+3.	search for the purpose of an existing cleaning agent by name or other attributes.
+4.	do cleaning with the help of instruction.
+5.	have their preference on some specific cleaning agent.
+6.	find detailed information about cleaning agents.
+7.	decide which cleaning agents to buy with additional information given by our application.
+1.4.	Functional requirements
+1.4.1.	Presentation
+•	Display the cleaning agents
+-	The categories shall be displayed first, and those cleaning agents will be displayed in the form of tables in each category.
+-	Multiple attributes of cleaning agents shall be displayed as table columns with headers.
+-	Each cleaning agent can be selected and the detail information of which can be displayed.
+1.4.2.	Customization
+•	Add, update and delete cleaning agents
+-	User input shall be asserted.
+-	Show status or result to the user after commit.
+•	Rating and user lists
+-	Rating and list information is user specific.
+-	Can be fully accessed by different user.
+-	Can only be modified by the creator.
+1.4.3.	Search
+•	Search keyword shall be:
+-	Language insensitive, Chinese pinyin supported.
+-	Case insensitive.
+-	Partial compared.
+-	Of unrestricted length.
+•	Search result shall be:
+-	Presented in real-time during inserting keyword.
+-	Folder up if the list is excessively long.
+1.4.4.	Language
+•	The software GUI supports: Chinese, English and German.
+•	The content is prepared in: Chinese, English and German.
+1.5.	Non-functional requirements
+1.5.1.	Portability
+•	The software has two distinctive sub versions which support desktop computers and Android devices.
+•	The desktop version shall be supported by Java SE Runtime Environment 7 or higher.
+•	The Android version...
+1.5.2.	Performance and Availability
+•	The software shall start up in less than 1 second.
+•	Search result shall be presented in less than 1 second.
+•	The software shall be always available during runtime.
+1.5.3.	Security and Extensibility
+•	User data and system data are stored with database specific security.
+•	The software is not designed to extend.
+
+2.	UML Specification
+2.1.	 Use Cases
+2.2.	 Class Diagrams
+
+3.	 GUI Design
+3.1.	Structure
+3.2.	Screenshots
+
+
+
+4.	Test 
+4.1.	 Description
+4.2.	 Results
+
+5.	 Evaluation
+5.1.	 Group Work
+5.2.	 Task Responsibilities
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

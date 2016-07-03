@@ -1,0 +1,15 @@
+# Usability test:
+- Task 0:
+log in, fill out name and choose language preference
+- Task 1:
+find a certain CA and comment on that
+- Task 2:
+given a cleaning purpose and find a suitable CA
+- Task 3:
+create a CA with given information and stick a new tag "my favorite"
+- Task 4:
+delete the CA and tag which just create
+
+# record:
+- time consumption
+- user activity
