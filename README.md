@@ -9,8 +9,8 @@ Overwhelmed by various kinds of cleaning agents or having trouble identifying cl
 ## Installation
 
 ## Platform Requirement
-PC or Mac: Windows 10 and OS X El Capitan with Java SE Runtime Environment 8u91 are fully tested.
-Android: Android 4.1–4.1.2 Jelly Bean (API level 16) or later.
+- __PC or Mac:__ Windows 10 and OS X El Capitan with Java SE Runtime Environment 8u91 are fully tested.
+- __Android:__ Android 4.1–4.1.2 Jelly Bean (API level 16) or later.
 
 ## Version
 
@@ -26,7 +26,7 @@ ENCA group
   - [Zeling Wu](mailto:zeling.wu@stud.fh-luebeck.de, send Zeling an email)
   - [Xiaoqi Ma](mailto:xiaoqi.ma@stud.fh-luebeck.de, send Xiaoqi an email)
 
-_Do not hesitate to contact us._
+_Click on the name to send an eamil, do not hesitate to contact us._
 
 ## License
 The MIT License (MIT)
