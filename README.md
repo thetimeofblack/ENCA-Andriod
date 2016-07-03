@@ -16,17 +16,16 @@ Android: Android 4.1–4.1.2 Jelly Bean (API level 16) or later.
 
 ## Bug Report
 Please come to our GitHub repository and open an issue, we will come to you as soon as possible.
-
 It is also welcomed to email any of our developers to report a bug.
-
 Here is our repository: [https://github.com/Nimita311/ENCA-Andriod](https://github.com/Nimita311/ENCA-Andriod)
 
 ## Developer
 ENCA group
-  - [Haoze Zhang  <haoze.zhang@stud.fh-luebeck.de>](mailto:haoze.zhang@stud.fh-luebeck.de, send Haoze an email)
-  - [Zhaowen Gong <zhaowen.gong@stud.fh-luebeck.de>](mailto:zhaowen.gong@stud.fh-luebeck.de, send Zhaowen an email)
-  - [Zeling Wu    <zeling.wu@stud.fh-luebeck.de>](mailto:zeling.wu@stud.fh-luebeck.de, send Zeling an email)
-  - [Xiaoqi Ma    <xiaoqi.ma@stud.fh-luebeck.de>](mailto:xiaoqi.ma@stud.fh-luebeck.de, send Xiaoqi an email)
+  - [Haoze Zhang](mailto:haoze.zhang@stud.fh-luebeck.de, send Haoze an email)
+  - [Zhaowen Gong](mailto:zhaowen.gong@stud.fh-luebeck.de, send Zhaowen an email)
+  - [Zeling Wu](mailto:zeling.wu@stud.fh-luebeck.de, send Zeling an email)
+  - [Xiaoqi Ma](mailto:xiaoqi.ma@stud.fh-luebeck.de, send Xiaoqi an email)
+_Do not hesitate to contact us._
 
 ## License
 The MIT License (MIT)
