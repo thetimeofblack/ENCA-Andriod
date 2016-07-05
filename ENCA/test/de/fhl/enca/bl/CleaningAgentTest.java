@@ -9,10 +9,19 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.Ignore;
 
+/**
+ * This class tests CleaningAgent class
+ * @author Wu Zeling, Zhang Haoze
+ * @version 05072016
+ */
 public class CleaningAgentTest {
 
 	CleaningAgent mCleaningAgent;
 	
+	/**
+	 * Setup testing instance of CA
+	 * @throws Exception
+	 */
 	@Before
 	public void setUp() throws Exception {
 		mCleaningAgent=new CleaningAgent(0);
@@ -42,25 +51,37 @@ public class CleaningAgentTest {
 		mCleaningAgent.setMemo("test Cleaning Agent");
 	}
 
+	/**
+	 * Test add function
+	 */
 	@Test
 	public void testAddCleaningAgent() {
-		mCleaningAgent.addCleaningAgent(mCleaningAgent);
+		CleaningAgent.addCleaningAgent(mCleaningAgent);
 		assertEquals(mCleaningAgent.getCleaningAgentID(),0);
 	}
 
+	/**
+	 * Test refresh function
+	 */
 	@Test
 	public void testRefreshCleaningAgentWithMemo() {
-		mCleaningAgent.refreshCleaningAgentWithMemo(mCleaningAgent);
-		assertEquals(mCleaningAgent.getCleaningAgentsWithMemo().contains(mCleaningAgent),true);
+		CleaningAgent.refreshCleaningAgentWithMemo(mCleaningAgent);
+		assertEquals(CleaningAgent.getCleaningAgentsWithMemo().contains(mCleaningAgent),true);
 	}
 
+	/**
+	 * Test removal
+	 */
 	@Test
 	public void testRemoveCleaningAgent() {
 		testAddCleaningAgent();
-		mCleaningAgent.removeCleaningAgent(mCleaningAgent);
-		assertEquals(mCleaningAgent.getCleaningAgent(0),null);
+		CleaningAgent.removeCleaningAgent(mCleaningAgent);
+		assertEquals(CleaningAgent.getCleaningAgent(0),null);
 	}
 
+	/**
+	 * Test adding
+	 */
 	@Test
 	public void testAddTag() {
 		InternationalString internationalString = new InternationalString();
@@ -70,6 +91,9 @@ public class CleaningAgentTest {
 		assertEquals(mCleaningAgent.getTags().contains(tag),true);
 	}
 	
+	/**
+	 * Test add all
+	 */
 	@Test
 	public void testAddTagsAll() {
 		InternationalString internationalString = new InternationalString();
@@ -81,12 +105,18 @@ public class CleaningAgentTest {
 		assertEquals(mCleaningAgent.getTags().contains(tag),true);
 	}
 	
+	/**
+	 * Test relevance search
+	 */
 	@Test
 	public void testSearch() {
 		testAddTag();
 		assertEquals(mCleaningAgent.search("Küche"),3);
 	}
 
+	/**
+	 * Test removal of a tag
+	 */
 	@Test
 	public void testRemoveTag() {
 		InternationalString internationalString = new InternationalString();
@@ -99,6 +129,9 @@ public class CleaningAgentTest {
 		assertEquals(mCleaningAgent.getTags().contains(tag),false);
 	}
 
+	/**
+	 * Test removal of all tags
+	 */
 	@Test
 	public void testRemoveTagsAll() {
 		InternationalString internationalString = new InternationalString();
@@ -113,6 +146,9 @@ public class CleaningAgentTest {
 		assertEquals(mCleaningAgent.getTags().contains(tag),false);
 	}
 
+	/**
+	 * Test CA type recognition
+	 */
 	@Test
 	public void testBelongsToSystem() {
 		assertEquals(mCleaningAgent.BelongsToSystem(),true);

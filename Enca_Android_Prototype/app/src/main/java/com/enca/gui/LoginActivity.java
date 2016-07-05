@@ -12,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -30,6 +31,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText registerName;
     private Spinner loginInterfaceLanguage;
     private Spinner loginContentLanguage;
+    private ImageButton loginLogo;
     Button loginButton;
     TextView loginName;
     Configuration config;
@@ -46,8 +48,16 @@ public class LoginActivity extends AppCompatActivity {
             registerName = (EditText) findViewById(R.id.login_name);
             loginInterfaceLanguage = (Spinner) findViewById(R.id.login_spinner_interface);
             loginContentLanguage = (Spinner) findViewById(R.id.login_spinner_content);
-            loginButton = (Button) findViewById(R.id.login_comfirm);
+            loginButton = (Button) findViewById(R.id.login_confirm);
+            loginLogo = (ImageButton) findViewById(R.id.login_logo);
 
+            loginLogo.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(LoginActivity.this, ReadMeActivity.class);
+                    startActivity(intent);
+                }
+            });
             ConfigureSpinner();
             loginButton.setText(getResources().getString(R.string.login_confirm));
             loginButton.setOnClickListener(new View.OnClickListener() {

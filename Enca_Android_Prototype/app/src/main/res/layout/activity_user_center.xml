@@ -11,15 +11,16 @@
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimaryDark" />
 
+
     <TableLayout
+        android:id="@+id/usercenter_tablelayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
         android:layout_below="@id/toolbar"
-        android:layout_marginTop="70dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
         android:layout_marginLeft="50dp"
-        android:id="@+id/usercenter_tablelayout"
+        android:layout_marginTop="70dp"
 
         >
 
@@ -27,24 +28,22 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="30dp"
-            >
+            android:layout_marginTop="30dp">
 
             <TextView
-                android:text="@string/usercenter_namehint"
                 android:id="@+id/usercenter_namehint"
+                android:layout_column="0"
                 android:layout_gravity="center"
-                android:layout_column="0" />
+                android:text="@string/usercenter_namehint" />
 
             <EditText
+                android:id="@+id/usercenter_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/usercenter_name"
-                android:maxLines="1"
-                android:singleLine="true"
                 android:layout_column="1"
                 android:hint="@string/enter_name"
-                />
+                android:maxLines="1"
+                android:singleLine="true" />
         </TableRow>
 
         <TableRow
@@ -54,15 +53,15 @@
             android:layout_marginTop="30dp">
 
             <TextView
-                android:text="@string/usercenter_interfacelanguage"
                 android:id="@+id/usercenter_interfacelanguage"
-                android:layout_column="0" />
+                android:layout_column="0"
+                android:text="@string/usercenter_interfacelanguage" />
 
             <Spinner
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:id="@+id/usercenter_spinner_interface"
                 style="?android:attr/spinnerDropDownItemStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_column="1" />
         </TableRow>
 
@@ -73,25 +72,24 @@
             android:layout_marginTop="30dp">
 
             <TextView
-                android:text="@string/usercenter_contentlanguage"
                 android:id="@+id/usercenter_contentlanguage"
-                android:layout_column="0" />
+                android:layout_column="0"
+                android:text="@string/usercenter_contentlanguage" />
 
             <Spinner
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:id="@+id/usercenter_spinner_content"
                 style="?android:attr/spinnerDropDownItemStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_column="1" />
         </TableRow>
     </TableLayout>
 
     <Button
+        android:id="@+id/usercenter_confirm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/usercenter_confirm"
         android:layout_below="@id/usercenter_tablelayout"
-        android:layout_marginTop="30dp"
         android:layout_centerHorizontal="true"
-        />
+        android:layout_marginTop="30dp" />
 </RelativeLayout>
