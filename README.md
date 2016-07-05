@@ -25,8 +25,9 @@ We provide not only a fully functional version on PC or Mac with all amazing fun
 ## Version
 Proudly present, Enca V1.0 & Enca express V1.0! A brand new and groundbreaking release.  
 New versions are (not) comming up soon!  
-If you are a student from ECUST, FHL or both (just like members in Enca group), please continue working on our project. International students like you and me need this software and it worths your effort.  
-If you are interested, come and help us improve the software.
+
+## Help us with the project
+If you are a student from ECUST, FHL or both (just like members in Enca group), or international students from any university (and you also have to know how to program, of course) please continue working on our project. International students like you and me need this software to make life easier and it definitely worths your effort. If you are interested, contact us and help us improve the software.
 
 ## Bug Report
 Please come to our GitHub repository and open an issue, we will come to you as soon as possible.  
