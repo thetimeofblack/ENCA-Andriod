@@ -6,18 +6,11 @@ import java.util.Set;
 import de.fhl.enca.bl.CleaningAgent;
 import de.fhl.enca.bl.LanguageType;
 import de.fhl.enca.bl.Tag;
+import de.fhl.enca.gui.utility.Utility;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.geometry.Insets;
-import javafx.scene.control.Label;
-import javafx.scene.layout.Border;
-import javafx.scene.layout.BorderStroke;
-import javafx.scene.layout.BorderStrokeStyle;
-import javafx.scene.layout.BorderWidths;
-import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.FlowPane;
-import javafx.scene.paint.Color;
 
 /**
  * Representing object shown in the TableView control.</br>
@@ -107,10 +100,7 @@ public final class CleaningAgentBean {
 		tags.setPrefHeight(0);
 		tags.setPrefWrapLength(700);
 		for (Tag tag : cleaningAgent.getTags()) {
-			Label label = new Label(tag.getName().getString(type));
-			label.setBorder(new Border(new BorderStroke(Color.GRAY, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
-			label.setPadding(new Insets(0, 4, 0, 4));
-			tags.getChildren().add(label);
+			tags.getChildren().add(Utility.getTagLabel(tag, type));
 		}
 	}
 

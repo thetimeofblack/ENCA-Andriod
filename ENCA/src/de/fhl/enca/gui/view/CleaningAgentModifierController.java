@@ -25,7 +25,6 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -34,13 +33,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Border;
-import javafx.scene.layout.BorderStroke;
-import javafx.scene.layout.BorderStrokeStyle;
-import javafx.scene.layout.BorderWidths;
-import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
@@ -288,9 +281,7 @@ public final class CleaningAgentModifierController {
 
 	private void addTagLabel(Tag tag) {
 		tags.add(tag);
-		Label label = new Label(tag.getName().getString(User.getInterfaceLanguage()));
-		label.setBorder(new Border(new BorderStroke(Color.GRAY, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
-		label.setPadding(new Insets(0, 4, 0, 4));
+		Label label = Utility.getTagLabel(tag, User.getInterfaceLanguage());
 		label.setOnMouseClicked(e -> {
 			tags.remove(tag);
 			tagBox.getChildren().remove(label);
