@@ -1,8 +1,11 @@
 package de.fhl.enca.gui.utility;
 
 import java.util.ResourceBundle;
+import de.fhl.enca.bl.LanguageType;
 import de.fhl.enca.bl.User;
 import de.fhl.enca.gui.view.MainController;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonBar.ButtonData;
@@ -30,6 +33,14 @@ public final class Utility {
 	 */
 	public static ResourceBundle getResourceBundle() {
 		return ResourceBundle.getBundle("resource.message", User.getInterfaceLanguage().getLocale());
+	}
+
+	public static ObservableList<String> getLanguageList() {
+		ObservableList<String> languageList = FXCollections.observableArrayList();
+		for (LanguageType type : LanguageType.values()) {
+			languageList.add(type.toString());
+		}
+		return languageList;
 	}
 
 	/**
