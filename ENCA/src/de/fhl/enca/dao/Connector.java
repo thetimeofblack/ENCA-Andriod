@@ -63,6 +63,7 @@ public final class Connector {
 		try{
 			PreparedStatement pstmt=connection.prepareStatement(sql);
 			pstmt.setBytes(1, image);
+			pstmt.execute();
 		}catch(SQLException e){
 			e.printStackTrace();
 		}
