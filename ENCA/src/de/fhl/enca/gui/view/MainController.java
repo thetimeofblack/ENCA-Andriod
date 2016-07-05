@@ -186,8 +186,12 @@ public final class MainController {
 					detail();
 				}
 			});
-			tableView.getSelectionModel().selectedItemProperty().addListener((ObservableValue<? extends CleaningAgentBean> o, CleaningAgentBean x, CleaningAgentBean y) -> validate());
-			tableView.itemsProperty().addListener((ObservableValue<? extends ObservableList<CleaningAgentBean>> o, ObservableList<CleaningAgentBean> x, ObservableList<CleaningAgentBean> y) -> validate());
+			tableView.getSelectionModel().selectedItemProperty().addListener((ObservableValue<? extends CleaningAgentBean> o, CleaningAgentBean x, CleaningAgentBean y) -> {
+				validate();
+			});
+			tableView.itemsProperty().addListener((ObservableValue<? extends ObservableList<CleaningAgentBean>> o, ObservableList<CleaningAgentBean> x, ObservableList<CleaningAgentBean> y) -> {
+				validate();
+			});
 		}
 		for (TableColumn<CleaningAgentBean, FlowPane> column : columns) {
 			column.setCellFactory(e -> new TableCell<CleaningAgentBean, FlowPane>() {
@@ -298,11 +302,7 @@ public final class MainController {
 	}
 
 	private boolean validateModify() {
-		try {
-			return validateDetail() && !CleaningAgent.getCleaningAgent(getCurrentTableView().getSelectionModel().getSelectedItem().getId()).BelongsToSystem();
-		} catch (NullPointerException e) {
-			return false;
-		}
+		return validateDetail() && !CleaningAgent.getCleaningAgent(getCurrentTableView().getSelectionModel().getSelectedItem().getId()).BelongsToSystem();
 	}
 
 	@FXML

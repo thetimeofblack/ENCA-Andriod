@@ -18,7 +18,6 @@ import de.fhl.enca.controller.CleaningAgentFetcher;
 import de.fhl.enca.controller.CleaningAgentOperator;
 import de.fhl.enca.controller.TagFetcher;
 import de.fhl.enca.gui.application.CleaningAgentDetail;
-import de.fhl.enca.gui.application.TagAdder;
 import de.fhl.enca.gui.model.CleaningAgentBean;
 import de.fhl.enca.gui.utility.Utility;
 import javafx.beans.value.ObservableValue;
@@ -142,8 +141,6 @@ public final class CleaningAgentModifierController {
 	@FXML
 	private ComboBox<Tag> addOthers;
 	@FXML
-	private ComboBox<String> language;
-	@FXML
 	private Button detail;
 	@FXML
 	private Button delete;
@@ -175,7 +172,6 @@ public final class CleaningAgentModifierController {
 				}
 			});
 		}
-		language.setItems(Utility.getLanguageList());
 		tabPane.getSelectionModel().clearAndSelect(User.getContentLanguage().getId());
 	}
 
@@ -202,11 +198,6 @@ public final class CleaningAgentModifierController {
 				e.printStackTrace();
 			}
 		}
-	}
-
-	@FXML
-	private void addTag() {
-		new TagAdder().start(new Stage());
 	}
 
 	@FXML
@@ -269,13 +260,11 @@ public final class CleaningAgentModifierController {
 			for (Tag tag : tags) {
 				addTagLabel(tag);
 			}
-			language.getSelectionModel().clearAndSelect(cleaningAgent.getMainLanguage().getId());
 		} else {
-			rate.getSelectionModel().clearAndSelect(4);
+			rate.getSelectionModel().clearAndSelect(0);
 			detail.setDisable(true);
 			delete.setDisable(true);
 			save.setDisable(true);
-			language.getSelectionModel().clearAndSelect(User.getContentLanguage().getId());
 		}
 	}
 
@@ -312,7 +301,6 @@ public final class CleaningAgentModifierController {
 		newCleaningAgent.setRate(rate.getSelectionModel().getSelectedIndex() + 1);
 		newCleaningAgent.setBelongsToSystem(false);
 		newCleaningAgent.addTagsAll(tags);
-		newCleaningAgent.setMainLanguage(LanguageType.getLanguageType(language.getSelectionModel().getSelectedIndex()));
 		return newCleaningAgent;
 	}
 
