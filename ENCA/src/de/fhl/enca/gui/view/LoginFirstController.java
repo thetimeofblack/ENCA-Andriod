@@ -3,6 +3,7 @@ package de.fhl.enca.gui.view;
 import java.util.Date;
 import de.fhl.enca.bl.LanguageType;
 import de.fhl.enca.bl.User;
+import de.fhl.enca.gui.application.About;
 import de.fhl.enca.gui.application.Main;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -60,6 +61,11 @@ public final class LoginFirstController {
 			new Main().start(new Stage());
 			loginStage.hide();
 		}
+	}
+
+	@FXML
+	private void about() {
+		new About().start(new Stage());
 	}
 
 	public void setLoginFirstStage(Stage stage) {
