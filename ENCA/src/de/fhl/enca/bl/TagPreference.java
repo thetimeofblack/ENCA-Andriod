@@ -7,22 +7,28 @@ import java.util.Map;
 import javafx.scene.paint.Color;
 
 /**
- * @author Haoze Zhang
- * @version 2016-05-30
  * Class TagPreference
  * This class contains metadata for tags. It can be stored and read out of
  * a file.
+ * 
+ * @author Haoze Zhang
+ * @version 2016-05-30
  */
 public class TagPreference implements Serializable {
+	
+	private double H = 0.207;
+	private double S = 0.55;
+	private double[] L = {0.45, 0.65, 0.85};
 
 	private static final long serialVersionUID = -633570705543638913L;
-	private Map<TagType, Color> colors = new HashMap<TagType, Color>();
 	private Map<TagType, InternationalString> descripsions = new HashMap<TagType, InternationalString>();
+	//transient private Map<TagType, Color> colors = null;
 
 	public TagPreference() {
-		colors.put(TagType.ROOM, Color.hsb(0.207, 0.55, 0.45));
-		colors.put(TagType.ITEM, Color.hsb(0.207, 0.55, 0.65));
-		colors.put(TagType.OTHERS, Color.hsb(0.207, 0.55, 0.85));
+//		colors = new HashMap<TagType, Color>();
+//		colors.put(TagType.ROOM, Color.hsb(H, S, L[0]));
+//		colors.put(TagType.ITEM, Color.hsb(H, S, L[1]));
+//		colors.put(TagType.OTHERS, Color.hsb(H, S, L[2]));
 
 		InternationalString desROOM = new InternationalString();
 		desROOM.setString(LanguageType.CHINESE, "房间");
@@ -46,7 +52,7 @@ public class TagPreference implements Serializable {
 
 	/* Getters */
 	public Color getColors(TagType t) {
-		return colors.get(t);
+		return Color.hsb(H, S, L[t.getId()]);
 	}
 
 	public InternationalString getDescripsions(TagType t) {
@@ -55,7 +61,7 @@ public class TagPreference implements Serializable {
 
 	/* Setters */
 	public void setColors(Map<TagType, Color> colors) {
-		this.colors = colors;
+//		this.colors = colors;
 	}
 
 	public void setDescripsions(Map<TagType, InternationalString> descripsions) {
