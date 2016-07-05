@@ -2,6 +2,7 @@ package de.fhl.enca.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -50,6 +51,19 @@ public final class Connector {
 		try {
 			connection.createStatement().execute(sql);
 		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * Save Image into database
+	 * @param sql update image, image to insert
+	*/
+	public static void executeImage(String sql, byte[] image){
+		try{
+			PreparedStatement pstmt=connection.prepareStatement(sql);
+			pstmt.setBytes(1, image);
+		}catch(SQLException e){
 			e.printStackTrace();
 		}
 	}

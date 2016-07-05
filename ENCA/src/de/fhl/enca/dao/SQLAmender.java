@@ -1,11 +1,12 @@
 package de.fhl.enca.dao;
 
 import de.fhl.enca.bl.CleaningAgent;
+import de.fhl.enca.bl.LanguageType;
 import de.fhl.enca.bl.Tag;
 
 /**
  * Execute update, insert into and delete SQL operation
- * @author Zhaowen.Gong
+ * @author Zhaowen.Gong, Zeling.Wu
  * @version 30.06.2016
  * @see Connector
  */
@@ -16,7 +17,7 @@ public final class SQLAmender {
 	}
 
 	public static void writeImage(int cleaningAgentID, byte[] content) {
-		
+		Connector.executeImage("update CleaningAgents set image=? where cleaningAgentID="+cleaningAgentID, content);
 	}
 
 	public static void createTCRelation(int cleaningAgentID, int tagID) {
@@ -27,15 +28,69 @@ public final class SQLAmender {
 		Connector.executeNonSelect("delete from TC where cleaningAgentID=" + cleaningAgentID + " and tagID=" + tagID);
 	}
 
-	public static void modifyCleaningAgent(CleaningAgent cleaningAgent) {}
+	public static void modifyCleaningAgent(CleaningAgent cleaningAgent) {
+		Connector.executeNonSelect("update CleaningAgents set cleaningAgentID="+cleaningAgent.getCleaningAgentID()+
+														",nameEn='"+cleaningAgent.getName().getString(LanguageType.ENGLISH)+
+														"',nameCn='"+cleaningAgent.getName().getString(LanguageType.CHINESE)+
+														"',nameDe='"+cleaningAgent.getName().getString(LanguageType.GERMAN)+
+														"',descriptionEn='"+cleaningAgent.getDescription().getString(LanguageType.ENGLISH)+
+														"',descriptionCn='"+cleaningAgent.getDescription().getString(LanguageType.CHINESE)+
+														"',descriptionDe='"+cleaningAgent.getDescription().getString(LanguageType.GERMAN)+
+														"',instructionEn='"+cleaningAgent.getInstruction().getString(LanguageType.ENGLISH)+
+														"',instructionCn='"+cleaningAgent.getInstruction().getString(LanguageType.CHINESE)+
+														"',instructionDe='"+cleaningAgent.getInstruction().getString(LanguageType.GERMAN)+
+														"',applicationTime="+cleaningAgent.getApplicationTime()+
+														",frequency="+cleaningAgent.getFrequency()+
+														",rate="+cleaningAgent.getRate()+
+														",isSystem='false'"+
+														",mainLanguage="+cleaningAgent.getMainLanguage().getId()+
+														",Memo='"+cleaningAgent.getMemo()+
+														"' where cleaningAgentID="+cleaningAgent.getCleaningAgentID());
+	}
 
-	public static void createCleaningAgent(CleaningAgent cleaningAgent) {}
+	public static void createCleaningAgent(CleaningAgent cleaningAgent) {
+		
+		Connector.executeNonSelect("insert into CleaningAgents (cleaningAgentID,nameEn,nameCn,nameDe,descriptionEn,descriptionCn,descriptionDe,instructionEn,instructionCn,instructionDe)"+
+				"VALUES ("+cleaningAgent.getCleaningAgentID()+",'"+
+						cleaningAgent.getName().getString(LanguageType.ENGLISH)+"','"+cleaningAgent.getName().getString(LanguageType.CHINESE)+"','"+cleaningAgent.getName().getString(LanguageType.GERMAN)+"','"+
+						cleaningAgent.getDescription().getString(LanguageType.ENGLISH)+"','"+cleaningAgent.getDescription().getString(LanguageType.CHINESE)+"','"+cleaningAgent.getDescription().getString(LanguageType.GERMAN)+"','"+
+						cleaningAgent.getInstruction().getString(LanguageType.ENGLISH)+"','"+cleaningAgent.getInstruction().getString(LanguageType.CHINESE)+"','"+cleaningAgent.getInstruction().getString(LanguageType.GERMAN)+
+						"')");
+		
+		Connector.executeNonSelect("update CleaningAgents set applicationTime="+cleaningAgent.getFrequency()+
+									",frequency="+cleaningAgent.getFrequency()+
+									",rate="+cleaningAgent.getRate()+
+									",isSystem='false'"+
+									",mainLanguage="+cleaningAgent.getMainLanguage().getId()+
+									",Memo='"+cleaningAgent.getMemo()+
+									"' where cleaningAgentID="+cleaningAgent.getCleaningAgentID());
+	}
 
-	public static void removeCleaningAgent(CleaningAgent cleaningAgent) {}
+	public static void removeCleaningAgent(CleaningAgent cleaningAgent) {
+		Connector.executeNonSelect("delete from CleaningAgents where cleaningAgentID="+cleaningAgent.getCleaningAgentID());
+	}
 
-	public static void modifyTag(Tag tag) {}
+	public static void modifyTag(Tag tag) {
+		Connector.executeNonSelect("update Tags set "+
+				"nameEn='"+tag.getName().getString(LanguageType.ENGLISH)+
+				"',nameCn='"+tag.getName().getString(LanguageType.CHINESE)+
+				"',nameDe='"+tag.getName().getString(LanguageType.GERMAN)+
+				"',tagType='"+tag.getTagType().name()+
+				"',isSystem='false' where tagID="+tag.getTagID());
+	}
 
-	public static void createTag(Tag tag) {}
+	public static void createTag(Tag tag) {
+		Connector.executeNonSelect("insert into Tags (tagID,nameEn,nameCn,nameDe,tagType,isSystem)"+
+							"VALUES("+tag.getTagID()+",'"+
+							tag.getName().getString(LanguageType.ENGLISH)+"','"+
+							tag.getName().getString(LanguageType.CHINESE)+"','"+
+							tag.getName().getString(LanguageType.GERMAN)+"','"+
+							tag.getTagType().name()+
+							"','false'"+
+							")");
+	}
 
-	public static void removeTag(Tag tag) {}
+	public static void removeTag(Tag tag) {
+		Connector.executeNonSelect("delete from Tags where tagID="+tag.getTagID());
+	}
 }

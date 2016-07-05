@@ -37,7 +37,7 @@ public final class CleaningAgent {
 	private long applicationTime;
 	private long frequency;
 	private boolean belongsToSystem;
-	private int rate;
+	private int rate = 5;
 	private LanguageType mainLanguage;
 	private String memo;
 
@@ -87,10 +87,8 @@ public final class CleaningAgent {
 	public static void removeCleaningAgent(CleaningAgent cleaningAgent) {
 		if (cleaningAgentAll.containsKey(cleaningAgent.getCleaningAgentID())) {
 			cleaningAgentAll.remove(cleaningAgent.getCleaningAgentID());
-			if (cleaningAgentsWithMemo.contains(cleaningAgent)) {
-				cleaningAgentsWithMemo.remove(cleaningAgent);
-			}
 		}
+		refreshCleaningAgentWithMemo(cleaningAgent);
 	}
 
 	public static Set<CleaningAgent> getCleaningAgentsAll() {
