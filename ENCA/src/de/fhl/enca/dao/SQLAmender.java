@@ -16,15 +16,15 @@ public final class SQLAmender {
 	}
 
 	public static void writeImage(int cleaningAgentID, byte[] content) {
-
+		
 	}
 
 	public static void createTCRelation(int cleaningAgentID, int tagID) {
-//		Connector.executeNonSelect("insert into TC values (" + cleaningAgentID + "," + tagID + ")");
+		Connector.executeNonSelect("insert into TC values (" + cleaningAgentID + "," + tagID + ")");
 	}
 
 	public static void removeTCRelation(int cleaningAgentID, int tagID) {
-//		Connector.executeNonSelect("delete from TC where cleaningAgentID=" + cleaningAgentID + " and tagID=" + tagID);
+		Connector.executeNonSelect("delete from TC where cleaningAgentID=" + cleaningAgentID + " and tagID=" + tagID);
 	}
 
 	public static void modifyCleaningAgent(CleaningAgent cleaningAgent) {}

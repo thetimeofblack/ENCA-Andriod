@@ -290,7 +290,7 @@
             <Line endX="3000.0" stroke="LIGHTGRAY" GridPane.halignment="CENTER" />
             <HBox alignment="CENTER_RIGHT" spacing="10.0" GridPane.rowIndex="1">
                <children>
-                  <Button fx:id="detail" alignment="CENTER" mnemonicParsing="false" onAction="#detail" prefHeight="25.0" prefWidth="75.0" text="%detail" />
+                  <Button fx:id="detail" alignment="CENTER" mnemonicParsing="false" onAction="#detail" prefHeight="25.0" prefWidth="75.0" text="%view" />
                   <Button fx:id="delete" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#delete" prefHeight="25.0" prefWidth="75.0" text="%delete" />
                   <Button fx:id="save" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#save" prefHeight="25.0" prefWidth="75.0" text="%save" />
                   <Button alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#cancel" prefHeight="25.0" prefWidth="75.0" text="%cancel" />
