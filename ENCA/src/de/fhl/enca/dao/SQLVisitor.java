@@ -22,10 +22,6 @@ public final class SQLVisitor {
 		return Connector.executeSelect("select * from TC");
 	}
 
-	public static ResultSet visitMemos() {
-		return Connector.executeSelect("select * from Memos");
-	}
-
 	public static ResultSet visitImage(int cleaningAgentID) {
 		return Connector.executeSelect("select image from CleaningAgents where cleaningAgentID=" + cleaningAgentID);
 	}
