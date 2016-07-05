@@ -22,13 +22,8 @@ public class TagPreference implements Serializable {
 
 	private static final long serialVersionUID = -633570705543638913L;
 	private Map<TagType, InternationalString> descripsions = new HashMap<TagType, InternationalString>();
-	//transient private Map<TagType, Color> colors = null;
 
 	public TagPreference() {
-//		colors = new HashMap<TagType, Color>();
-//		colors.put(TagType.ROOM, Color.hsb(H, S, L[0]));
-//		colors.put(TagType.ITEM, Color.hsb(H, S, L[1]));
-//		colors.put(TagType.OTHERS, Color.hsb(H, S, L[2]));
 
 		InternationalString desROOM = new InternationalString();
 		desROOM.setString(LanguageType.CHINESE, "房间");
@@ -60,8 +55,10 @@ public class TagPreference implements Serializable {
 	}
 
 	/* Setters */
-	public void setColors(Map<TagType, Color> colors) {
-//		this.colors = colors;
+	public void setColors(double H, double S, double[] L) {
+		this.H = H;
+		this.S = S;
+		this.L = L;
 	}
 
 	public void setDescripsions(Map<TagType, InternationalString> descripsions) {

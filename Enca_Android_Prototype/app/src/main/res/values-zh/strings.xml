@@ -39,4 +39,11 @@
         <item>Deutsch</item>
         <item>中文</item>
     </string-array>
+    <string name="contentlanguage_prompt">我们会为你推荐相应国家的清洁剂。</string>
+    <string name="interfacelanguage_prompt">这将设置你的界面语言。</string>
+    <string name="login_about">The MIT License (MIT)  Copyright (c) 2016 ENCA group.  Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:  The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.  THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</string>
+    <string name="login_description">Software Description: Overwhelmed by various kinds of cleaning agents or having trouble identifying cleaning agents in a foreign country? ENCA, helps you choose the right cleaning agent.(Only China and Germany are available now, more countries are (not) coming!) ENCA provides you a platfrom with massive cleaning agent on record where you can search, add, modify, rate and comment on local cleaning agents. With our sophisticated tag system, finding the right cleaning agent is just a few clicks away. Ready to do some cleaning? Try out ENCA now!</string>
+    <string name="login_logo_hint">按，更多了解我们</string>
+    <string name="login_personinformation">ENCA group:  Haoze Zhang Zhaowen Gong Zeling Wu Xiaoqi Ma</string>
+    <string name="aboutus">关于我们</string>
 </resources>
