@@ -1,17 +1,17 @@
 # ENCA-Andriod
-ENCA not Cleaning Agent, an FHL software engineering project.
+ENCA not Cleaning Agent, an FHL software engineering project.  
 And it is a serious agile development. Very agile indeed.
 
 ---
 
 ## Description
 
-> Cleaning agent is hard to choose. Especially in Germany, just like choosing which beer to have.
+> Cleaning agent is hard to choose. Especially in Germany, just like choosing which beer to have.  
 >    -- Zhang Haoze
 
 Overwhelmed by various kinds of cleaning agents or having trouble identifying cleaning agents in a foreign country? ENCA, helps you choose the right cleaning agent.(Only China and Germany are available now, more countries are (not) coming!) ENCA provides you a platfrom with massive cleaning agent on record where you can search, add, modify, rate and comment on local cleaning agents. With our sophisticated tag system, finding the right cleaning agent is just a few clicks away. Ready to do some cleaning? Try out ENCA now!
 
-We provide not only a fully functional version on PC or Mac with all amazing functionalities, but also an express version on Android devices. 
+We provide not only a fully functional version on PC or Mac with all amazing functionalities, but also an express version on Android devices which can search and look up cleaning agents. Next time you go to the supermarket, with no mood at all to make all that gestures to the clerk and describe what you want, or just too tired to look up 9 out of 10 words that you try to read, reach for your Android smart phone and run Enca express. Click few times and find the cleaning agent that you need and show the clerk, the clerk readily fetch that thing for you and here comes the happy ending.
 
 ## Install and run
 
