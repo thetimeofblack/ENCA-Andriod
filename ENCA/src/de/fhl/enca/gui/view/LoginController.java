@@ -28,7 +28,6 @@ public final class LoginController {
 	 */
 	@FXML
 	private void initialize() {
-		Initialize.initialize();
 		usernameLabel.setText(User.getName());
 	}
 

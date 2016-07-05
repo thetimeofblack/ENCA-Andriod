@@ -2,6 +2,7 @@ package de.fhl.enca.gui.application;
 
 import java.io.IOException;
 import de.fhl.enca.bl.User;
+import de.fhl.enca.controller.Initialize;
 import de.fhl.enca.gui.utility.Utility;
 import de.fhl.enca.gui.view.LoginController;
 import de.fhl.enca.gui.view.LoginFirstController;
@@ -21,6 +22,7 @@ public final class Login extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		User.initialize();
+		Initialize.initialize();
 		try {
 			if (User.isFirstUse()) {
 				FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/de/fhl/enca/gui/view/LoginFirst.fxml"));

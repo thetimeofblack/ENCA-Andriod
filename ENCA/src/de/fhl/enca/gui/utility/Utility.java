@@ -64,9 +64,8 @@ public final class Utility {
 	private static boolean showAlert(String key) {
 		ResourceBundle resourceBundle = getResourceBundle();
 		ButtonType yes = new ButtonType(resourceBundle.getString("yes"), ButtonData.YES);
-		ButtonType no = new ButtonType(resourceBundle.getString("no"), ButtonData.NO);
 		ButtonType cancel = new ButtonType(resourceBundle.getString("cancel"), ButtonData.CANCEL_CLOSE);
-		Alert alert = new Alert(AlertType.WARNING, resourceBundle.getString(key), yes, no, cancel);
+		Alert alert = new Alert(AlertType.WARNING, resourceBundle.getString(key), yes, cancel);
 		return alert.showAndWait().filter(e -> e == yes).isPresent();
 	}
 
