@@ -14,19 +14,12 @@ import de.fhl.enca.gui.application.CleaningAgentModifier;
 import de.fhl.enca.gui.utility.Utility;
 import de.fhl.enca.gui.view.CleaningAgentModifierController.OperationType;
 import javafx.fxml.FXML;
-import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Border;
-import javafx.scene.layout.BorderStroke;
-import javafx.scene.layout.BorderStrokeStyle;
-import javafx.scene.layout.BorderWidths;
-import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.FlowPane;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 /**
@@ -60,10 +53,7 @@ public final class CleaningAgentDetailController {
 		public void showContent() {
 			name.setText(cleaningAgent.getName().getString(type));
 			for (Tag tag : cleaningAgent.getTags()) {
-				Label label = new Label(tag.getName().getString(type));
-				label.setBorder(new Border(new BorderStroke(Color.GRAY, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
-				label.setPadding(new Insets(0, 4, 0, 4));
-				tags.getChildren().add(label);
+				tags.getChildren().add(Utility.getTagLabel(tag, type));
 			}
 			description.setText(cleaningAgent.getDescription().getString(type));
 			instruction.setText(cleaningAgent.getInstruction().getString(type));

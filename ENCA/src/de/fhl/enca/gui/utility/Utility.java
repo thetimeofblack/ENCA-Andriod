@@ -2,14 +2,25 @@ package de.fhl.enca.gui.utility;
 
 import java.util.ResourceBundle;
 import de.fhl.enca.bl.LanguageType;
+import de.fhl.enca.bl.Tag;
 import de.fhl.enca.bl.User;
 import de.fhl.enca.gui.view.MainController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.geometry.Insets;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonBar.ButtonData;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.Border;
+import javafx.scene.layout.BorderStroke;
+import javafx.scene.layout.BorderStrokeStyle;
+import javafx.scene.layout.BorderWidths;
+import javafx.scene.layout.CornerRadii;
+import javafx.scene.paint.Color;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
 
 /**
  * Provide useful utilities for other interfaces.
@@ -41,6 +52,15 @@ public final class Utility {
 			languageList.add(type.toString());
 		}
 		return languageList;
+	}
+
+	public static Label getTagLabel(Tag tag, LanguageType type) {
+		Label label = new Label(tag.getName().getString(type));
+		label.setBorder(new Border(new BorderStroke(User.getTagColor(tag.getTagType()), BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+		label.setPadding(new Insets(0, 4, 0, 4));
+		label.setTextFill(Color.WHITE);
+		label.setBackground(new Background(new BackgroundFill(User.getTagColor(tag.getTagType()), CornerRadii.EMPTY, new Insets(0))));
+		return label;
 	}
 
 	/**
