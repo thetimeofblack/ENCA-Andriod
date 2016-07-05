@@ -5,7 +5,8 @@ import de.fhl.enca.bl.LanguageType;
 import de.fhl.enca.bl.User;
 import de.fhl.enca.gui.application.About;
 import de.fhl.enca.gui.application.Main;
-import de.fhl.enca.gui.utility.Utility;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -39,9 +40,13 @@ public final class LoginFirstController {
 	 */
 	@FXML
 	private void initialize() {
-		interfaceComboBox.setItems(Utility.getLanguageList());
+		ObservableList<String> languageList = FXCollections.observableArrayList();
+		for (LanguageType lType : LanguageType.values()) {
+			languageList.add(lType.toString());
+		}
+		interfaceComboBox.setItems(languageList);
 		interfaceComboBox.setValue(User.getInterfaceLanguage().toString());
-		contentComboBox.setItems(Utility.getLanguageList());
+		contentComboBox.setItems(languageList);
 		contentComboBox.setValue(User.getContentLanguage().toString());
 	}
 

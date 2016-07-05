@@ -16,7 +16,6 @@
 	Author: Zhaowen.Gong
 	Version: 30.06.2016
 -->
-
 <BorderPane style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.fhl.enca.gui.view.TagAdderController">
    <center>
       <GridPane BorderPane.alignment="CENTER">
@@ -82,7 +81,7 @@
             <Line endX="400.0" startX="-100.0" stroke="LIGHTGRAY" />
             <HBox alignment="CENTER_RIGHT" spacing="10.0" GridPane.rowIndex="1">
                <children>
-                  <Button fx:id="save" alignment="CENTER" disable="true" mnemonicParsing="false" onAction="#save" prefHeight="25.0" prefWidth="75.0" text="%save" />
+                  <Button fx:id="save" alignment="CENTER" mnemonicParsing="false" onAction="#save" prefHeight="25.0" prefWidth="75.0" text="%save" />
                   <Button fx:id="cancel" alignment="CENTER" mnemonicParsing="false" onAction="#cancel" prefHeight="25.0" prefWidth="75.0" text="%cancel" />
                </children>
                <GridPane.margin>

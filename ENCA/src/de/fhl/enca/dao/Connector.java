@@ -61,8 +61,9 @@ public final class Connector {
 	*/
 	public static void executeImage(String sql, byte[] image){
 		try{
-			PreparedStatement statement=connection.prepareStatement(sql);
-			statement.setBytes(1, image);
+			PreparedStatement pstmt=connection.prepareStatement(sql);
+			pstmt.setBytes(1, image);
+			pstmt.execute();
 		}catch(SQLException e){
 			e.printStackTrace();
 		}

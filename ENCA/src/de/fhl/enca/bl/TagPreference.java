@@ -16,7 +16,7 @@ import javafx.scene.paint.Color;
  */
 public class TagPreference implements Serializable {
 	
-	private double H = 0.207;
+	private double H = 207;
 	private double S = 0.55;
 	private double[] L = {0.45, 0.65, 0.85};
 
