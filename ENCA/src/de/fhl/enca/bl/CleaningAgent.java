@@ -37,7 +37,7 @@ public final class CleaningAgent {
 	private long applicationTime;
 	private long frequency;
 	private boolean belongsToSystem;
-	private int rate;
+	private int rate = 5;
 	private LanguageType mainLanguage;
 	private String memo;
 

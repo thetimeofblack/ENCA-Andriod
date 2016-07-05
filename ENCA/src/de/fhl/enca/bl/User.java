@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.Date;
+import javafx.scene.paint.Color;
 
 /**
  * Contain metadata of user, providing saving and reading function of the metadata.
@@ -17,7 +18,7 @@ import java.util.Date;
  * @see TagPreference
  */
 public final class User {
-	
+
 	/**
 	 * Directory and file settings.
 	 */
@@ -157,5 +158,13 @@ public final class User {
 
 	public static void setContentLanguage(LanguageType contentLanguage) {
 		languagePreference.setContentLanguage(contentLanguage);
+	}
+
+	public static Color getTagColor(TagType type) {
+		return tagPreference.getColors(type);
+	}
+
+	public static InternationalString getTagDescription(TagType type) {
+		return tagPreference.getDescripsions(type);
 	}
 }
