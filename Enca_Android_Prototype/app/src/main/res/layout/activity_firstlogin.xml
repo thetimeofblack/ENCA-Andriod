@@ -7,101 +7,136 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@color/white"
     tools:context=".LoginActivity">
 
-<TextView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:id="@+id/login_welcome"
-    android:text="@string/firstlogin_welcome"
-    android:textStyle="bold"
-    android:textSize="40sp"
-    android:textAppearance="?android:attr/textAppearanceLarge"
-    android:layout_centerHorizontal="true"
-    android:layout_marginTop="50dp"
-    />
 
-    <TableLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginLeft="50dp"
-        android:id="@+id/login_tablelayout"
-        android:layout_below="@+id/login_welcome"
-        >
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="30dp"
-            >
-
-            <TextView
-                android:text="@string/login_namehint"
-                android:id="@+id/textView"
-                android:layout_gravity="center"
-                android:layout_column="0" />
-
-            <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/login_name"
-                android:maxLines="1"
-                android:singleLine="true"
-                android:layout_column="1"
-                android:hint="@string/enter_name"
-                />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="30dp">
-
-            <TextView
-                android:text="@string/login_interfacelanguage"
-                android:id="@+id/login_interfacelanguage"
-                android:layout_column="0" />
-
-            <Spinner
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/login_spinner_interface"
-                style="?android:attr/spinnerDropDownItemStyle"
-                android:layout_column="1" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="30dp">
-
-            <TextView
-                android:text="@string/login_contentlanguage"
-                android:id="@+id/login_contentlanguage"
-                android:layout_column="0" />
-
-            <Spinner
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/login_spinner_content"
-                style="?android:attr/spinnerDropDownItemStyle"
-                android:layout_column="1" />
-        </TableRow>
-    </TableLayout>
-
-    <Button
+    <TextView
+        android:id="@+id/login_welcome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/login_tablelayout"
-        android:id="@+id/login_comfirm"
-        android:text="@string/login_confirm"
-        android:layout_marginTop="30dp"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:text="@string/firstlogin_welcome"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="40sp"
+        android:textStyle="bold" />
+
+    <TableLayout
+        android:id="@+id/login_tablelayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/login_welcome"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="20dp">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="30dp">
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_column="0"
+                android:layout_gravity="center"
+                android:textStyle="bold"
+                android:text="@string/login_namehint" />
+
+            <EditText
+                android:id="@+id/login_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="1"
+                android:hint="@string/enter_name"
+                android:maxLines="1"
+                android:singleLine="true" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="30dp">
+
+            <TextView
+                android:id="@+id/login_interfacelanguage"
+                android:layout_column="0"
+                android:textStyle="bold"
+                android:text="@string/login_interfacelanguage" />
+
+            <Spinner
+                android:id="@+id/login_spinner_interface"
+                style="?android:attr/spinnerDropDownItemStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="1" />
+        </TableRow>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/interfacelanguage_prompt"
+            android:textSize="10sp"
+            android:textStyle="italic" />
+
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="30dp">
+
+            <TextView
+                android:id="@+id/login_contentlanguage"
+                android:layout_column="0"
+                android:textStyle="bold"
+                android:text="@string/login_contentlanguage" />
+
+            <Spinner
+                android:id="@+id/login_spinner_content"
+                style="?android:attr/spinnerDropDownItemStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="1" />
+        </TableRow>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/contentlanguage_prompt"
+            android:textSize="10sp"
+            android:textStyle="italic" />
+    </TableLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/login_logo_hint"
+        android:textStyle="bold"
+        android:text="@string/login_logo_hint"
+        android:layout_below="@+id/login_tablelayout"
+        android:layout_marginTop="20dp"
         />
+
+    <ImageButton
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:id="@+id/login_logo"
+        android:layout_toRightOf="@+id/login_logo_hint"
+        android:layout_below="@+id/login_logo_hint"
+        android:layout_centerHorizontal="true"
+        android:background="@mipmap/logosmall"
+        />
+    <Button
+        android:id="@+id/login_confirm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/login_logo"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:text="@string/login_confirm" />
 
 </RelativeLayout>
