@@ -1,12 +1,9 @@
 package de.fhl.enca.gui.view;
 
 import de.fhl.enca.bl.User;
-import de.fhl.enca.controller.Initialize;
-import de.fhl.enca.gui.application.Main;
+import de.fhl.enca.gui.utility.Utility;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.stage.Stage;
 
 /**
  * Controller of Login interface when it is not user's first use.
@@ -16,11 +13,7 @@ import javafx.stage.Stage;
 public final class LoginController {
 
 	@FXML
-	private Button loginButton;
-	@FXML
 	private Label usernameLabel;
-
-	private Stage loginStage;
 
 	/**
 	 * Initialize the interface.</br>
@@ -28,17 +21,6 @@ public final class LoginController {
 	 */
 	@FXML
 	private void initialize() {
-		Initialize.initialize();
-		usernameLabel.setText(User.getName());
-	}
-
-	@FXML
-	private void login() {
-		new Main().start(new Stage());
-		loginStage.hide();
-	}
-
-	public void setLoginStage(Stage stage) {
-		this.loginStage = stage;
+		usernameLabel.setText(Utility.getResourceBundle().getString("hey") + "  " + User.getName());
 	}
 }

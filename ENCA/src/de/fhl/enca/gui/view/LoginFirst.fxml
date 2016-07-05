@@ -1,46 +1,95 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.Cursor?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.Reflection?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <!-- 
 	Author: Zhaowen.Gong
 	Version: 30.06.2016
 -->
-<BorderPane xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.fhl.enca.gui.view.LoginFirstController">
+
+<BorderPane prefHeight="600.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.fhl.enca.gui.view.LoginFirstController">
    <center>
-		<AnchorPane fx:id="pane" prefHeight="500.0" prefWidth="300.0" style="-fx-background-color: #FFFFFF;" BorderPane.alignment="CENTER">
-			<children>
-				<Label alignment="CENTER" contentDisplay="CENTER" layoutX="81.0" layoutY="55.0" text="ENCA" textAlignment="CENTER">
-					<font>
-						<Font name="Verdana" size="50.0" />
-					</font>
-					<effect>
-						<Reflection topOffset="-10.0" />
-					</effect>
-				</Label>
-				<Label alignment="CENTER" contentDisplay="CENTER" layoutX="115.0" layoutY="185.0" text="Hello!" textAlignment="CENTER">
-					<font>
-						<Font name="Microsoft YaHei" size="25.0" />
-					</font>
-				</Label>
-				<Button fx:id="loginButton" layoutX="127.0" layoutY="397.0" mnemonicParsing="false" onAction="#login" text="Login" />
-				<ComboBox fx:id="interfaceComboBox" layoutX="75.0" layoutY="290.0" prefWidth="150.0" />
-				<Label layoutX="74.0" layoutY="273.0" text="Which language do you say?" />
-				<Label layoutX="57.0" layoutY="322.0" text="Which language do you encounter?" />
-				<ComboBox fx:id="contentComboBox" layoutX="75.0" layoutY="339.0" prefWidth="150.0" />
-				<TextField fx:id="usernameTextField" layoutX="76.0" layoutY="238.0" promptText="Please enter your name" />
-			</children>
-			<cursor>
-				<Cursor fx:constant="DEFAULT" />
-			</cursor>
-		</AnchorPane>
+      <VBox alignment="CENTER_LEFT" style="-fx-background-color: #FFFFFF;" BorderPane.alignment="CENTER">
+         <children>
+            <Label alignment="CENTER" contentDisplay="CENTER" text="ENCA" textAlignment="CENTER">
+               <font>
+                  <Font name="Verdana" size="50.0" />
+               </font>
+               <effect>
+                  <Reflection topOffset="-10.0" />
+               </effect>
+            </Label>
+            <Label alignment="CENTER" contentDisplay="CENTER" text="Welcome to ENCA" textAlignment="CENTER">
+               <font>
+                  <Font name="Microsoft YaHei" size="25.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="75.0" />
+               </VBox.margin>
+            </Label>
+            <TextField fx:id="usernameTextField" maxWidth="-Infinity" prefWidth="150.0" promptText="What's your name?">
+               <VBox.margin>
+                  <Insets bottom="20.0" top="20.0" />
+               </VBox.margin>
+            </TextField>
+            <Label text="Which language do you speak?" />
+            <ComboBox fx:id="interfaceComboBox" prefWidth="150.0">
+               <VBox.margin>
+                  <Insets bottom="10.0" top="10.0" />
+               </VBox.margin>
+            </ComboBox>
+            <Label text="This setting would affect your interface language." textFill="GREY">
+               <font>
+                  <Font name="System Italic" size="12.0" />
+               </font>
+            </Label>
+            <Label text="Which language would you prefer to see the content?">
+               <VBox.margin>
+                  <Insets top="25.0" />
+               </VBox.margin>
+            </Label>
+            <ComboBox fx:id="contentComboBox" prefWidth="150.0">
+               <VBox.margin>
+                  <Insets bottom="10.0" top="10.0" />
+               </VBox.margin>
+            </ComboBox>
+            <Label prefHeight="36.0" prefWidth="254.0" text="We would recommend you cleaning agent available in the certain country." textFill="GREY" wrapText="true">
+               <font>
+                  <Font name="System Italic" size="12.0" />
+               </font>
+            </Label>
+            <Button fx:id="loginButton" mnemonicParsing="false" onAction="#login" prefHeight="25.0" prefWidth="75.0" text="Login">
+               <VBox.margin>
+                  <Insets bottom="20.0" top="20.0" />
+               </VBox.margin>
+            </Button>
+         </children>
+         <padding>
+            <Insets left="50.0" />
+         </padding>
+      </VBox>
    </center>
+   <top>
+      <MenuBar style="-fx-background-color: #FFFFFF;" BorderPane.alignment="CENTER">
+        <menus>
+          <Menu mnemonicParsing="false" text="Help">
+            <items>
+                  <MenuItem mnemonicParsing="false" text="Manual" />
+              <MenuItem mnemonicParsing="false" onAction="#about" text="About" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+   </top>
 </BorderPane>

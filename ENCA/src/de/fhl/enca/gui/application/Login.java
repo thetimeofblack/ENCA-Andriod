@@ -2,8 +2,8 @@ package de.fhl.enca.gui.application;
 
 import java.io.IOException;
 import de.fhl.enca.bl.User;
+import de.fhl.enca.controller.Initialize;
 import de.fhl.enca.gui.utility.Utility;
-import de.fhl.enca.gui.view.LoginController;
 import de.fhl.enca.gui.view.LoginFirstController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -21,6 +21,7 @@ public final class Login extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		User.initialize();
+		Initialize.initialize();
 		try {
 			if (User.isFirstUse()) {
 				FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/de/fhl/enca/gui/view/LoginFirst.fxml"));
@@ -29,7 +30,6 @@ public final class Login extends Application {
 			} else {
 				FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/de/fhl/enca/gui/view/Login.fxml"), Utility.getResourceBundle());
 				primaryStage.setScene(new Scene(loader.load()));
-				((LoginController) loader.getController()).setLoginStage(primaryStage);
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -38,6 +38,15 @@ public final class Login extends Application {
 		primaryStage.setTitle("ENCA");
 		primaryStage.initStyle(StageStyle.UNIFIED);
 		primaryStage.show();
+		if (!User.isFirstUse()) {
+			try {
+				Thread.sleep(500);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			new Main().start(new Stage());
+			primaryStage.hide();
+		}
 	}
 
 	public static void main(String[] args) {

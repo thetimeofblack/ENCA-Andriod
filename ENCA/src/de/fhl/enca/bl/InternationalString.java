@@ -1,5 +1,6 @@
 package de.fhl.enca.bl;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -10,8 +11,11 @@ import java.util.Map;
  * @version 30.06.2016
  * @see LanguageType
  */
-public final class InternationalString {
+public final class InternationalString implements Serializable {
 
+
+	private static final long serialVersionUID = 6190737407260272144L;
+	
 	/**
 	 * Map that stores strings in different languages.
 	 */
