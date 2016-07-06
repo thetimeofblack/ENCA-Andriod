@@ -71,10 +71,12 @@ public final class TagAdderController {
 				if (Utility.showAddTagAlert()) {
 					TagOperator.createTag(assembly());
 					Utility.refreshMain();
+					stage.hide();
 				}
 			} else {
 				TagOperator.createTag(assembly());
 				Utility.refreshMain();
+				stage.hide();
 			}
 		}
 	}
