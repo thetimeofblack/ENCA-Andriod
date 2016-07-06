@@ -13,9 +13,8 @@ import java.util.Map;
  */
 public final class InternationalString implements Serializable {
 
-
 	private static final long serialVersionUID = 6190737407260272144L;
-	
+
 	/**
 	 * Map that stores strings in different languages.
 	 */
@@ -66,6 +65,15 @@ public final class InternationalString implements Serializable {
 				}
 			}
 			return null;
+		}
+	}
+
+	public String getSQLString(LanguageType type) {
+		String result = getString(type);
+		if (result != null && !result.equals("")) {
+			return "'" + result + "'";
+		} else {
+			return "NULL";
 		}
 	}
 }
