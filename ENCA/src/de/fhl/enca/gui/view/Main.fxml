@@ -32,7 +32,7 @@
           <Menu mnemonicParsing="false" text="%view">
             <items>
               <MenuItem fx:id="detail" mnemonicParsing="false" onAction="#detail" text="%detail" />
-                  <MenuItem mnemonicParsing="false" text="%memos" />
+                  <MenuItem mnemonicParsing="false" onAction="#userCentreToMemo" text="%memos" />
             </items>
           </Menu>
             <Menu mnemonicParsing="false" text="%modify">
@@ -50,6 +50,7 @@
           <Menu mnemonicParsing="false" text="%system">
             <items>
               <MenuItem mnemonicParsing="false" onAction="#userCentre" text="%userCenter" />
+                  <MenuItem mnemonicParsing="false" onAction="#manual" text="%manual" />
                   <MenuItem mnemonicParsing="false" onAction="#about" text="%about" />
             </items>
           </Menu>
@@ -89,19 +90,19 @@
                      <GridPane.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </GridPane.margin></ListView>
-                  <Label alignment="CENTER" prefHeight="25.0" prefWidth="90.0" text="%room" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                  <Label fx:id="room" alignment="CENTER" prefHeight="25.0" prefWidth="90.0" text="%room" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                      <font>
-                        <Font size="16.0" />
+                        <Font name="System Bold" size="16.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" prefHeight="25.0" prefWidth="93.0" text="%items" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                  <Label fx:id="items" alignment="CENTER" prefHeight="25.0" prefWidth="93.0" text="%items" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                      <font>
-                        <Font size="16.0" />
+                        <Font name="System Bold" size="16.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" prefHeight="25.0" prefWidth="92.0" text="%others" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                  <Label fx:id="others" alignment="CENTER" prefHeight="25.0" prefWidth="92.0" text="%others" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                      <font>
-                        <Font size="16.0" />
+                        <Font name="System Bold" size="16.0" />
                      </font>
                   </Label>
                </children>

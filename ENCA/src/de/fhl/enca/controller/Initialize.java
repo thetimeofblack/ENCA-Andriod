@@ -45,8 +45,8 @@ public final class Initialize {
 				cleaningAgent.setInstruction(iStringGenerator(r, 8));
 				cleaningAgent.setApplicationTime(r.getLong(11));
 				cleaningAgent.setFrequency(r.getLong(12));
-				cleaningAgent.setRate(r.getInt(13));
-				cleaningAgent.setBelongsToSystem(r.getBoolean(14));
+				cleaningAgent.setBelongsToSystem(r.getBoolean(13));
+				cleaningAgent.setRate(r.getInt(14));
 				cleaningAgent.setMainLanguage(LanguageType.getLanguageType(r.getInt(15)));
 				cleaningAgent.setMemo(r.getString(17));
 				CleaningAgent.addCleaningAgent(cleaningAgent);

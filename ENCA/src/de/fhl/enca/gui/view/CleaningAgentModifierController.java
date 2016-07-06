@@ -271,7 +271,7 @@ public final class CleaningAgentModifierController {
 			}
 			language.getSelectionModel().clearAndSelect(cleaningAgent.getMainLanguage().getId());
 		} else {
-			rate.getSelectionModel().clearAndSelect(0);
+			rate.getSelectionModel().clearAndSelect(4);
 			detail.setDisable(true);
 			delete.setDisable(true);
 			save.setDisable(true);

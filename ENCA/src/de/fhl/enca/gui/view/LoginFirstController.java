@@ -5,6 +5,7 @@ import de.fhl.enca.bl.LanguageType;
 import de.fhl.enca.bl.User;
 import de.fhl.enca.gui.application.About;
 import de.fhl.enca.gui.application.Main;
+import de.fhl.enca.gui.application.Manual;
 import de.fhl.enca.gui.utility.Utility;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -56,6 +57,11 @@ public final class LoginFirstController {
 			new Main().start(new Stage());
 			loginStage.hide();
 		}
+	}
+
+	@FXML
+	private void manual() {
+		new Manual().start(new Stage());
 	}
 
 	@FXML

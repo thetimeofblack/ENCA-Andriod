@@ -87,6 +87,10 @@ public final class Utility {
 		return showAlert("deleteTagAlert");
 	}
 
+	public static boolean showAddTagAlert() {
+		return showAlert("addTagAlert");
+	}
+
 	/**
 	 * Generate the alert according to the key.
 	 * @param key key representing the content of the alert
