@@ -42,11 +42,11 @@ public final class SQLAmender {
 	}
 
 	public static void modifyTag(Tag tag) {
-		Connector.executeNonSelect("update Tags set " + "nameEn='" + tag.getName().getString(LanguageType.ENGLISH) + "',nameCn='" + tag.getName().getString(LanguageType.CHINESE) + "',nameDe='" + tag.getName().getString(LanguageType.GERMAN) + "',tagType='" + tag.getTagType().name() + "',isSystem='false' where tagID=" + tag.getTagID());
+		Connector.executeNonSelect("update Tags set " + "nameEn='" + tag.getName().getString(LanguageType.ENGLISH) + "',nameCn='" + tag.getName().getString(LanguageType.CHINESE) + "',nameDe='" + tag.getName().getString(LanguageType.GERMAN) + "',tagType='" + tag.getTagType().getId() + "',isSystem=0 where tagID=" + tag.getTagID());
 	}
 
 	public static void createTag(Tag tag) {
-		Connector.executeNonSelect("insert into Tags (tagID,nameEn,nameCn,nameDe,tagType,isSystem)" + "VALUES(" + tag.getTagID() + ",'" + tag.getName().getString(LanguageType.ENGLISH) + "','" + tag.getName().getString(LanguageType.CHINESE) + "','" + tag.getName().getString(LanguageType.GERMAN) + "','" + tag.getTagType().name() + "','false'" + ")");
+		Connector.executeNonSelect("insert into Tags (tagID,nameEn,nameCn,nameDe,tagType,isSystem)" + "VALUES(" + tag.getTagID() + ",'" + tag.getName().getString(LanguageType.ENGLISH) + "','" + tag.getName().getString(LanguageType.CHINESE) + "','" + tag.getName().getString(LanguageType.GERMAN) + "','" + tag.getTagType().getId() + "',0" + ")");
 	}
 
 	public static void removeTag(Tag tag) {

@@ -1,7 +1,8 @@
 package de.fhl.enca.bl;
 
-import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
 import de.fhl.enca.controller.TagFetcher;
@@ -17,12 +18,12 @@ public final class CleaningAgent {
 	/**
 	 * Store the references of all cleaning agents.
 	 */
-	private static Map<Integer, CleaningAgent> cleaningAgentAll = new HashMap<>();
+	private static Map<Integer, CleaningAgent> cleaningAgentAll = new LinkedHashMap<>();
 
 	/**
 	 * Store the references of those cleaning agents with memo.
 	 */
-	private static Set<CleaningAgent> cleaningAgentsWithMemo = new HashSet<>();
+	private static Set<CleaningAgent> cleaningAgentsWithMemo = new LinkedHashSet<>();
 
 	/**
 	 * Max id stored for creating new cleaning agent.

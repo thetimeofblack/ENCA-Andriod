@@ -14,7 +14,7 @@ import java.util.Map;
  */
 
 public enum TagType {
-	
+
 	ROOM("Room", 0), ITEM("Items", 1), OTHERS("Others", 2);
 
 	/* Map: <ID, Type> */
@@ -38,19 +38,9 @@ public enum TagType {
 	}
 
 	/* Getters */
-	public static TagType getTagType(String string) {
-		for (TagType tagType : TagType.values()) {
-			if (tagType.name.equals(string)) {
-				return tagType;
-			}
-		}
-		return null;
-	}
-
 	public static TagType getTagType(int id) {
 		return tagTypeMap.get(id);
 	}
-
 
 	public int getId() {
 		return id;
