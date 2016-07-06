@@ -24,6 +24,7 @@
 	Author: Zhaowen.Gong
 	Version: 30.06.2016
 -->
+
 <BorderPane style="-fx-border-color: #FFFFFF;" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.fhl.enca.gui.view.MainController">
    <top>
       <MenuBar style="-fx-background-color: #FFFFFF;">
@@ -120,8 +121,9 @@
                            <content>
                               <TableView fx:id="table_en">
                                  <columns>
-                                    <TableColumn prefWidth="300.0" text="%name" />
-                                    <TableColumn fx:id="column_en" prefWidth="650.0" text="%tags" />
+                                    <TableColumn prefWidth="75.0" text="%nation" />
+                                    <TableColumn prefWidth="500.0" text="%name" />
+                                    <TableColumn fx:id="column_en" prefWidth="400.0" text="%tags" />
                                  </columns>
                                  <contextMenu>
                                     <ContextMenu>
@@ -138,8 +140,9 @@
                            <content>
                               <TableView fx:id="table_de">
                                  <columns>
-                                    <TableColumn prefWidth="300.0" text="%name" />
-                                    <TableColumn fx:id="column_de" prefWidth="700.0" text="%tags" />
+                                    <TableColumn prefWidth="75.0" text="%nation" />
+                                    <TableColumn prefWidth="500.0" text="%name" />
+                                    <TableColumn fx:id="column_de" prefWidth="400.0" text="%tags" />
                                  </columns>
                                  <contextMenu>
                                     <ContextMenu>
@@ -156,8 +159,9 @@
                            <content>
                               <TableView fx:id="table_zh">
                                  <columns>
-                                    <TableColumn prefWidth="300.0" text="%name" />
-                                    <TableColumn fx:id="column_zh" prefWidth="700.0" text="%tags" />
+                                    <TableColumn prefWidth="75.0" text="%nation" />
+                                    <TableColumn prefWidth="500.0" text="%name" />
+                                    <TableColumn fx:id="column_zh" prefWidth="400.0" text="%tags" />
                                  </columns>
                                  <contextMenu>
                                     <ContextMenu>
@@ -178,7 +182,7 @@
                   <GridPane alignment="CENTER" style="-fx-background-color: #FFFFFF;">
                      <columnConstraints>
                         <ColumnConstraints hgrow="NEVER" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" />
                         <ColumnConstraints hgrow="NEVER" />
                         <ColumnConstraints hgrow="NEVER" />
                         <ColumnConstraints hgrow="NEVER" />

@@ -7,6 +7,7 @@ import de.fhl.enca.bl.InternationalString;
 import de.fhl.enca.bl.LanguageType;
 import de.fhl.enca.bl.Tag;
 import de.fhl.enca.bl.TagType;
+import de.fhl.enca.bl.User;
 import de.fhl.enca.controller.TagFetcher;
 import de.fhl.enca.controller.TagOperator;
 import de.fhl.enca.gui.application.TagAdder;
@@ -15,6 +16,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
@@ -48,6 +50,8 @@ public final class TagModifierController {
 	private TextField german;
 	@FXML
 	private TextField chinese;
+	@FXML
+	private Label tip;
 
 	@FXML
 	private Button save;
@@ -118,16 +122,28 @@ public final class TagModifierController {
 			ListView<Tag> listView = listViewMap.get(TagType.getTagType(tabPane.getSelectionModel().getSelectedIndex()));
 			if (!listView.getSelectionModel().isEmpty()) {
 				tag = listView.getSelectionModel().getSelectedItem();
-				if (!tag.belongsToSystem()) {
-					setDisable(false);
+				if (!User.getPriority()) {
+					setDisable(tag.belongsToSystem());
+					if (tag.belongsToSystem()) {
+						tip.setText(Utility.getResourceBundle().getString("tagPriority"));
+					} else {
+						tip.setText(null);
+					}
 				} else {
-					setDisable(true);
+					setDisable(false);
+					if (tag.belongsToSystem()) {
+						tip.setText(Utility.getResourceBundle().getString("tagGod"));
+					} else {
+						tip.setText(null);
+					}
 				}
 			} else {
 				setDisable(true);
+				tip.setText(null);
 			}
 		} else {
 			setDisable(true);
+			tip.setText(null);
 		}
 		for (Entry<LanguageType, TextField> entry : textFieldMap.entrySet()) {
 			if (tag != null) {

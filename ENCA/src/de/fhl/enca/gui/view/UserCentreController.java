@@ -10,6 +10,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -32,6 +33,8 @@ public final class UserCentreController {
 	private ComboBox<String> interfaceComboBox;
 	@FXML
 	private ComboBox<String> contentComboBox;
+	@FXML
+	private CheckBox priority;
 	@FXML
 	private FlowPane flowPane;
 	@FXML
@@ -67,6 +70,7 @@ public final class UserCentreController {
 		contentComboBox.setItems(languageList);
 		interfaceComboBox.setValue(User.getInterfaceLanguage().toString());
 		contentComboBox.setValue(User.getContentLanguage().toString());
+		priority.setSelected(User.getPriority());
 		for (CleaningAgent cleaningAgent : CleaningAgent.getCleaningAgentsWithMemo()) {
 			ImageView imageView = new ImageView(CleaningAgentFetcher.fetchImageOfCleaningAgent(cleaningAgent));
 			imageView.setFitWidth(100);
@@ -80,6 +84,7 @@ public final class UserCentreController {
 	private void save() {
 		if (!usernameTextField.getText().equals("")) {
 			User.setName(usernameTextField.getText());
+			User.setPriority(priority.isSelected());
 			userCentreStage.hide();
 			if (User.getInterfaceLanguage() != LanguageType.getLanguageType(interfaceComboBox.getSelectionModel().getSelectedIndex()) || User.getContentLanguage() != LanguageType.getLanguageType(contentComboBox.getSelectionModel().getSelectedIndex())) {
 				User.setInterfaceLanguage(LanguageType.getLanguageType(interfaceComboBox.getSelectionModel().getSelectedIndex()));

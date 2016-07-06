@@ -20,11 +20,19 @@ import javafx.scene.layout.FlowPane;
  */
 public final class CleaningAgentBean {
 
+	private static Map<LanguageType, String> nationMap = new HashMap<>();
+	static {
+		nationMap.put(LanguageType.ENGLISH, " US");
+		nationMap.put(LanguageType.GERMAN, " DE");
+		nationMap.put(LanguageType.CHINESE, " CN");
+	}
+
 	/**
 	 * ID of the cleaning agent.
 	 */
 	private final int id;
 
+	private final String nation;
 	/**
 	 * Name of the cleaning agent.
 	 */
@@ -95,6 +103,7 @@ public final class CleaningAgentBean {
 	 */
 	public CleaningAgentBean(CleaningAgent cleaningAgent, LanguageType type) {
 		this.id = cleaningAgent.getCleaningAgentID();
+		this.nation = nationMap.get(cleaningAgent.getMainLanguage());
 		this.name = new SimpleStringProperty(cleaningAgent.getName().getString(type));
 		tags = new FlowPane(5, 5);
 		tags.setPrefHeight(0);
@@ -106,6 +115,10 @@ public final class CleaningAgentBean {
 
 	public int getId() {
 		return id;
+	}
+
+	public String getNation() {
+		return nation;
 	}
 
 	public String getName() {

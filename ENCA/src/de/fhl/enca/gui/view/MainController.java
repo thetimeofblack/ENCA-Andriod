@@ -179,9 +179,11 @@ public final class MainController {
 		modifyCASet.add(modifyCA_zh);
 		tabPane.getSelectionModel().clearAndSelect(User.getContentLanguage().getId());
 		for (TableView<CleaningAgentBean> tableView : tableViewMap.values()) {
-			tableView.getColumns().get(0).setCellValueFactory(new PropertyValueFactory<>("name"));
-			tableView.getColumns().get(1).setCellValueFactory(new PropertyValueFactory<>("tags"));
+			tableView.getColumns().get(0).setCellValueFactory(new PropertyValueFactory<>("nation"));
+			tableView.getColumns().get(1).setCellValueFactory(new PropertyValueFactory<>("name"));
+			tableView.getColumns().get(2).setCellValueFactory(new PropertyValueFactory<>("tags"));
 			tableView.setOnMouseClicked(e -> {
+				validate();
 				if (e.getClickCount() > 1) {
 					detail();
 				}
@@ -298,9 +300,17 @@ public final class MainController {
 	}
 
 	private boolean validateModify() {
-		try {
-			return validateDetail() && !CleaningAgent.getCleaningAgent(getCurrentTableView().getSelectionModel().getSelectedItem().getId()).BelongsToSystem();
-		} catch (NullPointerException e) {
+		if (validateDetail()) {
+			if (!User.getPriority()) {
+				try {
+					return !CleaningAgent.getCleaningAgent(getCurrentTableView().getSelectionModel().getSelectedItem().getId()).BelongsToSystem();
+				} catch (NullPointerException e) {
+					return false;
+				}
+			} else {
+				return true;
+			}
+		} else {
 			return false;
 		}
 	}

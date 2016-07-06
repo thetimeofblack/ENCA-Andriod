@@ -118,6 +118,8 @@ public final class CleaningAgentDetailController {
 	@FXML
 	private TextArea memo;
 	@FXML
+	private Label systemCA;
+	@FXML
 	private Button modify;
 
 	/**
@@ -165,7 +167,13 @@ public final class CleaningAgentDetailController {
 		frequency.setText(String.valueOf(cleaningAgent.getFrequency()));
 		rate.setText(rateMap.get(cleaningAgent.getRate()));
 		memo.setText(cleaningAgent.getMemo());
-		modify.setDisable(cleaningAgent.BelongsToSystem());
+		if (!User.getPriority()) {
+			modify.setDisable(cleaningAgent.BelongsToSystem());
+			systemCA.setVisible(cleaningAgent.BelongsToSystem());
+		} else {
+			modify.setDisable(false);
+			systemCA.setVisible(false);
+		}
 	}
 
 	public void setStage(Stage stage) {
