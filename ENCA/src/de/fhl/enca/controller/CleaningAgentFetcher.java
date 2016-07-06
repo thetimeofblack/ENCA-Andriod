@@ -88,8 +88,7 @@ public final class CleaningAgentFetcher {
 			} else {
 				return null;
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
+		} catch (SQLException | NullPointerException e) {
 			return null;
 		}
 	}

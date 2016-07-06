@@ -18,7 +18,7 @@ public class TagPreference implements Serializable {
 	
 	private double H = 207;
 	private double S = 0.55;
-	private double[] L = {0.45, 0.65, 0.85};
+	private double[] L = {0.55, 0.70, 0.85};
 
 	private static final long serialVersionUID = -633570705543638913L;
 	private Map<TagType, InternationalString> descripsions = new HashMap<TagType, InternationalString>();
@@ -47,7 +47,7 @@ public class TagPreference implements Serializable {
 
 	/* Getters */
 	public Color getColors(TagType t) {
-		return Color.hsb(H, S, L[t.getId()]);
+		return Color.hsb(H,S,L[t.getId()]);
 	}
 
 	public InternationalString getDescripsions(TagType t) {

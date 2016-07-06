@@ -45,8 +45,8 @@ public final class Initialize {
 				cleaningAgent.setInstruction(iStringGenerator(r, 8));
 				cleaningAgent.setApplicationTime(r.getLong(11));
 				cleaningAgent.setFrequency(r.getLong(12));
-				cleaningAgent.setBelongsToSystem(r.getBoolean(13));
-				cleaningAgent.setRate(r.getInt(14));
+				cleaningAgent.setRate(r.getInt(13));
+				cleaningAgent.setBelongsToSystem(r.getBoolean(14));
 				cleaningAgent.setMainLanguage(LanguageType.getLanguageType(r.getInt(15)));
 				cleaningAgent.setMemo(r.getString(17));
 				CleaningAgent.addCleaningAgent(cleaningAgent);
@@ -65,7 +65,7 @@ public final class Initialize {
 		try {
 			while (r.next()) {
 				int id = r.getInt(1);
-				Tag.addTag(new Tag(id, iStringGenerator(r, 2), TagType.getTagType(r.getString(5)), r.getBoolean(6)));
+				Tag.addTag(new Tag(id, iStringGenerator(r, 2), TagType.getTagType(r.getInt(5)), r.getBoolean(6)));
 				if (id > Tag.getMaxID()) {
 					Tag.setMaxID(id);
 				}

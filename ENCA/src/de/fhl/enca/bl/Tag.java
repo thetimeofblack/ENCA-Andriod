@@ -1,7 +1,7 @@
 package de.fhl.enca.bl;
 
-import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 import de.fhl.enca.controller.TagFetcher;
@@ -17,7 +17,7 @@ public class Tag {
 	/**
 	 * Store the references of all tags.
 	 */
-	private static Map<Integer, Tag> tagsAll = new HashMap<>();
+	private static Map<Integer, Tag> tagsAll = new LinkedHashMap<>();
 
 	/**
 	 * 'no tag' tag will be stored.
