@@ -119,8 +119,6 @@ public final class CleaningAgentDetailController {
 	private TextArea memo;
 	@FXML
 	private Button modify;
-	@FXML
-	private Label systemCA;
 
 	/**
 	 * Initialize the interface.</br>
@@ -168,7 +166,6 @@ public final class CleaningAgentDetailController {
 		rate.setText(rateMap.get(cleaningAgent.getRate()));
 		memo.setText(cleaningAgent.getMemo());
 		modify.setDisable(cleaningAgent.BelongsToSystem());
-		systemCA.setVisible(cleaningAgent.BelongsToSystem());
 	}
 
 	public void setStage(Stage stage) {

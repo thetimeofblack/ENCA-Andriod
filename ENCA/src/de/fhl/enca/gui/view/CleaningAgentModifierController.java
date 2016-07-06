@@ -18,7 +18,6 @@ import de.fhl.enca.controller.CleaningAgentFetcher;
 import de.fhl.enca.controller.CleaningAgentOperator;
 import de.fhl.enca.controller.TagFetcher;
 import de.fhl.enca.gui.application.CleaningAgentDetail;
-import de.fhl.enca.gui.application.TagAdder;
 import de.fhl.enca.gui.model.CleaningAgentBean;
 import de.fhl.enca.gui.utility.Utility;
 import javafx.beans.value.ObservableValue;
@@ -205,11 +204,6 @@ public final class CleaningAgentModifierController {
 	}
 
 	@FXML
-	private void addTag() {
-		new TagAdder().start(new Stage());
-	}
-
-	@FXML
 	private void detail() {
 		new CleaningAgentDetail(cleaningAgent).start(new Stage());
 		stage.hide();
@@ -271,7 +265,7 @@ public final class CleaningAgentModifierController {
 			}
 			language.getSelectionModel().clearAndSelect(cleaningAgent.getMainLanguage().getId());
 		} else {
-			rate.getSelectionModel().clearAndSelect(4);
+			rate.getSelectionModel().clearAndSelect(0);
 			detail.setDisable(true);
 			delete.setDisable(true);
 			save.setDisable(true);
