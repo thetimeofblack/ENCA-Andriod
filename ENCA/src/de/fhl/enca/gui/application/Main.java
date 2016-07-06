@@ -29,6 +29,7 @@ public class Main extends Application {
 		}
 		((MainController) loader.getController()).setMainStage(primaryStage);
 		Utility.setMainController(((MainController) loader.getController()));
+		primaryStage.setOnCloseRequest(e -> System.exit(0));
 		primaryStage.setTitle("ENCA");
 		primaryStage.initStyle(StageStyle.UNIFIED);
 		primaryStage.show();
