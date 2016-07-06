@@ -18,6 +18,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
 
 <!-- 
 	Author: Zhaowen.Gong
@@ -258,6 +259,7 @@
                 <RowConstraints vgrow="NEVER" />
                 <RowConstraints vgrow="NEVER" />
                 <RowConstraints vgrow="NEVER" />
+                  <RowConstraints vgrow="NEVER" />
                   <RowConstraints vgrow="SOMETIMES" />
                   <RowConstraints vgrow="NEVER" />
                   <RowConstraints vgrow="NEVER" />
@@ -278,7 +280,7 @@
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </GridPane.margin>
                   </ComboBox>
-                  <ScrollPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="4">
+                  <ScrollPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="5">
                      <content>
                         <VBox fx:id="tagBox" spacing="5.0" style="-fx-background-color: #FFFFFF;">
                            <padding>
@@ -299,16 +301,24 @@
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </padding>
                   </HBox>
-                  <Label text="%chooseLanguage" GridPane.rowIndex="5">
+                  <Label text="%chooseLanguage" GridPane.rowIndex="6">
                      <GridPane.margin>
                         <Insets left="10.0" right="10.0" top="10.0" />
                      </GridPane.margin>
                   </Label>
-                  <ComboBox fx:id="language" prefWidth="150.0" GridPane.halignment="LEFT" GridPane.rowIndex="6" GridPane.valignment="CENTER">
+                  <ComboBox fx:id="language" prefWidth="150.0" GridPane.halignment="LEFT" GridPane.rowIndex="7" GridPane.valignment="CENTER">
                      <GridPane.margin>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </GridPane.margin>
                   </ComboBox>
+                  <Label text="%pressToRemove" textFill="GREY" wrapText="true" GridPane.rowIndex="4">
+                     <GridPane.margin>
+                        <Insets left="10.0" right="10.0" top="10.0" />
+                     </GridPane.margin>
+                     <font>
+                        <Font name="System Italic" size="12.0" />
+                     </font>
+                  </Label>
                </children>
             </GridPane>
          </children>
