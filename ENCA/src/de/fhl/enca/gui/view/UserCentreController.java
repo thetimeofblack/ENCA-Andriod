@@ -6,6 +6,7 @@ import de.fhl.enca.bl.User;
 import de.fhl.enca.controller.CleaningAgentFetcher;
 import de.fhl.enca.gui.application.CleaningAgentDetail;
 import de.fhl.enca.gui.application.Main;
+import de.fhl.enca.gui.utility.Utility;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -13,6 +14,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
@@ -26,6 +28,8 @@ import javafx.stage.Stage;
 public final class UserCentreController {
 
 	@FXML
+	private TabPane tabPane;
+	@FXML
 	private TextField usernameTextField;
 	@FXML
 	private Label regDateLabel;
@@ -35,6 +39,8 @@ public final class UserCentreController {
 	private ComboBox<String> contentComboBox;
 	@FXML
 	private CheckBox priority;
+	@FXML
+	private Label tip;
 	@FXML
 	private FlowPane flowPane;
 	@FXML
@@ -71,6 +77,11 @@ public final class UserCentreController {
 		interfaceComboBox.setValue(User.getInterfaceLanguage().toString());
 		contentComboBox.setValue(User.getContentLanguage().toString());
 		priority.setSelected(User.getPriority());
+		if (!CleaningAgent.getCleaningAgentsWithMemo().isEmpty()) {
+			tip.setText(Utility.getResourceBundle().getString("hasMemo"));
+		} else {
+			tip.setText(Utility.getResourceBundle().getString("hasNotMemo"));
+		}
 		for (CleaningAgent cleaningAgent : CleaningAgent.getCleaningAgentsWithMemo()) {
 			ImageView imageView = new ImageView(CleaningAgentFetcher.fetchImageOfCleaningAgent(cleaningAgent));
 			imageView.setFitWidth(100);
@@ -101,5 +112,9 @@ public final class UserCentreController {
 	@FXML
 	private void cancel() {
 		userCentreStage.hide();
+	}
+
+	public void toMemo() {
+		tabPane.getSelectionModel().clearAndSelect(1);
 	}
 }

@@ -67,9 +67,27 @@ public final class TagAdderController {
 	@FXML
 	private void save() {
 		if (validate()) {
-			TagOperator.createTag(assembly());
-			Utility.refreshMain();
+			if (checkName()) {
+				if (Utility.showAddTagAlert()) {
+					TagOperator.createTag(assembly());
+					Utility.refreshMain();
+				}
+			} else {
+				TagOperator.createTag(assembly());
+				Utility.refreshMain();
+			}
 		}
+	}
+
+	private boolean checkName() {
+		for (Tag tag : Tag.getTagsAll()) {
+			for (Entry<LanguageType, TextField> entry : textFieldMap.entrySet()) {
+				if (tag.getName().getString(entry.getKey()).equals(entry.getValue().getText())) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 
 	@FXML

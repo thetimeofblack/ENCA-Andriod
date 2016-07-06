@@ -17,9 +17,11 @@ import javafx.stage.StageStyle;
 public final class UserCentre extends Application {
 
 	private Stage mainStage;
+	private boolean toMemo;
 
-	public UserCentre(Stage mainStage) {
+	public UserCentre(Stage mainStage, boolean toMemo) {
 		this.mainStage = mainStage;
+		this.toMemo = toMemo;
 	}
 
 	@Override
@@ -34,6 +36,9 @@ public final class UserCentre extends Application {
 		}
 		((UserCentreController) loader.getController()).setMainStage(mainStage);
 		((UserCentreController) loader.getController()).setUserCentreStage(primaryStage);
+		if (toMemo) {
+			((UserCentreController) loader.getController()).toMemo();
+		}
 		primaryStage.setTitle("User Centre");
 		primaryStage.initStyle(StageStyle.UNIFIED);
 		primaryStage.setResizable(false);

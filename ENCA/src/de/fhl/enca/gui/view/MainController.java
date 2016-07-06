@@ -15,6 +15,7 @@ import de.fhl.enca.controller.TagFetcher;
 import de.fhl.enca.gui.application.About;
 import de.fhl.enca.gui.application.CleaningAgentDetail;
 import de.fhl.enca.gui.application.CleaningAgentModifier;
+import de.fhl.enca.gui.application.Manual;
 import de.fhl.enca.gui.application.TagAdder;
 import de.fhl.enca.gui.application.TagModifier;
 import de.fhl.enca.gui.application.UserCentre;
@@ -24,6 +25,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.SplitMenuButton;
@@ -43,6 +45,13 @@ import javafx.stage.Stage;
  * @see de.fhl.enca.gui.application.Main
  */
 public final class MainController {
+
+	@FXML
+	private Label room;
+	@FXML
+	private Label items;
+	@FXML
+	private Label others;
 
 	@FXML
 	private ListView<Tag> list_room;
@@ -88,6 +97,7 @@ public final class MainController {
 
 	private Stage stage;
 
+	private Map<Label, TagType> labelMap = new HashMap<>();
 	/**
 	 * Store the three listView and their representing tagType.
 	 */
@@ -160,6 +170,9 @@ public final class MainController {
 	 */
 	@FXML
 	private void initialize() {
+		labelMap.put(room, TagType.ROOM);
+		labelMap.put(items, TagType.ITEM);
+		labelMap.put(others, TagType.OTHERS);
 		listViewMap.put(list_room, TagType.ROOM);
 		listViewMap.put(list_items, TagType.ITEM);
 		listViewMap.put(list_others, TagType.OTHERS);
@@ -177,6 +190,9 @@ public final class MainController {
 		modifyCASet.add(modifyCA_en);
 		modifyCASet.add(modifyCA_de);
 		modifyCASet.add(modifyCA_zh);
+		for (Entry<Label, TagType> entry : labelMap.entrySet()) {
+			entry.getKey().setTextFill(User.getTagColor(entry.getValue()));
+		}
 		tabPane.getSelectionModel().clearAndSelect(User.getContentLanguage().getId());
 		for (TableView<CleaningAgentBean> tableView : tableViewMap.values()) {
 			tableView.getColumns().get(0).setCellValueFactory(new PropertyValueFactory<>("nation"));
@@ -327,7 +343,12 @@ public final class MainController {
 
 	@FXML
 	private void userCentre() {
-		new UserCentre(stage).start(new Stage());
+		new UserCentre(stage, false).start(new Stage());
+	}
+
+	@FXML
+	private void userCentreToMemo() {
+		new UserCentre(stage, true).start(new Stage());
 	}
 
 	@FXML
@@ -372,6 +393,11 @@ public final class MainController {
 	@FXML
 	private void about() {
 		new About().start(new Stage());
+	}
+
+	@FXML
+	private void manual() {
+		new Manual().start(new Stage());
 	}
 
 	public void setMainStage(Stage stage) {
