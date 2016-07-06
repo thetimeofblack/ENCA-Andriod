@@ -160,6 +160,14 @@ public final class User {
 		languagePreference.setContentLanguage(contentLanguage);
 	}
 
+	public static boolean getPriority() {
+		return userPreference.isPriority();
+	}
+
+	public static void setPriority(boolean priority) {
+		userPreference.setPriority(priority);
+	}
+
 	public static Color getTagColor(TagType type) {
 		return tagPreference.getColors(type);
 	}

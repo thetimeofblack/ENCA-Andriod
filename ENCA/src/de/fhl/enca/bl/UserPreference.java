@@ -37,6 +37,8 @@ public final class UserPreference implements Serializable {
 	 */
 	private Date regDate = new Date();
 
+	private boolean priority = false;
+
 	public String getName() {
 		return name;
 	}
@@ -51,5 +53,13 @@ public final class UserPreference implements Serializable {
 
 	public void setRegDate(Date regDate) {
 		this.regDate = regDate;
+	}
+
+	public boolean isPriority() {
+		return priority;
+	}
+
+	public void setPriority(boolean priority) {
+		this.priority = priority;
 	}
 }
