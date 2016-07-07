@@ -3,13 +3,22 @@
 log in, fill out name and choose language preference
 - Task 1:
 find a certain CA and comment on that
+Name: "AJAX Frischeduft"
+
 - Task 2:
-given a cleaning purpose and find a suitable CA
+given a cleaning purpose and find a suitable CA and make a note as "to buy"
+Purpose: "Clean toilet"
+
 - Task 3:
 create a CA with given information and stick a new tag "my favorite"
+URL: "https://www.amazon.de/Bissell-1137E-Remover-Enzyme-Cleaning/dp/B00DPVNTG8/ref=sr_1_4?ie=UTF8&qid=1467900739&sr=8-4&keywords=cleaning+agent"
+
 - Task 4:
 delete the CA and tag which just create
 
-# record:
+- Task 5:
+Find the CA with a note.
+
+# record: (for each task)
 - time consumption
 - user activity
