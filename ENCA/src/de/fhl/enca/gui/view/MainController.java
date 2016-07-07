@@ -20,6 +20,7 @@ import de.fhl.enca.gui.application.TagAdder;
 import de.fhl.enca.gui.application.TagModifier;
 import de.fhl.enca.gui.application.UserCentre;
 import de.fhl.enca.gui.model.CleaningAgentBean;
+import de.fhl.enca.gui.utility.Utility;
 import de.fhl.enca.gui.view.CleaningAgentModifierController.OperationType;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -59,6 +60,8 @@ public final class MainController {
 	private ListView<Tag> list_items;
 	@FXML
 	private ListView<Tag> list_others;
+	@FXML
+	private Label count;
 	@FXML
 	private TabPane tabPane;
 	@FXML
@@ -306,6 +309,7 @@ public final class MainController {
 	 */
 	private void initTableViews(Set<CleaningAgent> source) {
 		result = source;
+		count.setText(result.size() + " " + Utility.getResourceBundle().getString("results"));
 		for (Entry<LanguageType, TableView<CleaningAgentBean>> entry : tableViewMap.entrySet()) {
 			entry.getValue().setItems(CleaningAgentBean.generateList(source, entry.getKey()));
 		}

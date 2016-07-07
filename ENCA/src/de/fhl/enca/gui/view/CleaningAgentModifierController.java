@@ -144,8 +144,6 @@ public final class CleaningAgentModifierController {
 	@FXML
 	private ComboBox<String> language;
 	@FXML
-	private Button detail;
-	@FXML
 	private Button delete;
 	@FXML
 	private Button save;
@@ -210,12 +208,6 @@ public final class CleaningAgentModifierController {
 	}
 
 	@FXML
-	private void detail() {
-		new CleaningAgentDetail(cleaningAgent).start(new Stage());
-		stage.hide();
-	}
-
-	@FXML
 	private void delete() {
 		if (Utility.showDeleteCAAlert()) {
 			CleaningAgentOperator.removeCleaningAgent(cleaningAgent);
@@ -238,13 +230,14 @@ public final class CleaningAgentModifierController {
 					break;
 			}
 			CleaningAgentBean.addCleaningAgentBean(cleaningAgent);
-			detail.setDisable(false);
 			delete.setDisable(false);
 			CleaningAgentOperator.saveMemo(cleaningAgent, memo.getText());
 			if (imageFile != null) {
 				CleaningAgentOperator.saveImage(cleaningAgent, imageFile);
 			}
 			Utility.refreshMain();
+			new CleaningAgentDetail(cleaningAgent).start(new Stage());
+			stage.hide();
 		}
 	}
 
@@ -272,7 +265,6 @@ public final class CleaningAgentModifierController {
 			language.getSelectionModel().clearAndSelect(cleaningAgent.getMainLanguage().getId());
 		} else {
 			rate.getSelectionModel().clearAndSelect(4);
-			detail.setDisable(true);
 			delete.setDisable(true);
 			save.setDisable(true);
 			language.getSelectionModel().clearAndSelect(User.getContentLanguage().getId());

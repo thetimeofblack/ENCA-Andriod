@@ -113,10 +113,16 @@
                </columnConstraints>
                <rowConstraints>
                   <RowConstraints maxHeight="50.0" minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="1.7976931348623157E308" vgrow="SOMETIMES" />
                   <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="600.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <TabPane fx:id="tabPane" style="-fx-background-color: #FFFFFF;" tabClosingPolicy="UNAVAILABLE" GridPane.rowIndex="1">
+                  <Label fx:id="count" textFill="GREY" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+                     <GridPane.margin>
+                        <Insets right="20.0" />
+                     </GridPane.margin>
+                  </Label>
+                  <TabPane fx:id="tabPane" prefWidth="1000.0" style="-fx-background-color: #FFFFFF;" tabClosingPolicy="UNAVAILABLE" GridPane.rowIndex="2">
                      <tabs>
                         <Tab text="%english">
                            <content>
@@ -177,7 +183,7 @@
                         </Tab>
                      </tabs>
                      <GridPane.margin>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                        <Insets bottom="10.0" left="10.0" right="10.0" />
                      </GridPane.margin>
                   </TabPane>
                   <GridPane alignment="CENTER" style="-fx-background-color: #FFFFFF;">
