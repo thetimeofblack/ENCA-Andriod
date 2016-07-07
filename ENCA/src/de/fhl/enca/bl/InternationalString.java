@@ -33,8 +33,17 @@ public final class InternationalString implements Serializable {
 	public int search(String keyword) {
 		int relevance = 0;
 		for (String string : stringMap.values()) {
-			if (string != null && string.toLowerCase().matches(".*" + keyword.toLowerCase() + ".*")) {
-				relevance++;
+			if (string != null && !string.equals("")) {
+				if (string.equalsIgnoreCase(keyword)) {
+					relevance += 10;
+				} else {
+					String[] subKeywords = keyword.split("\\p{Blank}|-|,|;");
+					for (String subKeyword : subKeywords) {
+						if (string != null && string.toLowerCase().matches(".*" + subKeyword.toLowerCase() + ".*")) {
+							relevance++;
+						}
+					}
+				}
 			}
 		}
 		return relevance;

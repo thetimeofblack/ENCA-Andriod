@@ -55,12 +55,8 @@ public final class CleaningAgentFetcher {
 	 */
 	public static Set<CleaningAgent> fetchResult(Set<CleaningAgent> source, String keyword) {
 		Map<CleaningAgent, Integer> tempMap = new HashMap<>();
-		String[] subKeywords = keyword.split("\\p{Blank}|-");
 		for (CleaningAgent cleaningAgent : source) {
-			int relevance = 0;
-			for (String subKeyword : subKeywords) {
-				relevance += cleaningAgent.search(subKeyword);
-			}
+			int relevance = cleaningAgent.search(keyword);
 			if (relevance > 0) {
 				tempMap.put(cleaningAgent, relevance);
 			}
