@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Handler;
 
 /**
  * Presenting  brief information for CleaningAgents in a recyclerView
@@ -79,8 +80,10 @@ public class CleaningAgentActivity extends AppCompatActivity {
 
         //Set Adapter to show recyclerView of cleaningAgents
         cleaningAgentAdapter = new CleaningAgentAdapter(this, cleaningAgentsResult);
+        cleaningAgentAdapter.notifyDataSetChanged();
         recyclerViewItem.setLayoutManager(new LinearLayoutManager(this));
         recyclerViewItem.setAdapter(cleaningAgentAdapter);
+
     }
 
     /**

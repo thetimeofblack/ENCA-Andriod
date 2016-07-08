@@ -67,7 +67,7 @@ public final class CleaningAgentFetcher {
         for (CleaningAgent cleaningAgent : source) {
             int relevance = 0;
             for (String subKeyword : subKeywords) {
-                relevance += cleaningAgent.search(subKeyword);
+                relevance += cleaningAgent.search(subKeyword.toLowerCase());
             }
             if (relevance > 0) {
                 tempMap.put(cleaningAgent, relevance);
