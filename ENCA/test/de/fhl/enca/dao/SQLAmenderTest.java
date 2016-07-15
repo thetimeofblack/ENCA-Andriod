@@ -35,7 +35,9 @@ public class SQLAmenderTest {
 	int testID=67003;
 	Tag tag;
 	
-	
+	/**
+	 * setUp cleaningAgent and tag for test use
+	 */
 	@Before
 	public void setUp() throws Exception {
 		sqlAmender = new SQLAmender();
@@ -70,6 +72,9 @@ public class SQLAmenderTest {
 		tag = new Tag(50,string,TagType.ITEM,false);
 	}
 
+	/**
+	 * test Writing Memo whether it writes correctly
+	 */
 	@Test
 	public void testWriteMemo() {
 		sqlAmender.createCleaningAgent(cleaningAgent);
@@ -78,6 +83,9 @@ public class SQLAmenderTest {
 		sqlAmender.removeCleaningAgent(cleaningAgent);	
 	}
 	
+	/**
+	 * test Writing Image check whether it is written
+	 */
 	@Test
 	public void testWriteImage()
 	{
@@ -93,6 +101,9 @@ public class SQLAmenderTest {
 		{e.printStackTrace();}
 	}
 	
+	/**
+	 * test Creating Relation whether it exists
+	 */
 	@Test
 	public void testCreateTCRelation(){
 		sqlAmender.createTCRelation(10, 5);
@@ -100,6 +111,9 @@ public class SQLAmenderTest {
 		sqlAmender.removeTCRelation(10, 5);
 	}
 	
+	/**
+	 * test Removing Relation whether it succeeds removin
+	 */
 	@Test
 	public void testRemoveTCRelation()
 	{
@@ -108,6 +122,9 @@ public class SQLAmenderTest {
 		assertFalse(existTC(10,5));
 	}
 	
+	/**
+	 * 	test Modifying Cleaning Agent
+	 */
 	@Test
 	public void testModifyCleaningAgent()
 	{
@@ -119,6 +136,9 @@ public class SQLAmenderTest {
 		sqlAmender.removeCleaningAgent(cleaningAgent);
 	}
 	
+	/**
+	 * test Creating CleaningAgent with temporary value
+	 */
 	@Test
 	public void testCreateCleaningAgent()
 	{
@@ -127,14 +147,20 @@ public class SQLAmenderTest {
 		sqlAmender.removeCleaningAgent(cleaningAgent);	
 	}
 	
+	/**
+	 * test Removing by check whether it exists after removing
+	 */
 	@Test
-	public void testRemoveCreateCleaningAgent()
+	public void testRemoveCleaningAgent()
 	{
 		sqlAmender.createCleaningAgent(cleaningAgent);
 		sqlAmender.removeCleaningAgent(cleaningAgent);
 		assertFalse(existCleaningAgent(cleaningAgent.getCleaningAgentID()));
 	}
 	
+	/**
+	 * test by changing some data
+	 */
 	@Test
 	public void testModifyTag()
 	{
@@ -148,6 +174,9 @@ public class SQLAmenderTest {
 		sqlAmender.removeTag(tag);
 	}
 	
+	/**
+	 * test creating tag
+	 */
 	@Test
 	public void testCreateTag()
 	{
@@ -156,6 +185,9 @@ public class SQLAmenderTest {
 		sqlAmender.removeTag(tag);
 	}
 	
+	/**
+	 * test removing tag
+	 */
 	@Test
 	public void testRemoveTag()
 	{
@@ -164,6 +196,11 @@ public class SQLAmenderTest {
 		assertNull(getTagName(tag.getTagID()));
 	}
 	
+	/**
+	 * a tool used to provide help for Memo related test
+	 * @param cleaningAgentID
+	 * @return
+	 */
 	public static String getMemo(int cleaningAgentID)
 	{
 		ResultSet rs=Connector.executeSelect("select Memo from CleaningAgents where cleaningAgentID="+cleaningAgentID);
@@ -178,6 +215,12 @@ public class SQLAmenderTest {
 		return temp;
 	}
 	
+	/**
+	 * check whether the relation exists
+	 * @param cleaningAgentID
+	 * @param tagID
+	 * @return
+	 */
 	private static boolean existTC(int cleaningAgentID, int tagID)
 	{
 		ResultSet rs=Connector.executeSelect("select * from TC where cleaningAgentID="+cleaningAgentID+" and tagID="+tagID);
@@ -193,6 +236,11 @@ public class SQLAmenderTest {
 		return false;
 	}
 	
+	/**
+	 * check whether exists cleaningAgent
+	 * @param cleaningAgentID
+	 * @return
+	 */
 	private static boolean existCleaningAgent(int cleaningAgentID)
 	{
 		ResultSet rs=Connector.executeSelect("select * from CleaningAgents where cleaningAgentID="+cleaningAgentID);
@@ -208,6 +256,11 @@ public class SQLAmenderTest {
 		return false;
 	}
 	
+	/**
+	 * convert image to Stream to put it into database
+	 * @param goodImage
+	 * @return
+	 */
 	private static byte[] imageToStream(Image goodImage)
 	{	
 		ByteArrayOutputStream bos = new ByteArrayOutputStream(1024);
@@ -226,6 +279,11 @@ public class SQLAmenderTest {
 		return bos.toByteArray();
 	}
 	
+	/**
+	 * check whether the image Exists 
+	 * @param cleaningAgentID
+	 * @return
+	 */
 	private static boolean imageExist(int cleaningAgentID)
 	{
 		ResultSet rs=Connector.executeSelect("select count(*) from CleaningAgents where cleaningAgentID="+cleaningAgentID+" and image!=NULL");
@@ -241,6 +299,11 @@ public class SQLAmenderTest {
 		return false;
 	}
 
+	/**
+	 * a tool help to get TagName 
+	 * @param tagID
+	 * @return
+	 */
 	private static String getTagName(int tagID)
 	{
 		String temp=null;
