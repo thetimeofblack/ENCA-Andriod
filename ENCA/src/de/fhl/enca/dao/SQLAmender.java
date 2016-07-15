@@ -44,7 +44,7 @@ public final class SQLAmender {
 	}
 
 	public static void modifyTag(Tag tag) {
-		Connector.executeNonSelect("update Tags set " + "nameEn='" + tag.getName().getString(LanguageType.ENGLISH) + "',nameCn='" + tag.getName().getString(LanguageType.CHINESE) + "',nameDe='" + tag.getName().getString(LanguageType.GERMAN) + "',tagType='" + tag.getTagType().getId() + "',isSystem=0 where tagID=" + tag.getTagID());
+		Connector.executeNonSelect("update Tags set " + "nameEn='" + tag.getName().getString(LanguageType.ENGLISH) + "',nameCn='" + tag.getName().getString(LanguageType.CHINESE) + "',nameDe='" + tag.getName().getString(LanguageType.GERMAN) + "',tagType='" + tag.getTagType().getId() + "',isSystem="+(tag.belongsToSystem()?1:0)+" where tagID=" + tag.getTagID());
 	}
 
 	public static void createTag(Tag tag) {

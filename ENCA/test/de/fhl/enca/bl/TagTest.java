@@ -14,6 +14,10 @@ public class TagTest {
 
 	Tag tag;
 	CleaningAgent cleaningAgent;
+	
+	/**
+	 * Set up some temporary variable for only one test use
+	 */
 	@Before
 	public void setUp() throws Exception {
 		InternationalString internationalString;
@@ -48,7 +52,10 @@ public class TagTest {
 		
 		cleaningAgent.setMemo("test Cleaning Agent");
 	}
-
+	
+	/**
+	 * Test add Tag
+	 */
 	@Test
 	public void testAddTag() {
 		Tag.addTag(tag);
@@ -56,6 +63,9 @@ public class TagTest {
 		Tag.removeTag(tag);
 	}
 
+	/**
+	 * 
+	 */
 	@Test
 	public void testRemoveTag(){
 		Tag.addTag(tag);

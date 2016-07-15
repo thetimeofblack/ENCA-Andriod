@@ -23,13 +23,19 @@ import de.fhl.enca.bl.Tag;
 import de.fhl.enca.bl.TagType;
 
 import org.junit.Ignore;
-
+/**
+ * Test Class whicheExecute update, insert into and delete SQL operation
+ * @author Zeling.Wu
+ * @version 15.06.2016
+ */
 public class SQLAmenderTest {
 
 	SQLAmender sqlAmender;
 	CleaningAgent cleaningAgent;
 	int testID=67003;
 	Tag tag;
+	
+	
 	@Before
 	public void setUp() throws Exception {
 		sqlAmender = new SQLAmender();

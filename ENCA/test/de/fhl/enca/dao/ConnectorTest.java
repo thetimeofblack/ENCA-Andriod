@@ -19,20 +19,25 @@ import org.junit.Test;
 import de.fhl.enca.bl.CleaningAgent;
 import de.fhl.enca.bl.InternationalString;
 import de.fhl.enca.bl.LanguageType;
-
+/**
+ * Class which responsible for connecting the database and sending SQL query to database
+ * @author Zeling Wu
+ * @version 15.07.2016
+ */
 public class ConnectorTest {
-
-	@Before
-	public void setUp() throws Exception {
 	
-	}
-
+	/**
+	 * test by trying out a selection
+	 */
 	@Test
 	public void testExecuteSelect() {
 		ResultSet rs=Connector.executeSelect("select COUNT(*) from TC where cleaningAgentID=1");
 		assertNotNull(rs);
 	}
 	
+	/**
+	 * test by trying out a insert
+	 */
 	@Test
 	public void testexecuteNonSelect(){
 		Connector.executeNonSelect("insert into TC values ( 1000,1000)");
@@ -46,6 +51,9 @@ public class ConnectorTest {
 		Connector.executeNonSelect("delete from TC where cleaningAgentID=1000 and tagID=1000");
 	}
 	
+	/**
+	 * test by trying on a Image
+	 */
 	@Test
 	public void testexecuteImage()
 	{

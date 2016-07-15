@@ -4,7 +4,12 @@ import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
-
+/**
+ * Class SQLVisitor Execute select SQL operations.
+ * @author Zeling WU
+ * @version 15-07-2016
+ *
+ */
 public class SQLVisitorTest {
 
 	@Before

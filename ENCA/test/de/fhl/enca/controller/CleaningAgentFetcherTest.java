@@ -17,7 +17,11 @@ import de.fhl.enca.bl.TagType;
 import de.fhl.enca.bl.User;
 
 import org.junit.Ignore;
-
+/**
+ * This class tests Fetcher Contain methods of fetching cleaning agents.
+ * @author Wu Zeling
+ * @version 15072016
+ */
 public class CleaningAgentFetcherTest {
 
 	CleaningAgentFetcher mCleaningAgentFetcher = new CleaningAgentFetcher();
