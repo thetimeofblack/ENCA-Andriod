@@ -19,7 +19,6 @@ import de.fhl.enca.controller.CleaningAgentOperator;
 import de.fhl.enca.controller.TagFetcher;
 import de.fhl.enca.gui.application.CleaningAgentDetail;
 import de.fhl.enca.gui.application.TagAdder;
-import de.fhl.enca.gui.model.CleaningAgentBean;
 import de.fhl.enca.gui.utility.Refreshable;
 import de.fhl.enca.gui.utility.Utility;
 import javafx.beans.value.ObservableValue;
@@ -212,7 +211,6 @@ public final class CleaningAgentModifierController implements Refreshable {
 	private void delete() {
 		if (Utility.showDeleteCAAlert()) {
 			CleaningAgentOperator.removeCleaningAgent(cleaningAgent);
-			CleaningAgentBean.removeCleaningAgentBean(cleaningAgent);
 			Utility.refreshMain();
 			stage.hide();
 		}
@@ -230,7 +228,6 @@ public final class CleaningAgentModifierController implements Refreshable {
 					CleaningAgentOperator.createCleaningAgent(cleaningAgent);
 					break;
 			}
-			CleaningAgentBean.addCleaningAgentBean(cleaningAgent);
 			delete.setDisable(false);
 			CleaningAgentOperator.saveMemo(cleaningAgent, memo.getText());
 			if (imageFile != null) {

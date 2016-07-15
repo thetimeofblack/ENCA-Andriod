@@ -52,9 +52,7 @@ public final class CleaningAgentBean {
 	 * Initialize all CleaningAgentBean.
 	 */
 	static {
-		for (CleaningAgent cleaningAgent : CleaningAgent.getCleaningAgentsAll()) {
-			addCleaningAgentBean(cleaningAgent);
-		}
+		refreshCleaningAgentBeans();
 	}
 
 	/**
@@ -93,6 +91,13 @@ public final class CleaningAgentBean {
 	 */
 	public static void removeCleaningAgentBean(CleaningAgent cleaningAgent) {
 		map.remove(cleaningAgent.getCleaningAgentID());
+	}
+
+	public static void refreshCleaningAgentBeans() {
+		map.clear();
+		for (CleaningAgent cleaningAgent : CleaningAgent.getCleaningAgentsAll()) {
+			addCleaningAgentBean(cleaningAgent);
+		}
 	}
 
 	/**

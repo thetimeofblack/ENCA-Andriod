@@ -4,6 +4,7 @@ import java.util.ResourceBundle;
 import de.fhl.enca.bl.LanguageType;
 import de.fhl.enca.bl.Tag;
 import de.fhl.enca.bl.User;
+import de.fhl.enca.gui.model.CleaningAgentBean;
 import de.fhl.enca.gui.view.MainController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -110,6 +111,7 @@ public final class Utility {
 	 * @see MainController
 	 */
 	public static void refreshMain() {
+		CleaningAgentBean.refreshCleaningAgentBeans();
 		mainController.refreshMain();
 	}
 }
