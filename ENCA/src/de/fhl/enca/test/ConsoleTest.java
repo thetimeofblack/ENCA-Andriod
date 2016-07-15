@@ -4,6 +4,11 @@ import de.fhl.enca.bl.CleaningAgent;
 import de.fhl.enca.bl.User;
 import de.fhl.enca.controller.Initialize;
 
+/**
+ * Just for playing around
+ * @author Haoze Zhang
+ *
+ */
 public final class ConsoleTest {
 
 	public static void main(String[] args) {
