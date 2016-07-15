@@ -57,7 +57,7 @@ public final class TagAdderController {
 			list.add(resourceBundle.getString(type.toString().toLowerCase()));
 		}
 		tagType.setItems(list);
-		tagType.getSelectionModel().clearAndSelect(0);
+		tagType.getSelectionModel().clearAndSelect(2);
 		textFieldMap.put(LanguageType.ENGLISH, english);
 		textFieldMap.put(LanguageType.GERMAN, german);
 		textFieldMap.put(LanguageType.CHINESE, chinese);
