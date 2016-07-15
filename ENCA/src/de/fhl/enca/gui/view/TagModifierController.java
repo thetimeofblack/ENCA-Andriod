@@ -11,6 +11,7 @@ import de.fhl.enca.bl.User;
 import de.fhl.enca.controller.TagFetcher;
 import de.fhl.enca.controller.TagOperator;
 import de.fhl.enca.gui.application.TagAdder;
+import de.fhl.enca.gui.utility.Refreshable;
 import de.fhl.enca.gui.utility.Utility;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -27,7 +28,7 @@ import javafx.stage.Stage;
  * @author Zhaowen.Gong
  * @version 30.06.2016
  */
-public final class TagModifierController {
+public final class TagModifierController implements Refreshable {
 
 	private Stage stage;
 	private Map<TagType, ListView<Tag>> listViewMap = new HashMap<>();
@@ -75,7 +76,7 @@ public final class TagModifierController {
 		textFieldMap.put(LanguageType.GERMAN, german);
 		textFieldMap.put(LanguageType.CHINESE, chinese);
 		tabPane.getSelectionModel().selectedIndexProperty().addListener((ObservableValue<? extends Number> o, Number x, Number y) -> refreshTextField());
-		refreshListView();
+		refresh();
 		for (Entry<TagType, ListView<Tag>> entry : listViewMap.entrySet()) {
 			entry.getValue().getSelectionModel().selectedItemProperty().addListener((ObservableValue<? extends Tag> o, Tag x, Tag y) -> refreshTextField());
 		}
@@ -89,7 +90,7 @@ public final class TagModifierController {
 	private void save() {
 		if (tag != null && validate()) {
 			TagOperator.modifyTag(assembly());
-			refreshListView();
+			refresh();
 			Utility.refreshMain();
 		}
 	}
@@ -99,7 +100,7 @@ public final class TagModifierController {
 		if (tag != null) {
 			if (Utility.showDeleteTagAlert()) {
 				TagOperator.removeTag(tag);
-				refreshListView();
+				refresh();
 				Utility.refreshMain();
 			}
 		}
@@ -107,7 +108,7 @@ public final class TagModifierController {
 
 	@FXML
 	private void addNew() {
-		new TagAdder().start(new Stage());
+		new TagAdder(this).start(new Stage());
 		stage.hide();
 	}
 
@@ -154,12 +155,6 @@ public final class TagModifierController {
 		}
 	}
 
-	private void refreshListView() {
-		for (Entry<TagType, ListView<Tag>> entry : listViewMap.entrySet()) {
-			entry.getValue().setItems(FXCollections.observableArrayList(TagFetcher.fetchTagsAllOfCertainType(entry.getKey())));
-		}
-	}
-
 	private boolean validate() {
 		boolean valid = false;
 		for (TextField textField : textFieldMap.values()) {
@@ -189,5 +184,12 @@ public final class TagModifierController {
 
 	public void setStage(Stage stage) {
 		this.stage = stage;
+	}
+
+	@Override
+	public void refresh() {
+		for (Entry<TagType, ListView<Tag>> entry : listViewMap.entrySet()) {
+			entry.getValue().setItems(FXCollections.observableArrayList(TagFetcher.fetchTagsAllOfCertainType(entry.getKey())));
+		}
 	}
 }

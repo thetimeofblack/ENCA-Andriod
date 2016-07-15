@@ -381,7 +381,7 @@ public final class MainController {
 
 	@FXML
 	private void addTag() {
-		new TagAdder().start(new Stage());
+		new TagAdder(null).start(new Stage());
 	}
 
 	@FXML

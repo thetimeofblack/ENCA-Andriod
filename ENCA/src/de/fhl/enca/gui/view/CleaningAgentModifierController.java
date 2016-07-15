@@ -20,6 +20,7 @@ import de.fhl.enca.controller.TagFetcher;
 import de.fhl.enca.gui.application.CleaningAgentDetail;
 import de.fhl.enca.gui.application.TagAdder;
 import de.fhl.enca.gui.model.CleaningAgentBean;
+import de.fhl.enca.gui.utility.Refreshable;
 import de.fhl.enca.gui.utility.Utility;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -43,7 +44,7 @@ import javafx.stage.Stage;
  * @author Zhaowen.Gong
  * @version 30.06.2016
  */
-public final class CleaningAgentModifierController {
+public final class CleaningAgentModifierController implements Refreshable {
 
 	/**
 	 * Determine whether this interface is used for modifying or adding cleaning agent.
@@ -162,8 +163,8 @@ public final class CleaningAgentModifierController {
 		comboBoxes.put(addOthers, TagType.OTHERS);
 		ObservableList<String> rateList = FXCollections.observableArrayList("☆", "★", "★☆", "★★", "★★☆", "★★★", "★★★☆", "★★★★", "★★★★☆", "★★★★★");
 		rate.setItems(rateList);
+		refresh();
 		for (Entry<ComboBox<Tag>, TagType> entry : comboBoxes.entrySet()) {
-			entry.getKey().setItems(FXCollections.observableArrayList(TagFetcher.fetchTagsAllOfCertainType(entry.getValue())));
 			entry.getKey().getSelectionModel().selectedItemProperty().addListener((ObservableValue<? extends Tag> o, Tag oldValue, Tag newValue) -> {
 				if (newValue != null) {
 					Tag tag = Tag.getTag(newValue.getTagID());
@@ -204,7 +205,7 @@ public final class CleaningAgentModifierController {
 
 	@FXML
 	private void addTag() {
-		new TagAdder().start(new Stage());
+		new TagAdder(this).start(new Stage());
 	}
 
 	@FXML
@@ -321,5 +322,12 @@ public final class CleaningAgentModifierController {
 
 	public void setStage(Stage stage) {
 		this.stage = stage;
+	}
+
+	@Override
+	public void refresh() {
+		for (Entry<ComboBox<Tag>, TagType> entry : comboBoxes.entrySet()) {
+			entry.getKey().setItems(FXCollections.observableArrayList(TagFetcher.fetchTagsAllOfCertainType(entry.getValue())));
+		}
 	}
 }
