@@ -303,7 +303,7 @@ public final class CleaningAgentModifierController implements Refreshable {
 		newCleaningAgent.setApplicationTime(applicationTime.getText().equals("") ? 0 : Long.valueOf(applicationTime.getText()));
 		newCleaningAgent.setFrequency(frequency.getText().equals("") ? 0 : Long.valueOf(frequency.getText()));
 		newCleaningAgent.setRate(rate.getSelectionModel().getSelectedIndex() + 1);
-		newCleaningAgent.setBelongsToSystem(cleaningAgent.BelongsToSystem());
+		newCleaningAgent.setBelongsToSystem(operationType == OperationType.ADD ? false : cleaningAgent.BelongsToSystem());
 		newCleaningAgent.addTagsAll(tags);
 		newCleaningAgent.setMainLanguage(LanguageType.getLanguageType(language.getSelectionModel().getSelectedIndex()));
 		return newCleaningAgent;
