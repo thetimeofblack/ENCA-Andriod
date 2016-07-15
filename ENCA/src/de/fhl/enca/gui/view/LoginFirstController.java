@@ -55,6 +55,7 @@ public final class LoginFirstController {
 			User.setContentLanguage(LanguageType.getLanguageType(contentComboBox.getSelectionModel().getSelectedIndex()));
 			User.writeUser();
 			new Main().start(new Stage());
+			new Manual().start(new Stage());
 			loginStage.hide();
 		}
 	}
