@@ -1,6 +1,7 @@
 package de.fhl.enca.gui.application;
 
 import java.io.IOException;
+import de.fhl.enca.bl.Tag;
 import de.fhl.enca.gui.utility.Utility;
 import de.fhl.enca.gui.view.TagModifierController;
 import javafx.application.Application;
@@ -16,6 +17,12 @@ import javafx.stage.StageStyle;
  */
 public class TagModifier extends Application {
 
+	private Tag tag;
+
+	public TagModifier(Tag tag) {
+		this.tag = tag;
+	}
+
 	@Override
 	public void start(Stage primaryStage) {
 		FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/de/fhl/enca/gui/view/TagModifier.fxml"), Utility.getResourceBundle());
@@ -27,6 +34,9 @@ public class TagModifier extends Application {
 			e.printStackTrace();
 		}
 		((TagModifierController) loader.getController()).setStage(primaryStage);
+		if (tag != null) {
+			((TagModifierController) loader.getController()).initializeContent(tag);
+		}
 		primaryStage.setTitle("Tag Modifier");
 		primaryStage.initStyle(StageStyle.UNIFIED);
 		primaryStage.setResizable(false);

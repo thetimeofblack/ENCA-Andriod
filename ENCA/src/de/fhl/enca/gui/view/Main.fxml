@@ -86,7 +86,7 @@
                      <contextMenu>
                         <ContextMenu>
                           <items>
-                            <MenuItem mnemonicParsing="false" onAction="#modifyTag" text="%modifyTag" />
+                            <MenuItem mnemonicParsing="false" onAction="#modifySpecificTag" text="%modifyTag" />
                           </items>
                         </ContextMenu>
                      </contextMenu></ListView>
@@ -97,7 +97,7 @@
                      <contextMenu>
                         <ContextMenu>
                            <items>
-                              <MenuItem mnemonicParsing="false" onAction="#modifyTag" text="%modifyTag" />
+                              <MenuItem mnemonicParsing="false" onAction="#modifySpecificTag" text="%modifyTag" />
                            </items>
                         </ContextMenu>
                      </contextMenu></ListView>
@@ -108,7 +108,7 @@
                      <contextMenu>
                         <ContextMenu>
                            <items>
-                              <MenuItem mnemonicParsing="false" onAction="#modifyTag" text="%modifyTag" />
+                              <MenuItem mnemonicParsing="false" onAction="#modifySpecificTag" text="%modifyTag" />
                            </items>
                         </ContextMenu>
                      </contextMenu></ListView>
