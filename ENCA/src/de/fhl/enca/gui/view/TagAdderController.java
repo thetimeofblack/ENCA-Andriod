@@ -9,6 +9,7 @@ import de.fhl.enca.bl.LanguageType;
 import de.fhl.enca.bl.Tag;
 import de.fhl.enca.bl.TagType;
 import de.fhl.enca.controller.TagOperator;
+import de.fhl.enca.gui.utility.Refreshable;
 import de.fhl.enca.gui.utility.Utility;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -27,6 +28,7 @@ import javafx.stage.Stage;
 public final class TagAdderController {
 
 	private Stage stage;
+	private Refreshable refreshable;
 	private Map<LanguageType, TextField> textFieldMap = new HashMap<>();
 
 	@FXML
@@ -69,15 +71,20 @@ public final class TagAdderController {
 		if (validate()) {
 			if (checkName()) {
 				if (Utility.showAddTagAlert()) {
-					TagOperator.createTag(assembly());
-					Utility.refreshMain();
-					stage.hide();
+					reallySave();
 				}
 			} else {
-				TagOperator.createTag(assembly());
-				Utility.refreshMain();
-				stage.hide();
+				reallySave();
 			}
+		}
+	}
+
+	private void reallySave() {
+		TagOperator.createTag(assembly());
+		Utility.refreshMain();
+		stage.hide();
+		if (refreshable != null) {
+			refreshable.refresh();
 		}
 	}
 
@@ -120,5 +127,9 @@ public final class TagAdderController {
 
 	public void setStage(Stage stage) {
 		this.stage = stage;
+	}
+
+	public void setRefreshable(Refreshable refreshable) {
+		this.refreshable = refreshable;
 	}
 }

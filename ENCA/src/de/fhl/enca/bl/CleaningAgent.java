@@ -89,7 +89,9 @@ public final class CleaningAgent {
 		if (cleaningAgentAll.containsKey(cleaningAgent.getCleaningAgentID())) {
 			cleaningAgentAll.remove(cleaningAgent.getCleaningAgentID());
 		}
-		refreshCleaningAgentWithMemo(cleaningAgent);
+		if (cleaningAgentsWithMemo.contains(cleaningAgent)) {
+			cleaningAgentsWithMemo.remove(cleaningAgent);
+		}
 	}
 
 	public static Set<CleaningAgent> getCleaningAgentsAll() {

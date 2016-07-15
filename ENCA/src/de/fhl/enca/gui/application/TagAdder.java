@@ -1,6 +1,7 @@
 package de.fhl.enca.gui.application;
 
 import java.io.IOException;
+import de.fhl.enca.gui.utility.Refreshable;
 import de.fhl.enca.gui.utility.Utility;
 import de.fhl.enca.gui.view.TagAdderController;
 import javafx.application.Application;
@@ -16,6 +17,12 @@ import javafx.stage.StageStyle;
  */
 public class TagAdder extends Application {
 
+	private Refreshable refreshable;
+
+	public TagAdder(Refreshable refreshable) {
+		this.refreshable = refreshable;
+	}
+
 	@Override
 	public void start(Stage primaryStage) {
 		FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/de/fhl/enca/gui/view/TagAdder.fxml"), Utility.getResourceBundle());
@@ -25,6 +32,7 @@ public class TagAdder extends Application {
 			e.printStackTrace();
 		}
 		((TagAdderController) loader.getController()).setStage(primaryStage);
+		((TagAdderController) loader.getController()).setRefreshable(refreshable);
 		primaryStage.setTitle("Tag Adder");
 		primaryStage.initStyle(StageStyle.UNIFIED);
 		primaryStage.setResizable(false);
