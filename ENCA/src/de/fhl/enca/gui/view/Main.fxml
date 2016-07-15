@@ -49,7 +49,6 @@
             </Menu>
           <Menu mnemonicParsing="false" text="%system">
             <items>
-              <MenuItem mnemonicParsing="false" onAction="#userCentre" text="%userCenter" />
                   <MenuItem mnemonicParsing="false" onAction="#userCentre" text="%changeLanguage" />
                   <MenuItem mnemonicParsing="false" onAction="#manual" text="%manual" />
                   <MenuItem mnemonicParsing="false" onAction="#about" text="%about" />
@@ -232,7 +231,7 @@
                            <GridPane.margin>
                               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                            </GridPane.margin></Button>
-                        <Button alignment="CENTER" mnemonicParsing="false" onAction="#userCentre" prefHeight="25.0" prefWidth="30.0" text="👨" textOverrun="CLIP" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                        <Button alignment="CENTER" mnemonicParsing="false" onAction="#userCentre" prefHeight="25.0" prefWidth="30.0" text="⚙" textOverrun="CLIP" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                            <GridPane.margin>
                               <Insets bottom="10.0" left="10.0" right="20.0" top="10.0" />
                            </GridPane.margin></Button>
