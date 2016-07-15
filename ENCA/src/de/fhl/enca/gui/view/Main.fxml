@@ -50,6 +50,7 @@
           <Menu mnemonicParsing="false" text="%system">
             <items>
               <MenuItem mnemonicParsing="false" onAction="#userCentre" text="%userCenter" />
+                  <MenuItem mnemonicParsing="false" onAction="#userCentre" text="%changeLanguage" />
                   <MenuItem mnemonicParsing="false" onAction="#manual" text="%manual" />
                   <MenuItem mnemonicParsing="false" onAction="#about" text="%about" />
             </items>
