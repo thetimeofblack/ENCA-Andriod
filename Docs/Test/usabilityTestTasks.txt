@@ -1,13 +1,19 @@
 # Usability test:
 - Task 0:
-log in, fill out name and choose language preference
+log in, fill out name and choose language preference:
+English
+English
+
 - Task 1:
-find a certain CA and comment on that
-Name: "AJAX Frischeduft"
+find a certain CA by searching name and write memo: "Good"
+Name: 
+EN: "AJAX fresh fragrance"
+DE: "AJAX Frischeduft"
+ZH: "AJAXÇå·Ò"
 
 - Task 2:
-given a cleaning purpose and find a suitable CA and make a note as "to buy"
-Purpose: "Clean toilet"
+find any one suitable CA using tag and write memo: "To buy"
+Tag: "toilet"
 
 - Task 3:
 create a CA with given information and stick a new tag "my favorite"
@@ -17,7 +23,7 @@ URL: "https://www.amazon.de/Bissell-1137E-Remover-Enzyme-Cleaning/dp/B00DPVNTG8/
 delete the CA and tag which just create
 
 - Task 5:
-Find the CA with a note.
+go to user centre and find the CA with memo.
 
 # record: (for each task)
 - time consumption

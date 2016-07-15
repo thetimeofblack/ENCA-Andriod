@@ -1,0 +1,27 @@
+# Usability test result 1:
+
+- Time consumption:
+0 - 0:17
+1 - 1:14
+2 - 2:11
+3 - 2:49
+4 - 0:47
+5 - 0:20
+
+ - User Activity:
+Add CA: add button
+Add tag: CAmodifier
+
+# Usability test result 2:
+
+- Time consumption:
+0 - 0:20
+1 - 0:56
+2 - 0:55
+3 - 2:49
+4 - 1:28
+5 - 0:33
+
+ - User Activity:
+Add CA: add button
+Add tag: CAmodifier
