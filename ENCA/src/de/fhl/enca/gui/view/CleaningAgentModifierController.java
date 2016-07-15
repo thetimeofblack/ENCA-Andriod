@@ -164,10 +164,10 @@ public final class CleaningAgentModifierController implements Refreshable {
 		ObservableList<String> rateList = FXCollections.observableArrayList("☆", "★", "★☆", "★★", "★★☆", "★★★", "★★★☆", "★★★★", "★★★★☆", "★★★★★");
 		rate.setItems(rateList);
 		refresh();
-		for (Entry<ComboBox<Tag>, TagType> entry : comboBoxes.entrySet()) {
-			entry.getKey().getSelectionModel().selectedItemProperty().addListener((ObservableValue<? extends Tag> o, Tag oldValue, Tag newValue) -> {
-				if (newValue != null) {
-					Tag tag = Tag.getTag(newValue.getTagID());
+		for (ComboBox<Tag> comboBox : comboBoxes.keySet()) {
+			comboBox.getSelectionModel().selectedItemProperty().addListener((ObservableValue<? extends Tag> o, Tag oldValue, Tag newValue) -> {
+				if (comboBox.getSelectionModel().getSelectedIndex() != -1) {
+					Tag tag = Tag.getTag(comboBox.getSelectionModel().getSelectedItem().getTagID());
 					if (!tags.contains(tag)) {
 						addTagLabel(tag);
 					}
@@ -276,8 +276,13 @@ public final class CleaningAgentModifierController implements Refreshable {
 		tags.add(tag);
 		Label label = Utility.getTagLabel(tag, User.getInterfaceLanguage());
 		label.setOnMouseClicked(e -> {
-			tags.remove(tag);
-			tagBox.getChildren().remove(label);
+			if (e.getClickCount() > 1) {
+				tags.remove(tag);
+				tagBox.getChildren().remove(label);
+				for (ComboBox<Tag> comboBox : comboBoxes.keySet()) {
+					comboBox.getSelectionModel().clearSelection();
+				}
+			}
 		});
 		tagBox.getChildren().add(label);
 	}
