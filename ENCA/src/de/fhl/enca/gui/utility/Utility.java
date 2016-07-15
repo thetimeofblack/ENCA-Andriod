@@ -47,6 +47,9 @@ public final class Utility {
 		return ResourceBundle.getBundle("resource.message", User.getInterfaceLanguage().getLocale());
 	}
 
+	/**
+	 * Return the list of all the languages supported
+	 */
 	public static ObservableList<String> getLanguageList() {
 		ObservableList<String> languageList = FXCollections.observableArrayList();
 		for (LanguageType type : LanguageType.values()) {
@@ -55,6 +58,10 @@ public final class Utility {
 		return languageList;
 	}
 
+	/**
+	 * Return a label that holds the tag
+	 * @param tag the tag to be held
+	 */
 	public static Label getTagLabel(Tag tag, LanguageType type) {
 		Label label = new Label(tag.getName().getString(type));
 		label.setBorder(new Border(new BorderStroke(User.getTagColor(tag.getTagType()), BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
@@ -88,6 +95,10 @@ public final class Utility {
 		return showAlert("deleteTagAlert");
 	}
 
+	/**
+	 * Show alert when a duplicate tag is to be added.
+	 * @return whether user confirm the execution
+	 */
 	public static boolean showAddTagAlert() {
 		return showAlert("addTagAlert");
 	}

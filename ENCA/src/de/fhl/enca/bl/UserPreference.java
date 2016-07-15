@@ -37,6 +37,9 @@ public final class UserPreference implements Serializable {
 	 */
 	private Date regDate = new Date();
 
+	/**
+	 * Indicate whether the god mode is activated.
+	 */
 	private boolean priority = false;
 
 	public String getName() {

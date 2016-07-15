@@ -17,6 +17,9 @@ import javafx.stage.StageStyle;
  */
 public class TagModifier extends Application {
 
+	/**
+	 * The tag which this interface should directly go to
+	 */
 	private Tag tag;
 
 	public TagModifier(Tag tag) {

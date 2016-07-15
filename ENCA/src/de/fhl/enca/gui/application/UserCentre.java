@@ -17,6 +17,10 @@ import javafx.stage.StageStyle;
 public final class UserCentre extends Application {
 
 	private Stage mainStage;
+
+	/**
+	 * Indicate whether this interface should directly go to memo.
+	 */
 	private boolean toMemo;
 
 	public UserCentre(Stage mainStage, boolean toMemo) {
