@@ -13,7 +13,8 @@ import de.fhl.enca.bl.Tag;
 public final class SQLAmender {
 
 	public static void writeMemo(int cleaningAgentID, String memo) {
-		Connector.executeNonSelect("update CleaningAgents set memo='" + memo + "' where cleaningAgentID=" + cleaningAgentID);
+		String memoSQL = memo == null || memo.equals("") ? "NULL" : "'" + memo + "'";
+		Connector.executeNonSelect("update CleaningAgents set memo=" + memoSQL + " where cleaningAgentID=" + cleaningAgentID);
 	}
 
 	public static void writeImage(int cleaningAgentID, byte[] content) {
