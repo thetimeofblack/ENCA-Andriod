@@ -203,6 +203,12 @@ public final class CleaningAgentModifierController implements Refreshable {
 	}
 
 	@FXML
+	private void removePicture() {
+		imageView.setImage(null);
+		imageFile = null;
+	}
+
+	@FXML
 	private void addTag() {
 		new TagAdder(this).start(new Stage());
 	}
