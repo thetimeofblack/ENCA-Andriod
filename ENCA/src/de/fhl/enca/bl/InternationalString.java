@@ -27,11 +27,15 @@ public final class InternationalString implements Serializable {
 
 	/**
 	 * Search those strings with given keyword.
+	 * Will also do boundary check and replace characters which could cause exception.
 	 * @param keyword
 	 * @return the relevance, whose value indicates the count that the keyword occurs in the content
 	 */
 	public int search(String keyword) {
 		int relevance = 0;
+		for (char c : new char[] { '*', '(', ')', '[', ']', '{', '}' }) {
+			keyword = keyword.replaceAll("\\" + c, "\\\\" + c);
+		}
 		for (String string : stringMap.values()) {
 			if (string != null && !string.equals("")) {
 				if (string.equalsIgnoreCase(keyword)) {
