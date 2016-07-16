@@ -1,84 +1,114 @@
 1.	 Specification
 1.1.	Description
 1.1.1.	Product Purpose
-Our product is a cleaning agent searching software, featured with quickly off-line searching,
- updating and commenting about cleaning agent based on customers’ needs and favourites. 
-It is available on desktop computers and android mobile devices, supporting multi-platform. 
+Our product is a cleaning agent searching software, featured with quick off-line searching,
+modifying and commenting about cleaning agent based on customers’ needs and favorites. 
+It is available on desktop computers and android mobile devices. 
 1.1.2.	Product Scope
 Our product provides three different languages, including Chinese, English and German, 
 containing most commonly used cleaning agent in China and Germany.
 1.1.3.	Potential Customers
-This product is specially designed for those who will travel, work or study abroad, 
-attempting to assist them to easily find the necessary cleaning agent in an unfamiliar society.
+This product is specially designed for those who travel, work or study abroad; 
+aiming to assist them to easily find the right cleaning agent in an unfamiliar cultural context.
+
 1.2.	Product functions
-The software serves unlimited number of users on a same device.
-Each user can: 
-•	Log in with username and password.
--	Username and password will be forced to fit certain format.
-•	Change password.
--	Old password is required to change password.
-•	Access to all the records of cleaning agent.
--	The categories will be displayed first, and those cleaning agents will be displayed in the form of tables in each category.
--	Multiple attributes of cleaning agents will be displayed as table columns with headers.
--	Each cleaning agent can be selected and the detail information of which can be displayed.
-•	Create unlimited numbers of cleaning agent lists.
--	Also allow user to modify, delete and sort those lists.
-•	Add, modify and delete his or her own record of cleaning agent.
--	Specially designed UI will be displayed to enable user to add, modify and delete.
--	Will also check if user's input is valid and show the execution status.
-•	Post, modify and delete his or her own rating and memo.
--	The average rating will be calculated and displayed.
--	The latest comment will be displayed in the first place. 
+- Search cleaning agents:
+	* Search cleaning agents by tags.
+	* Search cleaning agents by keywords.
+	* Combined search with both tags and keyword. "And" logic is used.
+- Add, modify and delete
+	* User can add, modify and delete a cleaning agent and a tag.
+- Memo:
+	* User can take a memo on a certain cleaning agent.
+	* User can find all memos in the user center.
+- Set preference:
+	* The software serves an unique user on a same device.
+	* User can log in with user name.
+	* System would greet the user by the user name.
+	* User can choose interface and content languages.
+	* User can enable God mode and violate system protection.
+
 1.3.	User characteristics
 Users are assumed to:
 1.	have basic computer operation knowledge, such as log in, GUI interaction and typing.
 2.	be uninfected with hearing, vision, touching and any other kinds of disability.
 3.	speak at least one of the following language: Chinese, English and German.	
-4.	be oversea students, business or casual travellers in the following country: China and Germany.	
-5.	have basic knowledge in choosing cleaning agent.
-6.	have either computer or mobile phone.
+4.	be oversea students, business or casual travelers in the following country: China and Germany.	
+5.	have basic knowledge in choosing cleaning agent and cleaning.
+6.	have either a computer or an Android mobile phone.
 7.	have access to cleaning agents in nearby supermarket.
-Users need the software to:	
-1.	find the name of a cleaning agent by its purpose.	
-2.	get a translation of a certain agent.	
-3.	search for the purpose of an existing cleaning agent by name or other attributes.
-4.	do cleaning with the help of instruction.
-5.	have their preference on some specific cleaning agent.
-6.	find detailed information about cleaning agents.
-7.	decide which cleaning agents to buy with additional information given by our application.
+Users need the software to:
+-	find a cleaning agent by its purpose.
+-	find a cleaning agent through its name, brand, description or other attributes.
+-	get detail information of a cleaning agent
+-	get multiple language contents of certain information.
+-	add new cleaning agents and tags and take memos.
+
 1.4.	Functional requirements
 1.4.1.	Presentation
-•	Display the cleaning agents
--	The categories shall be displayed first, and those cleaning agents will be displayed in the form of tables in each category.
--	Multiple attributes of cleaning agents shall be displayed as table columns with headers.
--	Each cleaning agent can be selected and the detail information of which can be displayed.
-1.4.2.	Customization
-•	Add, update and delete cleaning agents
--	User input shall be asserted.
--	Show status or result to the user after commit.
-•	Rating and user lists
--	Rating and list information is user specific.
--	Can be fully accessed by different user.
--	Can only be modified by the creator.
+- Display the search result
+	* Related cleaning agents shall be displayed in the form of a table with headers.
+	* Each cleaning agent can be selected and the detail information of which can be displayed.
+- Display the cleaning agent detail window
+	* User cannot edit in detail window except taking memo.
+	* There is an entry to modify the cleaning agent.
+- Display tag modify window
+	* Window shall highlight the tag or switch to a certain category tab based on user desire.
+1.4.2.	Add, modify and delete
+- Cleaning agents
+	* New cleaning agent must have a name.
+	* User cannot do anything to a system predefined cleaning agent unless God mode is enabled.
+	* In God mode the user shall also be notified when editing a system predefined cleaning agent.
+	* User has no restriction of manipulating a user defined cleaning agent.
+	* User can either abort an edit by clicking "Cancel" or confirm an edit by clicking "Save".
+	* User input shall be checked especially numbers.
+- Tags
+	* New tag must have a name.
+	* User cannot do anything to a system predefined tag unless God mode is enabled.
+	* In God mode the user shall also be notified when editing a system predefined tag.
+	* User has no restriction of manipulating a user defined tag.
+	* User will be warned when he or she try to add a tag which is already there.
+- Memo
+	* Memo and cleaning agent is one to one relation.
+	* Memo is always and only related to a cleaning agent.
+	* All memos are listed in user center. The latest memo will be displayed in the first place.
 1.4.3.	Search
-•	Search keyword shall be:
--	Language insensitive, Chinese pinyin supported.
--	Case insensitive.
--	Partial compared.
--	Of unrestricted length.
-•	Search result shall be:
--	Presented in real-time during inserting keyword.
--	Folder up if the list is excessively long.
+- The keywords shall be:
+	* Separated by common delimiters including but not limited to space, colon, semicolon and etc.
+	* Language insensitive.
+	* Case insensitive.
+	* Partially compared.
+	* Search will be cascaded from a cleaning agent to its elated tags and all other attributes.
+	* Each pattern match of a cleaning agent contributes to its relevance index.
+	* Full word match has higher weight of relevance.
+	* Tag match has higher weight of relevance.
+	* containing unrestricted number of words.
+	* Clicking on "Clear" will remove keywords in input field.
+- The tags shall be:
+	* Separated in three categories which are "Rooms", "Items" and "Others".
+	* selected only one in each category.
+	* "And" logic is used between tags.
+	* Clicking on "Clear" will remove tag selections.
+- Search result shall be:
+	* All cleaning agent if no tags or keywords are specified.
+	* Combining tags and keywords result by "and" logic.
+	* Ranked by relevance.
+	* Shown with "origin", "name" and "tags" fields.
+	* Presented in real-time during inserting keywords and selecting tags.
+	* Limited to 100 in number.
+	* Number of result will be displayed.
 1.4.4.	Language
-•	The software GUI supports: Chinese, English and German.
-•	The content is prepared in: Chinese, English and German.
+- The software GUI supports: Chinese, English and German.
+- The content is prepared in: Chinese, English and German. Contents of different languages are provided in different tabs and can be switched during software run time.
+- Changing language setting will result in software restart.
+- Unspecified string of a certain language can and will always be replaced by a string of another language if there is one available.
 1.5.	Non-functional requirements
 1.5.1.	Portability
 •	The software has two distinctive sub versions which support desktop computers and Android devices.
 •	The desktop version shall be supported by Java SE Runtime Environment 7 or higher.
 •	The Android version...
 1.5.2.	Performance and Availability
-•	The software shall start up in less than 1 second.
+•	The software shall start up and greet the user for 500ms.
 •	Search result shall be presented in less than 1 second.
 •	The software shall be always available during runtime.
 1.5.3.	Security and Extensibility
@@ -90,18 +120,23 @@ Users need the software to:
 2.2.	 Class Diagrams
 
 3.	 GUI Design
-3.1.	Structure
-3.2.	Screenshots
+3.1. User experience
+- Theme style and feel
+- Cross platform consistence
+3.2.	Structure
+3.3.	Screenshots
 
 
 
 4.	Test 
-4.1.	 Description
-4.2.	 Results
-
-5.	 Evaluation
-5.1.	 Group Work
-5.2.	 Task Responsibilities
+4.1 Usability test
+///test tasks
+First round test description.
+Result:
+Improvement plan:
+Second round test description.
+
+4.2 Equivalent classes and boundary tests
 
 
 
