@@ -6,7 +6,8 @@ import java.util.Map;
 
 /**
  * Encapsulate strings in different languages into single object and operations for them.</br>
- * Language is based on enum LanguageType.
+ * Language is based on enum LanguageType.</br>
+ * Also responsible for string boundary check.
  * @author Zhaowen.Gong
  * @version 30.06.2016
  * @see LanguageType
