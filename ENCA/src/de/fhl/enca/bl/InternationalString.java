@@ -34,7 +34,7 @@ public final class InternationalString implements Serializable {
 	 */
 	public int search(String keyword) {
 		int relevance = 0;
-		for (char c : new char[] { '*', '(', ')', '[', ']', '{', '}' }) {
+		for (char c : new char[] { '*', '(', ')', '[', ']', '{', '}' , '.'}) {
 			keyword = keyword.replaceAll("\\" + c, "\\\\" + c);
 		}
 		for (String string : stringMap.values()) {
