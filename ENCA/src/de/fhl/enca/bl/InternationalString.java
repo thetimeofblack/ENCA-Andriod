@@ -81,10 +81,15 @@ public final class InternationalString implements Serializable {
 		}
 	}
 
+	/**
+	 * Get the sql command string of the content.</br>
+	 * If the content is null, then "NULL" will be returned.</br>
+	 * Will also replace the apostrophe (') to double ('').
+	 */
 	public String getSQLString(LanguageType type) {
 		String result = getString(type);
 		if (result != null && !result.equals("")) {
-			return "'" + result + "'";
+			return "'" + result.replaceAll("\\'", "\\'\\'") + "'";
 		} else {
 			return "NULL";
 		}
