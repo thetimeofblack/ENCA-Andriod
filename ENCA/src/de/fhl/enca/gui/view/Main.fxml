@@ -78,9 +78,9 @@
                <children>
                   <GridPane style="-fx-border-width: 1;" GridPane.rowIndex="1">
                      <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="130.0" minWidth="130.0" prefWidth="130.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="130.0" minWidth="130.0" prefWidth="130.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="130.0" minWidth="130.0" prefWidth="130.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="150.0" minWidth="150.0" prefWidth="150.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="150.0" minWidth="150.0" prefWidth="150.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="150.0" minWidth="150.0" prefWidth="150.0" />
                      </columnConstraints>
                      <rowConstraints>
                         <RowConstraints maxHeight="50.0" minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
@@ -146,14 +146,14 @@
                       <ColumnConstraints hgrow="NEVER" />
                     </columnConstraints>
                     <rowConstraints>
-                      <RowConstraints vgrow="NEVER" />
+                      <RowConstraints vgrow="ALWAYS" />
                     </rowConstraints>
                      <children>
                         <Button alignment="CENTER" mnemonicParsing="false" onAction="#initMain" prefHeight="25.0" prefWidth="75.0" text="%clear" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.valignment="CENTER">
                            <GridPane.margin>
                               <Insets left="10.0" right="10.0" top="10.0" />
                            </GridPane.margin></Button>
-                        <Label text="%searchByTag" textFill="GREY">
+                        <Label text="%searchByTag" textFill="GREY" wrapText="true">
                            <GridPane.margin>
                               <Insets left="10.0" right="10.0" top="10.0" />
                            </GridPane.margin>
@@ -216,7 +216,7 @@
                                     <Insets bottom="10.0" left="10.0" right="20.0" top="10.0" />
                                  </GridPane.margin>
                               </Button>
-                              <SplitMenuButton fx:id="add" alignment="CENTER" mnemonicParsing="false" onAction="#add" prefWidth="100.0" text="%add" GridPane.columnIndex="3">
+                              <SplitMenuButton fx:id="add" alignment="CENTER" mnemonicParsing="false" onAction="#add" prefWidth="120.0" text="%add" GridPane.columnIndex="3">
                                  <items>
                                     <MenuItem mnemonicParsing="false" onAction="#addCleaningAgent" text="%addCA" />
                                     <MenuItem mnemonicParsing="false" onAction="#addTag" text="%addTag" />
@@ -252,11 +252,6 @@
                       <RowConstraints vgrow="ALWAYS" />
                     </rowConstraints>
                      <children>
-                        <Label fx:id="count" textFill="GREY" GridPane.halignment="RIGHT">
-                           <GridPane.margin>
-                              <Insets left="10.0" right="10.0" />
-                           </GridPane.margin>
-                        </Label>
                         <TabPane fx:id="tabPane" prefWidth="800.0" style="-fx-background-color: #FFFFFF;" tabClosingPolicy="UNAVAILABLE" GridPane.rowIndex="1">
                            <tabs>
                               <Tab text="%english">
@@ -318,6 +313,30 @@
                               </Tab>
                            </tabs>
                         </TabPane>
+                        <GridPane>
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="ALWAYS" />
+                            <ColumnConstraints hgrow="ALWAYS" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints vgrow="NEVER" />
+                          </rowConstraints>
+                           <children>
+                              <Label fx:id="count" textFill="GREY" GridPane.columnIndex="1" GridPane.halignment="RIGHT">
+                                 <GridPane.margin>
+                                    <Insets left="10.0" right="10.0" />
+                                 </GridPane.margin>
+                              </Label>
+                              <Label text="%result" textFill="GREY">
+                                 <font>
+                                    <Font name="System Bold" size="16.0" />
+                                 </font>
+                                 <GridPane.margin>
+                                    <Insets bottom="10.0" left="5.0" right="10.0" top="10.0" />
+                                 </GridPane.margin>
+                              </Label>
+                           </children>
+                        </GridPane>
                      </children>
                      <GridPane.margin>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />

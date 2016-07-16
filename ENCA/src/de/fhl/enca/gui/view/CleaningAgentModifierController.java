@@ -173,7 +173,7 @@ public final class CleaningAgentModifierController implements Refreshable {
 				}
 			});
 		}
-		language.setItems(Utility.getLanguageList());
+		language.setItems(FXCollections.observableArrayList("US", "DE", "CN"));
 		tabPane.getSelectionModel().clearAndSelect(User.getContentLanguage().getId());
 	}
 
