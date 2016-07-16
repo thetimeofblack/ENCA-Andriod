@@ -208,7 +208,6 @@ public class SQLAmenderTest {
 		try {
 			temp = rs.getString(1);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -293,7 +292,6 @@ public class SQLAmenderTest {
 				return true;
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return false;
@@ -316,7 +314,6 @@ public class SQLAmenderTest {
 			else{return null;}
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return temp;

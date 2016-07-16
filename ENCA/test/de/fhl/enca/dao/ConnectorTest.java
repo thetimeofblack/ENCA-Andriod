@@ -45,7 +45,6 @@ public class ConnectorTest {
 		try {
 			assertEquals(rs.getInt(1),1);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		Connector.executeNonSelect("delete from TC where cleaningAgentID=1000 and tagID=1000");
@@ -124,7 +123,6 @@ public class ConnectorTest {
 				return true;
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return false;
