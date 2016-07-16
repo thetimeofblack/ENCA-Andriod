@@ -111,9 +111,49 @@ public final class Utility {
 	private static boolean showAlert(String key) {
 		ResourceBundle resourceBundle = getResourceBundle();
 		ButtonType ok = new ButtonType(resourceBundle.getString("ok"), ButtonData.YES);
-		ButtonType cancel = new ButtonType(resourceBundle.getString("cancel"), ButtonData.CANCEL_CLOSE);
+		ButtonType cancel = new ButtonType(resourceBundle.getString("no"), ButtonData.CANCEL_CLOSE);
 		Alert alert = new Alert(AlertType.WARNING, resourceBundle.getString(key), ok, cancel);
 		return alert.showAndWait().filter(e -> e == ok).isPresent();
+	}
+
+	/**
+	 * Show confirmation when memo is saved.
+	 */
+	public static void showSaveConfirm() {
+		ResourceBundle resourceBundle = getResourceBundle();
+		ButtonType ok = new ButtonType(resourceBundle.getString("ok"), ButtonData.YES);
+		new Alert(AlertType.CONFIRMATION, resourceBundle.getString("saveMemoConfirm"), ok).showAndWait();
+	}
+
+	/**
+	 * Show error when application time is not valid.
+	 */
+	public static void showApplicationTimeError() {
+		showError("appTimeError");
+	}
+
+	/**
+	 * Show error when frequency is not valid.
+	 */
+	public static void showFrequencyError() {
+		showError("frequencyError");
+	}
+
+	/**
+	 * Show error when both application time and frequency are not valid.
+	 */
+	public static void showBothError() {
+		showError("bothError");
+	}
+
+	/**
+	 * Generate error dialog according to the key.
+	 * @param key key representing the content of error.
+	 */
+	private static void showError(String key) {
+		ResourceBundle resourceBundle = getResourceBundle();
+		ButtonType ok = new ButtonType(resourceBundle.getString("ok"), ButtonData.YES);
+		new Alert(AlertType.ERROR, resourceBundle.getString(key), ok).showAndWait();
 	}
 
 	/**

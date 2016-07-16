@@ -218,7 +218,7 @@ public final class CleaningAgentModifierController implements Refreshable {
 
 	@FXML
 	private void save() {
-		if (validate()) {
+		if (validate() && validateBoundary()) {
 			cleaningAgent = assembly();
 			switch (operationType) {
 				case MODIFY:
@@ -318,6 +318,39 @@ public final class CleaningAgentModifierController implements Refreshable {
 				valid = true;
 				break;
 			}
+		}
+		return valid;
+	}
+
+	private boolean validateBoundary() {
+		boolean appTimeValid = validateFormat(applicationTime.getText());
+		boolean frequencyValid = validateFormat(frequency.getText());
+		if (!appTimeValid && !frequencyValid) {
+			Utility.showBothError();
+			return false;
+		}
+		if (!appTimeValid) {
+			Utility.showApplicationTimeError();
+			return false;
+		}
+		if (!frequencyValid) {
+			Utility.showFrequencyError();
+			return false;
+		}
+		return true;
+	}
+
+	private boolean validateFormat(String source) {
+		boolean valid;
+		if (!source.equals("")) {
+			try {
+				Long.valueOf(source);
+				valid = true;
+			} catch (NumberFormatException e) {
+				valid = false;
+			}
+		} else {
+			valid = true;
 		}
 		return valid;
 	}

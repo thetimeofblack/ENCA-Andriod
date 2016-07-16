@@ -145,6 +145,7 @@ public final class CleaningAgentDetailController {
 	@FXML
 	private void save() {
 		CleaningAgentOperator.saveMemo(cleaningAgent, memo.getText());
+		Utility.showSaveConfirm();
 	}
 
 	@FXML
