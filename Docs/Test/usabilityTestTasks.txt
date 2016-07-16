@@ -42,4 +42,3 @@ Now do you want to try out Enca? We have some simple tasks for you to fulfill. P
 5. You bought the previously mentioned cleaning agent in Amazon and found it so rubbish that you would like to delete it from Enca. Delete the cleaning agent and the tag you have just created.
 6. Now you would like to go to the supermarket and buy some cleaning agents. Remember that you have made some memos as "to buy"? Find those cleaning agent with memos.
 That is the end of the test. Thank you again for your cooperation and have a nice day. 
-

@@ -1,0 +1,14 @@
+.tab-pane .tab-header-area .tab-header-background {
+	-fx-background-color: #FFFFFF;
+}
+
+.tab-pane .tab-header-area .tab {  
+}
+
+.scroll-pane .viewport{
+	-fx-background-color: #FFFFFF;
+}
+
+.menu-bar .label {
+    -fx-font-size: 14 pt;
+}
