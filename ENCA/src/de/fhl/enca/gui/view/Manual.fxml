@@ -24,7 +24,7 @@
             <Label text="We provide not only a fully functional version on PC or Mac with all amazing functionalities, but also an express version on Android devices which can search and look up cleaning agents. Next time you go to the supermarket, with no mood at all to make all that gestures to the clerk and describe what you want, or just too tired to look up 9 out of 10 words that you try to read, reach for your Android smart phone and run Enca express. Click few times and find the cleaning agent that you need and show the clerk, the clerk readily fetch that thing for you and here comes the happy ending." wrapText="true" />
          </children>
          <padding>
-            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+            <Insets left="20.0" right="20.0" top="20.0" />
          </padding>
       </VBox>
    </center>

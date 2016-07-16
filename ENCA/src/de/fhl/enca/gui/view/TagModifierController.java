@@ -186,6 +186,11 @@ public final class TagModifierController implements Refreshable {
 		this.stage = stage;
 	}
 
+	public void initializeContent(Tag tag) {
+		tabPane.getSelectionModel().clearAndSelect(tag.getTagType().getId());
+		listViewMap.get(tag.getTagType()).getSelectionModel().select(tag);
+	}
+
 	@Override
 	public void refresh() {
 		for (Entry<TagType, ListView<Tag>> entry : listViewMap.entrySet()) {

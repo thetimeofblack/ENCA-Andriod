@@ -138,12 +138,14 @@ public final class CleaningAgentDetailController {
 	private void clear() {
 		if (Utility.showClearAlert()) {
 			memo.clear();
+			save();
 		}
 	}
 
 	@FXML
 	private void save() {
 		CleaningAgentOperator.saveMemo(cleaningAgent, memo.getText());
+		Utility.showSaveConfirm();
 	}
 
 	@FXML

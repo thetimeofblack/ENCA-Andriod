@@ -17,6 +17,10 @@ import javafx.stage.StageStyle;
  */
 public class TagAdder extends Application {
 
+	/**
+	 * The interface which calls this TagAdder interface.
+	 * Should be refreshed after a tag is added.
+	 */
 	private Refreshable refreshable;
 
 	public TagAdder(Refreshable refreshable) {

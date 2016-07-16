@@ -64,7 +64,7 @@ public class TagTest {
 	}
 
 	/**
-	 * 
+	 * Test Remove Tag
 	 */
 	@Test
 	public void testRemoveTag(){
@@ -73,12 +73,18 @@ public class TagTest {
 		assertNull(Tag.getTag(tag.getTagID()));
 	}
 	
+	/**
+	 * Test Search
+	 */
 	@Test
 	public void testSearch(){
 		Tag.addTag(tag);
 		assertEquals(tag.search("Cleaners"),2);
 	}
 	
+	/**
+	 * Test Adding CleaningAgent
+	 */
 	@Test
 	public void testAddCleaningAgent(){
 		tag.addCleaningAgent(cleaningAgent);
@@ -86,11 +92,17 @@ public class TagTest {
 		tag.removeCleaningAgent(cleaningAgent);
 	}
 	
+	/**
+	 * Test Removing CleaningAgent
+	 */
 	@Test
 	public void testRemoveCleaningAgent(){
 		assertEquals(tag.getCleaningAgents().size(),0);
 	}
 	
+	/**
+	 * Test adding Related Tag by assuming one
+	 */
 	@Test
 	public void testAddTagRelated() {
 		InternationalString internationalString;
@@ -104,6 +116,9 @@ public class TagTest {
 		tag.removeTagRelated(tempTag);
 	}
 	
+	/**
+	 * Test Removing by checking whether vector is null after removing
+	 */
 	@Test
 	public void testRemoveTagRelated()
 	{

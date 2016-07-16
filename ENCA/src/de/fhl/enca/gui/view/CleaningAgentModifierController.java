@@ -19,7 +19,6 @@ import de.fhl.enca.controller.CleaningAgentOperator;
 import de.fhl.enca.controller.TagFetcher;
 import de.fhl.enca.gui.application.CleaningAgentDetail;
 import de.fhl.enca.gui.application.TagAdder;
-import de.fhl.enca.gui.model.CleaningAgentBean;
 import de.fhl.enca.gui.utility.Refreshable;
 import de.fhl.enca.gui.utility.Utility;
 import javafx.beans.value.ObservableValue;
@@ -164,10 +163,10 @@ public final class CleaningAgentModifierController implements Refreshable {
 		ObservableList<String> rateList = FXCollections.observableArrayList("☆", "★", "★☆", "★★", "★★☆", "★★★", "★★★☆", "★★★★", "★★★★☆", "★★★★★");
 		rate.setItems(rateList);
 		refresh();
-		for (Entry<ComboBox<Tag>, TagType> entry : comboBoxes.entrySet()) {
-			entry.getKey().getSelectionModel().selectedItemProperty().addListener((ObservableValue<? extends Tag> o, Tag oldValue, Tag newValue) -> {
-				if (newValue != null) {
-					Tag tag = Tag.getTag(newValue.getTagID());
+		for (ComboBox<Tag> comboBox : comboBoxes.keySet()) {
+			comboBox.getSelectionModel().selectedItemProperty().addListener((ObservableValue<? extends Tag> o, Tag oldValue, Tag newValue) -> {
+				if (comboBox.getSelectionModel().getSelectedIndex() != -1) {
+					Tag tag = Tag.getTag(comboBox.getSelectionModel().getSelectedItem().getTagID());
 					if (!tags.contains(tag)) {
 						addTagLabel(tag);
 					}
@@ -212,7 +211,6 @@ public final class CleaningAgentModifierController implements Refreshable {
 	private void delete() {
 		if (Utility.showDeleteCAAlert()) {
 			CleaningAgentOperator.removeCleaningAgent(cleaningAgent);
-			CleaningAgentBean.removeCleaningAgentBean(cleaningAgent);
 			Utility.refreshMain();
 			stage.hide();
 		}
@@ -220,7 +218,7 @@ public final class CleaningAgentModifierController implements Refreshable {
 
 	@FXML
 	private void save() {
-		if (validate()) {
+		if (validate() && validateBoundary()) {
 			cleaningAgent = assembly();
 			switch (operationType) {
 				case MODIFY:
@@ -230,7 +228,6 @@ public final class CleaningAgentModifierController implements Refreshable {
 					CleaningAgentOperator.createCleaningAgent(cleaningAgent);
 					break;
 			}
-			CleaningAgentBean.addCleaningAgentBean(cleaningAgent);
 			delete.setDisable(false);
 			CleaningAgentOperator.saveMemo(cleaningAgent, memo.getText());
 			if (imageFile != null) {
@@ -276,8 +273,13 @@ public final class CleaningAgentModifierController implements Refreshable {
 		tags.add(tag);
 		Label label = Utility.getTagLabel(tag, User.getInterfaceLanguage());
 		label.setOnMouseClicked(e -> {
-			tags.remove(tag);
-			tagBox.getChildren().remove(label);
+			if (e.getClickCount() > 1) {
+				tags.remove(tag);
+				tagBox.getChildren().remove(label);
+				for (ComboBox<Tag> comboBox : comboBoxes.keySet()) {
+					comboBox.getSelectionModel().clearSelection();
+				}
+			}
 		});
 		tagBox.getChildren().add(label);
 	}
@@ -303,7 +305,7 @@ public final class CleaningAgentModifierController implements Refreshable {
 		newCleaningAgent.setApplicationTime(applicationTime.getText().equals("") ? 0 : Long.valueOf(applicationTime.getText()));
 		newCleaningAgent.setFrequency(frequency.getText().equals("") ? 0 : Long.valueOf(frequency.getText()));
 		newCleaningAgent.setRate(rate.getSelectionModel().getSelectedIndex() + 1);
-		newCleaningAgent.setBelongsToSystem(cleaningAgent.BelongsToSystem());
+		newCleaningAgent.setBelongsToSystem(operationType == OperationType.ADD ? false : cleaningAgent.BelongsToSystem());
 		newCleaningAgent.addTagsAll(tags);
 		newCleaningAgent.setMainLanguage(LanguageType.getLanguageType(language.getSelectionModel().getSelectedIndex()));
 		return newCleaningAgent;
@@ -316,6 +318,39 @@ public final class CleaningAgentModifierController implements Refreshable {
 				valid = true;
 				break;
 			}
+		}
+		return valid;
+	}
+
+	private boolean validateBoundary() {
+		boolean appTimeValid = validateFormat(applicationTime.getText());
+		boolean frequencyValid = validateFormat(frequency.getText());
+		if (!appTimeValid && !frequencyValid) {
+			Utility.showBothError();
+			return false;
+		}
+		if (!appTimeValid) {
+			Utility.showApplicationTimeError();
+			return false;
+		}
+		if (!frequencyValid) {
+			Utility.showFrequencyError();
+			return false;
+		}
+		return true;
+	}
+
+	private boolean validateFormat(String source) {
+		boolean valid;
+		if (!source.equals("")) {
+			try {
+				Long.valueOf(source);
+				valid = true;
+			} catch (NumberFormatException e) {
+				valid = false;
+			}
+		} else {
+			valid = true;
 		}
 		return valid;
 	}

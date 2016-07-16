@@ -4,6 +4,7 @@ import java.util.ResourceBundle;
 import de.fhl.enca.bl.LanguageType;
 import de.fhl.enca.bl.Tag;
 import de.fhl.enca.bl.User;
+import de.fhl.enca.gui.model.CleaningAgentBean;
 import de.fhl.enca.gui.view.MainController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -46,6 +47,9 @@ public final class Utility {
 		return ResourceBundle.getBundle("resource.message", User.getInterfaceLanguage().getLocale());
 	}
 
+	/**
+	 * Return the list of all the languages supported
+	 */
 	public static ObservableList<String> getLanguageList() {
 		ObservableList<String> languageList = FXCollections.observableArrayList();
 		for (LanguageType type : LanguageType.values()) {
@@ -54,6 +58,10 @@ public final class Utility {
 		return languageList;
 	}
 
+	/**
+	 * Return a label that holds the tag
+	 * @param tag the tag to be held
+	 */
 	public static Label getTagLabel(Tag tag, LanguageType type) {
 		Label label = new Label(tag.getName().getString(type));
 		label.setBorder(new Border(new BorderStroke(User.getTagColor(tag.getTagType()), BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
@@ -87,6 +95,10 @@ public final class Utility {
 		return showAlert("deleteTagAlert");
 	}
 
+	/**
+	 * Show alert when a duplicate tag is to be added.
+	 * @return whether user confirm the execution
+	 */
 	public static boolean showAddTagAlert() {
 		return showAlert("addTagAlert");
 	}
@@ -99,9 +111,49 @@ public final class Utility {
 	private static boolean showAlert(String key) {
 		ResourceBundle resourceBundle = getResourceBundle();
 		ButtonType ok = new ButtonType(resourceBundle.getString("ok"), ButtonData.YES);
-		ButtonType cancel = new ButtonType(resourceBundle.getString("cancel"), ButtonData.CANCEL_CLOSE);
+		ButtonType cancel = new ButtonType(resourceBundle.getString("no"), ButtonData.CANCEL_CLOSE);
 		Alert alert = new Alert(AlertType.WARNING, resourceBundle.getString(key), ok, cancel);
 		return alert.showAndWait().filter(e -> e == ok).isPresent();
+	}
+
+	/**
+	 * Show confirmation when memo is saved.
+	 */
+	public static void showSaveConfirm() {
+		ResourceBundle resourceBundle = getResourceBundle();
+		ButtonType ok = new ButtonType(resourceBundle.getString("ok"), ButtonData.YES);
+		new Alert(AlertType.CONFIRMATION, resourceBundle.getString("saveMemoConfirm"), ok).showAndWait();
+	}
+
+	/**
+	 * Show error when application time is not valid.
+	 */
+	public static void showApplicationTimeError() {
+		showError("appTimeError");
+	}
+
+	/**
+	 * Show error when frequency is not valid.
+	 */
+	public static void showFrequencyError() {
+		showError("frequencyError");
+	}
+
+	/**
+	 * Show error when both application time and frequency are not valid.
+	 */
+	public static void showBothError() {
+		showError("bothError");
+	}
+
+	/**
+	 * Generate error dialog according to the key.
+	 * @param key key representing the content of error.
+	 */
+	private static void showError(String key) {
+		ResourceBundle resourceBundle = getResourceBundle();
+		ButtonType ok = new ButtonType(resourceBundle.getString("ok"), ButtonData.YES);
+		new Alert(AlertType.ERROR, resourceBundle.getString(key), ok).showAndWait();
 	}
 
 	/**
@@ -110,6 +162,7 @@ public final class Utility {
 	 * @see MainController
 	 */
 	public static void refreshMain() {
+		CleaningAgentBean.refreshCleaningAgentBeans();
 		mainController.refreshMain();
 	}
 }

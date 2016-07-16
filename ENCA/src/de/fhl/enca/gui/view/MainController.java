@@ -386,7 +386,23 @@ public final class MainController {
 
 	@FXML
 	private void modifyTag() {
-		new TagModifier().start(new Stage());
+		new TagModifier(null).start(new Stage());
+	}
+
+	@FXML
+	private void modifySpecificTag() {
+		for (ListView<Tag> listView : listViewMap.keySet()) {
+			if (listView.isFocused()) {
+				if (!listView.getSelectionModel().isEmpty()) {
+					Tag currentTag = listView.getSelectionModel().getSelectedItem();
+					if (currentTag.getTagID() != 0) {
+						new TagModifier(currentTag).start(new Stage());
+						return;
+					}
+				}
+			}
+		}
+		modifyTag();
 	}
 
 	@FXML

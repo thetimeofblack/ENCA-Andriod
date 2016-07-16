@@ -8,7 +8,7 @@ import java.sql.SQLException;
 
 /**
  * Responsible for connecting the database and sending SQL query to database
- * @author Zhaowen.Gong
+ * @author Zhaowen.Gong, Zeling.Wu
  * @version 30.06.2016
  */
 public final class Connector {

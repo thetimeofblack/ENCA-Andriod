@@ -27,6 +27,11 @@ public class CleaningAgentFetcherTest {
 	CleaningAgentFetcher mCleaningAgentFetcher = new CleaningAgentFetcher();
 	CleaningAgent mTestCleaningAgent;
 	Tag mTestTag;
+	
+	/**
+	 * a test which need initializing
+	 * @throws Exception
+	 */
 	@Before
 	public void setUp() throws Exception {
 		User.initialize();
@@ -39,18 +44,27 @@ public class CleaningAgentFetcherTest {
 		mTestCleaningAgent=(CleaningAgent)temp[1];
 	}
 	
+	/**
+	 * test Fetch CleaningAgent's Tags
+	 */
 	@Test
 	public void testFetchCleaningAgentsOfTags() {
 		mTestCleaningAgent.getTags().contains(mTestTag);
 		assertEquals(mTestCleaningAgent.getTags().contains(mTestTag),true);
 	}
 	
+	/**
+	 * test Fetching certain image
+	 */
 	@Test
 	public void testFetchImageOfCleaningAgent()
 	{	
 		assertEquals(mCleaningAgentFetcher.fetchImageOfCleaningAgent(mTestCleaningAgent).getClass(),Image.class);
 	}
 
+	/**
+	 * test getting result by creating temporary data
+	 */
 	@Test
 	public void testFetchResult() {
 		Set<CleaningAgent> cleaningAgentSet = new HashSet<CleaningAgent>();

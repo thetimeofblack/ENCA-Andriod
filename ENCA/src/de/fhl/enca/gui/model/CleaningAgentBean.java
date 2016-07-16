@@ -20,6 +20,9 @@ import javafx.scene.layout.FlowPane;
  */
 public final class CleaningAgentBean {
 
+	/**
+	 * Stores the string expression of a language.
+	 */
 	private static Map<LanguageType, String> nationMap = new HashMap<>();
 	static {
 		nationMap.put(LanguageType.ENGLISH, " US");
@@ -52,9 +55,7 @@ public final class CleaningAgentBean {
 	 * Initialize all CleaningAgentBean.
 	 */
 	static {
-		for (CleaningAgent cleaningAgent : CleaningAgent.getCleaningAgentsAll()) {
-			addCleaningAgentBean(cleaningAgent);
-		}
+		refreshCleaningAgentBeans();
 	}
 
 	/**
@@ -93,6 +94,17 @@ public final class CleaningAgentBean {
 	 */
 	public static void removeCleaningAgentBean(CleaningAgent cleaningAgent) {
 		map.remove(cleaningAgent.getCleaningAgentID());
+	}
+
+	/**
+	 * Refresh all the cleaning agent beans.
+	 * Called when a cleaning agent or a tag is altered.
+	 */
+	public static void refreshCleaningAgentBeans() {
+		map.clear();
+		for (CleaningAgent cleaningAgent : CleaningAgent.getCleaningAgentsAll()) {
+			addCleaningAgentBean(cleaningAgent);
+		}
 	}
 
 	/**
