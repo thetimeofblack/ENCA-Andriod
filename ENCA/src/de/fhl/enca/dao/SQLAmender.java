@@ -16,7 +16,7 @@ public final class SQLAmender {
 	 * Write memo to table CleaningAgents.
 	 */
 	public static void writeMemo(int cleaningAgentID, String memo) {
-		String memoSQL = memo == null || memo.equals("") ? "NULL" : "'" + memo + "'";
+		String memoSQL = memo == null || memo.equals("") ? "NULL" : "'" + memo.replaceAll("\\'", "\\'\\'") + "'";
 		Connector.executeNonSelect("update CleaningAgents set memo=" + memoSQL + " where cleaningAgentID=" + cleaningAgentID);
 	}
 
