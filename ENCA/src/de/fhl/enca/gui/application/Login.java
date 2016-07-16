@@ -8,6 +8,7 @@ import de.fhl.enca.gui.view.LoginFirstController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -36,6 +37,7 @@ public final class Login extends Application {
 		}
 		primaryStage.setResizable(false);
 		primaryStage.setTitle("ENCA");
+		primaryStage.getIcons().add(new Image(this.getClass().getResource("/image/Logo.png").toString()));
 		primaryStage.initStyle(StageStyle.UNIFIED);
 		primaryStage.show();
 		if (!User.isFirstUse()) {

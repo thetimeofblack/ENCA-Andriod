@@ -6,6 +6,7 @@ import de.fhl.enca.gui.view.MainController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -31,6 +32,7 @@ public class Main extends Application {
 		Utility.setMainController(((MainController) loader.getController()));
 		primaryStage.setOnCloseRequest(e -> System.exit(0));
 		primaryStage.setTitle("ENCA");
+		primaryStage.getIcons().add(new Image(this.getClass().getResource("/image/Logo.png").toString()));
 		primaryStage.initStyle(StageStyle.UNIFIED);
 		primaryStage.show();
 	}
