@@ -36,10 +36,10 @@ Here is our repository: [https://github.com/Nimita311/ENCA-Andriod](https://gith
 
 ## Developer
 ENCA group
-  - [Haoze Zhang](mailto:haoze.zhang@stud.fh-luebeck.de, send Haoze an email)
-  - [Zhaowen Gong](mailto:zhaowen.gong@stud.fh-luebeck.de, send Zhaowen an email)
-  - [Zeling Wu](mailto:zeling.wu@stud.fh-luebeck.de, send Zeling an email)
-  - [Xiaoqi Ma](mailto:xiaoqi.ma@stud.fh-luebeck.de, send Xiaoqi an email)
+  - [Haoze Zhang](mailto:haoze.zhang@stud.fh-luebeck.de "send Haoze an email")
+  - [Zhaowen Gong](mailto:zhaowen.gong@stud.fh-luebeck.de "send Zhaowen an email")
+  - [Zeling Wu](mailto:zeling.wu@stud.fh-luebeck.de "send Zeling an email")
+  - [Xiaoqi Ma](mailto:xiaoqi.ma@stud.fh-luebeck.de "send Xiaoqi an email")
 
 _Click on the name to send an eamil, do not hesitate to contact us._
 
