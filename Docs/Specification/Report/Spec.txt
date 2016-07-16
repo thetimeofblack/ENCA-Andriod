@@ -54,7 +54,23 @@ Users need the software to:
 	* There is an entry to modify the cleaning agent.
 - Display tag modify window
 	* Window shall highlight the tag or switch to a certain category tab based on user desire.
-1.4.2.	Add, modify and delete
+1.4.2. Content
+- Cleaning agent
+	* Provide information including: /////
+	* Special announcement: Application time and frequency are only related to a certain cleaning agent. This information indicates the common use case of the cleaning agent. It is not instructional information of applying the cleaning agent in a specific scenario, but a general reference. Specific application time and frequency can be recored in "Instruction" field. We are not intending to teach user how to clean but assist the user to find the right cleaning agent.
+
+	* Database arrangement:
+	///////
+- Tag
+	* Provide information including: /////
+	* Database arrangement:
+	///////
+
+- Relation
+	* Tag cleaning agent relation
+	* Tag and Tag relation
+
+1.4.3.	Add, modify and delete
 - Cleaning agents
 	* New cleaning agent must have a name.
 	* User cannot do anything to a system predefined cleaning agent unless God mode is enabled.
@@ -71,8 +87,9 @@ Users need the software to:
 - Memo
 	* Memo and cleaning agent is one to one relation.
 	* Memo is always and only related to a cleaning agent.
+	* User can modify a memo in any case no matter whether the cleaning agent is system predefined or not.
 	* All memos are listed in user center. The latest memo will be displayed in the first place.
-1.4.3.	Search
+1.4.4.	Search
 - The keywords shall be:
 	* Separated by common delimiters including but not limited to space, colon, semicolon and etc.
 	* Language insensitive.
@@ -97,7 +114,7 @@ Users need the software to:
 	* Presented in real-time during inserting keywords and selecting tags.
 	* Limited to 100 in number.
 	* Number of result will be displayed.
-1.4.4.	Language
+1.4.5.	Language
 - The software GUI supports: Chinese, English and German.
 - The content is prepared in: Chinese, English and German. Contents of different languages are provided in different tabs and can be switched during software run time.
 - Changing language setting will result in software restart.
