@@ -31,7 +31,7 @@ public class TagModifier extends Application {
 		FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/de/fhl/enca/gui/view/TagModifier.fxml"), Utility.getResourceBundle());
 		try {
 			Scene scene = new Scene(loader.load());
-			scene.getStylesheets().add(this.getClass().getResource("/css/TabPaneHeader.css").toString());
+			scene.getStylesheets().add(this.getClass().getResource("/css/EncaStyle.css").toString());
 			primaryStage.setScene(scene);
 		} catch (IOException e) {
 			e.printStackTrace();
