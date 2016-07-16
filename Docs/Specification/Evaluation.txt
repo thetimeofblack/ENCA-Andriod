@@ -1,10 +1,27 @@
 5. Evaluation
 5.1 Group Work
 In ENCA group, every member shows great passion, expertise and profession in the project. Our members are truly original and critical thinkers and strict practitioners. 
-We strongly stick to the process of real-life software development, achieving phases such as modeling, testing, refactoring and etc as professional as possible. We witness our progress in every iteration. It is the most delightful thing to finally put our software for delivery.
-We base our team collaboration on GitHub. Link: https://github.com/Nimita311/ENCA-Andriod.
+We strongly stick to the process of real-life software development, achieving phases such as modelling, testing, refactoring and etc as professional as possible. We witness our progress in every iteration. It is the most delightful thing to finally put our software for delivery.
+We base our team collaboration on GitHub. Check it out: https://github.com/Nimita311/ENCA-Andriod.
 Our progress milestones and agenda are as followed.
-/////agenda/////
+2016-05-09 First get-together
+2016-05-14 Spec discussion
+2016-05-16 1pm Spec submit; 2pm30 structure design
+*2016-05-17 Spec deadline
+2016-05-21 Supermarket trip, cleaning agents investigation; Class design
+2016-05-28 Database and tag spec meeting
+*2016-05-31 UML deadline
+2016-06-10 GUI monk
+*2016-06-14 GUI deadline
+2016-06-18 GUI theme issues
+2016-06-25 Database ready
+2016-06-28 Orientation issues
+2016-06-30 Prototype ready
+2016-07-01 Usability issue; logic finished
+2016-07-04 JUnit finished
+2016-07-10 Usability test
+2016-07-15 Usability enhanced; usability test
+*2016-07-17 Product deadline
 
 5.2 Task Responsibility
 We set coherent division of responsibilities, yet our collaboration flows just as smooth. Division of responsibilities is as followed.
