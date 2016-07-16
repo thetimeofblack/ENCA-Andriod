@@ -105,8 +105,8 @@ Users need the software to:
 1.5.	Non-functional requirements
 1.5.1.	Portability
 •	The software has two distinctive sub versions which support desktop computers and Android devices.
-•	The desktop version shall be supported by Java SE Runtime Environment 7 or higher.
-•	The Android version...
+- Windows 10 and OS X El Capitan with Java SE Runtime Environment 8u91 are fully tested.
+- Android should run on 4.1–4.1.2 Jelly Bean (API level 16) or later.
 1.5.2.	Performance and Availability
 •	The software shall start up and greet the user for 500ms.
 •	Search result shall be presented in less than 1 second.
@@ -125,18 +125,6 @@ Users need the software to:
 - Cross platform consistence
 3.2.	Structure
 3.3.	Screenshots
-
-
-
-4.	Test 
-4.1 Usability test
-///test tasks
-First round test description.
-Result:
-Improvement plan:
-Second round test description.
-
-4.2 Equivalent classes and boundary tests
 
 
 

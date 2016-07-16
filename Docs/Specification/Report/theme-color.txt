@@ -1,0 +1,5 @@
+java fx default css color spec:
+SteelBlue
+#4682b4
+rgb(70, 130, 180)
+hsl(207, 44%, 49%)
