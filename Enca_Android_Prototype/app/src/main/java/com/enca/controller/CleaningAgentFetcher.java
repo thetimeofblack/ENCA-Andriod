@@ -23,8 +23,8 @@ import java.util.Set;
  * This class contains methods of operating cleaning agents
  * which are stored in memory in map CleaningAgent.cleaningAgentAll.
  *
- * @author Zhaowen.Gong
- * @version 31.05.2016
+ * @author Zhaowen.Gong, Xiaoqi Ma
+ * @version 02.07.2016
  */
 public final class CleaningAgentFetcher {
 
