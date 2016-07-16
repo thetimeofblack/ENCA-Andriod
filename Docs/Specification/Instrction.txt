@@ -1,0 +1,28 @@
+# Instruction
+- Search
+	* By tags
+	It is easier to search for a cleaning agent using tags when you know what to clean. For example if you want to find cleaning agents that wash dishes: click on "Kitchen" in "Room" column, then click on "Dishes" in "Items" column. All cleaning agents with these two tags will be displayed in the result table. To start a new search, you need to click on "clear" button.
+	* By keywords
+	It is easier to search for a cleaning agent using keywords when you know its name, brand or descriptions. For example if you want to search Ecover's product, type in "Ecover" in the text field and click on "Search" or press Enter.
+	* Combined
+	By the way, you can use both tags and keywords at the same time to find a cleaning agent in a more accurate manner. Now I bet you know how to find Ecover's dish cleaner.
+- Add, modify and delete
+	* Cleaning agents and tags
+	You can add, modify and delete a cleaning agent or a tag. Try right clicking on a tag or a cleaning agent and also try out menu bar, you will find the entry.
+	* System protection
+	To ensure the integrity of system information, you are not allowed to do anything to a system predefined cleaning agents or tag, except taking your memo. However you can bypass this protection by enabling God mode.
+- Memo
+	* Make a memo!
+	You may make a memo on a cleaning agent to remind yourself of anything you like. You can write your memo on detail window and modify window. Click on "Clear" to clear the memo and click on "Save" to save it.
+	* Find memos
+	Open "User center" and turn to tab "Memos" or click on menu View -> Memos. All your memos are listed there.
+
+- Preference setting
+	* Language
+	Interface language: it should be the language that you are comfortable to read. Your software interface will be in this language. Select "Chinese" if you speaks Chinese best.
+	Content language: you can set content language based on the origin of the cleaning agents. We will provide contents in this language to facilitate you matching the corresponding cleaning agent. If you are traveling in Germany, select "German". And don't worry, we always provide you contents in all three supported language in separated tabs.
+
+	* Be the god!
+	You can mess with system predefined cleaning agents and tags when you enable God mode. Check the check box to enable it. But remember, great power comes with great responsibility.
+
+If this instruction cannot solve your problem or should you have further questions, do not hesitate to log on https://github.com/Nimita311/ENCA-Andriod and open an issue or email our developers.
