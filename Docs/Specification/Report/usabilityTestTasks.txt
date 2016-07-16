@@ -1,0 +1,44 @@
+# Usability test (Technical record):
+- Task 0:
+	* Aim: Test `first login`, `preference setting` and `manual readability`.
+	* Detail: Brief the user of the software and show README to the user. Then user shall log in, fill out name and choose language preference. Additionally, read manual.
+
+- Task 1:
+	* Aim: Test `searching by keywords` and `memo taking`.
+	* Detail: User shall find a certain cleaning agent and make a memo as "to buy" on it.
+	* Target CA: [German name: "AJAX Frischeduft"] (Opening the detail window of this CA is considered to be task accomplished)
+
+- Task 2:
+	* Aim: Test `searching by tag` and `memo taking`.
+	* Detail: User shall be given a cleaning purpose and find a suitable CA and make a memo as "to buy".
+	* Target CA: [Purpose: Clean toilet] (Opening any detail window of CAs which have tags "Bathroom" and "Toilet" is considered to be task accomplished)
+
+- Task 3:
+	* Aim: Test `adding CA` and `adding tag`.
+	* Detail: create a CA with given information and stick a new tag "interested"
+	* Target URL: "https://www.amazon.de/Bissell-1137E-Remover-Enzyme-Cleaning/dp/B00DPVNTG8/ref=sr_1_4?ie=UTF8&qid=1467900739&sr=8-4&keywords=cleaning+agent" (Hitting save button on the modify window is considered to be task accomplished)
+
+- Task 4:
+	* Aim: Test `deleting CA` and `deleting tag`.
+	* Detail: delete the CA and tag which have just been created.
+
+- Task 5:
+	* Aim: Test `viewing memo` or `user center`.
+	* Detail: Find the CAs with notes. (Opening the user center memo tab is considered to be task accomplished)
+
+- record: (for each task)
+	* time consumption
+	* user activity, window entry
+	* user complaint or feedback
+
+# Usability Test (User handout):
+Thank you very much for your participation; your assistance will help us develop software that is easier to use.
+Enca is a cleaning help software that helps you find the right cleaning agent in a foreign country. Our software supports three languages which are Engish, German and Chinese and we also prepared plenty of cleaning agents on Chinese and German market in our database for you to search. You may search for a certain cleaning agent with keywords when you know its name or description. You may also search for cleaning agents that suit your need with our predefined tags.
+Now do you want to try out Enca? We have some simple tasks for you to fulfill. Please do the following instructions.
+1. Please open Enca and log in. Read the mannual if you would like to.
+2. Your German friend recommands you "AJAX Frischeduft" but you cannot remember what kind of cleaning agent it is. Search for it in Enca and make memo on it as "to buy".
+3. Your toilet cleaner is used up and you would like to buy some more. Use Enca to find out what options do you have and make a memo on one of them which you would like to buy as "to buy".
+4. This cleaning agent online caught your eye and you would like to record it in Enca: "https://www.amazon.de/Bissell-1137E-Remover-Enzyme-Cleaning/dp/B00DPVNTG8/ref=sr_1_4?ie=UTF8&qid=1467900739&sr=8-4&keywords=cleaning+agent". Add information of this cleaning agent in Enca and stick an additional "interested" tag in "others" catagory to it.
+5. You bought the previously mentioned cleaning agent in Amazon and found it so rubbish that you would like to delete it from Enca. Delete the cleaning agent and the tag you have just created.
+6. Now you would like to go to the supermarket and buy some cleaning agents. Remember that you have made some memos as "to buy"? Find those cleaning agent with memos.
+That is the end of the test. Thank you again for your cooperation and have a nice day. 
