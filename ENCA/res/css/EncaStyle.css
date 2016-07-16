@@ -12,3 +12,18 @@
 .menu-bar .label {
     -fx-font-size: 14 pt;
 }
+	
+.content1{
+	-fx-font-size: 14 pt;
+	-fx-font-weight: bold;
+	-fx-padding: 10.0 0.0 0.0 0.0;
+}
+
+.content2{
+	-fx-font-weight: bold;
+	-fx-padding: 0.0 0.0 0.0 15.0;
+}
+
+.content{
+	-fx-padding: 0.0 0.0 0.0 25.0;
+}

@@ -15,7 +15,9 @@ public class Manual extends Application {
 	public void start(Stage primaryStage) {
 		FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/de/fhl/enca/gui/view/Manual.fxml"), Utility.getResourceBundle());
 		try {
-			primaryStage.setScene(new Scene(loader.load()));
+			Scene scene = new Scene(loader.load());
+			scene.getStylesheets().add(this.getClass().getResource("/css/EncaStyle.css").toString());
+			primaryStage.setScene(scene);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
