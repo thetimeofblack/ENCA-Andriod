@@ -350,8 +350,7 @@ public final class CleaningAgentModifierController implements Refreshable {
 		boolean valid;
 		if (!source.equals("")) {
 			try {
-				Long.valueOf(source);
-				valid = true;
+				valid = Long.valueOf(source) >= 0;
 			} catch (NumberFormatException e) {
 				valid = false;
 			}
