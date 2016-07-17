@@ -27,12 +27,12 @@ public final class User {
 	static final String FILE_NAME = "user.ini";
 
 	/**
-	 * Representing the directory of save file.
+	 * Represent the directory of save file.
 	 */
 	private static File directory;
 
 	/**
-	 * Representing the save file.
+	 * Represent the save file.
 	 */
 	private static File file;
 

@@ -10,7 +10,8 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 /**
- * The about interface
+ * The about interface.</br>
+ * Interface showing basic and legal information of the software.
  * @author Zhaowen.Gong
  * @version 30.06.2016
  */

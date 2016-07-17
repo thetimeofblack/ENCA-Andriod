@@ -11,7 +11,11 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 /**
- * The cleaning agent detail interface
+ * The cleaning agent detail interface.</br>
+ * Interface showing detail of single cleaning agent.</br>
+ * Content of all three languages will be displayed simultaneously, as well as the image.</br>
+ * Function of writing memo is also provided in this interface and a dialog will be shown when the memo is saved.</br>
+ * Size of this interface can be adjusted.</br>
  * @author Zhaowen.Gong
  * @version 30.06.2016
  */

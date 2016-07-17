@@ -66,6 +66,9 @@ public final class TagAdderController {
 		}
 	}
 
+	/**
+	 * Do boundary check and save the tag.
+	 */
 	@FXML
 	private void save() {
 		if (validate()) {
@@ -79,6 +82,9 @@ public final class TagAdderController {
 		}
 	}
 
+	/**
+	 * Save the tag.
+	 */
 	private void reallySave() {
 		TagOperator.createTag(assembly());
 		Utility.refreshMain();
@@ -88,6 +94,9 @@ public final class TagAdderController {
 		}
 	}
 
+	/**
+	 * Check if tag with then same name exists.
+	 */
 	private boolean checkName() {
 		for (Tag tag : Tag.getTagsAll()) {
 			for (Entry<LanguageType, TextField> entry : textFieldMap.entrySet()) {
@@ -99,11 +108,17 @@ public final class TagAdderController {
 		return false;
 	}
 
+	/**
+	 * Dispose the interface.
+	 */
 	@FXML
 	private void cancel() {
 		stage.hide();
 	}
 
+	/**
+	 * Check if all the names are null.
+	 */
 	private boolean validate() {
 		boolean valid = false;
 		for (TextField textField : textFieldMap.values()) {
@@ -115,6 +130,9 @@ public final class TagAdderController {
 		return valid;
 	}
 
+	/**
+	 * Assembly the content on the interface and generate a new tag.
+	 */
 	private Tag assembly() {
 		int id = Tag.getMaxID() + 1;
 		Tag.setMaxID(id);
@@ -129,6 +147,9 @@ public final class TagAdderController {
 		this.stage = stage;
 	}
 
+	/**
+	 * Set the interface which calls this tag adder interface.
+	 */
 	public void setRefreshable(Refreshable refreshable) {
 		this.refreshable = refreshable;
 	}

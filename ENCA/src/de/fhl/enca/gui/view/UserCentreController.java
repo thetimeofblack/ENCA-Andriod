@@ -91,6 +91,9 @@ public final class UserCentreController {
 		}
 	}
 
+	/**
+	 * Save user's preference are restart the main interface is language preference is changed.
+	 */
 	@FXML
 	private void save() {
 		if (!usernameTextField.getText().equals("")) {
@@ -109,11 +112,18 @@ public final class UserCentreController {
 		}
 	}
 
+	/**
+	 * Dispose the interface.
+	 */
 	@FXML
 	private void cancel() {
 		userCentreStage.hide();
 	}
 
+	/**
+	 * Goes to memo.</br>
+	 * Is called by class UserCentre.
+	 */
 	public void toMemo() {
 		tabPane.getSelectionModel().clearAndSelect(1);
 	}

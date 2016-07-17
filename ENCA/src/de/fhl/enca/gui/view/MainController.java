@@ -315,10 +315,16 @@ public final class MainController {
 		}
 	}
 
+	/**
+	 * Check if a cleaning agent is chosen in the tables.
+	 */
 	private boolean validateDetail() {
 		return getCurrentTableView() != null && !getCurrentTableView().getSelectionModel().isEmpty();
 	}
 
+	/**
+	 * Check if the selected cleaning agent can be modified.
+	 */
 	private boolean validateModify() {
 		if (validateDetail()) {
 			if (!User.getPriority()) {
@@ -335,6 +341,9 @@ public final class MainController {
 		}
 	}
 
+	/**
+	 * Controls whether menu items are disable.
+	 */
 	@FXML
 	private void validate() {
 		for (MenuItem menuItem : detailSet) {
@@ -345,16 +354,25 @@ public final class MainController {
 		}
 	}
 
+	/**
+	 * Jump to the UserCentre interface.
+	 */
 	@FXML
 	private void userCentre() {
 		new UserCentre(stage, false).start(new Stage());
 	}
 
+	/**
+	 * Jump to the UserCentre interface and go to memo.
+	 */
 	@FXML
 	private void userCentreToMemo() {
 		new UserCentre(stage, true).start(new Stage());
 	}
 
+	/**
+	 * Show the detail of the chosen cleaning agent.
+	 */
 	@FXML
 	private void detail() {
 		if (validateDetail()) {
@@ -362,6 +380,9 @@ public final class MainController {
 		}
 	}
 
+	/**
+	 * Modify the chosen cleaning agent.
+	 */
 	@FXML
 	private void modifyCA() {
 		if (validateModify()) {
@@ -369,26 +390,41 @@ public final class MainController {
 		}
 	}
 
+	/**
+	 * Show the add menu.
+	 */
 	@FXML
 	private void add() {
 		add.show();
 	}
 
+	/**
+	 * Add a cleaning agent.
+	 */
 	@FXML
 	private void addCleaningAgent() {
 		new CleaningAgentModifier(OperationType.ADD, null).start(new Stage());
 	}
 
+	/**
+	 * Add a tag.
+	 */
 	@FXML
 	private void addTag() {
 		new TagAdder(null).start(new Stage());
 	}
 
+	/**
+	 * Jump to TagModifier interface.
+	 */
 	@FXML
 	private void modifyTag() {
 		new TagModifier(null).start(new Stage());
 	}
 
+	/**
+	 * Jump to TagModifier interface and choose a specific tag.
+	 */
 	@FXML
 	private void modifySpecificTag() {
 		for (ListView<Tag> listView : listViewMap.keySet()) {
@@ -405,16 +441,25 @@ public final class MainController {
 		modifyTag();
 	}
 
+	/**
+	 * Exit the process.
+	 */
 	@FXML
 	private void exit() {
 		System.exit(0);
 	}
 
+	/**
+	 * Show about.
+	 */
 	@FXML
 	private void about() {
 		new About().start(new Stage());
 	}
 
+	/**
+	 * Show manual.
+	 */
 	@FXML
 	private void manual() {
 		new Manual().start(new Stage());
@@ -424,6 +469,9 @@ public final class MainController {
 		this.stage = stage;
 	}
 
+	/**
+	 * Refresh the content on the Main interface.
+	 */
 	public void refreshMain() {
 		initMain();
 	}

@@ -30,7 +30,7 @@ import javafx.stage.Stage;
 public final class CleaningAgentDetailController {
 
 	/**
-	 * Representing a group of controls showing content.
+	 * Represent a group of controls showing content.
 	 * @author Zhaowen.Gong
 	 * @version 30.06.2016
 	 */
@@ -50,6 +50,9 @@ public final class CleaningAgentDetailController {
 			this.instruction = instruction;
 		}
 
+		/**
+		 * Show the content of the cleaning agent in controls.
+		 */
 		public void showContent() {
 			name.setText(cleaningAgent.getName().getString(type));
 			for (Tag tag : cleaningAgent.getTags()) {
@@ -61,6 +64,9 @@ public final class CleaningAgentDetailController {
 		}
 	}
 
+	/**
+	 * Store strings representing rates.
+	 */
 	private static Map<Integer, String> rateMap = new HashMap<>();
 	static {
 		rateMap.put(1, "☆");
@@ -75,6 +81,9 @@ public final class CleaningAgentDetailController {
 		rateMap.put(10, "★★★★★");
 	}
 
+	/**
+	 * The cleaning agent to be shown.
+	 */
 	private CleaningAgent cleaningAgent;
 	private Set<ContentGroup> contentGroups = new HashSet<>();
 
@@ -134,6 +143,9 @@ public final class CleaningAgentDetailController {
 		tabPane.getSelectionModel().clearAndSelect(User.getContentLanguage().getId());
 	}
 
+	/**
+	 * Clear memo.
+	 */
 	@FXML
 	private void clear() {
 		if (Utility.showClearAlert()) {
@@ -142,23 +154,36 @@ public final class CleaningAgentDetailController {
 		}
 	}
 
+	/**
+	 * Save memo.
+	 */
 	@FXML
 	private void save() {
 		CleaningAgentOperator.saveMemo(cleaningAgent, memo.getText());
 		Utility.showSaveConfirm();
 	}
 
+	/**
+	 * Jump to CleaningAgentModifier interface.
+	 */
 	@FXML
 	private void modify() {
 		new CleaningAgentModifier(OperationType.MODIFY, cleaningAgent).start(new Stage());
 		stage.hide();
 	}
 
+	/**
+	 * Dispose the interface.
+	 */
 	@FXML
 	private void cancel() {
 		stage.hide();
 	}
 
+	/**
+	 * Show the content of the cleaning agent in the interface.</br>
+	 * Is called by class CleaningAgentDetail.
+	 */
 	public void initializeContent(CleaningAgent cleaningAgent) {
 		this.cleaningAgent = cleaningAgent;
 		for (ContentGroup contentGroup : contentGroups) {

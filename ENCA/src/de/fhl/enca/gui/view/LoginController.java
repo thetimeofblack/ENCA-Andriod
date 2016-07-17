@@ -17,6 +17,7 @@ public final class LoginController {
 
 	/**
 	 * Initialize the interface.</br>
+	 * Show username in the interface./<br>
 	 * Will be called automatically during the construction of the Stage.
 	 */
 	@FXML

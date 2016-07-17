@@ -11,10 +11,16 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 /**
- * The main interface
+ * The main interface.</br>
+ * Main interface of the software.</br>
+ * Allow searching cleaning agents by tags or by keywords.</br>
+ * Information about origin, name and tags of cleaning agents as results will be shown in the tables.</br>
+ * When single tag is chosen, tags of other types will be filtered and only those related tags of the chosen tag will be shown.</br>
+ * Search result will be displayed in real time when user types in the keywords.</br>
+ * Multiple entries to other interfaces are implemented in buttons, context menus and menus in menu bar.</br>
+ * Size of this interface can be adjusted.
  * @author Zhaowen.Gong
  * @version 30.06.2016
- * @see de.fhl.enca.gui.view.MainController
  */
 public class Main extends Application {
 

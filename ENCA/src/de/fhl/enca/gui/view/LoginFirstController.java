@@ -46,6 +46,9 @@ public final class LoginFirstController {
 		contentComboBox.setValue(User.getContentLanguage().toString());
 	}
 
+	/**
+	 * Save user's preference and and call the main interface.
+	 */
 	@FXML
 	private void login() {
 		if (!usernameTextField.getText().equals("") && !interfaceComboBox.getSelectionModel().isEmpty() && !contentComboBox.getSelectionModel().isEmpty()) {
@@ -60,11 +63,17 @@ public final class LoginFirstController {
 		}
 	}
 
+	/**
+	 * Show manual.
+	 */
 	@FXML
 	private void manual() {
 		new Manual().start(new Stage());
 	}
 
+	/**
+	 * Show about.
+	 */
 	@FXML
 	private void about() {
 		new About().start(new Stage());
