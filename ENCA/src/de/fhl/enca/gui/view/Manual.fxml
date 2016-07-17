@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -12,48 +13,6 @@
 <?import javafx.scene.text.Font?>
 
 <BorderPane style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.fhl.enca.gui.view.ManualController">
-   <center>
-      <VBox alignment="CENTER_LEFT" prefWidth="800.0" BorderPane.alignment="CENTER">
-         <children>
-            <Label text="Instruction">
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </Label>
-            <Label styleClass="content1" text="- Search" />
-            <Label styleClass="content2" text="* By tags" />
-            <Label styleClass="content0" text="It is easier to search for a cleaning agent using tags when you know what to clean. For example if you want to find cleaning agents that wash dishes: click on &quot;Kitchen&quot; in &quot;Room&quot; column, then click on &quot;Dishes&quot; in &quot;Items&quot; column. All cleaning agents with these two tags will be displayed in the result table. To start a new search, you need to click on &quot;clear&quot; button." wrapText="true" />
-            <Label styleClass="content2" text="* By keywords" />
-            <Label styleClass="content0" text="It is easier to search for a cleaning agent using keywords when you know its name, brand or descriptions. For example if you want to search Ecover's product, type in &quot;Ecover&quot; in the text field and click on &quot;Search&quot; or press Enter." wrapText="true" />
-            <Label styleClass="content2" text="* Combined" />
-            <Label styleClass="content0" text="By the way, you can use both tags and keywords at the same time to find a cleaning agent in a more accurate manner. Now I bet you know how to find Ecover's dish cleaner." wrapText="true" />
-            <Label styleClass="content1" text="- Add, modify and delete" />
-            <Label styleClass="content2" text="* Cleaning agents and tags" />
-            <Label styleClass="content0" text="You can add, modify and delete a cleaning agent or a tag. Try right clicking on a tag or a cleaning agent and also try out menu bar, you will find the entry." wrapText="true" />
-            <Label styleClass="content2" text="* System protection" />
-            <Label styleClass="content0" text="To ensure the integrity of system information, you are not allowed to do anything to a system predefined cleaning agents or tag, except taking your memo. However you can bypass this protection by enabling God mode." wrapText="true" />
-            <Label styleClass="content1" text="- Memo" />
-            <Label styleClass="content2" text="* Make a memo!" />
-            <Label styleClass="content0" text="You may make a memo on a cleaning agent to remind yourself of anything you like. You can write your memo on detail window and modify window. Click on &quot;Clear&quot; to clear the memo and click on &quot;Save&quot; to save it." wrapText="true" />
-            <Label styleClass="content2" text="* Find memos" />
-            <Label styleClass="content0" text="Open &quot;User center&quot; and turn to tab &quot;Memos&quot; or click on menu View -&gt; Memos. All your memos are listed there." />
-            <Label styleClass="content1" text="- Preference setting" />
-            <Label styleClass="content2" text="* Language" />
-            <Label styleClass="content0" text="Interface language: it should be the language that you are comfortable to read. Your software interface will be in this language. Select &quot;Chinese&quot; if you speaks Chinese best." wrapText="true" />
-            <Label styleClass="content0" text="Content language: you can set content language based on the origin of the cleaning agents. We will provide contents in this language to facilitate you matching the corresponding cleaning agent. If you are traveling in Germany, select &quot;German&quot;. And don't worry, we always provide you contents in all three supported language in separated tabs." wrapText="true" />
-            <Label styleClass="content2" text="* Be the god!" />
-            <Label styleClass="content0" text="You can mess with system predefined cleaning agents and tags when you enable God mode. Check the check box to enable it. But remember, great power comes with great responsibility." wrapText="true" />
-            <Label styleClass="content0" text="If this instruction cannot solve your problem or should you have further questions, do not hesitate to log on https://github.com/Nimita311/ENCA-Andriod and open an issue or email our developers." wrapText="true">
-               <VBox.margin>
-                  <Insets top="10.0" />
-               </VBox.margin>
-            </Label>
-         </children>
-         <padding>
-            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-         </padding>
-      </VBox>
-   </center>
    <bottom>
       <GridPane BorderPane.alignment="CENTER">
          <columnConstraints>
@@ -73,4 +32,50 @@
          </children>
       </GridPane>
    </bottom>
+   <center>
+      <ScrollPane fitToWidth="true" style="-fx-border-color: #FFFFFF; -fx-background-color: transparent;" BorderPane.alignment="TOP_CENTER">
+         <content>
+            <VBox alignment="CENTER_LEFT" prefWidth="800.0">
+               <children>
+                  <Label text="Instruction">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Label styleClass="content1" text="- Search" />
+                  <Label styleClass="content2" text="* By tags" />
+                  <Label styleClass="content0" text="It is easier to search for a cleaning agent using tags when you know what to clean. For example if you want to find cleaning agents that wash dishes: click on &quot;Kitchen&quot; in &quot;Room&quot; column, then click on &quot;Dishes&quot; in &quot;Items&quot; column. All cleaning agents with these two tags will be displayed in the result table. To start a new search, you need to click on &quot;clear&quot; button." wrapText="true" />
+                  <Label styleClass="content2" text="* By keywords" />
+                  <Label styleClass="content0" text="It is easier to search for a cleaning agent using keywords when you know its name, brand or descriptions. For example if you want to search Ecover's product, type in &quot;Ecover&quot; in the text field and click on &quot;Search&quot; or press Enter." wrapText="true" />
+                  <Label styleClass="content2" text="* Combined" />
+                  <Label styleClass="content0" text="By the way, you can use both tags and keywords at the same time to find a cleaning agent in a more accurate manner. Now I bet you know how to find Ecover's dish cleaner." wrapText="true" />
+                  <Label styleClass="content1" text="- Add, modify and delete" />
+                  <Label styleClass="content2" text="* Cleaning agents and tags" />
+                  <Label styleClass="content0" text="You can add, modify and delete a cleaning agent or a tag. Try right clicking on a tag or a cleaning agent and also try out menu bar, you will find the entry." wrapText="true" />
+                  <Label styleClass="content2" text="* System protection" />
+                  <Label styleClass="content0" text="To ensure the integrity of system information, you are not allowed to do anything to a system predefined cleaning agents or tag, except taking your memo. However you can bypass this protection by enabling God mode." wrapText="true" />
+                  <Label styleClass="content1" text="- Memo" />
+                  <Label styleClass="content2" text="* Make a memo!" />
+                  <Label styleClass="content0" text="You may make a memo on a cleaning agent to remind yourself of anything you like. You can write your memo on detail window and modify window. Click on &quot;Clear&quot; to clear the memo and click on &quot;Save&quot; to save it." wrapText="true" />
+                  <Label styleClass="content2" text="* Find memos" />
+                  <Label styleClass="content0" text="Open &quot;User center&quot; and turn to tab &quot;Memos&quot; or click on menu View -&gt; Memos. All your memos are listed there." />
+                  <Label styleClass="content1" text="- Preference setting" />
+                  <Label styleClass="content2" text="* Language" />
+                  <Label styleClass="content0" text="Interface language: it should be the language that you are comfortable to read. Your software interface will be in this language. Select &quot;Chinese&quot; if you speaks Chinese best." wrapText="true" />
+                  <Label styleClass="content0" text="Content language: you can set content language based on the origin of the cleaning agents. We will provide contents in this language to facilitate you matching the corresponding cleaning agent. If you are traveling in Germany, select &quot;German&quot;. And don't worry, we always provide you contents in all three supported language in separated tabs." wrapText="true" />
+                  <Label styleClass="content2" text="* Be the god!" />
+                  <Label styleClass="content0" text="You can mess with system predefined cleaning agents and tags when you enable God mode. Check the check box to enable it. But remember, great power comes with great responsibility." wrapText="true" />
+                  <Label styleClass="content0" text="If this instruction cannot solve your problem or should you have further questions, do not hesitate to log on https://github.com/Nimita311/ENCA-Andriod and open an issue or email our developers." wrapText="true">
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                  </Label>
+               </children>
+               <padding>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </padding>
+            </VBox>
+         </content>
+      </ScrollPane>
+   </center>
 </BorderPane>
