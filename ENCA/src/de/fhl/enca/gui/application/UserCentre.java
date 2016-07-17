@@ -43,7 +43,7 @@ public final class UserCentre extends Application {
 		if (toMemo) {
 			((UserCentreController) loader.getController()).toMemo();
 		}
-		primaryStage.setTitle("User Centre");
+		primaryStage.setTitle("User Center");
 		primaryStage.initStyle(StageStyle.UNIFIED);
 		primaryStage.setResizable(false);
 		primaryStage.show();
