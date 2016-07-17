@@ -119,7 +119,7 @@ public final class CleaningAgentBean {
 		this.name = new SimpleStringProperty(cleaningAgent.getName().getString(type));
 		tags = new FlowPane(5, 5);
 		tags.setPrefHeight(0);
-		tags.setPrefWrapLength(700);
+		tags.setPrefWrapLength(300);
 		for (Tag tag : cleaningAgent.getTags()) {
 			tags.getChildren().add(Utility.getTagLabel(tag, type));
 		}
