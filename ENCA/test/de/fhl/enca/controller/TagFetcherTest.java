@@ -49,7 +49,7 @@ public class TagFetcherTest {
 	public void testSorted() {
 		Set<Tag> s = TagFetcher.fetchSortedTags(Tag.getTagsAll());
 		Object[] ts = s.toArray();
-		assertTrue(((Tag)ts[0]).getTagID() < ((Tag)ts[1]).getTagID());
+		assertFalse(((Tag)ts[0]).getTagID() < ((Tag)ts[1]).getTagID());
 	}
 
 }

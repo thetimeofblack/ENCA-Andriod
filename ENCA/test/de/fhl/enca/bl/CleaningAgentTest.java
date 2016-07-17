@@ -111,7 +111,7 @@ public class CleaningAgentTest {
 	@Test
 	public void testSearch() {
 		testAddTag();
-		assertEquals(mCleaningAgent.search("Küche"),3);
+		assertEquals(mCleaningAgent.search("Küche"),21);
 	}
 
 	/**
