@@ -2,14 +2,98 @@
 4.1 Usability test
 - User group
 We choose Chinese international students in Germany as our test user group. Firstly they account for the majority of our target user group and moreover their knowledge of cleaning is somehow reflecting the average level.
+# Desktop version
 - Test tasks
-///test tasks
+	+ Task 0:
+		* Aim: Test `first login`, `preference setting` and `manual readability`.
+		* Detail: Brief the user of the software and show README to the user. Then user shall log in, fill out name and choose language preference. Additionally, read manual.
 
-- First round
-	* Result:
-	* Analysis:
+	+ Task 1:
+		* Aim: Test `searching by keywords` and `memo taking`.
+		* Detail: User shall find a certain cleaning agent and make a memo as "to buy" on it.
+		* Target CA: [German name: "AJAX Frischeduft"] (Opening the detail window of this CA is considered to be task accomplished)
+
+	+ Task 2:
+		* Aim: Test `searching by tag` and `memo taking`.
+		* Detail: User shall be given a cleaning purpose and find a suitable CA and make a memo as "to buy".
+		* Target CA: [Purpose: Clean toilet] (Opening any detail window of CAs which have tags "Bathroom" and "Toilet" is considered to be task accomplished)
+
+	+ Task 3:
+		* Aim: Test `adding CA` and `adding tag`.
+		* Detail: create a CA with given information and stick a new tag "interested"
+		* Target URL: "https://www.amazon.de/Bissell-1137E-Remover-Enzyme-Cleaning/dp/B00DPVNTG8/ref=sr_1_4?ie=UTF8&qid=1467900739&sr=8-4&keywords=cleaning+agent" (Hitting save button on the modify window is considered to be task accomplished)
+
+	+ Task 4:
+		* Aim: Test `deleting CA` and `deleting tag`.
+		* Detail: delete the CA and tag which have just been created.
+
+	+ Task 5:
+		* Aim: Test `viewing memo` or `user center`.
+		* Detail: Find the CAs with notes. (Opening the user center memo tab is considered to be task accomplished)
+
+- record: (for each task)
+	* time consumption
+	* user activity, window entry
+	* user complaint or feedback
+
+
+- First round usability test
+	* Result: see appendix.
+	* Issues:
+		+ Bug: user cannot add the same tag again when he or she added it just now and delete it. The state of combo box which contains tags is not changing, so no activity is triggered.
+		+ Bug: in add CA window, tag lists are not refreshing after user add a new tag. User cannot find the tag which has just been added.
+		+ Chinese students tend to set their interface language to Chinese even though they can speak English and English is Enca's most supported language. Problems such as description mismatch occur during search.
+		+ When users set content language to Chinese, it is hard for them to search by German keywords. Because even though the result would always come up, the contents are all in Chinese and it contributes to the difficulty to identify the exact cleaning agent. We have already used parallel tabs for different languages, however users tend to ignore it.
+		+ Users tend to always use keyword search instead of tag search. Tags are somehow confusing the user. Though they can get the desired result, it is not the most optimal way.
+		+ Users may easily miss click on a tag and delete it when modifying a CA.
+		+ Users have no idea about what "memo" is.
+		+ Users have no idea of the existence of "user center" or what it is for.
+		+ Activities such as "Save" lack conformations.
 	* Improvement plan:
-- Second round .
+		+ Fix tag adding bug by clearing combo box state after each deletion.
+		+ Fix tag refreshing bug.
+		+ Main window visual separation. Highlight "tag" and "keywords" area with a non transparent box. Clearly separate main window into three parts which are "search by tags", "search by keywords" and "result".
+		+ Give conformation windows for multiple activities such as "save memo" and "clear memo".
+		+ Change button text on some buttons. Such as close button in CA detail window is changed from "Cancel" to "Close".
+		+ Double click to remove a tag instead of single click.
+		+ Add "instruction" and prompt user to read it during first login.
+		+ Make tab header more visible, change background color from white to gray.
+- Second round usability test
+	* Result: see appendix.
+	* Issues:
+		+ Users cannot remove a picture in add CA window.
+		+ Users cannot easily find "Clear" button and reset search result.
+		+ "User center" is still confusing the user.
+		+ Users have trouble finding cleaning agents with short names.
+	* Improvement plan:
+		+ Add "remove picture" button on add CA window.
+		+ Move "clear" button to "search by tags" box and change name to "clear selection".
+		+ Add "tool box" with multiple setting entry.
+		+ Full word match gives more relevance.
+
+# Android version
+- Test tasks
+	+ Task 0:
+		* Aim: Test `first login`, `preference setting` and `manual readability`.
+		* Detail: Brief the user of the software and show README to the user. Then user shall log in, fill out name and choose language preference. Additionally, read manual.
+
+	+ Task 1:
+		* Aim: Test `searching by keywords`.
+		* Detail: User shall find a certain cleaning agent.
+		* Target CA: [German name: "AJAX Frischeduft"] (Opening the detail window of this CA is considered to be task accomplished)
+
+	+ Task 2:
+		* Aim: Test `searching by tag`.
+		* Detail: User shall be given a cleaning purpose and find a suitable CA.
+		* Target CA: [Purpose: Clean toilet] (Opening any detail window of CAs which have tags "Bathroom" and "Toilet" is considered to be task accomplished)
+- Usability test:
+	* Result: see appendix.
+	* Issues:
+		+ Users are reluctant to use tag.
+		+ Users set language to Chinese and had trouble finding the German CA.
+	* Improvement plan:
+		+ Add "instruction".
+		+ Easier language switch.
 
 4.2 Equivalent classes and boundary tests
 
