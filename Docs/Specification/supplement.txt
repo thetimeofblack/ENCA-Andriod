@@ -1,5 +1,14 @@
 # tag: [no tag] handle
 # GUI feel and user experience. Theme color, cross platform consistancy
-# Initialization: import 
+# Initialization: import data except blob into memory, better for search performance but may take more memory (in fact not too much)
 # first use: preference file + database file.(including Android)
 # preference: write objects into files.(including Android)
+# assume that we want to exchange and extend our software
+	- Scenario 1: add language:
+	add element to language type
+	change international string
+	add one column for each international string in database
+	- Scenario 2: add attribute to tag or cleaning agent
+	change database
+	change sqlvisitor
+	change view
