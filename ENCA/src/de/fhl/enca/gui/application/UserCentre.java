@@ -10,7 +10,11 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 /**
- * The user centre interface
+ * The user centre interface.</br>
+ * Interface for settings and view memos.</br>
+ * Name, language prferences are shown and are allowed to modify in the user settings tab, along with the register date shown.</br>
+ * God mode can also be toggled here.</br>
+ * Cleaning agents with memos are shown by their images in memos tab. Those images are also entries to detail of those cleaning agents. </br>
  * @author Zhaowen.Gong
  * @version 30.06.2016
  */

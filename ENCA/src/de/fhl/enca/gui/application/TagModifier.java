@@ -11,7 +11,10 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 /**
- * The tag modifier interface
+ * The tag modifier interface.</br>
+ * Interface allowing modifying and deleting tags.</br>
+ * The tag should be chosen in three lists on the left before modifying and deleting,
+ * then the names of the tags will be displayed on the right, allowing modifying.
  * @author Zhaowen.Gong
  * @version 30.06.2016
  */

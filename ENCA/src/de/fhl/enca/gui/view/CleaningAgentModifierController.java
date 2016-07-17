@@ -55,7 +55,7 @@ public final class CleaningAgentModifierController implements Refreshable {
 	}
 
 	/**
-	 * Representing a group of controls showing content.
+	 * Represent a group of controls showing content.
 	 * @author Zhaowen.Gong
 	 * @version 30.06.2016
 	 */
@@ -74,6 +74,9 @@ public final class CleaningAgentModifierController implements Refreshable {
 			this.instruction = instruction;
 		}
 
+		/**
+		 * Show the content of the cleaning agent in controls.
+		 */
 		public void showContent() {
 			if (operationType == OperationType.MODIFY) {
 				name.setText(cleaningAgent.getName().getString(type));
@@ -82,6 +85,9 @@ public final class CleaningAgentModifierController implements Refreshable {
 			}
 		}
 
+		/**
+		 * Assembly the content of the controls to the cleaning agent.
+		 */
 		public void assemblyContent(CleaningAgent cleaningAgent) {
 			cleaningAgent.getName().setString(type, name.getText());
 			cleaningAgent.getDescription().setString(type, description.getText());
@@ -94,10 +100,22 @@ public final class CleaningAgentModifierController implements Refreshable {
 	}
 
 	private OperationType operationType;
+	
+	/**
+	 * The cleaning agent to be modified.
+	 */
 	private CleaningAgent cleaningAgent;
 	private Set<ContentGroup> contentGroups = new HashSet<>();
 	private Map<ComboBox<Tag>, TagType> comboBoxes = new HashMap<>();
+	
+	/**
+	 * Store the related tags shown in the interface.
+	 */
 	private Set<Tag> tags = new HashSet<>();
+	
+	/**
+	 * The new image file chosen by user.
+	 */
 	private File imageFile = null;
 
 	private Stage stage;
@@ -177,6 +195,9 @@ public final class CleaningAgentModifierController implements Refreshable {
 		tabPane.getSelectionModel().clearAndSelect(User.getContentLanguage().getId());
 	}
 
+	/**
+	 * Clear memo.
+	 */
 	@FXML
 	private void clear() {
 		if (Utility.showClearAlert()) {
@@ -184,6 +205,9 @@ public final class CleaningAgentModifierController implements Refreshable {
 		}
 	}
 
+	/**
+	 * Choose picture.
+	 */
 	@FXML
 	private void choosePicture() {
 		FileChooser chooser = new FileChooser();
@@ -202,17 +226,26 @@ public final class CleaningAgentModifierController implements Refreshable {
 		}
 	}
 
+	/**
+	 * Remove chosen picture.
+	 */
 	@FXML
 	private void removePicture() {
 		imageView.setImage(null);
 		imageFile = null;
 	}
 
+	/**
+	 * Jump to TagAdder interface.
+	 */
 	@FXML
 	private void addTag() {
 		new TagAdder(this).start(new Stage());
 	}
 
+	/**
+	 * Delete the cleaning agent.
+	 */
 	@FXML
 	private void delete() {
 		if (Utility.showDeleteCAAlert()) {
@@ -222,6 +255,10 @@ public final class CleaningAgentModifierController implements Refreshable {
 		}
 	}
 
+	/**
+	 * Save the modification to the cleaning agent.</br>
+	 * Boundary check will also be done.
+	 */
 	@FXML
 	private void save() {
 		if (validate() && validateBoundary()) {
@@ -245,11 +282,18 @@ public final class CleaningAgentModifierController implements Refreshable {
 		}
 	}
 
+	/**
+	 * Dispose the interface.
+	 */
 	@FXML
 	private void cancel() {
 		stage.hide();
 	}
 
+	/**
+	 * Show the content of the cleaning agent in the interface.</br>
+	 * Is called by class CleaningAgentModifier.
+	 */
 	public void initializeContent(OperationType operationType, CleaningAgent cleaningAgent) {
 		this.operationType = operationType;
 		this.cleaningAgent = cleaningAgent;
@@ -275,6 +319,9 @@ public final class CleaningAgentModifierController implements Refreshable {
 		}
 	}
 
+	/**
+	 * Add chosen related tag to the interface.
+	 */
 	private void addTagLabel(Tag tag) {
 		tags.add(tag);
 		Label label = Utility.getTagLabel(tag, User.getInterfaceLanguage());
@@ -290,6 +337,9 @@ public final class CleaningAgentModifierController implements Refreshable {
 		tagBox.getChildren().add(label);
 	}
 
+	/**
+	 * Assembly the content on the interface and generate a new cleaning agent.
+	 */
 	private CleaningAgent assembly() {
 		int id = 0;
 		switch (operationType) {
@@ -317,6 +367,9 @@ public final class CleaningAgentModifierController implements Refreshable {
 		return newCleaningAgent;
 	}
 
+	/**
+	 * Check if all the names are null.
+	 */
 	private boolean validate() {
 		boolean valid = false;
 		for (ContentGroup contentGroup : contentGroups) {
@@ -328,6 +381,10 @@ public final class CleaningAgentModifierController implements Refreshable {
 		return valid;
 	}
 
+	/**
+	 * Boundary check for application time and frequency.</br>
+	 * if exception occurs, error messages will be displayed.
+	 */
 	private boolean validateBoundary() {
 		boolean appTimeValid = validateFormat(applicationTime.getText());
 		boolean frequencyValid = validateFormat(frequency.getText());
@@ -346,6 +403,9 @@ public final class CleaningAgentModifierController implements Refreshable {
 		return true;
 	}
 
+	/**
+	 * Boundary check for single number field.
+	 */
 	private boolean validateFormat(String source) {
 		boolean valid;
 		if (!source.equals("")) {
@@ -364,6 +424,9 @@ public final class CleaningAgentModifierController implements Refreshable {
 		this.stage = stage;
 	}
 
+	/**
+	 * Refresh the tag content in the three combo boxes.
+	 */
 	@Override
 	public void refresh() {
 		for (Entry<ComboBox<Tag>, TagType> entry : comboBoxes.entrySet()) {

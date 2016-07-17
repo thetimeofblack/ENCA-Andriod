@@ -14,7 +14,11 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 /**
- * The login interface
+ * The login interface.</br>
+ * Interface for user to login.</br>
+ * Allow entering user name, choosing interface language and content language to meet user’s requirement.
+ * Meanwhile, manual and about interface are also provided through help menu,
+ * allowing user to grant basic information of the software before using it.
  * @author Zhaowen.Gong
  * @version 30.06.2016
  */

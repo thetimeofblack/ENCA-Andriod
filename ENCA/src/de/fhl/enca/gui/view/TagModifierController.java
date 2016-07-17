@@ -86,6 +86,9 @@ public final class TagModifierController implements Refreshable {
 		setDisable(true);
 	}
 
+	/**
+	 * Save the modification of the tag.
+	 */
 	@FXML
 	private void save() {
 		if (tag != null && validate()) {
@@ -95,6 +98,9 @@ public final class TagModifierController implements Refreshable {
 		}
 	}
 
+	/**
+	 * Delete the tag.
+	 */
 	@FXML
 	private void delete() {
 		if (tag != null) {
@@ -106,17 +112,26 @@ public final class TagModifierController implements Refreshable {
 		}
 	}
 
+	/**
+	 * Jump to TagAdder interface.
+	 */
 	@FXML
 	private void addNew() {
 		new TagAdder(this).start(new Stage());
 		stage.hide();
 	}
 
+	/**
+	 * Dispose the interface.
+	 */
 	@FXML
 	private void cancel() {
 		stage.hide();
 	}
 
+	/**
+	 * Refresh the controls when another tag is chosen.
+	 */
 	private void refreshTextField() {
 		tag = null;
 		if (!tabPane.getSelectionModel().isEmpty()) {
@@ -155,6 +170,9 @@ public final class TagModifierController implements Refreshable {
 		}
 	}
 
+	/**
+	 * Check if all the names are null.
+	 */
 	private boolean validate() {
 		boolean valid = false;
 		for (TextField textField : textFieldMap.values()) {
@@ -166,6 +184,9 @@ public final class TagModifierController implements Refreshable {
 		return valid;
 	}
 
+	/**
+	 * Disable the controls.
+	 */
 	private void setDisable(boolean b) {
 		for (TextField textField : textFieldMap.values()) {
 			textField.setDisable(b);
@@ -174,6 +195,9 @@ public final class TagModifierController implements Refreshable {
 		delete.setDisable(b);
 	}
 
+	/**
+	 * Assembly the content on the interface and generate a new tag.
+	 */
 	private Tag assembly() {
 		InternationalString name = new InternationalString();
 		for (Entry<LanguageType, TextField> entry : textFieldMap.entrySet()) {
@@ -186,11 +210,18 @@ public final class TagModifierController implements Refreshable {
 		this.stage = stage;
 	}
 
+	/**
+	 * Choose the tag.</br>
+	 * Is called by class TagModifier.
+	 */
 	public void initializeContent(Tag tag) {
 		tabPane.getSelectionModel().clearAndSelect(tag.getTagType().getId());
 		listViewMap.get(tag.getTagType()).getSelectionModel().select(tag);
 	}
 
+	/**
+	 * Refresh the content in the lists of tags.
+	 */
 	@Override
 	public void refresh() {
 		for (Entry<TagType, ListView<Tag>> entry : listViewMap.entrySet()) {

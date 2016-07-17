@@ -11,7 +11,9 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 /**
- * The tag adder interface
+ * The tag adder interface.</br>
+ * Interface allowing creating tags.</br>
+ * The type of the tag can be chosen on the left and the names of the tag can be assigned on the right.
  * @author Zhaowen.Gong
  * @version 30.06.2016
  */
