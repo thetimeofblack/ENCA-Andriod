@@ -224,7 +224,7 @@
             </TabPane>
             <GridPane GridPane.columnIndex="1">
                <columnConstraints>
-                  <ColumnConstraints maxWidth="250.0" minWidth="250.0" prefWidth="250.0" />
+                  <ColumnConstraints hgrow="NEVER" maxWidth="250.0" minWidth="250.0" prefWidth="250.0" />
                </columnConstraints>
                <rowConstraints>
                   <RowConstraints maxHeight="250.0" minHeight="250.0" prefHeight="200.0" />

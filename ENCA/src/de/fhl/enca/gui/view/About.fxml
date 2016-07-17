@@ -79,7 +79,7 @@
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <Label text="Version 2.0 build 20160706" />
+                  <Label text="Version 3.0 build 20160717" />
                </children>
                <padding>
                   <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
