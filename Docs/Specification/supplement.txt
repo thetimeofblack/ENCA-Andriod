@@ -1,0 +1,5 @@
+# tag: [no tag] handle
+# GUI feel and user experience. Theme color, cross platform consistancy
+# Initialization: import 
+# first use: preference file + database file.(including Android)
+# preference: write objects into files.(including Android)
