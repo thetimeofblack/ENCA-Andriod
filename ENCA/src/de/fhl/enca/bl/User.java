@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.Date;
+
+import de.fhl.enca.dao.Connector;
 import javafx.scene.paint.Color;
 
 /**
@@ -58,6 +60,7 @@ public final class User {
 		}
 		file = new File(directory, FILE_NAME);
 		isFirstUse = readUser();
+		Connector.connect();
 	}
 
 	/**
