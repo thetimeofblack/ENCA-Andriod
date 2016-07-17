@@ -13,10 +13,8 @@ import de.fhl.enca.bl.CleaningAgent;
 import de.fhl.enca.bl.InternationalString;
 import de.fhl.enca.bl.LanguageType;
 import de.fhl.enca.bl.Tag;
-import de.fhl.enca.bl.TagType;
 import de.fhl.enca.bl.User;
 
-import org.junit.Ignore;
 /**
  * This class tests Fetcher Contain methods of fetching cleaning agents.
  * @author Wu Zeling
@@ -40,7 +38,7 @@ public class CleaningAgentFetcherTest {
 		mTestTag = Tag.getTag(1);
 		Set<Tag> s=new HashSet<Tag>();
 		s.add(mTestTag);
-		Object[] temp=mCleaningAgentFetcher.fetchCleaningAgentsOfTags(s).toArray();
+		Object[] temp=CleaningAgentFetcher.fetchCleaningAgentsOfTags(s).toArray();
 		mTestCleaningAgent=(CleaningAgent)temp[1];
 	}
 	
@@ -59,7 +57,7 @@ public class CleaningAgentFetcherTest {
 	@Test
 	public void testFetchImageOfCleaningAgent()
 	{	
-		assertEquals(mCleaningAgentFetcher.fetchImageOfCleaningAgent(mTestCleaningAgent).getClass(),Image.class);
+		assertEquals(CleaningAgentFetcher.fetchImageOfCleaningAgent(mTestCleaningAgent).getClass(),Image.class);
 	}
 
 	/**
@@ -102,7 +100,7 @@ public class CleaningAgentFetcherTest {
 		}catch(Exception e)
 		{}
 		
-		assertEquals(mCleaningAgentFetcher.fetchResult(cleaningAgentSet,"frosch"),cleaningAgentSet);
+		assertEquals(CleaningAgentFetcher.fetchResult(cleaningAgentSet,"frosch"),cleaningAgentSet);
 	}
 
 	

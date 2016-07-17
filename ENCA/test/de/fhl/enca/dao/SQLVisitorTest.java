@@ -2,8 +2,10 @@ package de.fhl.enca.dao;
 
 import static org.junit.Assert.*;
 
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
+
+import de.fhl.enca.bl.User;
 /**
  * Class SQLVisitor Execute select SQL operations.
  * @author Zeling WU
@@ -12,8 +14,9 @@ import org.junit.Test;
  */
 public class SQLVisitorTest {
 
-	@Before
-	public void setUp() throws Exception {
+	@BeforeClass
+	public static void setUp() throws Exception {
+		User.initialize();
 	}
 
 	@Test

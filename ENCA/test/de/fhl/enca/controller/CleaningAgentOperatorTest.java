@@ -10,6 +10,7 @@ import org.junit.Test;
 import de.fhl.enca.bl.CleaningAgent;
 import de.fhl.enca.bl.InternationalString;
 import de.fhl.enca.bl.LanguageType;
+import de.fhl.enca.bl.User;
 import de.fhl.enca.dao.SQLAmender;
 
 /**
@@ -27,6 +28,7 @@ public class CleaningAgentOperatorTest {
 	 */
 	@BeforeClass
 	public static void setup() {
+		User.initialize();
 		Initialize.initialize();
 	}
 	

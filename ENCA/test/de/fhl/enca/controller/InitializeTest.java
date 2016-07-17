@@ -9,6 +9,7 @@ import org.junit.Test;
 
 import de.fhl.enca.bl.CleaningAgent;
 import de.fhl.enca.bl.Tag;
+import de.fhl.enca.bl.User;
 
 /**
  * Class InitializeTest tests the initialization functionalities including Tags, CA and relation init.
@@ -22,6 +23,7 @@ public class InitializeTest {
 	 */
 	@Before
 	public void setup() {
+		User.initialize();
 		Initialize.initialize();
 	}
 	

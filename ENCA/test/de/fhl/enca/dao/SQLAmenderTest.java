@@ -22,7 +22,6 @@ import de.fhl.enca.bl.LanguageType;
 import de.fhl.enca.bl.Tag;
 import de.fhl.enca.bl.TagType;
 
-import org.junit.Ignore;
 /**
  * Test Class whicheExecute update, insert into and delete SQL operation
  * @author Zeling.Wu
@@ -77,10 +76,10 @@ public class SQLAmenderTest {
 	 */
 	@Test
 	public void testWriteMemo() {
-		sqlAmender.createCleaningAgent(cleaningAgent);
-		sqlAmender.writeMemo(testID, "test");
+		SQLAmender.createCleaningAgent(cleaningAgent);
+		SQLAmender.writeMemo(testID, "test");
 		assertEquals(getMemo(cleaningAgent.getCleaningAgentID()),"test");
-		sqlAmender.removeCleaningAgent(cleaningAgent);	
+		SQLAmender.removeCleaningAgent(cleaningAgent);	
 	}
 	
 	/**
@@ -90,13 +89,13 @@ public class SQLAmenderTest {
 	public void testWriteImage()
 	{
 		try{
-		sqlAmender.createCleaningAgent(cleaningAgent);
+		SQLAmender.createCleaningAgent(cleaningAgent);
 		URL imageURL = new URL("https://upload.wikimedia.org/wikipedia/en/e/eb/SupermanRoss.png");
 		Image goodImage = ImageIO.read(imageURL);
 		byte[] temp=imageToStream(goodImage);
-		sqlAmender.writeImage(testID,temp);
+		SQLAmender.writeImage(testID,temp);
 		assertTrue(imageExist(testID));
-		sqlAmender.removeCleaningAgent(cleaningAgent);
+		SQLAmender.removeCleaningAgent(cleaningAgent);
 		}catch(Exception e)
 		{e.printStackTrace();}
 	}
@@ -106,9 +105,9 @@ public class SQLAmenderTest {
 	 */
 	@Test
 	public void testCreateTCRelation(){
-		sqlAmender.createTCRelation(10, 5);
+		SQLAmender.createTCRelation(10, 5);
 		assertTrue(existTC(10,5));
-		sqlAmender.removeTCRelation(10, 5);
+		SQLAmender.removeTCRelation(10, 5);
 	}
 	
 	/**
@@ -117,8 +116,8 @@ public class SQLAmenderTest {
 	@Test
 	public void testRemoveTCRelation()
 	{
-		sqlAmender.createTCRelation(10, 5);
-		sqlAmender.removeTCRelation(10, 5);
+		SQLAmender.createTCRelation(10, 5);
+		SQLAmender.removeTCRelation(10, 5);
 		assertFalse(existTC(10,5));
 	}
 	
@@ -128,12 +127,12 @@ public class SQLAmenderTest {
 	@Test
 	public void testModifyCleaningAgent()
 	{
-		sqlAmender.createCleaningAgent(cleaningAgent);
-		sqlAmender.writeMemo(cleaningAgent.getCleaningAgentID(), "test");
+		SQLAmender.createCleaningAgent(cleaningAgent);
+		SQLAmender.writeMemo(cleaningAgent.getCleaningAgentID(), "test");
 		cleaningAgent.setMemo("test2");
-		sqlAmender.modifyCleaningAgent(cleaningAgent);
+		SQLAmender.modifyCleaningAgent(cleaningAgent);
 		assertEquals(getMemo(cleaningAgent.getCleaningAgentID()),"test2");
-		sqlAmender.removeCleaningAgent(cleaningAgent);
+		SQLAmender.removeCleaningAgent(cleaningAgent);
 	}
 	
 	/**
@@ -142,9 +141,9 @@ public class SQLAmenderTest {
 	@Test
 	public void testCreateCleaningAgent()
 	{
-		sqlAmender.createCleaningAgent(cleaningAgent);
+		SQLAmender.createCleaningAgent(cleaningAgent);
 		assertTrue(existCleaningAgent(cleaningAgent.getCleaningAgentID()));
-		sqlAmender.removeCleaningAgent(cleaningAgent);	
+		SQLAmender.removeCleaningAgent(cleaningAgent);	
 	}
 	
 	/**
@@ -153,8 +152,8 @@ public class SQLAmenderTest {
 	@Test
 	public void testRemoveCleaningAgent()
 	{
-		sqlAmender.createCleaningAgent(cleaningAgent);
-		sqlAmender.removeCleaningAgent(cleaningAgent);
+		SQLAmender.createCleaningAgent(cleaningAgent);
+		SQLAmender.removeCleaningAgent(cleaningAgent);
 		assertFalse(existCleaningAgent(cleaningAgent.getCleaningAgentID()));
 	}
 	
@@ -164,14 +163,14 @@ public class SQLAmenderTest {
 	@Test
 	public void testModifyTag()
 	{
-		sqlAmender.createTag(tag);
+		SQLAmender.createTag(tag);
 		
 		InternationalString string = new InternationalString();
 		string.setString(LanguageType.ENGLISH, "testTag2");
 		tag.setName(string);
-		sqlAmender.modifyTag(tag);
+		SQLAmender.modifyTag(tag);
 		assertEquals(getTagName(tag.getTagID()),"testTag2");
-		sqlAmender.removeTag(tag);
+		SQLAmender.removeTag(tag);
 	}
 	
 	/**
@@ -180,9 +179,9 @@ public class SQLAmenderTest {
 	@Test
 	public void testCreateTag()
 	{
-		sqlAmender.createTag(tag);
+		SQLAmender.createTag(tag);
 		assertNotNull(getTagName(tag.getTagID()));
-		sqlAmender.removeTag(tag);
+		SQLAmender.removeTag(tag);
 	}
 	
 	/**
@@ -191,8 +190,8 @@ public class SQLAmenderTest {
 	@Test
 	public void testRemoveTag()
 	{
-		sqlAmender.createTag(tag);
-		sqlAmender.removeTag(tag);
+		SQLAmender.createTag(tag);
+		SQLAmender.removeTag(tag);
 		assertNull(getTagName(tag.getTagID()));
 	}
 	
@@ -229,7 +228,6 @@ public class SQLAmenderTest {
 				return true;
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return false;
@@ -249,7 +247,6 @@ public class SQLAmenderTest {
 				return true;
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return false;

@@ -13,18 +13,24 @@ import java.sql.SQLException;
 
 import javax.imageio.ImageIO;
 
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import de.fhl.enca.bl.CleaningAgent;
 import de.fhl.enca.bl.InternationalString;
 import de.fhl.enca.bl.LanguageType;
+import de.fhl.enca.bl.User;
 /**
  * Class which responsible for connecting the database and sending SQL query to database
  * @author Zeling Wu
  * @version 15.07.2016
  */
 public class ConnectorTest {
+	
+	@BeforeClass
+	public static void setup() {
+		User.initialize();
+	}
 	
 	/**
 	 * test by trying out a selection
@@ -40,7 +46,7 @@ public class ConnectorTest {
 	 */
 	@Test
 	public void testexecuteNonSelect(){
-		Connector.executeNonSelect("insert into TC values ( 1000,1000)");
+		Connector.executeNonSelect("insert into TC values (1000,1000)");
 		ResultSet rs=Connector.executeSelect("select COUNT(*) from TC where cleaningAgentID=1000 and tagID=1000");
 		try {
 			assertEquals(rs.getInt(1),1);
@@ -55,9 +61,7 @@ public class ConnectorTest {
 	 */
 	@Test
 	public void testexecuteImage()
-	{
-		SQLAmender sqlAmender = new SQLAmender();
-		
+	{		
 		CleaningAgent cleaningAgent=new CleaningAgent(10000);
 		
 		InternationalString name=new InternationalString();
@@ -82,7 +86,7 @@ public class ConnectorTest {
 		
 		cleaningAgent.setMainLanguage(LanguageType.GERMAN);
 		
-		sqlAmender.createCleaningAgent(cleaningAgent);
+		SQLAmender.createCleaningAgent(cleaningAgent);
 		
 		try{
 			URL imageURL = new URL("https://upload.wikimedia.org/wikipedia/en/e/eb/SupermanRoss.png");
@@ -93,7 +97,7 @@ public class ConnectorTest {
 		}catch(Exception e)
 			{e.printStackTrace();}
 		
-		sqlAmender.removeCleaningAgent(cleaningAgent);
+		SQLAmender.removeCleaningAgent(cleaningAgent);
 	}
 	
 	private static byte[] imageToStream(Image goodImage)

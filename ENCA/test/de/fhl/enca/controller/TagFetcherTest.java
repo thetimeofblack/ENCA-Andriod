@@ -9,6 +9,7 @@ import org.junit.Test;
 
 import de.fhl.enca.bl.Tag;
 import de.fhl.enca.bl.TagType;
+import de.fhl.enca.bl.User;
 
 /**
  * Class TagFetcherTest tests fetching tags from database.
@@ -23,6 +24,7 @@ public class TagFetcherTest {
 	 */
 	@BeforeClass
 	public static void setup() {
+		User.initialize();
 		Initialize.initialize();
 	}
 
@@ -49,7 +51,7 @@ public class TagFetcherTest {
 	public void testSorted() {
 		Set<Tag> s = TagFetcher.fetchSortedTags(Tag.getTagsAll());
 		Object[] ts = s.toArray();
-		assertFalse(((Tag)ts[0]).getTagID() < ((Tag)ts[1]).getTagID());
+		assertTrue(((Tag)ts[0]).getTagType().getId() <= ((Tag)ts[1]).getTagType().getId());
 	}
 
 }

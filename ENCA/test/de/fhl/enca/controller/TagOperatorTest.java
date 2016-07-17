@@ -9,6 +9,7 @@ import de.fhl.enca.bl.InternationalString;
 import de.fhl.enca.bl.LanguageType;
 import de.fhl.enca.bl.Tag;
 import de.fhl.enca.bl.TagType;
+import de.fhl.enca.bl.User;
 
 /**
  * Class TagOperatorTest tests operations of tag.
@@ -26,11 +27,12 @@ public class TagOperatorTest {
 	 */
 	@BeforeClass
 	public static void setUp() throws Exception {
+		User.initialize();
 		InternationalString internationalString;
 		internationalString=new InternationalString();
 		internationalString.setString(LanguageType.CHINESE, "清洁剂Cleaners");
 		internationalString.setString(LanguageType.ENGLISH, "aaacleanersaaa");
-		tag = new Tag(Tag.getMaxID(),internationalString,TagType.getTagType(1),false);
+		tag = new Tag(Tag.getMaxID() + 100,internationalString,TagType.getTagType(1),false);
 	}
 		
 	/**
