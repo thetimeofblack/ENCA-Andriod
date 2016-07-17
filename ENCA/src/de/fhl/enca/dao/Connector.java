@@ -41,6 +41,9 @@ public final class Connector {
 			OutputStream output = null;
 		    try {
 		    	input = Connector.class.getResourceAsStream("/data/data.db");
+		    	if(!User.getDirectory().exists()) {
+		    		User.getDirectory().mkdirs();
+		    	}
 		        output = new FileOutputStream(target);
 		        byte[] buf = new byte[1024];
 		        int bytesRead;
