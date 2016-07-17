@@ -14,7 +14,7 @@ Overwhelmed by various kinds of cleaning agents or having trouble identifying cl
 We provide not only a fully functional version on PC or Mac with all amazing functionalities, but also an express version on Android devices which can search and look up cleaning agents. Next time you go to the supermarket, with no mood at all to make all that gestures to the clerk and describe what you want, or just too tired to look up 9 out of 10 words that you try to read, reach for your Android smart phone and run Enca express. Click few times and find the cleaning agent that you need and show the clerk, the clerk readily fetch that thing for you and here comes the happy ending.
 
 ## Install and run
-- __Developer evaluation__ (__Recommend__): (especially __Ms. Hanesova__ and __Mrs. Breuker__)  
+- __Developer evaluation__ (__Recommend__): (especially __Ms. Hanesova__ and __Mr. Breuker__)  
 Import project archieve file `ENCA.zip` into Eclipse IDE (project meta is built in). Run from class `de.fhl.enca.gui.application.Login`.
 
 - **Terminal or command line**:  
