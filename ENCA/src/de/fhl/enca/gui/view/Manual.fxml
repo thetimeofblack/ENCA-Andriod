@@ -33,9 +33,9 @@
       </GridPane>
    </bottom>
    <center>
-      <ScrollPane fitToWidth="true" style="-fx-border-color: #FFFFFF; -fx-background-color: transparent;" BorderPane.alignment="TOP_CENTER">
+      <ScrollPane fitToWidth="true" prefHeight="700.0" style="-fx-border-color: #FFFFFF; -fx-background-color: transparent;" BorderPane.alignment="TOP_CENTER">
          <content>
-            <VBox alignment="CENTER_LEFT" prefWidth="800.0">
+            <VBox alignment="CENTER_LEFT" prefWidth="600.0">
                <children>
                   <Label text="Instruction">
                      <font>
