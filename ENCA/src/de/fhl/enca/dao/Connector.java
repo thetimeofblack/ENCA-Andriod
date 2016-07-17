@@ -35,6 +35,9 @@ public final class Connector {
 	 * Establish the connection.
 	 */
 	public static void connect() {
+		if (connection != null) {
+			return;
+		}
 		/* Copy database if not exist */
 		if (User.isFirstUse() || !target.exists()) {
 			InputStream input = null;
