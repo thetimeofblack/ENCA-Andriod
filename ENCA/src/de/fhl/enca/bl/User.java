@@ -127,6 +127,10 @@ public final class User {
 	public static boolean isFirstUse() {
 		return isFirstUse;
 	}
+	
+	public static File getDirectory() {
+		return directory;
+	}
 
 	public static String getName() {
 		return userPreference.getName();

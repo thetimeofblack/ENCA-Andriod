@@ -1,10 +1,17 @@
 package de.fhl.enca.dao;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import de.fhl.enca.bl.User;
 
 /**
  * Responsible for connecting the database and sending SQL query to database
@@ -12,6 +19,12 @@ import java.sql.SQLException;
  * @version 30.06.2016
  */
 public final class Connector {
+	
+	/**
+	 * Database locations.
+	 */
+	private static final String DATABASE_NAME = "data.db";
+	private static File target = new File(User.getDirectory(), DATABASE_NAME);
 
 	/**
 	 * The unique connection.
@@ -21,9 +34,33 @@ public final class Connector {
 	/**
 	 * Establish the connection.
 	 */
-	static {
+	public static void connect() {
+		/* Copy database if not exist */
+		if (User.isFirstUse() || !target.exists()) {
+			InputStream input = null;
+			OutputStream output = null;
+		    try {
+		    	input = Connector.class.getResourceAsStream("/data/data.db");
+		        output = new FileOutputStream(target);
+		        byte[] buf = new byte[1024];
+		        int bytesRead;
+		        while ((bytesRead = input.read(buf)) > 0) {
+		            output.write(buf, 0, bytesRead);
+		        }
+		    } catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+		        try {
+					input.close();
+					output.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+		    }
+		}
+		/* Establish connection */
 		try {
-			connection = DriverManager.getConnection("jdbc:sqlite:" + Connector.class.getResource("/data/data.db"));
+			connection = DriverManager.getConnection("jdbc:sqlite:" + target.getAbsolutePath());
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

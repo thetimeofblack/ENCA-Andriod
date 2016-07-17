@@ -3,6 +3,7 @@ package de.fhl.enca.gui.application;
 import java.io.IOException;
 import de.fhl.enca.bl.User;
 import de.fhl.enca.controller.Initialize;
+import de.fhl.enca.dao.Connector;
 import de.fhl.enca.gui.utility.Utility;
 import de.fhl.enca.gui.view.LoginFirstController;
 import javafx.application.Application;
@@ -22,6 +23,7 @@ public final class Login extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		User.initialize();
+		Connector.connect();
 		Initialize.initialize();
 		try {
 			if (User.isFirstUse()) {
