@@ -1,9 +1,35 @@
 4.	Test 
 4.1 Usability test
+- User group
+We choose Chinese international students in Germany as our test user group. Firstly they account for the majority of our target user group and moreover their knowledge of cleaning is somehow reflecting the average level.
+- Test tasks
 ///test tasks
-First round test description.
-Result:
-Improvement plan:
-Second round test description.
+
+- First round
+	* Result:
+	* Analysis:
+	* Improvement plan:
+- Second round .
 
 4.2 Equivalent classes and boundary tests
+
+Test cases
+- Application time and frequency are required when modifying and creating cleaning agents. Valid input shall be a positive number or left empty.
+Valid EC:
+V1 = {value | value is null}
+V2 = {value | value = "5"}
+Invalid EC:
+V3 = {value | value = "abc"}
+V4 = {value | value = "-5"}
+V5 = {value | value = "0"}
+- Name cannot be empty when creating a new cleaning agent. Valid input would be a not null cleaning agent name.
+Valid EC:
+V1 = {name filled, other fields not filled}
+Invalid EC:
+V2 = {name not filled, other fields filled}
+
+Special test cases
+- Keywords are used in regular expression patterns, thus special charecters in the keywords such as "*.()[]{}" shall be escaped. Keywords with such characters shall be input in a boundary value test.
+Input: [Keywords: ".*"]
+- Any content that is eventually written to database may affect SQL query, thus charecters such as ' shall be escaped. Test of saving a field which contains ' into the database shall be performed.
+Input: [Tag name: "Mary's favourite"]
