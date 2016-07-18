@@ -1,4 +1,15 @@
-Member & Responsibility:
+Slide 1:
+ENCA not Cleaning Agent, a cleaning agent picker
+
+Agenda
+Introduction (Haoze Zhang)
+Business Logic Structure (Zhaowen Gong)
+Data Access and Testing (Zeling Wu)
+Android application: (Xiaoqi Ma)
+Demo
+
+Slide 2:
+Team:
 Haoze Zhang: Requirement analysis, system structure, UI design and team collaboration.
 Zhaowen Gong: Business logic implementation, UI implementation and code revision.
 Zeling Wu: Data acquisition, database management and testing.
@@ -6,10 +17,20 @@ Xiaoqi Ma: Android application, UI design and implementation.
 Collaboration platform:
 GitHub: https://github.com/Nimita311/ENCA-Andriod
 
+Slide 3:
 Additional Task:
 Android: ENCA-express
 // Screen-shot of detail activity
 
-Use cases:
-Scenario 1:
-Scenario 2:
+Slide 4:
+Scenarios of use:
+Scenario 1: (with ENCA)
+Cleaning purpose -> Cleaning agent
+Scenario 2: (with ENCA)
+Cleaning agent's name or description -> Cleaning agent
+Scenario 3: (with ENCA-express)
+want to buy a cleaning agent -> show the seller
+
+Slide 5:
+Use case diagram:
+// diagram
