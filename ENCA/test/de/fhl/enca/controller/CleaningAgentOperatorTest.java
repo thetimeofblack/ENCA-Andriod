@@ -89,7 +89,6 @@ public class CleaningAgentOperatorTest {
 			killCleaningAgent.invoke(CleaningAgentOperator.class, CleaningAgent.getCleaningAgent(ID));
 			SQLAmender.removeCleaningAgent(mCleaningAgent);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
