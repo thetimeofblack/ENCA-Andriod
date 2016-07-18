@@ -1,0 +1,15 @@
+Member & Responsibility:
+Haoze Zhang: Requirement analysis, system structure, UI design and team collaboration.
+Zhaowen Gong: Business logic implementation, UI implementation and code revision.
+Zeling Wu: Data acquisition, database management and testing.
+Xiaoqi Ma: Android application, UI design and implementation.
+Collaboration platform:
+GitHub: https://github.com/Nimita311/ENCA-Andriod
+
+Additional Task:
+Android: ENCA-express
+// Screen-shot of detail activity
+
+Use cases:
+Scenario 1:
+Scenario 2:
