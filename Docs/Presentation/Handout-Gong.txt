@@ -1,0 +1,20 @@
+Software Structure
+- MVC
+ * MVC structure
+ * Scenario
+ * Extensibility
+- Multi-language Support
+ * LanguageType
+ * LanguagePreference
+ * InternationalString
+ * ResourceBundle
+- Preference Saving
+ * LanguagePreference
+ * UserPreference
+ * TagPreference
+ * User
+- UI Design
+ * JvaFX
+ * More flexible layout
+ * Better look
+ * Consistency

@@ -1,0 +1,7 @@
+Additional Task -- Android Version of ENCA
+
+1. Consistency
+2. Preserve most of functions (shown in User Case Diagram)
+3. Demo (Purpose: chean dishs)
+	Tag Search: Kitchen-Dish
+	Keyword Search: "dish ecover"
