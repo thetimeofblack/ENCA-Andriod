@@ -1,3 +1,22 @@
 Demo
 https://www.amazon.de/Ecover-Sp%C3%BClmaschinen-Tabs-XL-Pack-Tabs/dp/B00823938W/ref=sr_1_1?s=drugstore&ie=UTF8&qid=1468832664&sr=1-1&keywords=ecover
 Ecover Spülmaschinen-Tabs
+
+1. login
+	- Enter name and choose preference
+	- Notice menu bar: Help
+	- Instruction pop up in first login
+2. Find CA with tag
+	- GUI segment: Tag search area
+	- Tag logic: AND, prioritized
+	- Make memo
+3. Find CA with attribute
+	- Wide search scope
+	- Tag and keyword combination
+4. Add CA
+	- Multiple entries
+	- Add tag
+	- Double click to remove tag
+	- Input check
+5. Delete CA and tag
+	- Conformation
