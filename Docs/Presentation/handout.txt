@@ -1,0 +1,42 @@
+# Handout of ENCA presentation
+
+ENCA not Cleaning Agent, a cleaning agent picker
+
+Agenda:
+Introduction (Haoze Zhang)
+Business Logic Structure (Zhaowen Gong)
+Data Access and Testing (Zeling Wu)
+Android application: (Xiaoqi Ma)
+Demo
+
+Introducion:
+	- Senarios
+	- Use cases
+
+Business Logic Structure
+
+Data Access Logic
+
+Testing
+
+Android
+
+Demo
+1. login
+	- Enter name and choose preference
+	- Notice menu bar: Help
+	- Instruction pop up in first login
+2. Find CA with tag
+	- GUI segment: Tag search area
+	- Tag logic: AND, prioritized
+	- Make memo
+3. Find CA with attribute
+	- Wide search scope
+	- Tag and keyword combination
+4. Add CA
+	- Multiple entries
+	- Add tag
+	- Double click to remove tag
+	- Input check
+5. Delete CA and tag
+	- Conformation
