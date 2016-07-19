@@ -1,42 +1,75 @@
-# Handout of ENCA presentation
-
+# ENCA Release Presentation
+20-07-2016
 ENCA not Cleaning Agent, a cleaning agent picker
-
+------------------------------------------------
+```
 Agenda:
-Introduction (Haoze Zhang)
-Business Logic Structure (Zhaowen Gong)
-Data Access and Testing (Zeling Wu)
-Android application: (Xiaoqi Ma)
-Demo
+Introduction (Haoze Zhang, 3 min)
+Business Logic Structure (Zhaowen Gong, 3 min)
+Data Access and Testing (Zeling Wu, 3 min)
+Android application: (Xiaoqi Ma, 3 min)
+Demo (8 min)
+```
 
-Introducion:
-	- Senarios
+## Introduction
+	- Member and responsibility
+	- Scenarios
 	- Use cases
 
-Business Logic Structure
+## Business Logic Structure
+	- MVC
+		* MVC structure
+		* Scenario
+		* Extensibility
+	- Multi-language Support
+		* LanguageType
+		* LanguagePreference
+		* InternationalString
+		* ResourceBundle
+	- Preference Saving
+		* LanguagePreference
+		* UserPreference
+		* TagPreference
+		* User
+	- UI Design
+		* JavaFX
+		* More flexible layout
+		* Better look
+		* Consistency
 
-Data Access Logic
+## Data Access Logic
+	- Data access managing
+	- Data structure organising
 
-Testing
+## Testing
+	- Test organisation
+	- Test details
 
-Android
+## Android 
+	- Use cases
+	- Quick demo
 
-Demo
-1. login
-	- Enter name and choose preference
-	- Notice menu bar: Help
-	- Instruction pop up in first login
-2. Find CA with tag
-	- GUI segment: Tag search area
-	- Tag logic: AND, prioritized
-	- Make memo
-3. Find CA with attribute
-	- Wide search scope
-	- Tag and keyword combination
-4. Add CA
-	- Multiple entries
-	- Add tag
-	- Double click to remove tag
-	- Input check
-5. Delete CA and tag
-	- Conformation
+## Demo (You can try it out with us)
+	1. login
+		- Enter name and choose preference
+		- Notice menu bar: Help
+		- Instruction pop up in first login
+	2. Find CA with tags
+		- GUI segment: Tag search box
+		- Tag logic: AND, tag relations
+		- Make memo & conformation after saving
+	3. Find CA with keywords
+		- Wide search scope, cascade search
+		- Weighted relevance ranking
+	4. Find CA with Tag and keyword combination
+		- AND logic
+	5. Add CA
+		- Multiple entries
+		- Add tag in CA modify window
+		- Double click to remove tag
+		- Input check
+	6. Delete CA and tag
+		- Conformation
+
+For more information:
+https://github.com/Nimita311/ENCA-Andriod
